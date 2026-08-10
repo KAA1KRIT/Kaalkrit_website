@@ -1,0 +1,138 @@
+# Dependencies and package-manager state
+node_modules/
+.pnp/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Framework output and deploy bundles
+.next/
+out/
+dist/
+build/
+.vercel/
+
+# Test reports, coverage, and build caches
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+.turbo/
+.cache/
+.parcel-cache/
+.eslintcache
+*.tsbuildinfo
+*.tsbuildinfo.*
+
+# Logs and debug output
+*.log
+logs/
+debug/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Environment files and secrets. Keep only the safe template in Git.
+.env*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.jks
+*.keystore
+**/credentials*.json
+**/*credentials*.json
+**/*service-account*.json
+**/firebase-adminsdk-*.json
+**/google-application-credentials*.json
+**/*-secrets*.json
+**/*-secret*.json
+*.tfstate
+*.tfstate.*
+
+# Provider and local tool credentials
+.aws/
+.gcloud/
+.firebase/
+.supabase/
+supabase/.temp/
+supabase/.branches/
+firebase-debug.log*
+
+# Local databases and database dumps
+*.sqlite
+*.sqlite3
+*.db
+*.db-*
+*.dump
+*.bak
+
+# Raw, private, downloaded, or unapproved design/media inputs.
+# Approved optimized website assets remain trackable, including
+# public/images/approved/ and the current public/images/ assets.
+assets/private/
+assets/raw/
+assets/reference/
+downloads/
+download/
+screenshots/
+exports/
+raw-media/
+source-images/
+temp-images/
+stock-images/
+design-references/
+public/uploads/
+public/temp/
+output/
+*.psd
+*.ai
+*.fig
+*.sketch
+*.raw
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.wav
+*.mp3
+*.zip
+!public/images/approved/
+!public/images/approved/**
+
+# Editor, OS, and local workspace files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.fleet/
+.history/
+.vscode/
+*.swp
+*.swo
+*.code-workspace
+
+# Local browser/Codex/agent artifacts
+.playwright-cli/
+.codex/
+.claude/
+.agent/
+CLAUDE.local.md
+codex.local.*
+
+# Source code, configuration, documentation, lockfiles, legal pages, and
+# intentionally approved public assets are intentionally not ignored.
