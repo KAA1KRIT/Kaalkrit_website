@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///home/rosso/Projects/Kaalkrit/app/loading.tsx"],"sourcesContent":["import { LoadingExperience } from '@/components/system/LoadingExperience';\n\nexport default function Loading() { return <LoadingExperience />; }\n"],"names":["Loading"],"mappings":";;;;;AAAA;;;AAEe,SAASA;IAAY,qBAAO,8OAAC,+JAAiB;;;;;AAAK"}},
+    {"offset": {"line": 27, "column": 0}, "map": {"version":3,"sources":["file:///home/rosso/Projects/Kaalkrit/components/system/LoadingExperience.tsx"],"sourcesContent":["export function LoadingExperience() {\n  return (\n    <section className=\"loading-experience\" aria-label=\"Loading KAALKRIT\">\n      <div className=\"public-container\"><p className=\"eyebrow\">KAALKRIT / loading</p><div className=\"loading-line loading-line--wide\" /><div className=\"loading-line\" /><div className=\"loading-line loading-line--short\" /></div>\n    </section>\n  );\n}\n"],"names":["LoadingExperience","className"],"mappings":";;;;;;AAAO,SAASA;IACd,qBACE,8OAAC;QAAQC,WAAU;QAAqB,cAAW;kBACjD,cAAA,8OAAC;YAAIA,WAAU;;8BAAmB,8OAAC;oBAAEA,WAAU;8BAAU;;;;;;8BAAsB,8OAAC;oBAAIA,WAAU;;;;;;8BAAoC,8OAAC;oBAAIA,WAAU;;;;;;8BAAiB,8OAAC;oBAAIA,WAAU;;;;;;;;;;;;;;;;;AAGvL"}}]
+}

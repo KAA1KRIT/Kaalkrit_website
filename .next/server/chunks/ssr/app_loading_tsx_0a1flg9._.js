@@ -1,0 +1,3 @@
+module.exports=[63588,a=>{"use strict";var b=a.i(7997);function c(){return(0,b.jsx)("section",{className:"loading-experience","aria-label":"Loading KAALKRIT",children:(0,b.jsxs)("div",{className:"public-container",children:[(0,b.jsx)("p",{className:"eyebrow",children:"KAALKRIT / loading"}),(0,b.jsx)("div",{className:"loading-line loading-line--wide"}),(0,b.jsx)("div",{className:"loading-line"}),(0,b.jsx)("div",{className:"loading-line loading-line--short"})]})})}a.s(["default",0,function(){return(0,b.jsx)(c,{})}],63588)},45538,function(a){a.n(a.i(63588))}];
+
+//# sourceMappingURL=app_loading_tsx_0a1flg9._.js.map

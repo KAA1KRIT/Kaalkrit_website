@@ -1,0 +1,54 @@
+:root {
+  --k-void: #fff6d2;
+  --k-surface: #ffffff;
+  --k-surface-2: #f3edce;
+  --k-line: #cccbc7;
+  --k-line-strong: #000000;
+  --k-text: #000000;
+  --k-text-muted: #666664;
+  --k-text-faint: #666664;
+  --k-signal: #ffd801;
+  --k-signal-dim: rgba(255, 216, 1, 0.24);
+  --k-live: #000000;
+  --k-alert: #ffd801;
+
+  --canvas: #fff6d2;
+  --accent: #ffd801;
+  --ink: #000000;
+  --white: #ffffff;
+  --char: #666664;
+  --oat: #cccbc7;
+
+  --k-t-hero: clamp(3.25rem, 2.1rem + 5.7vw, 6.8rem);
+  --k-t-h2: clamp(2.4rem, 1.8rem + 3.2vw, 4.8rem);
+  --k-t-h3: clamp(1.55rem, 1.2rem + 1.5vw, 2.35rem);
+  --k-t-lede: clamp(1.1rem, 1rem + 0.48vw, 1.3rem);
+  --k-t-body: 1rem;
+  --k-t-small: 0.875rem;
+  --k-t-meta: 0.72rem;
+
+  --k-1: 4px;
+  --k-2: 8px;
+  --k-3: 12px;
+  --k-4: 16px;
+  --k-5: 24px;
+  --k-6: 32px;
+  --k-7: 48px;
+  --k-8: 64px;
+  --k-9: 80px;
+  --k-10: 112px;
+  --k-11: 144px;
+
+  --k-container: 1200px;
+  --k-container-wide: 1360px;
+  --k-gutter: clamp(20px, 5.56vw, 80px);
+  --k-section-y: clamp(72px, 8vw, 112px);
+
+  --k-radius: 20px;
+  --k-radius-small: 4px;
+  --k-radius-pill: 999px;
+  --k-dur-fast: 120ms;
+  --k-dur: 180ms;
+  --k-dur-slow: 260ms;
+  --k-ease: cubic-bezier(0.2, 0, 0, 1);
+}

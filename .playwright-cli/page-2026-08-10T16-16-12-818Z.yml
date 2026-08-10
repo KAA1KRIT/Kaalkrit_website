@@ -1,0 +1,405 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "KAALKRIT — home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: KAALKRIT
+      - navigation "Primary" [ref=e8]:
+        - link "Technology" [ref=e9] [cursor=pointer]:
+          - /url: /#capabilities
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: /projects
+        - link "Journey" [ref=e11] [cursor=pointer]:
+          - /url: /journey
+        - link "Contact" [ref=e12] [cursor=pointer]:
+          - /url: /#partnership
+        - link "Follow Team KAALKRIT on Instagram" [ref=e14] [cursor=pointer]:
+          - /url: https://www.instagram.com/team_kaalkrit/
+          - text: Instagram
+        - link "Follow Team KAALKRIT on X" [ref=e15] [cursor=pointer]:
+          - /url: https://x.com/KAALKRit
+          - text: X
+        - link "Partner with us" [ref=e16] [cursor=pointer]:
+          - /url: mailto:teamkaalkrit@gmail.com?subject=Partnership%20with%20Team%20KAALKRIT
+      - text: ＋
+  - main [ref=e17]:
+    - region [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - paragraph [ref=e22]: Official drone & robotics innovation team
+          - heading "Engineering intelligent systems." [level=1] [ref=e24]
+          - paragraph [ref=e25]: KAALKRIT is the multidisciplinary student engineering team of Sir MVIT, working across autonomous aerial systems, robotics, embedded systems, AI, computer vision and software.
+          - generic [ref=e26]:
+            - link "Explore the work" [ref=e27] [cursor=pointer]:
+              - /url: /projects
+              - text: Explore the work
+              - generic [ref=e28]: ↗
+            - link "Study the system" [ref=e29] [cursor=pointer]:
+              - /url: /#capabilities
+              - text: Study the system
+              - generic [ref=e30]: ↓
+          - generic [ref=e31]:
+            - generic [ref=e32]:
+              - term [ref=e33]: Established
+              - definition [ref=e34]: "2024"
+            - generic [ref=e35]:
+              - term [ref=e36]: System focus
+              - definition [ref=e37]: Air · Ground · Intelligence
+            - generic [ref=e38]:
+              - term [ref=e39]: Programme
+              - definition [ref=e40]: NIDAR 2026 → AirMOS 2027
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - generic [ref=e44]: Deployment / 01
+            - generic [ref=e45]: SYSTEM INIT
+          - img "KAALKRIT distributed intelligence to autonomous drone system A geometric quadcopter resolves from a constellation and can open into a controlled exploded engineering view." [ref=e49]:
+            - 'button "Airframe: Mechanical design and rapid prototyping" [ref=e229] [cursor=pointer]'
+            - 'button "Rotor assembly: Flight control and autonomous navigation" [ref=e231] [cursor=pointer]'
+            - 'button "Embedded electronics: PCB design and embedded systems development" [ref=e233] [cursor=pointer]'
+            - 'button "Flight controller: Control systems and autonomous navigation" [ref=e235] [cursor=pointer]'
+            - 'button "Sensor integration: Sensor integration and control systems" [ref=e237] [cursor=pointer]'
+            - 'button "Payload management: Mission planning and payload management" [ref=e239] [cursor=pointer]'
+            - 'button "Autonomous navigation: Artificial intelligence, computer vision and autonomous flight" [ref=e241] [cursor=pointer]'
+            - generic [ref=e243]: DISTRIBUTED INTELLIGENCE / AUTONOMOUS SYSTEM
+            - generic [ref=e244]: SYSTEM INIT
+          - generic [ref=e245]:
+            - button "Open the system" [ref=e246] [cursor=pointer]
+            - paragraph [ref=e248]: Scroll to deploy the system. Tap or focus a callout to inspect the role of each component.
+          - list "Autonomous drone system components" [ref=e249]:
+            - listitem [ref=e250]:
+              - button "Airframe Mechanical design and rapid prototyping" [ref=e251] [cursor=pointer]:
+                - generic [ref=e253]:
+                  - generic [ref=e254]: Airframe
+                  - generic [ref=e255]: Mechanical design and rapid prototyping
+            - listitem [ref=e256]:
+              - button "Rotor assembly Flight control and autonomous navigation" [ref=e257] [cursor=pointer]:
+                - generic [ref=e259]:
+                  - generic [ref=e260]: Rotor assembly
+                  - generic [ref=e261]: Flight control and autonomous navigation
+            - listitem [ref=e262]:
+              - button "Embedded electronics PCB design and embedded systems development" [ref=e263] [cursor=pointer]:
+                - generic [ref=e265]:
+                  - generic [ref=e266]: Embedded electronics
+                  - generic [ref=e267]: PCB design and embedded systems development
+            - listitem [ref=e268]:
+              - button "Flight controller Control systems and autonomous navigation" [ref=e269] [cursor=pointer]:
+                - generic [ref=e271]:
+                  - generic [ref=e272]: Flight controller
+                  - generic [ref=e273]: Control systems and autonomous navigation
+            - listitem [ref=e274]:
+              - button "Sensor integration Sensor integration and control systems" [ref=e275] [cursor=pointer]:
+                - generic [ref=e277]:
+                  - generic [ref=e278]: Sensor integration
+                  - generic [ref=e279]: Sensor integration and control systems
+            - listitem [ref=e280]:
+              - button "Payload management Mission planning and payload management" [ref=e281] [cursor=pointer]:
+                - generic [ref=e283]:
+                  - generic [ref=e284]: Payload management
+                  - generic [ref=e285]: Mission planning and payload management
+            - listitem [ref=e286]:
+              - button "Autonomous navigation Artificial intelligence, computer vision and autonomous flight" [ref=e287] [cursor=pointer]:
+                - generic [ref=e289]:
+                  - generic [ref=e290]: Autonomous navigation
+                  - generic [ref=e291]: Artificial intelligence, computer vision and autonomous flight
+          - paragraph [ref=e292]: "This visual maps distributed intelligence into an engineered autonomous system: an airframe, rotor assembly, embedded electronics, flight controller, sensor integration, payload management and autonomous navigation."
+      - link "System init" [ref=e295] [cursor=pointer]:
+        - /url: "#capabilities"
+        - text: System init
+        - generic [ref=e296]: ↓
+    - region [ref=e297]:
+      - generic [ref=e298]:
+        - generic [ref=e301]:
+          - paragraph [ref=e302]: Mission / 02
+          - generic [ref=e303]:
+            - heading "We do not only build prototypes." [level=2] [ref=e304]
+            - paragraph [ref=e305]: KAALKRIT is the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology, Bengaluru. We are a multidisciplinary student engineering team working across hardware, software, robotics, embedded systems, AI, computer vision and autonomous systems.
+        - generic [ref=e306]:
+          - paragraph [ref=e307]: We engineer complete systems across hardware, software, and intelligence.
+          - generic [ref=e308]: Full engineering lifecycle / Sir MVIT
+    - region [ref=e309]:
+      - generic [ref=e310]:
+        - generic [ref=e313]:
+          - paragraph [ref=e314]: Lifecycle / 03
+          - generic [ref=e315]:
+            - heading "Research becomes autonomy through the whole system." [level=2] [ref=e316]
+            - paragraph [ref=e317]: "The team follows a full engineering lifecycle: research, system architecture, design, manufacturing, electronics integration, software development, testing, validation and continuous improvement."
+        - list [ref=e318]:
+          - listitem [ref=e319]:
+            - generic [ref=e320]: "01"
+            - strong [ref=e321]: Research
+          - listitem [ref=e322]:
+            - generic [ref=e323]: "02"
+            - strong [ref=e324]: System architecture
+          - listitem [ref=e325]:
+            - generic [ref=e326]: "03"
+            - strong [ref=e327]: Design
+          - listitem [ref=e328]:
+            - generic [ref=e329]: "04"
+            - strong [ref=e330]: Manufacturing
+          - listitem [ref=e331]:
+            - generic [ref=e332]: "05"
+            - strong [ref=e333]: Electronics integration
+          - listitem [ref=e334]:
+            - generic [ref=e335]: "06"
+            - strong [ref=e336]: Software development
+          - listitem [ref=e337]:
+            - generic [ref=e338]: "07"
+            - strong [ref=e339]: Testing
+          - listitem [ref=e340]:
+            - generic [ref=e341]: "08"
+            - strong [ref=e342]: Validation
+          - listitem [ref=e343]:
+            - generic [ref=e344]: "09"
+            - strong [ref=e345]: Continuous improvement
+    - region [ref=e346]:
+      - generic [ref=e347]:
+        - generic [ref=e350]:
+          - paragraph [ref=e351]: Capability index / 05
+          - generic [ref=e352]:
+            - heading "A multidisciplinary team, organized around the system." [level=2] [ref=e353]
+            - paragraph [ref=e354]: The work crosses disciplines because autonomous systems do. Each domain connects to the next one in the build.
+        - generic [ref=e355]:
+          - article [ref=e356]:
+            - paragraph [ref=e357]: 01 // Aerial systems
+            - heading "Autonomous UAS" [level=3] [ref=e358]
+            - paragraph [ref=e359]: Drone technology, flight-controller integration and autonomous navigation across the aerial system.
+            - generic [ref=e360]: Autonomous unmanned aerial systems · intelligent drone technologies · flight control
+          - article [ref=e363]:
+            - paragraph [ref=e364]: 02 // Intelligent systems
+            - heading "Embedded intelligence" [level=3] [ref=e365]
+            - paragraph [ref=e366]: Embedded systems, AI, computer vision, sensors and software connected into one engineered system.
+            - generic [ref=e367]: Embedded systems · PCB design · AI and computer vision · sensor integration · software
+          - article [ref=e370]:
+            - paragraph [ref=e371]: 03 // Robotics
+            - heading "Motion & automation" [level=3] [ref=e372]
+            - paragraph [ref=e373]: Robotics, mechanical design, rapid prototyping and control systems for precise physical movement.
+            - generic [ref=e374]: Robotics and automation · mechanical design · rapid prototyping · control systems
+    - region [ref=e377]:
+      - generic [ref=e378]:
+        - generic [ref=e381]:
+          - paragraph [ref=e382]: Programme / 06
+          - generic [ref=e383]:
+            - heading "NIDAR 2026 → AirMOS 2027. One aerial programme, carried forward." [level=2] [ref=e384]
+            - paragraph [ref=e385]: The first system establishes the engineering base. The next is currently in development, with advanced sensing, autonomy and mission-oriented design.
+        - generic [ref=e386]:
+          - article [ref=e387]:
+            - generic [ref=e388]: "01"
+            - generic [ref=e389]: NIDAR 2026
+            - generic [ref=e390]:
+              - generic [ref=e391]: Developed
+              - heading "Autonomous Unmanned Aerial System" [level=3] [ref=e393]
+              - paragraph [ref=e394]: "A fully integrated unmanned aerial system, designed and built end to end: airframe, embedded electronics, flight controller integration, mission planning, payload management and autonomous flight."
+              - link "View project detail" [ref=e395] [cursor=pointer]:
+                - /url: /projects#uas-nidar-2026
+                - text: View project detail
+                - generic [ref=e396]: ↗
+          - article [ref=e397]:
+            - generic [ref=e398]: "02"
+            - generic [ref=e399]: NIDAR 2027
+            - generic [ref=e400]:
+              - generic [ref=e401]: Currently in development
+              - heading "AirMOS" [level=3] [ref=e403]
+              - paragraph [ref=e404]: Currently in development; advanced sensing, autonomy and mission-oriented design.
+              - link "View project detail" [ref=e405] [cursor=pointer]:
+                - /url: /projects#airmos
+                - text: View project detail
+                - generic [ref=e406]: ↗
+    - region [ref=e407]:
+      - generic [ref=e409]:
+        - generic [ref=e410]:
+          - paragraph [ref=e411]: Platform / 07
+          - heading "Build With Hardware" [level=2] [ref=e412]
+        - generic [ref=e413]:
+          - paragraph [ref=e414]: KAALKRIT’s flagship engineering platform is currently in development for structured learning, projects, documentation, collaborative workspaces and AI-powered engineering assistance.
+          - link "Read the platform brief" [ref=e415] [cursor=pointer]:
+            - /url: /projects#build-with-hardware
+            - text: Read the platform brief
+            - generic [ref=e416]: ↗
+    - region [ref=e417]:
+      - generic [ref=e418]:
+        - generic [ref=e421]:
+          - paragraph [ref=e422]: Robotics track / 08
+          - generic [ref=e423]:
+            - heading "Autonomy moves beyond the airframe." [level=2] [ref=e424]
+            - paragraph [ref=e425]: "The same engineering disciplines show up on the ground: navigation, obstacle detection, motion control, sensor integration and precision movement."
+        - generic [ref=e426]:
+          - article [ref=e427]:
+            - generic [ref=e428]:
+              - paragraph [ref=e429]: Currently in development
+              - heading "Intelligent Robotic Arm" [level=3] [ref=e430]
+            - generic [ref=e431]:
+              - paragraph [ref=e432]: A servo-driven manipulator in development, combining mechanical engineering, electronics and control algorithms for precision motion.
+              - link "Explore system" [ref=e433] [cursor=pointer]:
+                - /url: /projects#robotic-arm
+                - text: Explore system
+                - generic [ref=e434]: ↗
+          - article [ref=e435]:
+            - generic [ref=e436]:
+              - paragraph [ref=e437]: Developed
+              - heading "Autonomous Robot Vacuum Cleaner" [level=3] [ref=e438]
+            - generic [ref=e439]:
+              - paragraph [ref=e440]: Developed system covering navigation, obstacle detection, motion control, sensor integration and autonomous mobility.
+              - link "Explore system" [ref=e441] [cursor=pointer]:
+                - /url: /projects#robot-vacuum
+                - text: Explore system
+                - generic [ref=e442]: ↗
+    - region [ref=e443]:
+      - generic [ref=e445]:
+        - generic [ref=e446]:
+          - paragraph [ref=e447]: Achievement / 09
+          - heading "Evidence, without inflated numbers." [level=2] [ref=e448]
+        - list [ref=e449]:
+          - listitem [ref=e450]:
+            - generic [ref=e451]: "01"
+            - generic [ref=e452]:
+              - heading "11th place — Business Evaluation" [level=3] [ref=e453]
+              - paragraph [ref=e454]: Placed 11th in Business Evaluation at a national-level competition.
+          - listitem [ref=e455]:
+            - generic [ref=e456]: "01"
+            - generic [ref=e457]:
+              - heading "National-level drone innovation competitions" [level=3] [ref=e458]
+              - paragraph [ref=e459]: Represented Sir MVIT at national-level drone innovation competitions.
+    - region [ref=e460]:
+      - generic [ref=e461]:
+        - generic [ref=e464]:
+          - paragraph [ref=e465]: Trajectory / 10
+          - generic [ref=e466]:
+            - heading "The work is aimed at India’s deep-tech future." [level=2] [ref=e467]
+            - paragraph [ref=e468]: KAALKRIT aims to contribute to India’s deep-tech ecosystem, indigenous technology development and future engineering talent through practical systems work.
+        - generic [ref=e469]:
+          - generic [ref=e470]:
+            - generic [ref=e471]: "01"
+            - paragraph [ref=e472]: Research that becomes a build
+          - generic [ref=e473]:
+            - generic [ref=e474]: "02"
+            - paragraph [ref=e475]: Indigenous technology development
+          - generic [ref=e476]:
+            - generic [ref=e477]: "03"
+            - paragraph [ref=e478]: Future engineering talent
+    - region [ref=e479]:
+      - generic [ref=e480]:
+        - generic [ref=e483]:
+          - paragraph [ref=e484]: Partnership / 11
+          - generic [ref=e485]:
+            - heading "Help move a system from intent to validation." [level=2] [ref=e486]
+            - paragraph [ref=e487]: KAALKRIT is open to conversations around engineering collaboration, hardware, research and mentorship. No sponsor claims or contact details are implied here.
+        - generic [ref=e488]:
+          - list [ref=e489]:
+            - listitem [ref=e490]:
+              - generic [ref=e491]: "01"
+              - generic [ref=e492]:
+                - heading "Engineering collaboration" [level=3] [ref=e493]
+                - paragraph [ref=e494]: Explore a focused engineering conversation around autonomous systems, robotics, embedded systems or software.
+            - listitem [ref=e495]:
+              - generic [ref=e496]: "02"
+              - generic [ref=e497]:
+                - heading "Hardware and electronics" [level=3] [ref=e498]
+                - paragraph [ref=e499]: Discuss engineering needs around airframes, electronics, sensors, control systems and rapid prototyping.
+            - listitem [ref=e500]:
+              - generic [ref=e501]: "03"
+              - generic [ref=e502]:
+                - heading "Engineering mentorship" [level=3] [ref=e503]
+                - paragraph [ref=e504]: Share engineering perspective around flight control, embedded systems, manufacturing or related disciplines.
+            - listitem [ref=e505]:
+              - generic [ref=e506]: "04"
+              - generic [ref=e507]:
+                - heading "Research collaboration" [level=3] [ref=e508]
+                - paragraph [ref=e509]: Explore shared research questions in autonomy, computer vision, embedded systems or robotics.
+          - generic [ref=e510]:
+            - paragraph [ref=e511]: Approved route
+            - paragraph [ref=e512]: Send a partnership question to the team through the official contact route.
+            - link "Email the team" [ref=e513] [cursor=pointer]:
+              - /url: mailto:teamkaalkrit@gmail.com?subject=Partnership%20with%20Team%20KAALKRIT
+              - text: Email the team
+              - generic [ref=e514]: ↗
+    - region [ref=e515]:
+      - generic [ref=e516]:
+        - generic [ref=e519]:
+          - paragraph [ref=e520]: Join KAALKRIT
+          - generic [ref=e521]:
+            - heading "Bring curiosity. Learn the system." [level=2] [ref=e522]
+            - paragraph [ref=e523]: KAALKRIT is a multidisciplinary student engineering team at Sir MVIT. The public team roster and recruitment process are not published yet, so this section does not invent an application path.
+        - generic [ref=e524]:
+          - generic [ref=e525]:
+            - heading "Where you would work" [level=3] [ref=e526]
+            - list [ref=e527]:
+              - listitem [ref=e528]:
+                - paragraph [ref=e530]: Air
+                - paragraph [ref=e531]: Autonomous Unmanned Aerial Systems · Intelligent Drone Technologies · Flight Control & Autonomous Navigation
+              - listitem [ref=e532]:
+                - paragraph [ref=e534]: Machine
+                - paragraph [ref=e535]: Robotics & Automation · Mechanical Design & Rapid Prototyping · Sensor Integration & Control Systems
+              - listitem [ref=e536]:
+                - paragraph [ref=e538]: Silicon & Software
+                - paragraph [ref=e539]: Embedded Systems Development · PCB Design & Electronics · Artificial Intelligence & Computer Vision · Software & Full-Stack Development
+              - listitem [ref=e540]:
+                - paragraph [ref=e542]: Method
+                - paragraph [ref=e543]: Research & Product Engineering
+          - generic [ref=e544]:
+            - heading "Joining the team" [level=3] [ref=e545]
+            - generic [ref=e546]:
+              - paragraph [ref=e547]: The public team roster and recruitment process are not published yet. You can still send a joining enquiry to the official team email.
+              - link "Email about joining" [ref=e548] [cursor=pointer]:
+                - /url: mailto:teamkaalkrit@gmail.com?subject=Joining%20Team%20KAALKRIT
+  - contentinfo [ref=e549]:
+    - generic [ref=e550]:
+      - generic [ref=e551]:
+        - generic [ref=e552]:
+          - generic [ref=e553]: KAALKRIT
+          - paragraph [ref=e555]: Official Drone and Robotics Innovation Team of Sir MVIT, Bengaluru.
+          - generic [ref=e556]: Established 2024
+          - link "teamkaalkrit@gmail.com" [ref=e557] [cursor=pointer]:
+            - /url: mailto:teamkaalkrit@gmail.com?subject=KAALKRIT%20website%20enquiry
+        - navigation "Footer navigation" [ref=e558]:
+          - heading "Navigate" [level=2] [ref=e559]
+          - list [ref=e560]:
+            - listitem [ref=e561]:
+              - link "Work" [ref=e562] [cursor=pointer]:
+                - /url: /#projects
+            - listitem [ref=e563]:
+              - link "Capabilities" [ref=e564] [cursor=pointer]:
+                - /url: /#capabilities
+            - listitem [ref=e565]:
+              - link "Projects" [ref=e566] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e567]:
+              - link "Journey" [ref=e568] [cursor=pointer]:
+                - /url: /journey
+        - navigation "Footer actions" [ref=e569]:
+          - heading "Work with us" [level=2] [ref=e570]
+          - list [ref=e571]:
+            - listitem [ref=e572]:
+              - link "Partner with us" [ref=e573] [cursor=pointer]:
+                - /url: /#partnership
+            - listitem [ref=e574]:
+              - link "Join KAALKRIT" [ref=e575] [cursor=pointer]:
+                - /url: /#join
+          - heading "Follow" [level=2] [ref=e576]
+          - list [ref=e577]:
+            - listitem [ref=e578]:
+              - link "Follow Team KAALKRIT on Instagram" [ref=e579] [cursor=pointer]:
+                - /url: https://www.instagram.com/team_kaalkrit/
+                - text: Instagram
+            - listitem [ref=e580]:
+              - link "Follow Team KAALKRIT on X" [ref=e581] [cursor=pointer]:
+                - /url: https://x.com/KAALKRit
+                - text: X
+        - navigation "Legal navigation" [ref=e582]:
+          - heading "Legal" [level=2] [ref=e583]
+          - list [ref=e584]:
+            - listitem [ref=e585]:
+              - link "Privacy Policy" [ref=e586] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e587]:
+              - link "Terms of Use" [ref=e588] [cursor=pointer]:
+                - /url: /terms
+            - listitem [ref=e589]:
+              - link "Accessibility Statement" [ref=e590] [cursor=pointer]:
+                - /url: /accessibility
+      - generic [ref=e591]:
+        - generic [ref=e592]: © 2026 Team KAALKRIT · Sir MVIT, Bengaluru, India
+        - link "Back to top ↑" [ref=e593] [cursor=pointer]:
+          - /url: "#main"
+  - alert [ref=e594]

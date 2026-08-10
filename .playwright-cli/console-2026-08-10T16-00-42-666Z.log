@@ -1,0 +1,11 @@
+[    2519ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:3100/_next/static/chunks/1pvslhklx_89d.js:0
+[    2614ms] [WARNING] [.WebGL-0x399c00100a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:3100/:0
+[    2717ms] [WARNING] [.WebGL-0x399c00100a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:3100/:0
+[    2722ms] [WARNING] [.WebGL-0x399c00100a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:3100/:0
+[    2730ms] [WARNING] [.WebGL-0x399c00100a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat) @ http://127.0.0.1:3100/:0
+[   26894ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:3100/_next/static/chunks/1pvslhklx_89d.js:0
+[   27341ms] [LOG] THREE.WebGLRenderer: Context Lost. @ http://127.0.0.1:3100/_next/static/chunks/1pvslhklx_89d.js:0
+[   28649ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:3100/_next/static/chunks/1pvslhklx_89d.js:0
+[   60120ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:3100/_next/static/chunks/1pvslhklx_89d.js:0
+[   60546ms] [LOG] THREE.WebGLRenderer: Context Lost. @ http://127.0.0.1:3100/_next/static/chunks/1pvslhklx_89d.js:0
+[   61844ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:3100/_next/static/chunks/1pvslhklx_89d.js:0
