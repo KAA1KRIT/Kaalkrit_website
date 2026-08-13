@@ -22,6 +22,8 @@ coverage/
 test-results/
 playwright-report/
 blob-report/
+.lighthouseci/
+artifacts/
 .turbo/
 .cache/
 .parcel-cache/
@@ -31,6 +33,8 @@ blob-report/
 
 # Logs and debug output
 *.log
+*.trace
+*.har
 logs/
 debug/
 npm-debug.log*
@@ -89,6 +93,7 @@ assets/reference/
 downloads/
 download/
 screenshots/
+screen-recordings/
 exports/
 raw-media/
 source-images/
@@ -108,6 +113,7 @@ output/
 *.mkv
 *.webm
 *.avi
+*.m4v
 *.wav
 *.mp3
 *.zip

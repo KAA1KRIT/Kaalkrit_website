@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
-import { milestones } from '@/content/milestones';
+import { milestones } from '@/content/journey';
 import { getProject } from '@/content/projects';
 
 const kindLabels: Record<string, string> = {

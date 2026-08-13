@@ -7,8 +7,11 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Official drone and robotics innovation team of Sir MVIT, Bengaluru.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#fff6d2',
-    theme_color: '#fff6d2',
-    icons: [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' }],
+    background_color: '#ffffff',
+    theme_color: '#f3bc16',
+    icons: [
+      { src: '/icon.png', sizes: '675x616', type: 'image/png' },
+      { src: '/apple-icon.png', sizes: '675x616', type: 'image/png' },
+    ],
   };
 }

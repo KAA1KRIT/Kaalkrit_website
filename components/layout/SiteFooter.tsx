@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { footerNav, sectionNav } from '@/content/navigation';
 import { mailto, SITE, SOCIAL_LINKS } from '@/content/site';
 import { Wordmark } from '@/components/ui/Wordmark';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 
 const footerLink = 'footer-link';
 
@@ -15,7 +16,7 @@ export function SiteFooter() {
             <Wordmark />
             <p>Official Drone and Robotics Innovation Team of Sir MVIT, Bengaluru.</p>
             <span>Established {SITE.founded}</span>
-            <a href={mailto('KAALKRIT website enquiry')} className="footer-email">{SITE.email}</a>
+            <TrackedLink href={mailto('KAALKRIT website enquiry')} className="footer-email" event="email_click" properties={{ placement: 'footer' }}>{SITE.email}</TrackedLink>
           </div>
           <nav aria-label="Footer navigation" className="footer-nav">
             <h2>Navigate</h2>
@@ -25,7 +26,7 @@ export function SiteFooter() {
             <h2>Connect</h2>
             <ul>{sectionNav.map((item) => <li key={item.href}><Link href={item.href} className={footerLink}>{item.label}</Link></li>)}</ul>
             <h2 className="footer-nav__subhead">Follow</h2>
-            <ul>{SOCIAL_LINKS.map((link) => <li key={link.href}><a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.ariaLabel} className={footerLink}>{link.label}</a></li>)}</ul>
+            <ul>{SOCIAL_LINKS.map((link) => <li key={link.href}><TrackedLink href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.ariaLabel} className={footerLink} event="social_outbound_click" properties={{ platform: link.label, placement: 'footer' }}>{link.label}</TrackedLink></li>)}</ul>
           </nav>
           <nav aria-label="Legal navigation" className="footer-nav">
             <h2>Legal</h2>

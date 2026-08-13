@@ -1,14 +1,15 @@
 # KAALKRIT homepage visual system
 
-The former procedural drone visual system was retired during the warm editorial redesign. The public homepage no longer loads a WebGL canvas, Three.js, React Three Fiber, mesh particles, hotspots, or a GSAP deployment timeline.
+The former drone, particle, and MoltenMetal experiments are retired. The active homepage visual is the contained `GradientWaves` background inside `components/hero/`, with all factual hero copy rendered as normal HTML above it.
 
 ## Current signature interaction
 
-`ScrollExpandHero` is the homepage's only scroll-linked visual. It uses native document scroll and CSS custom properties to expand a locally stored temporary editorial image from a rounded frame to the full viewport.
+`ScrollExpandHero` is the only landing-page scroll-linked owner. It observes native document scroll and applies clamped transforms only to local hero elements.
 
-- Desktop uses a single sticky stage in the regular document flow.
-- Mobile uses the stable image composition without pinning.
-- Reduced-motion users receive the final static image state.
-- Hero copy is normal HTML and remains available independently of the image.
+- Desktop uses one sticky stage in ordinary document flow.
+- GradientWaves is a dynamically loaded, pointer-inert OGL background; it never owns document scrolling.
+- `GradualBlur` is a local bottom boundary, not a fixed page overlay.
+- Mobile and reduced-motion users receive a stable fallback with no hero pinning or WebGL requirement.
+- Hero copy remains available without the visual effect.
 
-The temporary image and its required replacement are documented in `public/images/ATTRIBUTIONS.md`.
+See `ARCHITECTURE.md` for the current component boundaries and `CONTENT_REQUIRED.md` for future approved media.

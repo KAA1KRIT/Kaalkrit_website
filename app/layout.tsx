@@ -1,32 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Mono, DM_Sans, Roboto_Slab } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { SITE } from '@/content/site';
 import { organizationSchema } from '@/lib/seo';
 import '@/styles/globals.css';
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-body',
-  preload: true,
-});
-
-const robotoSlab = Roboto_Slab({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-display',
-  preload: true,
-});
-
-const dmMono = DM_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  display: 'swap',
-  variable: '--font-mono',
-  preload: false,
-});
 
 export const metadata: Metadata = {
   ...(SITE.url ? { metadataBase: new URL(SITE.url) } : {}),
@@ -42,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#fff6d2',
+  themeColor: '#f3bc16',
   colorScheme: 'light',
 };
 
@@ -51,7 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${robotoSlab.variable} ${dmMono.variable}`}
     >
       <body>
         <a
@@ -63,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        {process.env.VERCEL === '1' ? <Analytics /> : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}

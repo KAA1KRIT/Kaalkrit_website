@@ -1,23 +1,88 @@
 :root {
-  --k-void: #fff6d2;
-  --k-surface: #ffffff;
-  --k-surface-2: #f3edce;
-  --k-line: #cccbc7;
-  --k-line-strong: #000000;
-  --k-text: #000000;
-  --k-text-muted: #666664;
-  --k-text-faint: #666664;
-  --k-signal: #ffd801;
-  --k-signal-dim: rgba(255, 216, 1, 0.24);
-  --k-live: #000000;
-  --k-alert: #ffd801;
+  /* TweakCN "openprofile" theme: cmi0kusqy000004jlhzfjfpim */
+  --background: oklch(1 0 0);
+  --foreground: #1a1a1a;
+  --card: #fdfdfc;
+  --card-foreground: #1f1f1f;
+  --popover: #fdfdfc;
+  --popover-foreground: #1f1f1f;
+  --primary: #f3bc16;
+  --primary-foreground: #383838;
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: #262626;
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: #595959;
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: #886807;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #ffffff;
+  --border: oklch(0.922 0 0);
+  --input: #dcd9d0;
+  --ring: #f3bc16;
+  --chart-1: oklch(0.81 0.10 252);
+  --chart-2: #e68c33;
+  --chart-3: #308ce8;
+  --chart-4: #e14747;
+  --chart-5: #34b25e;
+  --radius: 1.4rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #f3bc16;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #f2e5c0;
+  --sidebar-accent-foreground: #9b7608;
+  --sidebar-border: #d8d5ca;
+  --sidebar-ring: #f3bc16;
+  --shadow-color: oklch(0 0 0);
+  --shadow-opacity: 0.01;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0;
+  --shadow-offset-y: 0;
+  --letter-spacing: 0em;
+  --spacing: 0.25rem;
 
-  --canvas: #fff6d2;
-  --accent: #ffd801;
-  --ink: #000000;
-  --white: #ffffff;
-  --char: #666664;
-  --oat: #cccbc7;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
+
+  /* Compatibility aliases for the existing public composition. */
+  --k-void: var(--background);
+  --k-surface: var(--background);
+  --k-surface-2: var(--secondary);
+  --k-line: var(--border);
+  --k-line-strong: var(--accent-foreground);
+  --k-text: var(--foreground);
+  --k-text-muted: var(--muted-foreground);
+  --k-text-faint: var(--muted-foreground);
+  --k-signal: var(--primary);
+  --k-signal-dim: color-mix(in srgb, var(--accent) 60%, transparent);
+  --k-live: var(--chart-5);
+  --k-alert: var(--destructive);
+
+  --canvas: var(--background);
+  --ink: var(--foreground);
+  --white: var(--card);
+  --char: var(--muted-foreground);
+  --oat: var(--border);
+  --focus: var(--ring);
+  --hero-scrim: color-mix(in srgb, var(--foreground) 78%, transparent);
+  /* Openprofile's primary is the only hero highlight. It is intentionally
+     local to the visual system rather than a second brand palette. */
+  --hero-accent: var(--primary);
+  --hero-accent-foreground: var(--primary-foreground);
+  --hero-surface: color-mix(in srgb, var(--foreground) 86%, transparent);
+  --surface: var(--card);
+  --surface-dark: var(--foreground);
+
+  /* Old names remain role aliases, not a second palette. */
+  --forest-mist: var(--card);
+  --leaf: var(--secondary);
+  --growth: var(--chart-5);
+  --forest: var(--accent-foreground);
+  --deep-forest: var(--foreground);
 
   --k-t-hero: clamp(3.25rem, 2.1rem + 5.7vw, 6.8rem);
   --k-t-h2: clamp(2.4rem, 1.8rem + 3.2vw, 4.8rem);
@@ -38,13 +103,11 @@
   --k-9: 80px;
   --k-10: 112px;
   --k-11: 144px;
-
   --k-container: 1200px;
   --k-container-wide: 1360px;
   --k-gutter: clamp(20px, 5.56vw, 80px);
   --k-section-y: clamp(72px, 8vw, 112px);
-
-  --k-radius: 20px;
+  --k-radius: var(--radius);
   --k-radius-small: 4px;
   --k-radius-pill: 999px;
   --k-dur-fast: 120ms;

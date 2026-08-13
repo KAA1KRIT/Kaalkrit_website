@@ -1,10 +1,10 @@
 # KAALKRIT landing-page plan
 
-The homepage follows a warm editorial path from curiosity to trust, engineering capability, proof of work, ambition, and partnership.
+The homepage follows an engineering-led path from curiosity to trust, capability, proof of work, ambition, and partnership.
 
 ## Narrative order
 
-1. Warm fixed header and ScrollExpand hero.
+1. Fixed header and ScrollExpand hero with a contained GradientWaves background.
 2. Mission and the reason KAALKRIT works through practice.
 3. Full engineering lifecycle and capability index.
 4. Five documented projects, presented with clearly labelled temporary imagery.
@@ -14,8 +14,8 @@ The homepage follows a warm editorial path from curiosity to trust, engineering 
 
 ## Experience principles
 
-- One native-scroll signature interaction: the hero image expands from a rounded frame to the viewport.
+- One native-scroll signature interaction: the hero expands within a stable document region while the brand statement becomes the focal point.
 - Server-rendered factual content remains readable without JavaScript or image effects.
 - The mobile hero never pins; reduced-motion uses a static final composition.
-- Temporary stock imagery is never presented as KAALKRIT work and is tracked in `public/images/ATTRIBUTIONS.md`.
-- No drone model, WebGL canvas, particle system, fake telemetry, fake roster, or unsupported sponsor claim appears.
+- Media is never presented as KAALKRIT work without approval and a ready content entry.
+- No drone model, particle system, fake telemetry, fake roster, or unsupported sponsor claim appears. The contained GradientWaves background is decorative only and has a static fallback.

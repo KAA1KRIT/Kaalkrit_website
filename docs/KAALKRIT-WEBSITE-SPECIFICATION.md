@@ -1,5 +1,7 @@
 # KAALKRIT — Website Product & UX Specification
 
+> **Historical planning record.** This document preserves the original factual inventory and gap analysis, but its proposed component inventory, contact gaps, and visual direction are superseded by the implemented repository. See [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`CONTENT_REQUIRED.md`](../CONTENT_REQUIRED.md), and `content/` for current sources of truth.
+
 **Status:** Draft v1.0 — Phase 1 deliverable
 **Sources of truth:** `documentation.md` (content, verified facts) · `DESIGN.md` (visual system — *see §21, the supplied file did not contain a design system*)
 **Rule applied throughout:** nothing in this document asserts a fact that is not present in `documentation.md`. Every gap is marked `[GAP]` rather than filled.

@@ -1,4 +1,4 @@
-import { WarmLandingPage } from '@/components/sections/WarmLandingPage';
+import { LandingPage } from '@/components/sections/LandingPage';
 import { SITE } from '@/content/site';
 import { pageMetadata } from '@/lib/seo';
 
@@ -10,5 +10,5 @@ export const metadata = pageMetadata({
 });
 
 export default function HomePage() {
-  return <WarmLandingPage />;
+  return <LandingPage />;
 }

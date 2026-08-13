@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { primaryNav } from '@/content/navigation';
 import { mailto } from '@/content/site';
 import { Wordmark } from '@/components/ui/Wordmark';
+import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { MobileNavigation } from './MobileNavigation';
 
 /**
@@ -30,20 +31,8 @@ export function SiteHeader() {
   // extra render-producing effect.
   const open = openRoute === pathname;
 
-  // Escape closes and returns focus to the toggle.
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setOpenRoute(null);
-        toggleRef.current?.focus();
-      }
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [open]);
-
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const closeMenu = useCallback(() => setOpenRoute(null), []);
 
   return (
     <header
@@ -55,7 +44,7 @@ export function SiteHeader() {
           className="inline-flex items-center min-h-[44px] text-[1.0625rem] text-[var(--k-text)] no-underline shrink-0"
           aria-label="KAALKRIT — home"
         >
-          <Wordmark />
+          <Wordmark priority />
         </Link>
 
         <nav aria-label="Primary" className="site-header__nav">
@@ -73,7 +62,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <a className="site-header__cta" href={mailto('Partnership with Team KAALKRIT')}>Partner with KAALKRIT</a>
+          <TrackedLink className="site-header__cta" href={mailto('Partnership with Team KAALKRIT')} event="partner_cta_click" properties={{ placement: 'header' }}>Partner with KAALKRIT</TrackedLink>
         </nav>
 
         <button
@@ -82,6 +71,7 @@ export function SiteHeader() {
           onClick={() => setOpenRoute(open ? null : pathname)}
           aria-expanded={open}
           aria-controls={panelId}
+          aria-label={open ? 'Close menu' : 'Open menu'}
           className="site-header__menu-button"
         >
           {open ? 'Close' : 'Menu'}
@@ -92,7 +82,7 @@ export function SiteHeader() {
         </button>
       </div>
 
-      <MobileNavigation open={open} onClose={() => setOpenRoute(null)} panelId={panelId} />
+      <MobileNavigation open={open} onClose={closeMenu} panelId={panelId} triggerRef={toggleRef} />
     </header>
   );
 }

@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 70% 25%, color-mix(in srgb, #ff9ffc 28%, transparent), transparent 34%),
+    linear-gradient(145deg, #16111f 0%, #5227ff 48%, #130e20 100%);
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.container[data-static-fallback='true']::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #5227ff 24%, transparent), color-mix(in srgb, #130e20 64%, transparent)),
+    radial-gradient(ellipse 80% 42% at 62% 62%, color-mix(in srgb, #ff9ffc 35%, transparent), transparent 72%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canvas { display: none; }
+}

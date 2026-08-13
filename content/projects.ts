@@ -18,6 +18,7 @@ export const projects: Project[] = [
     problem: 'Documented engineering scope: bringing airframe design, embedded electronics, flight control, mission planning and payload management into one autonomous system.',
     significance: 'Represents KAALKRIT’s full-lifecycle work across design, integration, software, testing and autonomous flight.',
     capabilities: ['uas', 'flight-control', 'embedded', 'mechanical', 'pcb'],
+    contentStatus: 'ready',
   },
   {
     slug: 'airmos',
@@ -31,6 +32,7 @@ export const projects: Project[] = [
     problem: 'Documented engineering scope: advanced sensing, autonomy and mission-oriented design for the next aerial programme cycle.',
     significance: 'Continues the NIDAR aerial programme into 2027.',
     capabilities: ['uas', 'drone-tech', 'flight-control', 'sensors', 'ai-cv'],
+    contentStatus: 'ready',
   },
   {
     slug: 'build-with-hardware',
@@ -42,6 +44,7 @@ export const projects: Project[] = [
     problem: 'Documented platform scope: structured learning, projects, documentation, collaborative workspaces and AI-powered engineering assistance.',
     significance: 'Extends KAALKRIT’s engineering practice into a flagship learning and collaboration platform.',
     capabilities: ['software', 'ai-cv', 'research', 'embedded'],
+    contentStatus: 'ready',
   },
   {
     slug: 'robotic-arm',
@@ -53,6 +56,7 @@ export const projects: Project[] = [
     problem: 'Documented engineering scope: servo control, precision motion and control algorithms.',
     significance: 'Applies mechanical design, electronics and control to an intelligent robotic arm.',
     capabilities: ['robotics', 'mechanical', 'embedded', 'sensors'],
+    contentStatus: 'ready',
   },
   {
     slug: 'robot-vacuum',
@@ -63,6 +67,7 @@ export const projects: Project[] = [
     problem: 'Documented engineering scope: navigation, obstacle detection, motion control, sensor integration and autonomous mobility.',
     significance: 'Demonstrates autonomous robotics beyond the aerial programme.',
     capabilities: ['robotics', 'sensors', 'embedded', 'ai-cv'],
+    contentStatus: 'ready',
   },
 ];
 

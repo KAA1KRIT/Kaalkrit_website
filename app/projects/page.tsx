@@ -1,8 +1,8 @@
 import { PageHeader } from '@/components/layout/PageHeader';
-import { ProgrammeSpine } from '@/components/sections/ProgrammeSpine';
-import { PlatformFeature } from '@/components/sections/PlatformFeature';
-import { ProjectFeature } from '@/components/sections/ProjectFeature';
-import { PartnerSection } from '@/components/sections/PartnerSection';
+import { ProgrammeSpine } from '@/components/projects/ProgrammeSpine';
+import { PlatformFeature } from '@/components/projects/PlatformFeature';
+import { ProjectFeature } from '@/components/projects/ProjectFeature';
+import { PartnershipSection } from '@/components/sections/PartnershipSection';
 import { Rule } from '@/components/ui/Rule';
 import { projects, roboticsProjects } from '@/content/projects';
 import { pageMetadata, projectsSchema } from '@/lib/seo';
@@ -78,7 +78,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <PartnerSection />
+      <PartnershipSection />
 
       <script
         type="application/ld+json"

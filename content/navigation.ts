@@ -12,6 +12,9 @@ export const footerNav: NavItem[] = [
   { label: 'Capabilities', href: '/#capabilities' },
   { label: 'Projects', href: '/projects' },
   { label: 'Journey', href: '/journey' },
+  { label: 'Team', href: '/team' },
+  { label: 'Partners', href: '/partners' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const sectionNav: NavItem[] = [

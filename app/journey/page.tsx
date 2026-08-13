@@ -5,6 +5,8 @@ import { Rule } from '@/components/ui/Rule';
 import { Reveal } from '@/components/ui/Reveal';
 import { SITE } from '@/content/site';
 import { pageMetadata } from '@/lib/seo';
+import { DriftWallGallery } from '@/components/gallery/DriftWallGallery';
+import { journeyGallery } from '@/content/gallery';
 
 export const metadata = pageMetadata({
   title: 'Our Journey',
@@ -51,6 +53,15 @@ export default function JourneyPage() {
               </div>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="pb-[var(--k-section-y)]" aria-labelledby="journey-archive-heading">
+        <div className="k-container">
+          <Rule />
+          <h2 id="journey-archive-heading" className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]">Visual archive.</h2>
+          <p className="k-lede mt-[var(--k-5)]">Visual documentation is shared only when approval and publication permission are confirmed.</p>
+          <div className="mt-[var(--k-7)]"><DriftWallGallery items={journeyGallery} /></div>
         </div>
       </section>
     </>
