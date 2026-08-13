@@ -1,12 +1,12 @@
 import { copyFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
-const source = resolve('logo_favicon.png');
+const source = resolve('logo_favicon.jpg');
 const targets = [
-  resolve('public/logo_favicon.png'),
-  resolve('public/images/approved/logo_favicon.png'),
-  resolve('app/icon.png'),
-  resolve('app/apple-icon.png'),
+  resolve('public/logo_favicon.jpg'),
+  resolve('public/images/approved/logo_favicon.jpg'),
+  resolve('app/icon.jpg'),
+  resolve('app/apple-icon.jpg'),
 ];
 
 if (!existsSync(source)) {

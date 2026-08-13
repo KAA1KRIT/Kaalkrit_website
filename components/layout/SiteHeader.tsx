@@ -3,11 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import { primaryNav } from '@/content/navigation';
 import { mailto } from '@/content/site';
-import { Wordmark } from '@/components/ui/Wordmark';
 import { TrackedLink } from '@/components/analytics/TrackedLink';
 import { MobileNavigation } from './MobileNavigation';
+import { DesktopFlyoutNavigation } from './DesktopFlyoutNavigation';
 
 /**
  * Sparse public navigation. The mobile menu owns its own layout so desktop
@@ -31,39 +30,27 @@ export function SiteHeader() {
   // extra render-producing effect.
   const open = openRoute === pathname;
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const closeMenu = useCallback(() => setOpenRoute(null), []);
 
   return (
     <header
-      className={`site-header fixed inset-x-0 top-0 z-50 transition-colors duration-[var(--k-dur)] ease-[var(--k-ease)] ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}
+      className={`site-header fixed z-50 ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}
     >
-      <div className="k-container flex items-center justify-between gap-[var(--k-5)] h-[68px]">
+      <div className="site-header__inner">
         <Link
           href="/"
-          className="inline-flex items-center min-h-[44px] text-[1.0625rem] text-[var(--k-text)] no-underline shrink-0"
+          className="site-header__brand-link"
           aria-label="KAALKRIT — home"
         >
-          <Wordmark priority />
+          <span className="site-header__brand" aria-hidden="true">
+            <span className="site-header__brand-soft">Kaal</span><span className="site-header__brand-accent">Krit</span>
+          </span>
         </Link>
 
-        <nav aria-label="Primary" className="site-header__nav">
-          {primaryNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`site-header__link ${
-                isActive(item.href)
-                  ? 'is-active'
-                  : ''
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="site-header__desktop-navigation">
+          <DesktopFlyoutNavigation pathname={pathname} />
           <TrackedLink className="site-header__cta" href={mailto('Partnership with Team KAALKRIT')} event="partner_cta_click" properties={{ placement: 'header' }}>Partner with KAALKRIT</TrackedLink>
-        </nav>
+        </div>
 
         <button
           ref={toggleRef}

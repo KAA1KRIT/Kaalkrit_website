@@ -8,7 +8,7 @@
   },
   "scripts": {
     "predev": "node scripts/sync-brand-assets.mjs",
-    "dev": "next dev",
+    "dev": "node scripts/dev-with-brand-sync.mjs",
     "build": "next build",
     "prebuild": "node scripts/sync-brand-assets.mjs",
     "start": "next start",

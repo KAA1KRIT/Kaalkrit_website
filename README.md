@@ -74,7 +74,7 @@ tests/               Content and route-integrity tests
 
 ## Content and assets
 
-Only approved `ready` content and local, permission-confirmed gallery media may render publicly. No stock or placeholder media is included. The canonical official mark is `logo_favicon.png`; `predev` and `prebuild` synchronize it to the public logo and App Router icons. See [CONTENT_REQUIRED.md](CONTENT_REQUIRED.md) for remaining approved media, roster, proof, and sponsor material.
+Only approved `ready` content and local, permission-confirmed gallery media may render publicly. No stock or placeholder media is included. The canonical official mark is `logo_favicon.jpg`; `predev` and `prebuild` synchronize it to the public logo and App Router icons. See [CONTENT_REQUIRED.md](CONTENT_REQUIRED.md) for remaining approved media, roster, proof, and sponsor material.
 
 ## Deployment
 

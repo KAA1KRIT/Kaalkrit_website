@@ -1,10 +1,18 @@
 import type { Metadata, Viewport } from 'next';
+import { Bungee } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ANALYTICS_ENABLED, SITE } from '@/content/site';
 import { organizationSchema, serializeJsonLd, websiteSchema } from '@/lib/seo';
 import '@/styles/globals.css';
+
+const brandFont = Bungee({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-kaalkrit-brand',
+});
 
 export const metadata: Metadata = {
   ...(SITE.url ? { metadataBase: new URL(SITE.url) } : {}),
@@ -30,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       data-scroll-behavior="smooth"
     >
-      <body>
+      <body className={brandFont.variable}>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-[var(--k-4)] focus:top-[var(--k-4)] focus:z-[60] focus:inline-flex focus:items-center focus:min-h-[44px] focus:px-[var(--k-5)] focus:bg-[var(--k-signal)] focus:text-white focus:rounded-[var(--k-radius)] focus:no-underline"

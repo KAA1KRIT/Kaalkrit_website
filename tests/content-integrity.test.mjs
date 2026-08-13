@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 import { readyGalleryItems } from '../content/gallery.ts';
-import { primaryNav, footerNav, sectionNav } from '../content/navigation.ts';
+import { flyoutNavigation, primaryNav, footerNav, sectionNav } from '../content/navigation.ts';
 import { domains } from '../content/domains.ts';
 import { projects } from '../content/projects.ts';
 import { mailto, SITE, SOCIAL_LINKS } from '../content/site.ts';
@@ -19,7 +19,7 @@ test('verified public contact channels remain exact', () => {
 });
 
 test('navigation contains only real local, mail, or verified social destinations', () => {
-  const links = [...primaryNav, ...footerNav, ...sectionNav];
+  const links = [...primaryNav, ...footerNav, ...sectionNav, ...flyoutNavigation.flatMap(({ items }) => items)];
   for (const { href } of links) {
     assert.ok(!href.includes('localhost') && !href.includes('example.com'));
     assert.ok(href.startsWith('/') || href.startsWith('mailto:'));
@@ -64,13 +64,23 @@ test('gallery publication gate rejects incomplete and external media', () => {
   assert.deepEqual(readyGalleryItems(candidates).map(({ id }) => id), ['approved']);
 });
 
-test('shared wordmark has transparent presentation and a distinct footer scale', () => {
+test('shared wordmark has a transparent presentation and a distinct footer scale', () => {
   const component = readFileSync('components/ui/Wordmark.tsx', 'utf8');
   const styles = readFileSync('styles/globals.css', 'utf8');
 
   assert.match(component, /alt="KAALKRIT"/);
+  assert.match(component, /src="\/logo_favicon\.jpg"/);
+  assert.match(component, /unoptimized/);
   assert.match(component, /wordmark--footer/);
   assert.match(styles, /\.wordmark\s*\{[^}]*background:\s*transparent/s);
+  assert.match(styles, /\.wordmark\s*\{[^}]*overflow:\s*hidden/s);
   assert.match(styles, /\.wordmark--footer/);
   assert.match(styles, /\.wordmark__image\s*\{[^}]*object-fit:\s*contain/s);
+});
+
+test('navbar uses a text-only KaalKrit brand treatment while the official logo remains shared elsewhere', () => {
+  const header = readFileSync('components/layout/SiteHeader.tsx', 'utf8');
+
+  assert.match(header, /site-header__brand-soft">Kaal<\/span><span className="site-header__brand-accent">Krit/);
+  assert.doesNotMatch(header, /<Wordmark/);
 });

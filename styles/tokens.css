@@ -69,6 +69,15 @@
   --hero-accent-foreground: var(--primary-foreground);
   --hero-surface: color-mix(in srgb, var(--foreground) 86%, transparent);
 
+  /* Local to the floating navigation: a restrained, opaque-enough surface
+     that keeps controls legible over the kinetic hero. */
+  --navigation-surface: color-mix(in srgb, #635d85 88%, var(--foreground));
+  --navigation-foreground: #f8f6ff;
+  --navigation-muted: color-mix(in srgb, var(--navigation-foreground) 72%, transparent);
+  --navigation-border: color-mix(in srgb, var(--navigation-foreground) 18%, transparent);
+  --navigation-shadow: rgba(20, 16, 37, 0.28);
+  --navigation-brand-soft: #f3c4c7;
+
   --k-t-hero: clamp(3.25rem, 2.1rem + 5.7vw, 6.8rem);
   --k-t-h2: clamp(2.4rem, 1.8rem + 3.2vw, 4.8rem);
   --k-t-h3: clamp(1.55rem, 1.2rem + 1.5vw, 2.35rem);

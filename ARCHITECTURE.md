@@ -33,7 +33,7 @@ Contact details and analytics state are centralized in `content/site.ts`. `NEXT_
 
 `styles/tokens.css` is the sole semantic theme source. `styles/globals.css` owns shared spacing, buttons, focus, native scrollbar, reduced-motion, and feature layout rules. Old palette aliases have been removed.
 
-The canonical logo is root `logo_favicon.png`. `scripts/sync-brand-assets.mjs` copies it to `public/logo_favicon.png`, the approved image path, and App Router icon files before development/build. A separate high-resolution vector wordmark remains desirable.
+The canonical logo is root `logo_favicon.jpg`. `scripts/sync-brand-assets.mjs` copies it to `public/logo_favicon.jpg`, the approved image path, and App Router icon files before development/build. A separate transparent/vector wordmark remains desirable.
 
 GradientWaves is decorative and pointer-inert. It skips WebGL on reduced-motion, coarse-pointer, and low-core devices; pauses off-screen or when the document is hidden; and disposes its canvas, observers, listeners, frame, and WebGL context on unmount.
 

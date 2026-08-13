@@ -32,7 +32,7 @@ No source relocations were required in this pass. The existing feature-oriented 
 
 ## Intentionally retained
 
-- Root `logo_favicon.png`, synchronized public/app icons, and `public/images/approved/kaalkrit-logo.png` are approved brand assets and were not deleted.
+- Root `logo_favicon.jpg`, synchronized public/app icons, and `public/images/approved/kaalkrit-logo.png` are approved brand assets and were not deleted.
 - Empty gallery/team structures remain because they safely hide unavailable material and are ready for approved content.
 - The ignored local `logo_favicon.psd` was left untouched; it is not tracked or shipped.
 - Generated `.next`, `node_modules`, `output`, Playwright artifacts, and TypeScript build info remain local and ignored, not tracked.
