@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import type { ComponentProps, MouseEvent, ReactNode } from 'react';
 import { track } from '@vercel/analytics';
+import { ANALYTICS_ENABLED } from '@/content/site';
 
 export type AnalyticsEvent =
   | 'primary_cta_click'
@@ -30,11 +31,8 @@ type TrackedLinkProps = SharedProps &
     rel?: string;
   };
 
-const analyticsEnabled =
-  process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' && process.env.VERCEL === '1';
-
 function record(event: AnalyticsEvent | undefined, properties: Properties | undefined) {
-  if (!analyticsEnabled || !event) return;
+  if (!ANALYTICS_ENABLED || !event) return;
   track(event, properties);
 }
 

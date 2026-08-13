@@ -6,7 +6,7 @@ export function NotFoundExperience() {
   return (
     <section className="not-found-experience" aria-labelledby="not-found-heading">
       <div className="public-container not-found-experience__inner">
-        <Wordmark />
+        <Wordmark variant="system" />
         <div className="flight-path-mark" aria-hidden="true"><span /><i /></div>
         <p className="eyebrow">Error 404 / Route unavailable</p>
         <h1 id="not-found-heading">This page took a different flight path.</h1>

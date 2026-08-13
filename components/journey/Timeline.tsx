@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { milestones } from '@/content/journey';
-import { getProject } from '@/content/projects';
+import { getPublicProject } from '@/content/projects';
 
 const kindLabels: Record<string, string> = {
   founding: 'Founding',
@@ -93,7 +93,7 @@ export function Timeline() {
 
       <ol className="grid gap-[var(--k-10)] pl-[var(--k-6)] md:pl-0" aria-label="KAALKRIT milestones">
         {milestones.map((milestone, index) => {
-          const project = milestone.projectSlug ? getProject(milestone.projectSlug) : undefined;
+          const project = milestone.projectSlug ? getPublicProject(milestone.projectSlug) : undefined;
           const active = index === activeIndex;
 
           return (
@@ -123,7 +123,7 @@ export function Timeline() {
                   <p className="k-body mt-[var(--k-4)]">{milestone.description}</p>
                   {project ? (
                     <Link
-                      href={`/projects#${project.slug}`}
+                      href={`/projects/${project.slug}`}
                       className="mt-[var(--k-4)] inline-flex items-center gap-[var(--k-2)] min-h-[44px] text-[var(--k-t-small)] text-[var(--k-text)] underline decoration-[var(--k-line-strong)] underline-offset-4 hover:decoration-[var(--k-signal)] transition-colors duration-[var(--k-dur-fast)]"
                     >
                       {project.shortTitle}

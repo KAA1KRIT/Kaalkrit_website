@@ -3,19 +3,10 @@ import { ScrollExpandHero } from '@/components/hero/ScrollExpandHero';
 import { BorderGlow } from '@/components/motion/BorderGlow';
 import { MaskedHeading } from '@/components/motion/MaskedHeading';
 import { mailto } from '@/content/site';
-import { projects, statusLabel } from '@/content/projects';
+import { publicProjects, statusLabel } from '@/content/projects';
+import { achievements } from '@/content/achievements';
+import { domainsByGroup, lifecycleStages } from '@/content/domains';
 import { TrackedLink } from '@/components/analytics/TrackedLink';
-
-const lifecycle = [
-  'Research', 'Architecture', 'Design', 'Manufacturing', 'Electronics', 'Software', 'Testing', 'Validation', 'Iteration',
-];
-
-const capabilityGroups = [
-  ['Air', ['Autonomous UAS', 'Intelligent drone technologies', 'Flight control and autonomous navigation']],
-  ['Machine', ['Robotics and automation', 'Mechanical design and rapid prototyping', 'Sensor integration and control']],
-  ['Silicon + Software', ['Embedded systems', 'PCB design and electronics', 'AI, computer vision, and full-stack development']],
-  ['Research', ['Research and product engineering', 'System architecture', 'Testing, validation, and continuous improvement']],
-] as const;
 
 export function LandingPage() {
   return (
@@ -51,7 +42,7 @@ export function LandingPage() {
             <h2 id="lifecycle-heading">From a question to a validated system.</h2>
           </div>
           <ol className="editorial-lifecycle">
-            {lifecycle.map((stage, index) => <li key={stage}><span>{String(index + 1).padStart(2, '0')}</span>{stage}</li>)}
+            {lifecycleStages.map((stage, index) => <li key={stage}><span>{String(index + 1).padStart(2, '0')}</span>{stage}</li>)}
           </ol>
         </div>
       </section>
@@ -63,7 +54,7 @@ export function LandingPage() {
             <div><h2 id="capabilities-heading">Capability lives in the connections.</h2><p className="editorial-lede">The index is deliberately broad: each discipline becomes more useful when it is designed alongside the others.</p></div>
           </div>
           <div className="capability-index-warm">
-            {capabilityGroups.map(([group, items], index) => <section key={group}><p>{String(index + 1).padStart(2, '0')} / {group}</p><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></section>)}
+            {domainsByGroup.map(({ group, items }, index) => <section key={group.id}><p>{String(index + 1).padStart(2, '0')} / {group.label}</p><ul>{items.map((item) => <li key={item.id}>{item.label}</li>)}</ul></section>)}
           </div>
         </div>
       </section>
@@ -75,7 +66,7 @@ export function LandingPage() {
             <div><h2 id="projects-heading">Work that makes the ambition tangible.</h2><p className="editorial-lede">Each project record keeps its documented scope, status, and engineering focus in view.</p></div>
           </div>
           <div className="project-editorial-list">
-            {projects.map((project, index) => (
+            {publicProjects.map((project, index) => (
               <article key={project.title} className={`project-editorial ${index % 2 === 1 ? 'project-editorial--reverse' : ''}`}>
                 <div className="project-editorial__image project-editorial__image--empty" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></div>
                 <div className="project-editorial__copy"><p className="project-status">{statusLabel[project.status]}</p><h3>{project.title}</h3><p>{project.summary}</p><TrackedLink href={`/projects/${project.slug}`} className="text-link" event="project_detail_click" properties={{ project: project.slug, placement: 'homepage' }}>Read the project record <span aria-hidden="true">→</span></TrackedLink></div>
@@ -96,7 +87,7 @@ export function LandingPage() {
       <section className="editorial-section achievement-section" aria-labelledby="achievement-heading">
         <div className="public-container editorial-two-column">
           <p className="eyebrow">07 / Proof of work</p>
-          <div><h2 id="achievement-heading">Progress worth stating plainly.</h2><div className="achievement-lines"><p><strong>11th place</strong><span>Business Evaluation at a national-level competition.</span></p><p><strong>National representation</strong><span>Representing Sir MVIT in national-level drone innovation competitions.</span></p></div></div>
+          <div><h2 id="achievement-heading">Progress worth stating plainly.</h2><div className="achievement-lines">{achievements.map((achievement) => <p key={achievement.id}><strong>{achievement.title}</strong><span>{achievement.detail}</span></p>)}</div></div>
         </div>
       </section>
 

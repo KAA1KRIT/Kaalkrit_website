@@ -1,38 +1,44 @@
-# KAALKRIT repository architecture
+# KAALKRIT Architecture
 
-## Application boundaries
+## Rendering boundaries
 
-This is a Next.js App Router project rooted at `app/`. The root App Router location is intentionally retained rather than moving every route into `src/`: it keeps the active deployment/configuration paths stable. Route files compose server-rendered content by default. Client boundaries are limited to interactive presentation: the mobile navigation, scroll-expanded hero, GradientWaves background, galleries, and focused feedback states.
+The project uses the Next.js App Router rooted at `app/`. Routes and static marketing composition are Server Components by default. Client boundaries are limited to navigation state, tracked links, the scroll-expanded hero, GradientWaves, galleries, timeline/reveal behavior, roster filtering, and error recovery.
 
-`app/layout.tsx` owns global metadata, the shared header/footer, analytics when deployed on Vercel, and organisation JSON-LD. Individual routes own their page metadata through `lib/seo.ts`.
+All current public pages are statically rendered; project detail pages use `generateStaticParams`. There is no form backend, authentication, database, preview mode, or personalized response to cache.
 
-## Routes
+## Routes and system pages
 
 - Marketing: `/`, `/projects`, `/projects/[slug]`, `/journey`, `/team`, `/partners`, `/contact`.
-- Support and system: `/privacy`, `/terms`, `/accessibility`, route loading states, `error.tsx`, `global-error.tsx`, and `not-found.tsx`.
-- Search and installability: `robots.ts`, `sitemap.ts`, `manifest.ts`, `icon.png`, and `apple-icon.png`.
+- Legal/support: `/privacy`, `/terms`, `/accessibility`.
+- System: `loading.tsx`, `error.tsx`, `global-error.tsx`, and `not-found.tsx`.
+- Discovery/installability: `robots.ts`, `sitemap.ts`, `manifest.ts`, `icon.png`, `apple-icon.png`, and `opengraph-image.svg`.
 
-## Components
+The team route remains useful as an honest empty state, but is `noindex`, disallowed in `robots.txt`, and absent from the sitemap until an approved roster exists.
 
-- `components/layout`: site chrome and legal/page framing.
-- `components/hero`: the single landing hero owner. Its local scroll calculation only transforms children; it never owns document scrolling. `GradientWavesLayer` dynamically loads its OGL canvas, and `GradualBlur` is a local decorative boundary.
-- `components/sections`: reusable marketing sections and the home composition.
-- `components/projects`: programme, platform, and project feature blocks.
-- `components/gallery`: typed wrappers around optional React Bits galleries, with static, empty, and error fallbacks.
-- `components/motion`: contained, non-route motion treatments.
-- `components/system`: global loading, error, not-found, and skeleton building blocks.
-- `components/ui`: project UI primitives; avoid feature logic here.
+## Component ownership
 
-## Content and media
+- `components/hero`: one scroll owner (`ScrollExpandHero`), one dynamically imported OGL visual (`GradientWavesLayer`), and one local decorative blur boundary (`GradualBlur`). Only local hero children transform; document scrolling remains native.
+- `components/layout`: shared header, accessible mobile dialog/sheet behavior, footer, and page/legal framing.
+- `components/gallery`: typed lazy adapters. Heavy gallery code loads only when approved media passes `readyGalleryItems`; otherwise a stable public empty state renders.
+- `components/projects`, `components/journey`, `components/team`, and `components/sections`: feature-level composition.
+- `components/system` and `components/ui`: shared loading/error/not-found and interface primitives.
 
-`content/` is the only public factual source. Entries use `ContentStatus` from `lib/types.ts`; public components must render only approved `ready` material. `content/journey.ts` and `content/partners.ts` own their records directly. `content/gallery.ts` enforces local, permission-confirmed media before it renders.
+## Content and publication safety
 
-The canonical incoming logo is the root `logo_favicon.png`. `scripts/sync-brand-assets.mjs` copies it to the public brand asset and App Router icons. The website references `/images/approved/logo_favicon.png`; changing the canonical file and running the script updates the derived logo/icon files.
+`content/` is the factual source of truth. `ContentStatus` supports `ready`, `draft`, `awaiting-content`, and `hidden`. Public project routes, metadata, sitemap entries, schema, and homepage cards consume `publicProjects`, not the unrestricted source array. Gallery entries must be ready, local, dimensioned, have meaningful alt text, confirm permission, and pass `readyGalleryItems`.
 
-## Styles and motion
+Contact details and analytics state are centralized in `content/site.ts`. `NEXT_PUBLIC_SITE_URL` is normalized to a non-private HTTPS origin before it can enter metadata.
 
-`styles/tokens.css` is the single semantic token source. `styles/globals.css` owns the page-level typography, scrollbar, focus, layout, and reduced-motion rules. Feature CSS modules remain adjacent to their component. Do not add competing global palettes or transform `html`, `body`, or `main`.
+## Theme, media, and motion
 
-## Caching and deployment
+`styles/tokens.css` is the sole semantic theme source. `styles/globals.css` owns shared spacing, buttons, focus, native scrollbar, reduced-motion, and feature layout rules. Old palette aliases have been removed.
 
-Static public routes are build-rendered where possible. `next.config.ts` sets image formats and intentionally short revalidation for the stable official logo filename. `NEXT_PUBLIC_SITE_URL` is optional locally and required for production canonical/search metadata.
+The canonical logo is root `logo_favicon.png`. `scripts/sync-brand-assets.mjs` copies it to `public/logo_favicon.png`, the approved image path, and App Router icon files before development/build. A separate high-resolution vector wordmark remains desirable.
+
+GradientWaves is decorative and pointer-inert. It skips WebGL on reduced-motion, coarse-pointer, and low-core devices; pauses off-screen or when the document is hidden; and disposes its canvas, observers, listeners, frame, and WebGL context on unmount.
+
+## SEO, analytics, and security
+
+`lib/seo.ts` owns page metadata, safe absolute URLs, and escaped JSON-LD. Organization and WebSite schema use verified facts only. Vercel Web Analytics loads only in production when `NEXT_PUBLIC_ENABLE_ANALYTICS=true`; custom events contain interaction names and non-personal placement labels only.
+
+`next.config.ts` supplies `nosniff`, strict referrer policy, clickjacking protection, a restrictive permissions policy, and a production CSP compatible with current local assets, OGL, and same-origin Vercel Analytics. HSTS is intentionally deferred until the final HTTPS domain is confirmed.

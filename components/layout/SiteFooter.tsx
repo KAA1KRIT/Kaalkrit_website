@@ -13,7 +13,7 @@ export function SiteFooter() {
       <div className="public-container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <Wordmark />
+            <Wordmark variant="footer" />
             <p>Official Drone and Robotics Innovation Team of Sir MVIT, Bengaluru.</p>
             <span>Established {SITE.founded}</span>
             <TrackedLink href={mailto('KAALKRIT website enquiry')} className="footer-email" event="email_click" properties={{ placement: 'footer' }}>{SITE.email}</TrackedLink>

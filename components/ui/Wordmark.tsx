@@ -1,13 +1,27 @@
 import Image from 'next/image';
 
-export function Wordmark({ className = '', priority = false }: { className?: string; priority?: boolean }) {
+const variantClass = {
+  header: 'wordmark--header',
+  footer: 'wordmark--footer',
+  system: 'wordmark--system',
+} as const;
+
+export function Wordmark({
+  className = '',
+  priority = false,
+  variant = 'header',
+}: {
+  className?: string;
+  priority?: boolean;
+  variant?: keyof typeof variantClass;
+}) {
   return (
-    <span className={`wordmark ${className}`}>
+    <span className={`wordmark ${variantClass[variant]} ${className}`.trim()}>
       <Image
-        src="/images/approved/logo_favicon.png"
-        alt="KAALKRIT Drone and Aviation Club"
-        width={675}
-        height={616}
+        src="/logo_favicon.png"
+        alt="KAALKRIT"
+        width={160}
+        height={160}
         priority={priority}
         className="wordmark__image"
       />

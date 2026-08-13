@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { absoluteUrl, SITE, SOCIAL_LINKS } from '@/content/site';
-import { projects } from '@/content/projects';
+import { publicProjects } from '@/content/projects';
 import { teamMembers } from '@/content/team';
 
 const TITLE_SUFFIX = 'KAALKRIT';
@@ -10,12 +10,15 @@ export function pageMetadata({
   description,
   path,
   fullTitle,
+  index = true,
 }: {
   title: string;
   description: string;
   path: string;
   /** Use for the homepage, where the suffix would be redundant. */
   fullTitle?: string;
+  /** Exclude content-incomplete routes from search results. */
+  index?: boolean;
 }): Metadata {
   const resolved = fullTitle ?? `${title} — ${TITLE_SUFFIX}`;
   const url = absoluteUrl(path);
@@ -26,6 +29,7 @@ export function pageMetadata({
     // template must not append it a second time.
     title: { absolute: resolved },
     description,
+    robots: { index, follow: true },
     ...(url ? { alternates: { canonical: url } } : {}),
     openGraph: {
       title: resolved,
@@ -43,6 +47,10 @@ export function pageMetadata({
       ...(socialImage ? { images: [socialImage] } : {}),
     },
   };
+}
+
+export function serializeJsonLd(value: unknown): string {
+  return JSON.stringify(value).replaceAll('<', '\\u003c');
 }
 
 /** Organization schema with the two verified social profiles. */
@@ -73,12 +81,23 @@ export function organizationSchema() {
   };
 }
 
+export function websiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    description: SITE.description,
+    ...(SITE.url ? { url: SITE.url } : {}),
+    publisher: { '@type': 'Organization', name: SITE.name },
+  };
+}
+
 export function projectsSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'KAALKRIT projects',
-    itemListElement: projects.map((project, index) => ({
+    itemListElement: publicProjects.map((project, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       item: {
@@ -86,8 +105,8 @@ export function projectsSchema() {
         name: project.title,
         description: project.summary,
         creator: { '@type': 'Organization', name: SITE.name },
-        ...(absoluteUrl(`/projects#${project.slug}`)
-          ? { url: absoluteUrl(`/projects#${project.slug}`) }
+        ...(absoluteUrl(`/projects/${project.slug}`)
+          ? { url: absoluteUrl(`/projects/${project.slug}`) }
           : {}),
       },
     })),

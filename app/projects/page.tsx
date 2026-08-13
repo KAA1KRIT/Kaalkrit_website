@@ -4,8 +4,8 @@ import { PlatformFeature } from '@/components/projects/PlatformFeature';
 import { ProjectFeature } from '@/components/projects/ProjectFeature';
 import { PartnershipSection } from '@/components/sections/PartnershipSection';
 import { Rule } from '@/components/ui/Rule';
-import { projects, roboticsProjects } from '@/content/projects';
-import { pageMetadata, projectsSchema } from '@/lib/seo';
+import { publicProjects, roboticsProjects } from '@/content/projects';
+import { pageMetadata, projectsSchema, serializeJsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Projects',
@@ -21,7 +21,7 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         heading="Five documented systems, from airframe to firmware."
         lede="Each entry states what the system is, its current status and the engineering capability it demonstrates."
-        meta={[`${projects.length} documented systems`, '2 NIDAR cycles', '1 platform']}
+        meta={[`${publicProjects.length} documented systems`, '2 NIDAR cycles', '1 platform']}
       />
 
       <section className="pb-[var(--k-section-y)]" aria-labelledby="programme-heading">
@@ -82,7 +82,7 @@ export default function ProjectsPage() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema()) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(projectsSchema()) }}
       />
     </>
   );

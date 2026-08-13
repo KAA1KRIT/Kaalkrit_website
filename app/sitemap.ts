@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { absoluteUrl } from '@/content/site';
 import { hasRoster } from '@/content/team';
-import { projects } from '@/content/projects';
+import { publicProjects } from '@/content/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!absoluteUrl('/')) return [];
@@ -17,9 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/', 1),
     entry('/projects', 0.9),
     entry('/journey', 0.8),
-    ...projects
-      .filter((project) => project.contentStatus === 'ready')
-      .map((project) => entry(`/projects/${project.slug}`, 0.75)),
+    ...publicProjects.map((project) => entry(`/projects/${project.slug}`, 0.75)),
     entry('/partners', 0.65),
     entry('/contact', 0.65),
     entry('/privacy', 0.4),

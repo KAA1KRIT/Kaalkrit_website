@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
-import { SITE } from '@/content/site';
-import { organizationSchema } from '@/lib/seo';
+import { ANALYTICS_ENABLED, SITE } from '@/content/site';
+import { organizationSchema, serializeJsonLd, websiteSchema } from '@/lib/seo';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -40,10 +40,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        {process.env.VERCEL === '1' ? <Analytics /> : null}
+        {ANALYTICS_ENABLED && process.env.NODE_ENV === 'production' ? <Analytics /> : null}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(organizationSchema()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteSchema()) }}
         />
       </body>
     </html>

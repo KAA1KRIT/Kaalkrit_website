@@ -39,14 +39,21 @@ export function Button({
   const isExternal = href.startsWith('mailto:') || href.startsWith('http');
   const classes = `${base} ${variants[variant]} ${loading ? 'opacity-50 pointer-events-none' : ''} ${className}`;
 
+  if (loading) {
+    return (
+      <button type="button" className={classes} aria-busy="true" disabled>
+        Loading…
+        {trailing}
+      </button>
+    );
+  }
+
   if (isExternal) {
     const isMailto = href.startsWith('mailto:');
     return (
       <a
         href={href}
         className={classes}
-        aria-busy={loading || undefined}
-        aria-disabled={loading || undefined}
         {...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
       >
         {loading ? 'Loading…' : children}
@@ -56,8 +63,8 @@ export function Button({
   }
 
   return (
-    <Link href={href} className={classes} aria-busy={loading || undefined} aria-disabled={loading || undefined} {...rest}>
-      {loading ? 'Loading…' : children}
+    <Link href={href} className={classes} {...rest}>
+      {children}
       {trailing}
     </Link>
   );

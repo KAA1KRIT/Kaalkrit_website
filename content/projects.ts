@@ -2,7 +2,7 @@ import type { Project } from '@/lib/types';
 
 /**
  * Five documented systems (F5–F9). Every field is a restatement of
- * documentation.md — no capability, date or outcome is added.
+ * the verified KAALKRIT content inventory — no capability, date or outcome is added.
  */
 export const projects: Project[] = [
   {
@@ -73,21 +73,29 @@ export const projects: Project[] = [
 
 const bySlug = new Map(projects.map((project) => [project.slug, project]));
 
+/** Only approved records may be composed into public routes or metadata. */
+export const publicProjects = projects.filter((project) => project.contentStatus === 'ready');
+const publicBySlug = new Map(publicProjects.map((project) => [project.slug, project]));
+
 export function getProject(slug: string): Project | undefined {
   return bySlug.get(slug);
 }
 
+export function getPublicProject(slug: string): Project | undefined {
+  return publicBySlug.get(slug);
+}
+
 /** The two-cycle aerial programme, in sequence. */
-export const programmeProjects = projects.filter((project) => project.programme !== undefined);
+export const programmeProjects = publicProjects.filter((project) => project.programme !== undefined);
 
 /** The paired ground-robotics track. */
-export const roboticsProjects = projects.filter((project) =>
+export const roboticsProjects = publicProjects.filter((project) =>
   ['robotic-arm', 'robot-vacuum'].includes(project.slug),
 );
 
-export const platformProject = getProject('build-with-hardware');
+export const platformProject = publicProjects.find((project) => project.slug === 'build-with-hardware');
 
 export const statusLabel: Record<Project['status'], string> = {
-  completed: 'Built',
+  completed: 'Completed',
   'in-development': 'In development',
 };

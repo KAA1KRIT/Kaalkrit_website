@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 
 const source = resolve('logo_favicon.png');
 const targets = [
+  resolve('public/logo_favicon.png'),
   resolve('public/images/approved/logo_favicon.png'),
   resolve('app/icon.png'),
   resolve('app/apple-icon.png'),

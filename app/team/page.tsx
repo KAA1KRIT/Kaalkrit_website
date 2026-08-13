@@ -8,7 +8,12 @@ import { pageMetadata } from '@/lib/seo';
 import { DepthCarouselGallery } from '@/components/gallery/DepthCarouselGallery';
 import { teamGallery } from '@/content/gallery';
 
-export const metadata = pageMetadata({ title: 'Team', description: 'The multidisciplinary student engineering team behind KAALKRIT.', path: '/team' });
+export const metadata = pageMetadata({
+  title: 'Team',
+  description: 'The multidisciplinary student engineering team behind KAALKRIT.',
+  path: '/team',
+  index: teamMembers.length > 0,
+});
 
 export default function TeamPage() {
   return (

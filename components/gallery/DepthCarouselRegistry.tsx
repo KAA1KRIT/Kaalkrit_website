@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
 import type { GalleryItem } from '@/lib/types';
 
 /** Typed KAALKRIT adaptation of the React Bits DepthCarousel JS + CSS registry component. */
@@ -21,16 +20,30 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
 
   useEffect(() => {
     if (reducedRef.current || !rootRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.kaalkrit-depth-card', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.08, ease: 'power3.out' });
-    }, rootRef);
-    return () => ctx.revert();
+    const animations = Array.from(rootRef.current.querySelectorAll<HTMLElement>('.kaalkrit-depth-card')).map(
+      (card, index) => card.animate(
+        [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 420, delay: index * 55, easing: 'cubic-bezier(0.2, 0, 0, 1)', fill: 'backwards' },
+      ),
+    );
+    return () => animations.forEach((animation) => animation.cancel());
   }, [items]);
 
   const move = (delta: number) => setActive((value) => (value + delta + items.length) % items.length);
 
   return (
-    <div ref={rootRef} className="registry-depth-carousel" tabIndex={0} aria-label="KAALKRIT media gallery">
+    <div
+      ref={rootRef}
+      className="registry-depth-carousel"
+      tabIndex={0}
+      aria-label="KAALKRIT media gallery"
+      onKeyDown={(event) => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
+        if (event.key === 'Home') { event.preventDefault(); setActive(0); }
+        if (event.key === 'End') { event.preventDefault(); setActive(items.length - 1); }
+      }}
+    >
       <div className="registry-depth-carousel__stage">
         {items.map((item, index) => {
           const distance = index - active;

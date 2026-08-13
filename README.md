@@ -1,37 +1,48 @@
 # KAALKRIT Website
 
-The public website for KAALKRIT, the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru.
+Public website for KAALKRIT, the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru.
 
-## What is included
+## Features and routes
 
-- A native-scroll GradientWaves landing hero, documented projects, journey, team, partners, and contact routes.
-- Privacy, terms, accessibility, loading, error, and custom not-found experiences.
-- Typed, status-aware content modules that publish only approved material.
-- Local official logo/icon assets, metadata, manifest, robots, sitemap, and optional Vercel Analytics.
-
-## Routes
-
-`/`, `/projects`, `/projects/[slug]`, `/journey`, `/team`, `/partners`, `/contact`, `/privacy`, `/terms`, `/accessibility`, `/robots.txt`, and `/sitemap.xml`.
+- Native-scroll landing hero with a dynamically loaded GradientWaves visual and reduced-motion fallback.
+- Typed, approval-aware project, journey, team, partner, contact, and gallery content.
+- Responsive navigation, route loading/error states, custom 404, legal pages, metadata, manifest, robots, and sitemap.
+- Public routes: `/`, `/projects`, `/projects/[slug]`, `/journey`, `/team`, `/partners`, `/contact`, `/privacy`, `/terms`, and `/accessibility`.
+- The empty team route is excluded from the sitemap and marked `noindex` until an approved roster exists.
 
 ## Stack
 
-Next.js 16.3 (App Router), React 19, TypeScript, Tailwind CSS 4, GSAP, OGL, and Vercel Analytics. Node.js 24 or newer is required.
+- Next.js 16.3 App Router and React 19
+- TypeScript 5 and Tailwind CSS 4
+- OGL for the isolated GradientWaves canvas
+- Optional Vercel Web Analytics
+
+Node.js 24 or newer is required.
 
 ## Setup
 
 ```bash
-npm install
+npm ci
 cp .env.example .env.local
 npm run dev
 ```
 
-Set the optional production origin in `.env.local`:
+Environment variables:
 
 ```text
-NEXT_PUBLIC_SITE_URL=https://your-production-domain
+NEXT_PUBLIC_SITE_URL=https://your-real-production-domain
+NEXT_PUBLIC_ENABLE_ANALYTICS=false
 ```
 
-This value is used only when available for canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml`; it must be the real HTTPS origin.
+`NEXT_PUBLIC_SITE_URL` must be the final HTTPS origin. Invalid, localhost, and private-network values are deliberately omitted from canonical and social metadata. Set analytics to `true` only after Vercel Web Analytics is configured and the privacy copy has been reviewed.
+
+For LAN testing, the development server can be exposed with:
+
+```bash
+npm run dev -- --hostname 0.0.0.0
+```
+
+`next.config.ts` explicitly permits `10.67.84.166`, `localhost`, and `127.0.0.1` during development; it does not broaden production CORS.
 
 ## Commands
 
@@ -39,6 +50,7 @@ This value is used only when available for canonical URLs, Open Graph URLs, `rob
 npm run dev
 npm run lint
 npm run typecheck
+npm test
 npm run build
 npm run start
 ```
@@ -46,30 +58,30 @@ npm run start
 ## Structure
 
 ```text
-app/                 App Router routes, metadata, sitemap, and system states
-components/hero/     Landing hero, GradientWaves, and local scroll logic
-components/layout/   Header, footer, navigation, legal/page framing
-components/projects/ Project-specific presentation components
-components/gallery/  Typed gallery wrappers and their loading/error states
-components/motion/   Small reusable visual-motion treatments
-components/system/   Global loading, error, empty, and not-found states
-components/ui/       Shared UI primitives
-content/             Typed verified site, project, journey, partner, and media data
-lib/                 Types and SEO helpers
-public/images/       Official approved assets and retained replacement media
-styles/              The active semantic tokens and global rules
+app/                 App Router pages, metadata, and system routes
+components/hero/     Scroll-expanded hero, GradientWaves, and GradualBlur
+components/layout/   Header, mobile navigation, footer, and page framing
+components/gallery/  Lazy gallery adapters and loading/empty/error states
+components/projects/ Project presentation building blocks
+components/system/   Route loading, error, and not-found experiences
+components/ui/       Shared interface primitives
+content/             Typed verified content and publication states
+lib/                 Shared types and SEO helpers
+public/images/       Approved public assets only
+styles/              Semantic theme tokens and global component rules
+tests/               Content and route-integrity tests
 ```
 
-## Content workflow
+## Content and assets
 
-Public rendering must use only `ready` content from `content/`. Material awaiting approval stays out of the public UI. See [CONTENT_REQUIRED.md](CONTENT_REQUIRED.md) for the exact requested copy, media, approval, and proof inputs. Retained image files are not automatically presented as KAALKRIT work.
+Only approved `ready` content and local, permission-confirmed gallery media may render publicly. No stock or placeholder media is included. The canonical official mark is `logo_favicon.png`; `predev` and `prebuild` synchronize it to the public logo and App Router icons. See [CONTENT_REQUIRED.md](CONTENT_REQUIRED.md) for remaining approved media, roster, proof, and sponsor material.
 
 ## Deployment
 
-Deploy as a Next.js application on Vercel. Set `NEXT_PUBLIC_SITE_URL` to the final production domain, then run lint, typecheck, and build before release. No deployment configuration or secrets should be committed.
+Deploy as a Next.js application on Vercel after completing [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md). Do not commit `.env.local` or platform credentials.
 
 ## Contact
 
-- Email: [teamkaalkrit@gmail.com](mailto:teamkaalkrit@gmail.com)
-- Instagram: [@team_kaalkrit](https://www.instagram.com/team_kaalkrit/)
-- X: [@KAALKRit](https://x.com/KAALKRit)
+- [teamkaalkrit@gmail.com](mailto:teamkaalkrit@gmail.com)
+- [Instagram](https://www.instagram.com/team_kaalkrit/)
+- [X](https://x.com/KAALKRit)

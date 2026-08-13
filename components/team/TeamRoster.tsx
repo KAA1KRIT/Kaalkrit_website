@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import type { DivisionId, TeamMember } from '@/lib/types';
 import { divisions, tierLabels, tierOrder } from '@/content/team';
-import { getProject } from '@/content/projects';
+import { getPublicProject } from '@/content/projects';
 
 type Filter = DivisionId | 'all';
 
@@ -55,6 +55,9 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
               <ul className="mt-[var(--k-7)] grid gap-px bg-[var(--k-line)] border-y border-[var(--k-line)]">
                 {tierMembers.map((member) => {
                   const open = openSlug === member.slug;
+                  const publicProjectTitles = member.projects
+                    .map((slug) => getPublicProject(slug)?.shortTitle)
+                    .filter((title): title is string => Boolean(title));
                   return (
                     <li key={member.slug} className="bg-[var(--k-void)]">
                       <div className="grid gap-[var(--k-3)] py-[var(--k-5)] md:grid-cols-12 md:items-baseline md:gap-[var(--k-5)]">
@@ -100,13 +103,11 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
                               </dd>
                             </div>
                           ) : null}
-                          {member.projects.length > 0 ? (
+                          {publicProjectTitles.length > 0 ? (
                             <div>
                               <dt className="k-meta">Projects</dt>
                               <dd className="k-body mt-[var(--k-2)] text-[var(--k-t-small)]">
-                                {member.projects
-                                  .map((slug) => getProject(slug)?.shortTitle ?? slug)
-                                  .join(' · ')}
+                                {publicProjectTitles.join(' · ')}
                               </dd>
                             </div>
                           ) : null}

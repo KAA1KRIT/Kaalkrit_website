@@ -144,8 +144,3 @@ export interface CollaborationMode {
   subject: string;
   contentStatus?: ContentStatus;
 }
-
-export interface ProofPoint {
-  value: string;
-  statement: string;
-}

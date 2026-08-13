@@ -48,7 +48,7 @@
   --font-display: var(--font-sans);
   --font-body: var(--font-sans);
 
-  /* Compatibility aliases for the existing public composition. */
+  /* KAALKRIT layout aliases resolve only to the semantic theme above. */
   --k-void: var(--background);
   --k-surface: var(--background);
   --k-surface-2: var(--secondary);
@@ -58,31 +58,16 @@
   --k-text-muted: var(--muted-foreground);
   --k-text-faint: var(--muted-foreground);
   --k-signal: var(--primary);
-  --k-signal-dim: color-mix(in srgb, var(--accent) 60%, transparent);
+  --k-signal-dim: color-mix(in srgb, var(--primary) 60%, transparent);
   --k-live: var(--chart-5);
   --k-alert: var(--destructive);
 
-  --canvas: var(--background);
-  --ink: var(--foreground);
-  --white: var(--card);
-  --char: var(--muted-foreground);
-  --oat: var(--border);
-  --focus: var(--ring);
   --hero-scrim: color-mix(in srgb, var(--foreground) 78%, transparent);
   /* Openprofile's primary is the only hero highlight. It is intentionally
      local to the visual system rather than a second brand palette. */
   --hero-accent: var(--primary);
   --hero-accent-foreground: var(--primary-foreground);
   --hero-surface: color-mix(in srgb, var(--foreground) 86%, transparent);
-  --surface: var(--card);
-  --surface-dark: var(--foreground);
-
-  /* Old names remain role aliases, not a second palette. */
-  --forest-mist: var(--card);
-  --leaf: var(--secondary);
-  --growth: var(--chart-5);
-  --forest: var(--accent-foreground);
-  --deep-forest: var(--foreground);
 
   --k-t-hero: clamp(3.25rem, 2.1rem + 5.7vw, 6.8rem);
   --k-t-h2: clamp(2.4rem, 1.8rem + 3.2vw, 4.8rem);

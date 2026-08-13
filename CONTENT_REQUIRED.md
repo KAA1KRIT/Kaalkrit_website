@@ -6,7 +6,7 @@ This repository now has the public structure and typed state model for the remai
 
 ### Brand and shared media
 
-- Final logo package: SVG wordmark, transparent PNG, square favicon mark, and usage guidance. Recommended: SVG plus 512px PNG and 180px Apple touch icon.
+- The current official 160×160 PNG is integrated. Supply a transparent/vector wordmark, a high-resolution light-background variant, a 512×512 app icon, and a 180×180 Apple touch icon with usage guidance.
 - Approved social-preview artwork at 1200 × 630px (PNG, JPG, or SVG-safe equivalent).
 - Real team/workshop photography with publication permission. Recommended editorial captures: 2400px wide minimum, JPG/WebP, plus vertical 4:5 crops for galleries.
 - A record of photographer/creator credit and permission for every image or clip.
@@ -22,6 +22,7 @@ This repository now has the public structure and typed state model for the remai
 - Confirmation of the public navigation labels and destination anchors.
 - Official domain for `NEXT_PUBLIC_SITE_URL`.
 - Final legal approver and any institution-approved legal wording.
+- Confirmation of the official institutional/legal identity and jurisdiction wording, if any, that may be used in public terms.
 
 ## Required before sponsor outreach
 
@@ -36,6 +37,7 @@ This repository now has the public structure and typed state model for the remai
 
 - Exact competition/event name, date, location/context, and proof link or document for the 11th-place Business Evaluation result.
 - Approved wording for national-level representation and any public event photographs or video clips.
+- Confirmation of Build With Hardware as public, private, or concept-stage, plus an official URL only if public access is approved.
 
 ## Required before a project case study is published
 
@@ -66,6 +68,7 @@ For each project (Autonomous UAS — NIDAR 2026, AirMOS — NIDAR 2027, Build Wi
 - Approved downloadable technical briefs or public documentation.
 - Press or publication links that KAALKRIT has verified.
 - A named communications owner for future content review and social-preview updates.
+- Final social-profile imagery and the public communications owner responsible for approving updates.
 
 ## Where to add the data
 

@@ -6,26 +6,28 @@ import { StatusTag } from '@/components/ui/StatusTag';
 import { GalleryEmptyState } from '@/components/gallery/GalleryStates';
 import { MorphSliderGallery } from '@/components/gallery/MorphSliderGallery';
 import { projectGallery } from '@/content/gallery';
-import { getProject, projects } from '@/content/projects';
+import { domainLabel } from '@/content/domains';
+import { getProject, publicProjects } from '@/content/projects';
 import { pageMetadata } from '@/lib/seo';
 
 type ProjectPageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return projects.map(({ slug }) => ({ slug }));
+  return publicProjects.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project) return {};
+  if (!project || project.contentStatus !== 'ready') return {};
   return pageMetadata({ title: project.title, description: project.summary, path: `/projects/${project.slug}` });
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project || project.contentStatus === 'hidden') notFound();
+  if (!project || project.contentStatus !== 'ready') notFound();
+  const media = projectGallery.filter((item) => item.projectSlug === project.slug);
 
   return (
     <>
@@ -41,7 +43,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <StatusTag status={project.status} />
             <p className="k-meta mt-[var(--k-6)]">Engineering disciplines</p>
             <ul className="mt-[var(--k-3)] grid gap-[var(--k-2)] text-[var(--k-t-small)] text-[var(--k-text-muted)]">
-              {project.capabilities.map((capability) => <li key={capability}>{capability.replaceAll('-', ' ')}</li>)}
+              {project.capabilities.map((capability) => <li key={capability}>{domainLabel(capability)}</li>)}
             </ul>
           </div>
           <div className="md:col-span-7 md:col-start-6">
@@ -57,8 +59,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <div className="k-container">
           <h2 id="project-media-heading" className="k-display text-[length:var(--k-t-h2)]">System media.</h2>
           <div className="mt-[var(--k-6)]">
-            {projectGallery.filter((item) => item.projectSlug === project.slug).length > 0 ? (
-              <MorphSliderGallery items={projectGallery.filter((item) => item.projectSlug === project.slug)} />
+            {media.length > 0 ? (
+              <MorphSliderGallery items={media} />
             ) : (
               <GalleryEmptyState title="Project media" description="Visual documentation is shared when it is ready for publication." />
             )}
