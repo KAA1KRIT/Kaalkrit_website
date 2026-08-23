@@ -17,7 +17,7 @@ export function PageHeader({
     <header className="pt-[calc(68px+var(--k-9))] pb-[var(--k-8)]">
       <div className="k-container">
         <p className="k-meta">{eyebrow}</p>
-        <h1 className="k-display mt-[var(--k-5)] text-[length:var(--k-t-hero)] leading-[1.02] max-w-[16ch] text-[var(--k-text)]">
+        <h1 className="page-header__heading k-display mt-[var(--k-5)] text-[length:var(--k-t-hero)] leading-[1.02] max-w-[16ch] text-[var(--k-text)]">
           {heading}
         </h1>
         <p className="k-lede mt-[var(--k-6)]">{lede}</p>

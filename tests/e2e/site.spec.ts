@@ -71,6 +71,19 @@ async function expectNoOverflow(page: Page) {
     .toBe(true);
 }
 
+async function expectImageToLoad(page: Page, selector: string) {
+  // App Router can retain the previous lazy image during a same-page route
+  // replacement. The last match is the currently rendered route instance.
+  const image = page.locator(selector).last();
+  await image.scrollIntoViewIfNeeded();
+  await expect(image).toHaveJSProperty("complete", true);
+  await expect
+    .poll(() =>
+      image.evaluate((element) => (element as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+}
+
 test("homepage delivers the engineering identity without layout or runtime errors", async ({
   page,
 }) => {
@@ -111,6 +124,23 @@ test("homepage delivers the engineering identity without layout or runtime error
       .toBeGreaterThan(0);
   }
   expect(faults).toEqual([]);
+});
+
+test("approved public media loads on every route that presents it", async ({
+  page,
+}) => {
+  const mediaRoutes = [
+    ["/", ".proof-section img"],
+    ["/", ".people-preview img"],
+    ["/team", ".team-image img"],
+    ["/projects/uas-nidar-2026", "figure img"],
+  ] as const;
+
+  for (const [path, selector] of mediaRoutes) {
+    const response = await page.goto(path);
+    expect(response?.status(), path).toBe(200);
+    await expectImageToLoad(page, selector);
+  }
 });
 
 test("desktop and mobile navigation transition between public routes accessibly", async ({
@@ -241,10 +271,10 @@ test("public routes, legal pages, and every published project resolve with their
   expect(faults).toEqual([]);
 });
 
-test("the public layout has no horizontal overflow from mobile through wide desktop", async ({
+test("the public layout has no horizontal overflow from mobile through ultra-wide desktop", async ({
   page,
 }) => {
-  for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1600]) {
+  for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1600, 1920]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("/");
     await page.waitForLoadState("networkidle");
@@ -267,10 +297,32 @@ test("the public layout has no horizontal overflow from mobile through wide desk
           : null;
       });
       expect(dimensions).not.toBeNull();
-      expect(dimensions!.indexWidth / width).toBeGreaterThan(0.7);
+      // The site intentionally caps the editorial container at 1200px, but it
+      // must never regress into the narrow project rail that prompted the
+      // original layout fix. This remains proportional until the cap applies.
+      expect(dimensions!.indexWidth).toBeGreaterThanOrEqual(
+        Math.min(width * 0.7, 1150),
+      );
       expect(dimensions!.summaryWidth).toBeGreaterThan(280);
     }
   }
+});
+
+test("long interior headings remain fully visible on a narrow viewport", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  await page.goto("/team");
+
+  const heading = page.getByRole("heading", { level: 1 });
+  const bounds = await heading.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return { left: rect.left, right: rect.right, viewport: window.innerWidth };
+  });
+
+  expect(bounds.left).toBeGreaterThanOrEqual(0);
+  expect(bounds.right).toBeLessThanOrEqual(bounds.viewport);
+  await expectNoOverflow(page);
 });
 
 test("the project index has five working records and intentional desktop proportions", async ({
@@ -309,6 +361,28 @@ test("the project index has five working records and intentional desktop proport
   expect(layout?.featuredHeight).toBeLessThan(layout!.supportingHeight * 0.65);
   await expect(container).toBeVisible();
   expect(faults).toEqual([]);
+});
+
+test("the project index follows its page header without an accidental double gap", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/projects");
+
+  const spacing = await page.evaluate(() => {
+    const headerRule = document.querySelector<HTMLElement>(
+      "main > header .k-rule",
+    );
+    const firstBrief = document.querySelector<HTMLElement>(".project-brief");
+    if (!headerRule || !firstBrief) return null;
+    return (
+      firstBrief.getBoundingClientRect().top -
+      headerRule.getBoundingClientRect().bottom
+    );
+  });
+
+  expect(spacing).not.toBeNull();
+  expect(spacing).toBeLessThan(128);
 });
 
 test("the 404 route remains useful and does not disclose internal errors", async ({

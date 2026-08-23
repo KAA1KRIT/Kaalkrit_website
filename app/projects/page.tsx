@@ -20,7 +20,10 @@ export default function ProjectsPage() {
         lede="Five active and completed projects across autonomous aerial systems, robotics, and engineering platforms."
         meta={["Autonomy", "Robotics", "Embedded systems"]}
       />
-      <section className="system-section" aria-label="Project index">
+      <section
+        className="system-section system-section--after-page-header"
+        aria-label="Project index"
+      >
         <div className="k-container project-brief-list">
           {publicProjects.map((project, index) => (
             <article key={project.slug} className="project-brief">

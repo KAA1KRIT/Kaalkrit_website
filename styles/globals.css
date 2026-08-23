@@ -118,24 +118,29 @@ svg {
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border: 1px solid transparent;
-  border-radius: 6px;
+  overflow: visible;
+  border: 0;
   background: transparent;
 }
 .wordmark--header {
-  width: 104px;
-  height: 54px;
+  width: 168px;
+  height: 72px;
 }
 .wordmark--footer {
-  width: 104px;
-  height: 34px;
-  border-color: transparent;
-  background: transparent;
+  width: min(260px, 100%);
+  height: auto;
+  aspect-ratio: 3 / 2;
+  justify-content: flex-start;
 }
 .wordmark--system {
-  width: 112px;
-  height: 44px;
+  width: 220px;
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+.wordmark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .k-display {
   font-family: var(--font-interface), Arial, sans-serif;
@@ -215,16 +220,17 @@ svg {
   justify-content: center;
   gap: 9px;
   padding: 0 20px;
-  border: 1px solid var(--accent-foreground);
-  border-radius: var(--k-radius-pill);
+  border: 1px solid var(--primary);
+  border-radius: 0;
   background: transparent;
   color: var(--foreground);
-  font-family: var(--font-interface), Arial, sans-serif;
-  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.1em;
   line-height: 1;
   text-decoration: none;
+  text-transform: uppercase;
   cursor: pointer;
   transition:
     background-color var(--k-dur) var(--k-ease),
@@ -257,19 +263,19 @@ svg {
 }
 .button--primary:hover,
 .button--primary:focus-visible {
-  border-color: var(--accent-foreground);
-  background: color-mix(in srgb, var(--primary) 84%, white);
+  border-color: #78a6ff;
+  background: #78a6ff;
   color: var(--primary-foreground);
-  box-shadow: 0 8px 18px color-mix(in srgb, var(--primary) 24%, transparent);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--primary) 42%, transparent);
 }
 .button--secondary {
-  border-color: var(--accent-foreground);
+  border-color: var(--border);
   background: transparent;
 }
 .button--secondary:hover,
 .button--secondary:focus-visible {
   border-color: var(--primary);
-  background: color-mix(in srgb, var(--primary) 15%, var(--card));
+  background: color-mix(in srgb, var(--primary) 13%, transparent);
   color: var(--foreground);
 }
 .pointer-button {
@@ -303,12 +309,12 @@ svg {
   min-height: 44px;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid var(--accent-foreground);
+  border-bottom: 1px solid var(--primary);
   color: var(--foreground);
   font-family: var(--font-mono), Georgia, serif;
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   font-weight: 400;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -552,6 +558,9 @@ svg {
   gap: clamp(28px, 7vw, 110px);
   padding-top: 24px;
 }
+.page-header__heading {
+  overflow-wrap: anywhere;
+}
 .section-header h2 {
   max-width: 14ch;
   margin: 0;
@@ -567,12 +576,13 @@ svg {
 }
 .site-footer {
   padding-top: 60px;
-  background: var(--foreground);
-  color: var(--card);
+  border-top: 1px solid var(--border);
+  background: #030509;
+  color: var(--foreground);
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
   gap: 28px;
   padding-bottom: 54px;
 }
@@ -585,13 +595,13 @@ svg {
 .footer-brand p {
   max-width: 36ch;
   margin: 0;
-  color: var(--card);
+  color: var(--muted-foreground);
   font-size: 0.88rem;
   line-height: 1.55;
 }
 .footer-link,
 .back-to-top {
-  color: var(--card);
+  color: #d4e1f6;
   text-decoration-color: var(--primary);
 }
 .footer-link:hover,
@@ -600,11 +610,11 @@ svg {
 }
 .footer-nav h2 {
   margin: 0 0 14px;
-  color: var(--secondary);
-  font-family: var(--font-mono), Georgia, serif;
-  font-size: 0.68rem;
+  color: var(--accent-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
   font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 .footer-nav ul {
@@ -615,7 +625,9 @@ svg {
   list-style: none;
 }
 .footer-link {
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
   text-underline-offset: 3px;
 }
 .footer-endline {
@@ -625,9 +637,9 @@ svg {
   gap: 20px;
   padding: 18px 0 24px;
   border-top: 1px solid var(--accent-foreground);
-  color: var(--card);
-  font-family: var(--font-mono), Georgia, serif;
-  font-size: 0.67rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
   letter-spacing: 0.04em;
 }
 .not-found-experience,
@@ -760,71 +772,6 @@ svg {
 }
 
 /* KAALKRIT identity system: derived from the supplied technical ID-card. */
-body {
-  background: var(--background);
-  color: var(--foreground);
-}
-.wordmark {
-  border: 0;
-  border-radius: 0;
-  overflow: visible;
-  background: transparent;
-}
-.wordmark img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.wordmark--header {
-  width: 168px;
-  height: 72px;
-}
-.wordmark--footer {
-  width: min(260px, 100%);
-  height: auto;
-  aspect-ratio: 3 / 2;
-  justify-content: flex-start;
-}
-.wordmark--system {
-  width: 220px;
-  height: auto;
-  aspect-ratio: 3 / 2;
-}
-.button {
-  border-radius: 0;
-  border-color: var(--primary);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.button--primary {
-  background: var(--primary);
-  color: var(--primary-foreground);
-}
-.button--primary:hover,
-.button--primary:focus-visible {
-  background: #78a6ff;
-  border-color: #78a6ff;
-  box-shadow: 0 0 28px color-mix(in srgb, var(--primary) 42%, transparent);
-}
-.button--secondary {
-  border-color: var(--border);
-  background: transparent;
-  color: var(--foreground);
-}
-.button--secondary:hover,
-.button--secondary:focus-visible {
-  border-color: var(--primary);
-  background: color-mix(in srgb, var(--primary) 13%, transparent);
-  color: var(--foreground);
-}
-.text-link {
-  border-bottom-color: var(--primary);
-  color: var(--foreground);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-}
 .technical-label {
   margin: 0;
   color: var(--accent-foreground);
@@ -967,6 +914,11 @@ body {
 .system-section {
   padding-block: var(--k-section-y);
   border-bottom: 1px solid var(--border);
+}
+.system-section--after-page-header {
+  /* PageHeader already provides a closing rule and bottom rhythm. Avoid
+     stacking a second full section lead-in before the first content block. */
+  padding-top: var(--k-7);
 }
 .system-section--panel {
   background: linear-gradient(135deg, #0a101b, #080d16);
@@ -1446,33 +1398,6 @@ body {
   max-width: 68ch;
   margin: 12px 0 0;
   color: var(--muted-foreground);
-}
-.site-footer {
-  border-top: 1px solid var(--border);
-  background: #030509;
-}
-.footer-grid {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
-}
-.footer-brand p {
-  color: var(--muted-foreground);
-}
-.footer-nav h2 {
-  color: var(--accent-foreground);
-  font: 0.7rem var(--font-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.footer-link {
-  color: #d4e1f6;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-}
-.footer-endline {
-  color: var(--muted-foreground);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
 }
 @media (max-width: 767px) {
   .engineering-hero {

@@ -19,7 +19,7 @@ export default function TeamPage() {
         meta={["Current roster", "Sir MVIT, Bengaluru"]}
       />
       <section
-        className="system-section"
+        className="system-section system-section--after-page-header"
         aria-labelledby="team-directory-heading"
       >
         <div className="k-container team-page-grid">
