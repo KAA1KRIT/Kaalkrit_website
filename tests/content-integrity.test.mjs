@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
-import { readyGalleryItems } from "../content/gallery.ts";
+import { galleryItems, readyGalleryItems } from "../content/gallery.ts";
 import { footerNav, primaryNav, sectionNav } from "../content/navigation.ts";
 import { SITE, SOCIAL_LINKS } from "../content/site.ts";
 
@@ -50,6 +50,16 @@ test("gallery publication gate still rejects incomplete and external media", () 
     ]).map(({ id }) => id),
     ["approved"],
   );
+});
+
+test("approved NIDAR media is locally hosted, dimensioned, and accessible", () => {
+  assert.equal(galleryItems.length, 4);
+  for (const item of galleryItems) {
+    assert.ok(item.src?.startsWith("/images/approved/"));
+    assert.ok(item.width && item.height);
+    assert.ok(item.alt.length > 0);
+    assert.equal(item.permissionConfirmed, true);
+  }
 });
 
 test("brand raster assets are replaced with SVG placeholders", () => {

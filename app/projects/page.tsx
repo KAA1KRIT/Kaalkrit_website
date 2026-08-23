@@ -8,8 +8,9 @@ import { roboticsProjects } from "@/content/projects";
 import { pageMetadata, projectsSchema, serializeJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "[PROJECTS PAGE TITLE PLACEHOLDER]",
-  description: "[PROJECTS META DESCRIPTION PLACEHOLDER]",
+  title: "Projects",
+  description:
+    "Explore Team KAALKRIT's autonomous aerial systems, robotics, and engineering platform projects.",
   path: "/projects",
 });
 
@@ -17,13 +18,13 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="[PROJECTS EYEBROW PLACEHOLDER]"
-        heading="[PROJECTS HEADLINE PLACEHOLDER]"
-        lede="[PROJECTS LEDE PLACEHOLDER]"
+        eyebrow="Projects"
+        heading="Intelligent engineering solutions in action."
+        lede="Explore Team KAALKRIT's autonomous aerial systems, robotics, and engineering platform projects."
         meta={[
-          "[PROJECTS META PLACEHOLDER 1]",
-          "[PROJECTS META PLACEHOLDER 2]",
-          "[PROJECTS META PLACEHOLDER 3]",
+          "Autonomous aerial systems",
+          "Robotics",
+          "Intelligent engineering",
         ]}
       />
 
@@ -36,10 +37,12 @@ export default function ProjectsPage() {
             id="programme-heading"
             className="k-display text-[length:var(--k-t-h2)]"
           >
-            [PROGRAMME HEADING PLACEHOLDER]
+            Autonomous aerial systems
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            [PROGRAMME BODY COPY PLACEHOLDER]
+            Team KAALKRIT is developing intelligent aerial systems through
+            advanced sensing technologies, autonomous capabilities, and
+            mission-oriented design.
           </p>
           <div className="mt-[var(--k-8)]">
             <ProgrammeSpine detail />
@@ -57,10 +60,11 @@ export default function ProjectsPage() {
             id="platform-heading"
             className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]"
           >
-            [PLATFORM HEADING PLACEHOLDER]
+            Build With Hardware
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            [PLATFORM BODY COPY PLACEHOLDER]
+            Team KAALKRIT's flagship engineering platform designed to make
+            hardware innovation more accessible.
           </p>
           <div className="mt-[var(--k-8)]">
             <PlatformFeature detail />
@@ -78,10 +82,11 @@ export default function ProjectsPage() {
             id="robotics-heading"
             className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]"
           >
-            [PROJECT CATEGORY HEADING PLACEHOLDER]
+            Robotics & Automation
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            [PROJECT CATEGORY BODY COPY PLACEHOLDER]
+            Intelligent robotics, embedded systems, sensor integration, and
+            autonomous navigation for real-world applications.
           </p>
           <div className="mt-[var(--k-8)] grid gap-[var(--k-9)]">
             {roboticsProjects.map((project, index) => (

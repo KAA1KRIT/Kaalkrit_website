@@ -40,12 +40,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   return (
     <>
       <PageHeader
-        eyebrow={project.programmeLabel ?? "[PROJECT EYEBROW PLACEHOLDER]"}
+        eyebrow={project.programmeLabel ?? "Project"}
         heading={project.title}
         lede={project.summary}
         meta={[
-          project.year ? String(project.year) : "[PROJECT DATE PLACEHOLDER]",
-          "[PROJECT STATUS PLACEHOLDER]",
+          project.year ? String(project.year) : "Current project",
+          project.status === "completed" ? "Completed" : "In development",
         ]}
       />
       <section
@@ -67,17 +67,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               id="project-scope-heading"
               className="k-display text-[length:var(--k-t-h2)]"
             >
-              [PROJECT SCOPE HEADING PLACEHOLDER]
+              Project scope
             </h2>
             <dl className="mt-[var(--k-6)] grid gap-[var(--k-6)] border-t border-[var(--k-line)] pt-[var(--k-6)]">
               <div>
-                <dt className="k-meta">[PROJECT PROBLEM LABEL PLACEHOLDER]</dt>
+                <dt className="k-meta">Focus</dt>
                 <dd className="k-body mt-[var(--k-2)]">{project.problem}</dd>
               </div>
               <div>
-                <dt className="k-meta">
-                  [PROJECT SIGNIFICANCE LABEL PLACEHOLDER]
-                </dt>
+                <dt className="k-meta">Impact</dt>
                 <dd className="k-body mt-[var(--k-2)]">
                   {project.significance}
                 </dd>
@@ -95,15 +93,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             id="project-media-heading"
             className="k-display text-[length:var(--k-t-h2)]"
           >
-            [PROJECT MEDIA HEADING PLACEHOLDER]
+            Project media
           </h2>
           <div className="mt-[var(--k-6)]">
             {media.length > 0 ? (
               <MorphSliderGallery items={media} />
             ) : (
               <GalleryEmptyState
-                title="[PROJECT MEDIA TITLE PLACEHOLDER]"
-                description="[PROJECT MEDIA DESCRIPTION PLACEHOLDER]"
+                title="Project media"
+                description="Project documentation will be shared as it becomes available."
               />
             )}
           </div>
@@ -112,10 +110,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       <section className="pb-[var(--k-section-y)]" aria-label="Project actions">
         <div className="k-container flex flex-wrap gap-[var(--k-3)]">
           <Button href="/projects" variant="secondary">
-            [PROJECT BACK CTA PLACEHOLDER] <Arrow />
+            Back to projects <Arrow />
           </Button>
           <Button href="/#partnership" variant="primary">
-            [PROJECT COLLABORATION CTA PLACEHOLDER] <Arrow />
+            Discuss collaboration <Arrow />
           </Button>
         </div>
       </section>

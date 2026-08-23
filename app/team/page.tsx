@@ -9,8 +9,9 @@ import { DepthCarouselGallery } from "@/components/gallery/DepthCarouselGallery"
 import { teamGallery } from "@/content/gallery";
 
 export const metadata = pageMetadata({
-  title: "[TEAM PAGE TITLE PLACEHOLDER]",
-  description: "[TEAM META DESCRIPTION PLACEHOLDER]",
+  title: "Team",
+  description:
+    "Meet Team KAALKRIT, the official drone and robotics innovation team of Sir MVIT.",
   path: "/team",
   index: teamMembers.length > 0,
 });
@@ -19,10 +20,10 @@ export default function TeamPage() {
   return (
     <>
       <PageHeader
-        eyebrow="[TEAM EYEBROW PLACEHOLDER]"
-        heading="[TEAM HEADLINE PLACEHOLDER]"
-        lede="[TEAM LEDE PLACEHOLDER]"
-        meta={["[TEAM META PLACEHOLDER 1]", "[TEAM META PLACEHOLDER 2]"]}
+        eyebrow="Team KAALKRIT"
+        heading="Engineering the Future Through Innovation, Autonomy, and Intelligent Systems."
+        lede="Team KAALKRIT is the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru."
+        meta={["Sir MVIT, Bengaluru", "Established 2024"]}
       />
       <section
         className="pb-[var(--k-section-y)]"
@@ -30,7 +31,7 @@ export default function TeamPage() {
       >
         <div className="k-container">
           <h2 id="team-roster-heading" className="sr-only">
-            [TEAM ROSTER HEADING PLACEHOLDER]
+            Team KAALKRIT
           </h2>
           {teamMembers.length > 0 ? (
             <TeamRoster members={teamMembers} />
