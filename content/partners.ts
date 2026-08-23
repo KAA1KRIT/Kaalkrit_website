@@ -1,5 +1,5 @@
 export const collaborationFocus = [
-  "Autonomous systems, robotics, embedded systems, and intelligent software",
-  "Research, prototyping, testing, and complete system development",
-  "Learning and knowledge-sharing through Build With Hardware (BWH)",
+  "Technical exchange around autonomous systems, robotics, embedded technology, AI, and software",
+  "Research, prototyping, testing, validation, and complete-system engineering",
+  "Interdisciplinary learning and knowledge-sharing through Build With Hardware (BWH)",
 ];

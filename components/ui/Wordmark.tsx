@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const variantClass = {
   header: "wordmark--header",
   footer: "wordmark--footer",
@@ -6,17 +8,23 @@ const variantClass = {
 
 export function Wordmark({
   className = "",
-  priority: _priority = false,
+  priority = false,
   variant = "header",
 }: {
   className?: string;
   priority?: boolean;
   variant?: keyof typeof variantClass;
 }) {
-  void _priority;
   return (
     <span className={`wordmark ${variantClass[variant]} ${className}`.trim()}>
-      <span className="wordmark__text">KAALKRIT</span>
+      <Image
+        src="/brand/kaalkrit-logo.png"
+        alt={variant === "header" ? "" : "KAALKRIT logo"}
+        width={1536}
+        height={1024}
+        priority={priority}
+        sizes={variant === "header" ? "168px" : "260px"}
+      />
     </span>
   );
 }

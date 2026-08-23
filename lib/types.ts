@@ -56,6 +56,18 @@ export interface MediaAsset {
   height: number;
 }
 
+export interface TeamMember {
+  name: string;
+  role: string;
+  area?: string;
+}
+
+export interface LegalPageContent {
+  title: string;
+  description: string;
+  sections: Array<{ heading: string; body: string }>;
+}
+
 export type MilestoneKind =
   "founding" | "competition" | "project" | "achievement" | "forward";
 
@@ -65,7 +77,6 @@ export interface Milestone {
   yearLabel: string;
   title: string;
   description: string;
-  projectSlug?: Project["slug"];
   kind: MilestoneKind;
 }
 

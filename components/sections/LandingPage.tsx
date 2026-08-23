@@ -1,82 +1,76 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ScrollExpandHero } from "@/components/hero/ScrollExpandHero";
-import { MaskedHeading } from "@/components/motion/MaskedHeading";
-import { TrackedLink } from "@/components/analytics/TrackedLink";
+import { EngineeringHero } from "@/components/hero/EngineeringHero";
 import { achievements } from "@/content/achievements";
 import { domainsByGroup, lifecycleStages } from "@/content/domains";
 import { publicProjects, statusLabel } from "@/content/projects";
+import { SITE } from "@/content/site";
+import { teamMembers } from "@/content/team";
 
 export function LandingPage() {
   return (
     <>
-      <ScrollExpandHero />
+      <EngineeringHero />
 
-      <section
-        className="editorial-section mission-section"
-        aria-labelledby="mission-heading"
-      >
-        <div className="public-container editorial-two-column">
-          <p className="eyebrow">About Team KAALKRIT</p>
+      <section className="system-section" aria-labelledby="mission-heading">
+        <div className="k-container split-heading">
+          <p className="technical-label">02 / Mission</p>
           <div>
             <h2 id="mission-heading">
-              Engineering across hardware, software, and intelligence.
+              Engineering that begins with the system, not the spectacle.
             </h2>
-            <p className="editorial-lede">
-              Team KAALKRIT is the official drone and robotics innovation team
-              of Sir M. Visvesvaraya Institute of Technology (Sir MVIT),
-              Bengaluru. The team takes engineering work from research and
-              design through prototyping, testing, and complete systems.
-            </p>
+            <p className="section-lede">{SITE.mission}</p>
           </div>
         </div>
       </section>
 
       <section
-        className="editorial-section lifecycle-section"
+        className="system-section system-section--panel"
         aria-labelledby="lifecycle-heading"
       >
-        <div className="public-container">
-          <div className="editorial-section__heading">
-            <p className="eyebrow">How we work</p>
-            <h2 id="lifecycle-heading">
-              From a real-world challenge to a complete system.
-            </h2>
+        <div className="k-container">
+          <div className="split-heading">
+            <p className="technical-label">03 / Engineering lifecycle</p>
+            <div>
+              <h2 id="lifecycle-heading">From research to validation.</h2>
+              <p className="section-lede">
+                KAALKRIT approaches engineering as a connected lifecycle, with
+                each discipline informing the next.
+              </p>
+            </div>
           </div>
-          <ol className="editorial-lifecycle">
+          <ol className="lifecycle-track">
             {lifecycleStages.map((stage, index) => (
               <li key={stage}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                {stage}
+                <strong>{stage}</strong>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section
-        id="capabilities"
-        className="editorial-section capability-section"
-        aria-labelledby="capabilities-heading"
-      >
-        <div className="public-container">
-          <div className="editorial-two-column">
-            <p className="eyebrow">Engineering areas</p>
+      <section className="system-section" aria-labelledby="domains-heading">
+        <div className="k-container">
+          <div className="split-heading">
+            <p className="technical-label">04 / Engineering domains</p>
             <div>
-              <h2 id="capabilities-heading">
-                Autonomous systems, robotics, embedded systems, and software.
+              <h2 id="domains-heading">
+                A multidisciplinary capability index.
               </h2>
-              <p className="editorial-lede">
-                KAALKRIT combines disciplines that are needed to design,
-                prototype, and develop intelligent engineering systems.
+              <p className="section-lede">
+                The team combines the disciplines required to build and validate
+                intelligent systems.
               </p>
             </div>
           </div>
-          <div className="capability-index-warm">
+          <div className="domain-matrix">
             {domainsByGroup.map(({ group, items }, index) => (
               <section key={group.id}>
-                <p>
-                  {String(index + 1).padStart(2, "0")} / {group.label}
+                <p className="technical-label">
+                  0{index + 1} / {group.label}
                 </p>
+                <p className="domain-matrix__note">{group.note}</p>
                 <ul>
                   {items.map((item) => (
                     <li key={item.id}>{item.label}</li>
@@ -89,116 +83,147 @@ export function LandingPage() {
       </section>
 
       <section
-        id="projects"
-        className="editorial-section projects-section"
+        className="system-section system-section--panel"
         aria-labelledby="projects-heading"
       >
-        <div className="public-container">
-          <div className="editorial-two-column projects-heading">
-            <p className="eyebrow">Current work</p>
+        <div className="k-container">
+          <div className="split-heading">
+            <p className="technical-label">05 / Projects</p>
             <div>
               <h2 id="projects-heading">
-                Programmes and projects in development.
+                Work in autonomous systems, robotics, and engineering platforms.
               </h2>
-              <p className="editorial-lede">
-                Explore KAALKRIT’s work in aerial systems, robotics, and the
-                Build With Hardware engineering platform.
+              <p className="section-lede">
+                Each project is a practical setting for systems thinking across
+                hardware and software.
               </p>
             </div>
           </div>
-          <div className="project-editorial-list">
-            {publicProjects.map((project) => (
-              <article key={project.slug} className="project-editorial">
-                <div className="project-editorial__copy">
-                  <p className="project-status">
-                    {statusLabel[project.status]}
-                  </p>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <TrackedLink
-                    href={`/projects/${project.slug}`}
-                    className="text-link"
-                    event="project_detail_click"
-                    properties={{
-                      project: project.slug,
-                      placement: "homepage",
-                    }}
-                  >
-                    View project details <span aria-hidden="true">→</span>
-                  </TrackedLink>
+          <div className="project-index">
+            {publicProjects.map((project, index) => (
+              <article key={project.slug} className="project-index__item">
+                <div className="project-index__meta">
+                  <span>0{index + 1}</span>
+                  <span>{statusLabel[project.status]}</span>
                 </div>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <Link href={`/projects/${project.slug}`} className="text-link">
+                  Project brief <span aria-hidden="true">→</span>
+                </Link>
               </article>
             ))}
           </div>
-          <Link href="/projects" className="text-link">
-            View all projects <span aria-hidden="true">→</span>
+        </div>
+      </section>
+
+      <section
+        className="system-section proof-section"
+        aria-labelledby="progress-heading"
+      >
+        <div className="k-container proof-section__grid">
+          <div className="proof-section__image">
+            <Image
+              src="/images/team/nidar-2026-presentation.webp"
+              alt="KAALKRIT members at a NIDAR 2026 presentation venue."
+              width={1438}
+              height={753}
+              sizes="(min-width: 900px) 50vw, 100vw"
+            />
+          </div>
+          <div>
+            <p className="technical-label">06 / Progress</p>
+            <h2 id="progress-heading">
+              Evidence through engineering practice.
+            </h2>
+            <ul className="achievement-list">
+              {achievements.map((achievement) => (
+                <li key={achievement.id}>
+                  <strong>{achievement.title}</strong>
+                  <span>{achievement.detail}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="system-section system-section--panel"
+        aria-labelledby="people-heading"
+      >
+        <div className="k-container people-preview">
+          <div className="people-preview__copy">
+            <p className="technical-label">07 / People</p>
+            <h2 id="people-heading">
+              A multidisciplinary team with one engineering direction.
+            </h2>
+            <p className="section-lede">
+              KAALKRIT’s work is supported by technical, outreach, creative, and
+              content roles that contribute to the same operating system:
+              stronger engineering practice.
+            </p>
+            <Link href="/team" className="text-link">
+              Meet the team <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <Image
+            src="/images/team/nidar-2026-team-back.webp"
+            alt="KAALKRIT members wearing team apparel at NIDAR 2026."
+            width={1438}
+            height={753}
+            sizes="(min-width: 900px) 50vw, 100vw"
+          />
+          <p className="people-preview__count">
+            {String(teamMembers.length).padStart(2, "0")} current roster entries
+          </p>
+        </div>
+      </section>
+
+      <section
+        className="system-section direction-section"
+        aria-labelledby="direction-heading"
+      >
+        <div className="k-container split-heading">
+          <p className="technical-label">08 / Direction</p>
+          <div>
+            <h2 id="direction-heading">Future-facing, clearly labelled.</h2>
+            <p className="section-lede">
+              KAALKRIT is looking toward autonomous drones, AI-powered robotics,
+              swarm intelligence, computer-vision-driven autonomy, embedded
+              platforms, robotic manipulators, and integrated autonomous
+              ecosystems.
+            </p>
+            <Link href="/journey" className="text-link">
+              Read the journey <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="system-section collaboration-band"
+        aria-labelledby="collaboration-heading"
+      >
+        <div className="k-container">
+          <p className="technical-label">09 / Collaboration</p>
+          <h2 id="collaboration-heading">
+            A practical basis for technical collaboration.
+          </h2>
+          <p>
+            KAALKRIT is open to engineering conversations with academia,
+            industry, startups, research organisations, and communities working
+            on connected technical challenges.
+          </p>
+          <Link href="/partners" className="button button--primary">
+            Collaboration context <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </section>
 
-      <section
-        className="editorial-section achievement-section"
-        aria-labelledby="achievement-heading"
-      >
-        <div className="public-container editorial-two-column">
-          <p className="eyebrow">Progress to date</p>
-          <div>
-            <MaskedHeading id="achievement-heading">
-              Work grounded in multidisciplinary engineering.
-            </MaskedHeading>
-            <div className="achievement-lines">
-              {achievements.map((achievement) => (
-                <p key={achievement.id}>
-                  <strong>{achievement.title}</strong>
-                  <span>{achievement.detail}</span>
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="editorial-section future-section"
-        aria-labelledby="future-heading"
-      >
-        <div className="public-container editorial-two-column">
-          <p className="eyebrow">Direction</p>
-          <div>
-            <h2 id="future-heading">
-              Building toward more capable autonomous systems.
-            </h2>
-            <p className="editorial-lede">
-              KAALKRIT is focused on advancing autonomous aerial systems,
-              robotics, embedded platforms, and intelligent engineering while
-              developing a stronger foundation for research and collaboration.
-            </p>
-            <Link href="/journey" className="text-link">
-              Explore the team’s direction <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="editorial-section partnership-section"
-        aria-labelledby="partnership-heading"
-      >
-        <div className="public-container">
-          <div className="partnership-card">
-            <p className="eyebrow">Collaboration</p>
-            <h2 id="partnership-heading">
-              A focused engineering team for technical collaboration.
-            </h2>
-            <p>
-              KAALKRIT’s work brings together research, hands-on engineering,
-              and student-led innovation. Its direction includes collaboration
-              with academia, industry, startups, and research organizations.
-            </p>
-            <Link href="/partners" className="button button--primary">
-              Explore collaboration <span aria-hidden="true">→</span>
-            </Link>
-          </div>
+      <section className="closing-mark" aria-label="KAALKRIT closing statement">
+        <div className="k-container">
+          <p>KAALKRIT / Precision, autonomy, systems.</p>
         </div>
       </section>
     </>

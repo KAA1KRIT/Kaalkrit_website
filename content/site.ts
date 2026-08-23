@@ -30,7 +30,9 @@ export const SITE = {
   founded: 2024,
   url: productionSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   description:
-    "Team KAALKRIT is the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru — building autonomous aerial systems, robotics, and intelligent engineering solutions.",
+    "Team KAALKRIT is the official Drone & Robotics Innovation Team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru. Established in 2024, it brings autonomous systems, robotics, embedded technology, AI, and software together through practical engineering.",
+  mission:
+    "To turn research, experimentation, and multidisciplinary engineering into autonomous systems and intelligent technology with real-world relevance.",
 } as const;
 
 export function absoluteUrl(path: string): string | undefined {

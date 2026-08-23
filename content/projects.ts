@@ -3,39 +3,40 @@ import type { Project } from "@/lib/types";
 export const projects: Project[] = [
   {
     slug: "uas-nidar-2026",
-    title: "Autonomous Unmanned Aerial System (UAS) – NIDAR 2026",
+    title: "Autonomous Unmanned Aerial System — NIDAR 2026",
     shortTitle: "Autonomous UAS",
     programme: "nidar-2026",
     programmeLabel: "NIDAR 2026",
     status: "completed",
     year: 2026,
     summary:
-      "For NIDAR 2026, Team KAALKRIT designed and developed a fully integrated Unmanned Aerial System, combining airframe design, embedded electronics, flight-control integration, mission planning, payload management, and autonomous flight.",
+      "A fully integrated UAS developed for NIDAR 2026, bringing airframe design, embedded electronics, flight-control integration, mission planning, payload management, and autonomous flight into one system.",
     problem:
-      "A fully integrated Unmanned Aerial System requiring airframe design, embedded electronics, flight controller integration, mission planning, payload management, and autonomous flight.",
-    significance: "A technical foundation for the team’s future aerial work.",
+      "An end-to-end aerial engineering challenge spanning the aircraft, electronics, mission layer, payload, and flight behaviour.",
+    significance:
+      "Established a technical foundation for KAALKRIT’s future work in autonomous aerial systems.",
     capabilities: ["uas", "flight-control", "embedded", "mechanical", "pcb"],
     media: {
-      src: "/images/approved/nidar-field-testing.jpg",
-      alt: "Team KAALKRIT members field-testing the autonomous UAS in an open field.",
+      src: "/images/projects/nidar-2026-field-testing.webp",
+      alt: "KAALKRIT members field-testing an autonomous UAS in an open field.",
       width: 479,
       height: 378,
     },
   },
   {
     slug: "airmos",
-    title: "AirMOS – NIDAR 2027",
-    shortTitle: "AirMOS",
+    title: "AirMOUSE — NIDAR 2027",
+    shortTitle: "AirMOUSE",
     programme: "nidar-2027",
     programmeLabel: "NIDAR 2027",
     status: "in-development",
     year: 2027,
     summary:
-      "AirMOS is Team KAALKRIT’s NIDAR 2027 aerial-systems project, building on the UAS programme through advanced sensing, autonomous capabilities, and mission-oriented design.",
+      "An aerial-systems project in development for NIDAR 2027, building on the UAS programme through advanced sensing, autonomy, and mission-oriented design.",
     problem:
-      "Develop scalable drone solutions through advanced sensing technologies, autonomous capabilities, and mission-oriented design.",
+      "Explore scalable drone systems through advanced sensing, autonomous capabilities, and mission-oriented design.",
     significance:
-      "It extends the team’s research in intelligent aerial systems beyond the NIDAR 2026 UAS.",
+      "Extends the team’s research in intelligent aerial systems beyond the NIDAR 2026 UAS.",
     capabilities: ["uas", "drone-tech", "flight-control", "sensors", "ai-cv"],
   },
   {
@@ -44,11 +45,11 @@ export const projects: Project[] = [
     shortTitle: "BWH",
     status: "in-development",
     summary:
-      "Build With Hardware (BWH) is an engineering platform in development that brings structured learning, practical projects, technical documentation, collaborative workspaces, and AI-powered engineering assistance together.",
+      "KAALKRIT’s flagship engineering platform in development, bringing structured learning, practical projects, documentation, collaborative workspaces, and AI-powered engineering assistance together.",
     problem:
-      "Make hardware innovation more accessible through structured learning, practical hardware projects, technical documentation, collaborative workspaces, and AI-powered engineering assistance.",
+      "Make hardware innovation more accessible through a connected environment for learning, building, documenting, and collaborating.",
     significance:
-      "It is intended to make hardware innovation more accessible to students, developers, researchers, startups, and makers.",
+      "Intended for students, developers, researchers, startups, and makers working with hardware.",
     capabilities: ["software", "ai-cv", "research", "embedded"],
   },
   {
@@ -57,11 +58,11 @@ export const projects: Project[] = [
     shortTitle: "Robotic Arm",
     status: "in-development",
     summary:
-      "An intelligent robotic arm in development that combines mechanical engineering, electronics, servo-based control, and control algorithms for precision motion and automation.",
+      "A robotic arm in development that combines mechanical integration, embedded electronics, servo control, and control algorithms for precision motion and automation.",
     problem:
-      "Integrate mechanical engineering, electronics, servo-based control, and advanced control algorithms for precision motion control and intelligent automation.",
+      "Develop a system that coordinates mechanical structure, electronics, servo control, and control algorithms.",
     significance:
-      "The work supports the team’s exploration of industrial automation, precision handling, research, and autonomous robotic operations.",
+      "Supports future exploration of industrial automation, smart manufacturing, precision handling, research, and autonomous robotic operations.",
     capabilities: ["robotics", "mechanical", "embedded", "sensors"],
   },
   {
@@ -70,37 +71,23 @@ export const projects: Project[] = [
     shortTitle: "Robot Vacuum",
     status: "completed",
     summary:
-      "An autonomous robot vacuum cleaner that combines navigation, obstacle detection, motion control, sensors, and embedded electronics for floor-cleaning with minimal human intervention.",
+      "An autonomous robot vacuum cleaner developed around navigation, obstacle detection, motion control, sensor integration, embedded systems, and automation.",
     problem:
-      "Perform efficient floor-cleaning operations with minimal human intervention through intelligent navigation, obstacle detection, motion control, and automation.",
+      "Apply autonomous mobility and embedded control to floor-cleaning with minimal human intervention.",
     significance:
-      "It demonstrates a practical everyday application of autonomous mobility and embedded robotics.",
+      "Demonstrates a practical everyday application of autonomous mobility, embedded systems, and robotics.",
     capabilities: ["robotics", "sensors", "embedded", "ai-cv"],
   },
 ];
 
 const bySlug = new Map(projects.map((project) => [project.slug, project]));
 export const publicProjects = projects;
-const publicBySlug = new Map(
-  publicProjects.map((project) => [project.slug, project]),
-);
 
 export function getProject(slug: string): Project | undefined {
   return bySlug.get(slug);
 }
-export function getPublicProject(slug: string): Project | undefined {
-  return publicBySlug.get(slug);
-}
 
-export const programmeProjects = publicProjects.filter(
-  (project) => project.programme !== undefined,
-);
-export const roboticsProjects = publicProjects.filter((project) =>
-  ["robotic-arm", "robot-vacuum"].includes(project.slug),
-);
-export const platformProject = publicProjects.find(
-  (project) => project.slug === "build-with-hardware",
-);
+export const getPublicProject = getProject;
 
 export const statusLabel: Record<Project["status"], string> = {
   completed: "Completed",

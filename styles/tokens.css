@@ -1,38 +1,37 @@
 :root {
-  /* TweakCN "openprofile" theme: cmi0kusqy000004jlhzfjfpim */
-  --background: oklch(1 0 0);
-  --foreground: #1a1a1a;
-  --card: #fdfdfc;
-  --card-foreground: #1f1f1f;
-  --popover: #fdfdfc;
-  --popover-foreground: #1f1f1f;
-  --primary: #f3bc16;
-  --primary-foreground: #383838;
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: #262626;
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: #595959;
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: #886807;
-  --destructive: oklch(0.577 0.245 27.325);
+  --background: #05070c;
+  --foreground: #f4f7ff;
+  --card: #0b1019;
+  --card-foreground: #f4f7ff;
+  --popover: #0b1019;
+  --popover-foreground: #f4f7ff;
+  --primary: #377dff;
+  --primary-foreground: #f8fbff;
+  --secondary: #101722;
+  --secondary-foreground: #e7edf9;
+  --muted: #101722;
+  --muted-foreground: #aab7ca;
+  --accent: #13264b;
+  --accent-foreground: #77a6ff;
+  --destructive: #ff6578;
   --destructive-foreground: #ffffff;
-  --border: oklch(0.922 0 0);
-  --input: #dcd9d0;
-  --ring: #f3bc16;
+  --border: #273449;
+  --input: #273449;
+  --ring: #9bc1ff;
   --chart-1: oklch(0.81 0.1 252);
   --chart-2: #e68c33;
   --chart-3: #308ce8;
   --chart-4: #e14747;
   --chart-5: #34b25e;
-  --radius: 1.4rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: #1a1a1a;
-  --sidebar-primary: #f3bc16;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #f2e5c0;
-  --sidebar-accent-foreground: #9b7608;
-  --sidebar-border: #d8d5ca;
-  --sidebar-ring: #f3bc16;
+  --radius: 0.25rem;
+  --sidebar: #0b1019;
+  --sidebar-foreground: #f4f7ff;
+  --sidebar-primary: #377dff;
+  --sidebar-primary-foreground: #f8fbff;
+  --sidebar-accent: #13264b;
+  --sidebar-accent-foreground: #9bc1ff;
+  --sidebar-border: #273449;
+  --sidebar-ring: #9bc1ff;
   --shadow-color: oklch(0 0 0);
   --shadow-opacity: 0.01;
   --shadow-blur: 3px;
@@ -75,8 +74,8 @@
 
   /* Local to the floating navigation: a restrained, opaque-enough surface
      that keeps controls legible over the kinetic hero. */
-  --navigation-surface: color-mix(in srgb, #635d85 88%, var(--foreground));
-  --navigation-foreground: #f8f6ff;
+  --navigation-surface: color-mix(in srgb, #070b12 92%, transparent);
+  --navigation-foreground: #f4f7ff;
   --navigation-muted: color-mix(
     in srgb,
     var(--navigation-foreground) 72%,
@@ -87,8 +86,8 @@
     var(--navigation-foreground) 18%,
     transparent
   );
-  --navigation-shadow: rgba(20, 16, 37, 0.28);
-  --navigation-brand-soft: #f3c4c7;
+  --navigation-shadow: rgba(0, 0, 0, 0.34);
+  --navigation-brand-soft: #9bc1ff;
 
   --k-t-hero: clamp(3.25rem, 2.1rem + 5.7vw, 6.8rem);
   --k-t-h2: clamp(2.4rem, 1.8rem + 3.2vw, 4.8rem);

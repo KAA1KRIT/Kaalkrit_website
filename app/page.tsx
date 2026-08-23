@@ -4,8 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Team KAALKRIT",
-  fullTitle:
-    "Team KAALKRIT — Engineering the Future Through Innovation, Autonomy, and Intelligent Systems.",
+  fullTitle: "Team KAALKRIT — Drone & Robotics Innovation Team",
   description: SITE.description,
   path: "/",
 });

@@ -75,12 +75,13 @@ export function domainLabel(id: Domain["id"]): string {
 }
 
 export const lifecycleStages = [
-  "Identifying real-world challenges",
   "Research",
+  "System Architecture",
   "Design",
-  "Prototyping",
   "Manufacturing",
-  "Programming",
+  "Electronics Integration",
+  "Software Development",
   "Testing",
-  "Deploying complete systems",
+  "Validation",
+  "Continuous Improvement",
 ];

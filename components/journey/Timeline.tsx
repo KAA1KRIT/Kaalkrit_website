@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   useCallback,
   useEffect,
@@ -10,7 +9,6 @@ import {
 } from "react";
 import { useLenis } from "lenis/react";
 import { milestones } from "@/content/journey";
-import { getPublicProject } from "@/content/projects";
 
 const kindLabels: Record<string, string> = {
   founding: "Founding",
@@ -23,7 +21,7 @@ const kindLabels: Record<string, string> = {
 /**
  * A vertical spine with dated milestones — the scale rule turned upright.
  *
- * Scroll drives the amber progress fill and nothing else: no parallax on
+ * Scroll drives the blue progress fill and nothing else: no parallax on
  * text, no scroll hijacking. Under reduced motion the fill is static and
  * the content is unaffected, because progress is decorative here.
  */
@@ -111,9 +109,6 @@ export function Timeline() {
         aria-label="Team KAALKRIT journey"
       >
         {milestones.map((milestone, index) => {
-          const project = milestone.projectSlug
-            ? getPublicProject(milestone.projectSlug)
-            : undefined;
           const active = index === activeIndex;
 
           return (
@@ -151,15 +146,6 @@ export function Timeline() {
                   <p className="k-body mt-[var(--k-4)]">
                     {milestone.description}
                   </p>
-                  {project ? (
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="mt-[var(--k-4)] inline-flex items-center gap-[var(--k-2)] min-h-[44px] text-[var(--k-t-small)] text-[var(--k-text)] underline decoration-[var(--k-line-strong)] underline-offset-4 hover:decoration-[var(--k-signal)] transition-colors duration-[var(--k-dur-fast)]"
-                    >
-                      {project.shortTitle}
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                  ) : null}
                 </div>
               </div>
             </li>
