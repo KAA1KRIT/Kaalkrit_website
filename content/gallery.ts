@@ -1,4 +1,4 @@
-import type { GalleryItem } from '@/lib/types';
+import type { GalleryItem } from "@/lib/types";
 
 /**
  * Public gallery source of truth. New media must be locally hosted, approved,
@@ -14,9 +14,9 @@ export const archiveGallery: GalleryItem[] = [];
 export function readyGalleryItems(items: GalleryItem[]): GalleryItem[] {
   return items.filter(
     (item) =>
-      item.status === 'ready' &&
+      item.status === "ready" &&
       item.permissionConfirmed === true &&
-      Boolean(item.src?.startsWith('/')) &&
+      Boolean(item.src?.startsWith("/")) &&
       Boolean(item.alt.trim()) &&
       Boolean(item.width && item.height),
   );

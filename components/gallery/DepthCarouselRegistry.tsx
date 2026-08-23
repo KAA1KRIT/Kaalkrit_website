@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-import type { GalleryItem } from '@/lib/types';
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import type { GalleryItem } from "@/lib/types";
 
 /** Typed KAALKRIT adaptation of the React Bits DepthCarousel JS + CSS registry component. */
 export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
@@ -11,25 +11,38 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
   const reducedRef = useRef(false);
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     reducedRef.current = media.matches;
-    const onChange = () => { reducedRef.current = media.matches; };
-    media.addEventListener('change', onChange);
-    return () => media.removeEventListener('change', onChange);
+    const onChange = () => {
+      reducedRef.current = media.matches;
+    };
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
   }, []);
 
   useEffect(() => {
     if (reducedRef.current || !rootRef.current) return;
-    const animations = Array.from(rootRef.current.querySelectorAll<HTMLElement>('.kaalkrit-depth-card')).map(
-      (card, index) => card.animate(
-        [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration: 420, delay: index * 55, easing: 'cubic-bezier(0.2, 0, 0, 1)', fill: 'backwards' },
+    const animations = Array.from(
+      rootRef.current.querySelectorAll<HTMLElement>(".kaalkrit-depth-card"),
+    ).map((card, index) =>
+      card.animate(
+        [
+          { opacity: 0, transform: "translateY(18px)" },
+          { opacity: 1, transform: "translateY(0)" },
+        ],
+        {
+          duration: 420,
+          delay: index * 55,
+          easing: "cubic-bezier(0.2, 0, 0, 1)",
+          fill: "backwards",
+        },
       ),
     );
     return () => animations.forEach((animation) => animation.cancel());
   }, [items]);
 
-  const move = (delta: number) => setActive((value) => (value + delta + items.length) % items.length);
+  const move = (delta: number) =>
+    setActive((value) => (value + delta + items.length) % items.length);
 
   return (
     <div
@@ -38,10 +51,22 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
       tabIndex={0}
       aria-label="KAALKRIT media gallery"
       onKeyDown={(event) => {
-        if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
-        if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
-        if (event.key === 'Home') { event.preventDefault(); setActive(0); }
-        if (event.key === 'End') { event.preventDefault(); setActive(items.length - 1); }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          move(-1);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          move(1);
+        }
+        if (event.key === "Home") {
+          event.preventDefault();
+          setActive(0);
+        }
+        if (event.key === "End") {
+          event.preventDefault();
+          setActive(items.length - 1);
+        }
       }}
     >
       <div className="registry-depth-carousel__stage">
@@ -51,18 +76,45 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
             <figure
               key={item.id}
               className="kaalkrit-depth-card"
-              style={{ '--depth': `${distance * -170}px`, '--spread': `${distance * 78}px`, '--opacity': Math.abs(distance) > 3 ? 0 : 1 } as React.CSSProperties}
+              style={
+                {
+                  "--depth": `${distance * -170}px`,
+                  "--spread": `${distance * 78}px`,
+                  "--opacity": Math.abs(distance) > 3 ? 0 : 1,
+                } as React.CSSProperties
+              }
               aria-hidden={index !== active}
             >
-              <Image src={item.src!} alt={item.alt} fill sizes="(max-width: 767px) 72vw, 300px" />
+              <Image
+                src={item.src!}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 767px) 72vw, 300px"
+              />
               {item.caption ? <figcaption>{item.caption}</figcaption> : null}
             </figure>
           );
         })}
       </div>
-      <button type="button" className="registry-gallery-control registry-gallery-control--prev" onClick={() => move(-1)} aria-label="Previous gallery item">←</button>
-      <button type="button" className="registry-gallery-control registry-gallery-control--next" onClick={() => move(1)} aria-label="Next gallery item">→</button>
-      <p className="sr-only" aria-live="polite">Item {active + 1} of {items.length}</p>
+      <button
+        type="button"
+        className="registry-gallery-control registry-gallery-control--prev"
+        onClick={() => move(-1)}
+        aria-label="Previous gallery item"
+      >
+        ←
+      </button>
+      <button
+        type="button"
+        className="registry-gallery-control registry-gallery-control--next"
+        onClick={() => move(1)}
+        aria-label="Next gallery item"
+      >
+        →
+      </button>
+      <p className="sr-only" aria-live="polite">
+        Item {active + 1} of {items.length}
+      </p>
     </div>
   );
 }

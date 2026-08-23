@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import { mailto } from '@/content/site';
-import { TrackedLink } from '@/components/analytics/TrackedLink';
-import { Wordmark } from '@/components/ui/Wordmark';
-import { MobileNavigation } from './MobileNavigation';
-import { DesktopFlyoutNavigation } from './DesktopFlyoutNavigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { mailto } from "@/content/site";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
+import { Wordmark } from "@/components/ui/Wordmark";
+import { MobileNavigation } from "./MobileNavigation";
+import { DesktopFlyoutNavigation } from "./DesktopFlyoutNavigation";
 
 /**
  * Sparse public navigation. The mobile menu owns its own layout so desktop
@@ -23,8 +23,8 @@ export function SiteHeader() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // The route is part of the menu state, so navigation closes it without an
@@ -35,7 +35,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`site-header fixed z-50 ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}
+      className={`site-header fixed z-50 ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}
     >
       <div className="site-header__inner">
         <Link
@@ -48,7 +48,14 @@ export function SiteHeader() {
 
         <div className="site-header__desktop-navigation">
           <DesktopFlyoutNavigation pathname={pathname} />
-          <TrackedLink className="site-header__cta" href={mailto('Partnership with Team KAALKRIT')} event="partner_cta_click" properties={{ placement: 'header' }}>Partner with KAALKRIT</TrackedLink>
+          <TrackedLink
+            className="site-header__cta"
+            href={mailto("Partnership with Team KAALKRIT")}
+            event="partner_cta_click"
+            properties={{ placement: "header" }}
+          >
+            Partner with KAALKRIT
+          </TrackedLink>
         </div>
 
         <button
@@ -57,10 +64,10 @@ export function SiteHeader() {
           onClick={() => setOpenRoute(open ? null : pathname)}
           aria-expanded={open}
           aria-controls={panelId}
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? "Close menu" : "Open menu"}
           className="site-header__menu-button"
         >
-          {open ? 'Close' : 'Menu'}
+          {open ? "Close" : "Menu"}
           <span aria-hidden="true" className="grid gap-[3px]">
             <span className="block h-px w-[18px] bg-current" />
             <span className="block h-px w-[18px] bg-current" />
@@ -68,7 +75,12 @@ export function SiteHeader() {
         </button>
       </div>
 
-      <MobileNavigation open={open} onClose={closeMenu} panelId={panelId} triggerRef={toggleRef} />
+      <MobileNavigation
+        open={open}
+        onClose={closeMenu}
+        panelId={panelId}
+        triggerRef={toggleRef}
+      />
     </header>
   );
 }

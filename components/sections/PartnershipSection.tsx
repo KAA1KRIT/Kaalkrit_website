@@ -1,12 +1,16 @@
-import { Button } from '@/components/ui/Button';
-import { SectionHeader } from '@/components/ui/SectionHeader';
-import { collaborationModes } from '@/content/partners';
-import { mailto } from '@/content/site';
+import { Button } from "@/components/ui/Button";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { collaborationModes } from "@/content/partners";
+import { mailto } from "@/content/site";
 
 /** Shared partnership invitation used by the project index. */
 export function PartnershipSection() {
   return (
-    <section id="partnership" className="public-section partnership" aria-labelledby="partnership-heading">
+    <section
+      id="partnership"
+      className="public-section partnership"
+      aria-labelledby="partnership-heading"
+    >
       <div className="public-container">
         <SectionHeader
           eyebrow="Partnership / 11"
@@ -28,8 +32,15 @@ export function PartnershipSection() {
           </ul>
           <div className="partnership__route">
             <p className="eyebrow">Approved route</p>
-            <p>Send a partnership question to the team through the official contact route.</p>
-            <Button href={mailto('Partnership with Team KAALKRIT')} variant="primary" trailing={<span aria-hidden="true">↗</span>}>
+            <p>
+              Send a partnership question to the team through the official
+              contact route.
+            </p>
+            <Button
+              href={mailto("Partnership with Team KAALKRIT")}
+              variant="primary"
+              trailing={<span aria-hidden="true">↗</span>}
+            >
               Email the team
             </Button>
           </div>

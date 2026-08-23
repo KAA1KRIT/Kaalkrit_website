@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { type ReactNode, useRef } from 'react';
+import { type ReactNode, useRef } from "react";
 
 /** A single, restrained pointer response for the partnership invitation. */
 export function BorderGlow({ children }: { children: ReactNode }) {
@@ -11,10 +11,16 @@ export function BorderGlow({ children }: { children: ReactNode }) {
       ref={ref}
       className="border-glow"
       onPointerMove={(event) => {
-        if (event.pointerType !== 'mouse' || !ref.current) return;
+        if (event.pointerType !== "mouse" || !ref.current) return;
         const rect = ref.current.getBoundingClientRect();
-        ref.current.style.setProperty('--glow-x', `${event.clientX - rect.left}px`);
-        ref.current.style.setProperty('--glow-y', `${event.clientY - rect.top}px`);
+        ref.current.style.setProperty(
+          "--glow-x",
+          `${event.clientX - rect.left}px`,
+        );
+        ref.current.style.setProperty(
+          "--glow-y",
+          `${event.clientY - rect.top}px`,
+        );
       }}
     >
       {children}

@@ -1,7 +1,13 @@
 export function AccordionGallerySkeleton() {
   return (
-    <div className="section-skeleton section-skeleton--gallery" aria-busy="true" aria-label="Loading activity gallery">
-      <span className="sr-only" role="status">Loading verified team activity</span>
+    <div
+      className="section-skeleton section-skeleton--gallery"
+      aria-busy="true"
+      aria-label="Loading activity gallery"
+    >
+      <span className="sr-only" role="status">
+        Loading verified team activity
+      </span>
       <div className="section-skeleton__tabs">
         <span />
         <span />
@@ -17,8 +23,14 @@ export function AccordionGallerySkeleton() {
 
 export function DepthCarouselSkeleton() {
   return (
-    <div className="section-skeleton section-skeleton--team" aria-busy="true" aria-label="Loading team section">
-      <span className="sr-only" role="status">Loading team information</span>
+    <div
+      className="section-skeleton section-skeleton--team"
+      aria-busy="true"
+      aria-label="Loading team section"
+    >
+      <span className="sr-only" role="status">
+        Loading team information
+      </span>
       <span className="section-skeleton__media" />
       <span className="section-skeleton__copy" />
     </div>
@@ -27,8 +39,14 @@ export function DepthCarouselSkeleton() {
 
 export function RouteLoadingExperience({ label }: { label: string }) {
   return (
-    <section className="route-loading" aria-busy="true" aria-label={`Loading ${label}`}>
-      <span className="sr-only" role="status">Loading {label}</span>
+    <section
+      className="route-loading"
+      aria-busy="true"
+      aria-label={`Loading ${label}`}
+    >
+      <span className="sr-only" role="status">
+        Loading {label}
+      </span>
       <div className="public-container">
         <div className="route-loading__eyebrow" />
         <div className="route-loading__title" />

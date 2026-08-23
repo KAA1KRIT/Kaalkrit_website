@@ -1,15 +1,15 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 const variantClass = {
-  header: 'wordmark--header',
-  footer: 'wordmark--footer',
-  system: 'wordmark--system',
+  header: "wordmark--header",
+  footer: "wordmark--footer",
+  system: "wordmark--system",
 } as const;
 
 export function Wordmark({
-  className = '',
+  className = "",
   priority = false,
-  variant = 'header',
+  variant = "header",
 }: {
   className?: string;
   priority?: boolean;

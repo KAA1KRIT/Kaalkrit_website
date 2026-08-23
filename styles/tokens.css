@@ -19,7 +19,7 @@
   --border: oklch(0.922 0 0);
   --input: #dcd9d0;
   --ring: #f3bc16;
-  --chart-1: oklch(0.81 0.10 252);
+  --chart-1: oklch(0.81 0.1 252);
   --chart-2: #e68c33;
   --chart-3: #308ce8;
   --chart-4: #e14747;
@@ -42,9 +42,13 @@
   --letter-spacing: 0em;
   --spacing: 0.25rem;
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   --font-display: var(--font-sans);
   --font-body: var(--font-sans);
 
@@ -73,8 +77,16 @@
      that keeps controls legible over the kinetic hero. */
   --navigation-surface: color-mix(in srgb, #635d85 88%, var(--foreground));
   --navigation-foreground: #f8f6ff;
-  --navigation-muted: color-mix(in srgb, var(--navigation-foreground) 72%, transparent);
-  --navigation-border: color-mix(in srgb, var(--navigation-foreground) 18%, transparent);
+  --navigation-muted: color-mix(
+    in srgb,
+    var(--navigation-foreground) 72%,
+    transparent
+  );
+  --navigation-border: color-mix(
+    in srgb,
+    var(--navigation-foreground) 18%,
+    transparent
+  );
   --navigation-shadow: rgba(20, 16, 37, 0.28);
   --navigation-brand-soft: #f3c4c7;
 

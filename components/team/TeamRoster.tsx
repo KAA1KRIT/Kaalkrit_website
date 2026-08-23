@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useMemo, useState } from 'react';
-import type { DivisionId, TeamMember } from '@/lib/types';
-import { divisions, tierLabels, tierOrder } from '@/content/team';
-import { getPublicProject } from '@/content/projects';
+import { useMemo, useState } from "react";
+import type { DivisionId, TeamMember } from "@/lib/types";
+import { divisions, tierLabels, tierOrder } from "@/content/team";
+import { getPublicProject } from "@/content/projects";
 
-type Filter = DivisionId | 'all';
+type Filter = DivisionId | "all";
 
 /**
  * Department-led and editorial, not a uniform grid. The filter is a real
@@ -13,7 +13,7 @@ type Filter = DivisionId | 'all';
  * headings that give the roster its structure.
  */
 export function TeamRoster({ members }: { members: TeamMember[] }) {
-  const [filter, setFilter] = useState<Filter>('all');
+  const [filter, setFilter] = useState<Filter>("all");
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   const available = useMemo(() => {
@@ -21,12 +21,17 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
     return divisions.filter((division) => present.has(division.id));
   }, [members]);
 
-  const visible = filter === 'all' ? members : members.filter((m) => m.division === filter);
+  const visible =
+    filter === "all" ? members : members.filter((m) => m.division === filter);
 
   return (
     <div>
-      <div role="group" aria-label="Filter by division" className="flex flex-wrap gap-[var(--k-2)]">
-        <FilterChip active={filter === 'all'} onClick={() => setFilter('all')}>
+      <div
+        role="group"
+        aria-label="Filter by division"
+        className="flex flex-wrap gap-[var(--k-2)]"
+      >
+        <FilterChip active={filter === "all"} onClick={() => setFilter("all")}>
           All ({members.length})
         </FilterChip>
         {available.map((division) => (
@@ -35,7 +40,8 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
             active={filter === division.id}
             onClick={() => setFilter(division.id)}
           >
-            {division.label} ({members.filter((m) => m.division === division.id).length})
+            {division.label} (
+            {members.filter((m) => m.division === division.id).length})
           </FilterChip>
         ))}
       </div>
@@ -48,7 +54,10 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
           return (
             <section key={tier} aria-labelledby={`tier-${tier}`}>
               <div className="k-rule" />
-              <h2 id={`tier-${tier}`} className="k-display mt-[var(--k-5)] text-[length:var(--k-t-h3)]">
+              <h2
+                id={`tier-${tier}`}
+                className="k-display mt-[var(--k-5)] text-[length:var(--k-t-h3)]"
+              >
                 {tierLabels[tier]}
               </h2>
 
@@ -66,17 +75,22 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
                         </p>
                         <p className="k-meta md:col-span-4">{member.role}</p>
                         <p className="k-meta md:col-span-2">
-                          {divisions.find((d) => d.id === member.division)?.label}
+                          {
+                            divisions.find((d) => d.id === member.division)
+                              ?.label
+                          }
                         </p>
                         <div className="md:col-span-2 md:justify-self-end">
                           <button
                             type="button"
                             aria-expanded={open}
                             aria-controls={`member-${member.slug}`}
-                            onClick={() => setOpenSlug(open ? null : member.slug)}
+                            onClick={() =>
+                              setOpenSlug(open ? null : member.slug)
+                            }
                             className="inline-flex items-center min-h-[44px] px-[var(--k-2)] -mx-[var(--k-2)] text-[var(--k-t-small)] text-[var(--k-text-muted)] hover:text-[var(--k-signal)] transition-colors duration-[var(--k-dur-fast)]"
                           >
-                            {open ? 'Close' : 'Detail'}
+                            {open ? "Close" : "Detail"}
                           </button>
                         </div>
                       </div>
@@ -91,7 +105,7 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
                             <div>
                               <dt className="k-meta">Owns</dt>
                               <dd className="k-body mt-[var(--k-2)] text-[var(--k-t-small)]">
-                                {member.responsibilities.join(' · ')}
+                                {member.responsibilities.join(" · ")}
                               </dd>
                             </div>
                           ) : null}
@@ -99,7 +113,7 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
                             <div>
                               <dt className="k-meta">Skills</dt>
                               <dd className="k-body mt-[var(--k-2)] text-[var(--k-t-small)]">
-                                {member.skills.join(' · ')}
+                                {member.skills.join(" · ")}
                               </dd>
                             </div>
                           ) : null}
@@ -107,7 +121,7 @@ export function TeamRoster({ members }: { members: TeamMember[] }) {
                             <div>
                               <dt className="k-meta">Projects</dt>
                               <dd className="k-body mt-[var(--k-2)] text-[var(--k-t-small)]">
-                                {publicProjectTitles.join(' · ')}
+                                {publicProjectTitles.join(" · ")}
                               </dd>
                             </div>
                           ) : null}
@@ -159,8 +173,8 @@ function FilterChip({
       aria-pressed={active}
       className={`inline-flex items-center min-h-[44px] px-[var(--k-4)] rounded-[var(--k-radius-pill)] border text-[var(--k-t-small)] transition-colors duration-[var(--k-dur-fast)] ${
         active
-          ? 'border-[var(--k-signal)] text-[var(--k-signal)] bg-[var(--k-signal-dim)]'
-          : 'border-[var(--k-line)] text-[var(--k-text-muted)] hover:border-[var(--k-line-strong)] hover:text-[var(--k-text)]'
+          ? "border-[var(--k-signal)] text-[var(--k-signal)] bg-[var(--k-signal-dim)]"
+          : "border-[var(--k-line)] text-[var(--k-text-muted)] hover:border-[var(--k-line-strong)] hover:text-[var(--k-text)]"
       }`}
     >
       {children}

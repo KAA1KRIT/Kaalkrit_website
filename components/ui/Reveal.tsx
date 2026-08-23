@@ -1,6 +1,12 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 
 /**
  * Entrance reveal: opacity + 12px translate, once, at 20% intersection.
@@ -15,7 +21,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 export function Reveal({
   children,
   delay = 0,
-  className = '',
+  className = "",
 }: {
   children: ReactNode;
   /** Stagger. Callers cap this at four children. */
@@ -33,7 +39,7 @@ export function Reveal({
     // Already on screen at mount, or no observer: show it outright. Arming
     // visible content only to fade it back in reads as a glitch, not motion.
     if (
-      typeof IntersectionObserver === 'undefined' ||
+      typeof IntersectionObserver === "undefined" ||
       node.getBoundingClientRect().top < window.innerHeight * 0.9
     ) {
       setRevealed(true);
@@ -51,19 +57,21 @@ export function Reveal({
           }
         }
       },
-      { threshold: 0.2, rootMargin: '0px 0px -5% 0px' },
+      { threshold: 0.2, rootMargin: "0px 0px -5% 0px" },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  const style = delay ? ({ '--k-reveal-delay': `${delay}ms` } as CSSProperties) : undefined;
+  const style = delay
+    ? ({ "--k-reveal-delay": `${delay}ms` } as CSSProperties)
+    : undefined;
 
   return (
     <div
       ref={ref}
-      className={`${armed ? 'k-reveal' : ''} ${revealed ? 'is-revealed' : ''} ${className}`.trim()}
+      className={`${armed ? "k-reveal" : ""} ${revealed ? "is-revealed" : ""} ${className}`.trim()}
       style={style}
     >
       {children}

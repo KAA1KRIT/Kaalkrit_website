@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-import styles from './GradientWaves.module.css';
+import styles from "./GradientWaves.module.css";
 
-const GradientWaves = dynamic(() => import('./GradientWaves'), {
+const GradientWaves = dynamic(() => import("./GradientWaves"), {
   ssr: false,
   loading: () => <div className={styles.container} aria-hidden="true" />,
 });

@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import type { ComponentProps, MouseEvent, ReactNode } from 'react';
-import { track } from '@vercel/analytics';
-import { ANALYTICS_ENABLED } from '@/content/site';
+import Link from "next/link";
+import type { ComponentProps, MouseEvent, ReactNode } from "react";
+import { track } from "@vercel/analytics";
+import { ANALYTICS_ENABLED } from "@/content/site";
 
 export type AnalyticsEvent =
-  | 'primary_cta_click'
-  | 'partner_cta_click'
-  | 'recruitment_cta_click'
-  | 'email_click'
-  | 'social_outbound_click'
-  | 'project_detail_click'
-  | 'contact_form_submit';
+  | "primary_cta_click"
+  | "partner_cta_click"
+  | "recruitment_cta_click"
+  | "email_click"
+  | "social_outbound_click"
+  | "project_detail_click"
+  | "contact_form_submit";
 
 type PropertyValue = string | number | boolean | null | undefined;
 type Properties = Record<string, PropertyValue>;
@@ -26,12 +26,15 @@ type SharedProps = {
 };
 
 type TrackedLinkProps = SharedProps &
-  Omit<ComponentProps<typeof Link>, 'href' | 'children' | 'onClick'> & {
+  Omit<ComponentProps<typeof Link>, "href" | "children" | "onClick"> & {
     target?: string;
     rel?: string;
   };
 
-function record(event: AnalyticsEvent | undefined, properties: Properties | undefined) {
+function record(
+  event: AnalyticsEvent | undefined,
+  properties: Properties | undefined,
+) {
   if (!ANALYTICS_ENABLED || !event) return;
   track(event, properties);
 }
@@ -49,7 +52,7 @@ export function TrackedLink({
     onClick?.(clickEvent);
   };
 
-  const isExternal = href.startsWith('mailto:') || href.startsWith('http');
+  const isExternal = href.startsWith("mailto:") || href.startsWith("http");
 
   if (isExternal) {
     return (

@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties } from "react";
 
 /**
  * The scale rule — the one element permitted to be memorable.
@@ -6,7 +6,7 @@ import type { CSSProperties } from 'react';
  */
 export function Rule({
   label,
-  className = '',
+  className = "",
   animate = false,
   delay = 0,
 }: {
@@ -17,12 +17,17 @@ export function Rule({
   animate?: boolean;
   delay?: number;
 }) {
-  const style = animate ? ({ '--k-enter-delay': `${delay}ms` } as CSSProperties) : undefined;
+  const style = animate
+    ? ({ "--k-enter-delay": `${delay}ms` } as CSSProperties)
+    : undefined;
 
   return (
     <div className={className}>
       {label ? <p className="k-meta mb-[var(--k-3)]">{label}</p> : null}
-      <div className={`k-rule ${animate ? 'k-enter-rule' : ''}`.trim()} style={style} />
+      <div
+        className={`k-rule ${animate ? "k-enter-rule" : ""}`.trim()}
+        style={style}
+      />
     </div>
   );
 }

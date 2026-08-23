@@ -1,6 +1,10 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-export function GallerySkeleton({ label = 'Loading media' }: { label?: string }) {
+export function GallerySkeleton({
+  label = "Loading media",
+}: {
+  label?: string;
+}) {
   return (
     <div className="gallery-state gallery-state--skeleton" aria-busy="true">
       <span className="sr-only">{label}</span>
@@ -15,8 +19,8 @@ export function GallerySkeleton({ label = 'Loading media' }: { label?: string })
 }
 
 export function GalleryEmptyState({
-  title = 'Media documentation',
-  description = 'Visual documentation will be shared when it is ready for publication.',
+  title = "Media documentation",
+  description = "Visual documentation will be shared when it is ready for publication.",
   children,
 }: {
   title?: string;
@@ -34,7 +38,7 @@ export function GalleryEmptyState({
 }
 
 export function GalleryErrorState({
-  description = 'This media section could not be loaded. Please try again later.',
+  description = "This media section could not be loaded. Please try again later.",
 }: {
   description?: string;
 }) {
@@ -47,5 +51,7 @@ export function GalleryErrorState({
 }
 
 export function GalleryFallback({ children }: { children: ReactNode }) {
-  return <div className="gallery-state gallery-state--fallback">{children}</div>;
+  return (
+    <div className="gallery-state gallery-state--fallback">{children}</div>
+  );
 }

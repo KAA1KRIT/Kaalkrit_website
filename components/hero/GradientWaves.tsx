@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Mesh, Program, Renderer, Triangle } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { Mesh, Program, Renderer, Triangle } from "ogl";
+import { useEffect, useRef } from "react";
 
-import styles from './GradientWaves.module.css';
+import styles from "./GradientWaves.module.css";
 
-type Detail = 'low' | 'medium' | 'high';
+type Detail = "low" | "medium" | "high";
 
 export type GradientWavesProps = {
   horizonColor?: string;
@@ -32,7 +32,7 @@ export type GradientWavesProps = {
 };
 
 type WaveContext = {
-  gl: Renderer['gl'];
+  gl: Renderer["gl"];
   renderer: Renderer;
   program: Program;
   mesh: Mesh<Triangle, Program>;
@@ -162,17 +162,33 @@ function hexToRgb(hex: string): [number, number, number] {
 }
 
 function detailToSteps(detail: Detail) {
-  if (detail === 'low') return 40;
-  if (detail === 'high') return 110;
+  if (detail === "low") return 40;
+  if (detail === "high") return 110;
   return 70;
 }
 
 export default function GradientWaves({
-  horizonColor = '#5227FF', waveColor = '#FF9FFC', crestColor = '#FFFFFF', speed = 0.4,
-  amplitude = 2.5, waveScale = 0.6, waveRatio = 0.9, swell = 35, turbulence = 20,
-  tilt = 1.11, zoom = 1, height = 5.5, fogDepth = 15, detail = 'medium', brightness = 1,
-  opacity = 1, mouseInteraction = true, parallaxStrength = 0.5, grain = true,
-  grainIntensity = 0.05, className = '',
+  horizonColor = "#5227FF",
+  waveColor = "#FF9FFC",
+  crestColor = "#FFFFFF",
+  speed = 0.4,
+  amplitude = 2.5,
+  waveScale = 0.6,
+  waveRatio = 0.9,
+  swell = 35,
+  turbulence = 20,
+  tilt = 1.11,
+  zoom = 1,
+  height = 5.5,
+  fogDepth = 15,
+  detail = "medium",
+  brightness = 1,
+  opacity = 1,
+  mouseInteraction = true,
+  parallaxStrength = 0.5,
+  grain = true,
+  grainIntensity = 0.05,
+  className = "",
 }: GradientWavesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseEnabledRef = useRef(false);
@@ -181,12 +197,21 @@ export default function GradientWaves({
     const container = containerRef.current;
     if (!container) return undefined;
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const compact = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
-    const lowPower = compact || (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4);
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const compact = window.matchMedia(
+      "(max-width: 767px), (pointer: coarse)",
+    ).matches;
+    const lowPower =
+      compact ||
+      (navigator.hardwareConcurrency !== undefined &&
+        navigator.hardwareConcurrency <= 4);
     if (reducedMotion || lowPower) {
-      container.dataset.staticFallback = 'true';
-      return () => { delete container.dataset.staticFallback; };
+      container.dataset.staticFallback = "true";
+      return () => {
+        delete container.dataset.staticFallback;
+      };
     }
 
     let animationFrame = 0;
@@ -194,7 +219,8 @@ export default function GradientWaves({
     let pageVisible = !document.hidden;
     let resizeObserver: ResizeObserver | undefined;
     let intersectionObserver: IntersectionObserver | undefined;
-    const canvasListeners: Array<[keyof HTMLElementEventMap, EventListener]> = [];
+    const canvasListeners: Array<[keyof HTMLElementEventMap, EventListener]> =
+      [];
 
     try {
       const renderer = new Renderer({
@@ -207,22 +233,35 @@ export default function GradientWaves({
       const gl = renderer.gl;
       gl.clearColor(0, 0, 0, 0);
       const canvas = gl.canvas;
-      canvas.className = styles.canvas ?? '';
+      canvas.className = styles.canvas ?? "";
       container.appendChild(canvas);
 
       const program = new Program(gl, {
         vertex,
         fragment,
         uniforms: {
-          iTime: { value: 0 }, iResolution: { value: new Float32Array([1, 1]) },
-          uSpeed: { value: speed }, uAmplitude: { value: amplitude }, uWaveScale: { value: waveScale },
-          uWaveRatio: { value: waveRatio }, uSwell: { value: swell }, uTurbulence: { value: turbulence },
-          uTilt: { value: tilt }, uZoom: { value: zoom }, uHeight: { value: height }, uFogDepth: { value: fogDepth },
-          uSteps: { value: detailToSteps(lowPower ? 'low' : detail) }, uBrightness: { value: brightness },
-          uOpacity: { value: opacity }, uGrain: { value: grain && !lowPower ? 1 : 0 },
-          uGrainIntensity: { value: grainIntensity }, uMouse: { value: new Float32Array([0.5, 0.5]) },
-          uParallax: { value: parallaxStrength }, uEnableMouse: { value: false },
-          uHorizonColor: { value: new Float32Array([1, 1, 1]) }, uWaveColor: { value: new Float32Array([1, 1, 1]) },
+          iTime: { value: 0 },
+          iResolution: { value: new Float32Array([1, 1]) },
+          uSpeed: { value: speed },
+          uAmplitude: { value: amplitude },
+          uWaveScale: { value: waveScale },
+          uWaveRatio: { value: waveRatio },
+          uSwell: { value: swell },
+          uTurbulence: { value: turbulence },
+          uTilt: { value: tilt },
+          uZoom: { value: zoom },
+          uHeight: { value: height },
+          uFogDepth: { value: fogDepth },
+          uSteps: { value: detailToSteps(lowPower ? "low" : detail) },
+          uBrightness: { value: brightness },
+          uOpacity: { value: opacity },
+          uGrain: { value: grain && !lowPower ? 1 : 0 },
+          uGrainIntensity: { value: grainIntensity },
+          uMouse: { value: new Float32Array([0.5, 0.5]) },
+          uParallax: { value: parallaxStrength },
+          uEnableMouse: { value: false },
+          uHorizonColor: { value: new Float32Array([1, 1, 1]) },
+          uWaveColor: { value: new Float32Array([1, 1, 1]) },
           uCrestColor: { value: new Float32Array([1, 1, 1]) },
         },
       });
@@ -232,7 +271,10 @@ export default function GradientWaves({
 
       const setSize = () => {
         const rect = container.getBoundingClientRect();
-        renderer.setSize(Math.max(1, Math.floor(rect.width)), Math.max(1, Math.floor(rect.height)));
+        renderer.setSize(
+          Math.max(1, Math.floor(rect.width)),
+          Math.max(1, Math.floor(rect.height)),
+        );
         const resolution = program.uniforms.iResolution.value as Float32Array;
         resolution[0] = gl.drawingBufferWidth;
         resolution[1] = gl.drawingBufferHeight;
@@ -244,7 +286,10 @@ export default function GradientWaves({
 
       const currentMouse: [number, number] = [0.5, 0.5];
       const targetMouse: [number, number] = [0.5, 0.5];
-      const mouseEnabled = mouseInteraction && !lowPower && window.matchMedia('(pointer: fine)').matches;
+      const mouseEnabled =
+        mouseInteraction &&
+        !lowPower &&
+        window.matchMedia("(pointer: fine)").matches;
       mouseEnabledRef.current = mouseEnabled;
       program.uniforms.uEnableMouse.value = mouseEnabled;
       const pointerMove = ((event: PointerEvent) => {
@@ -252,24 +297,41 @@ export default function GradientWaves({
         targetMouse[0] = (event.clientX - rect.left) / rect.width;
         targetMouse[1] = 1 - (event.clientY - rect.top) / rect.height;
       }) as EventListener;
-      const pointerLeave = (() => { targetMouse[0] = 0.5; targetMouse[1] = 0.5; }) as EventListener;
-      canvas.addEventListener('pointermove', pointerMove);
-      canvas.addEventListener('pointerleave', pointerLeave);
-      canvasListeners.push(['pointermove', pointerMove], ['pointerleave', pointerLeave]);
+      const pointerLeave = (() => {
+        targetMouse[0] = 0.5;
+        targetMouse[1] = 0.5;
+      }) as EventListener;
+      canvas.addEventListener("pointermove", pointerMove);
+      canvas.addEventListener("pointerleave", pointerLeave);
+      canvasListeners.push(
+        ["pointermove", pointerMove],
+        ["pointerleave", pointerLeave],
+      );
 
       const startedAt = performance.now();
       const render = (time: number) => {
         program.uniforms.iTime.value = (time - startedAt) / 1000;
         const useMouse = mouseEnabledRef.current;
-        currentMouse[0] += 0.05 * ((useMouse ? targetMouse[0] : 0.5) - currentMouse[0]);
-        currentMouse[1] += 0.05 * ((useMouse ? targetMouse[1] : 0.5) - currentMouse[1]);
+        currentMouse[0] +=
+          0.05 * ((useMouse ? targetMouse[0] : 0.5) - currentMouse[0]);
+        currentMouse[1] +=
+          0.05 * ((useMouse ? targetMouse[1] : 0.5) - currentMouse[1]);
         const mouse = program.uniforms.uMouse.value as Float32Array;
-        mouse[0] = currentMouse[0]; mouse[1] = currentMouse[1];
+        mouse[0] = currentMouse[0];
+        mouse[1] = currentMouse[1];
         renderer.render({ scene: mesh });
         animationFrame = window.requestAnimationFrame(render);
       };
-      const start = () => { if (visible && pageVisible && !animationFrame) animationFrame = window.requestAnimationFrame(render); };
-      const stop = () => { if (animationFrame) { window.cancelAnimationFrame(animationFrame); animationFrame = 0; } };
+      const start = () => {
+        if (visible && pageVisible && !animationFrame)
+          animationFrame = window.requestAnimationFrame(render);
+      };
+      const stop = () => {
+        if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = 0;
+        }
+      };
       intersectionObserver = new IntersectionObserver((entries) => {
         const entry = entries[0];
         if (!entry) return;
@@ -283,40 +345,112 @@ export default function GradientWaves({
         if (pageVisible) start();
         else stop();
       };
-      document.addEventListener('visibilitychange', visibilityChange);
+      document.addEventListener("visibilitychange", visibilityChange);
       start();
 
       return () => {
         stop();
         resizeObserver?.disconnect();
         intersectionObserver?.disconnect();
-        document.removeEventListener('visibilitychange', visibilityChange);
-        canvasListeners.forEach(([event, listener]) => canvas.removeEventListener(event, listener));
+        document.removeEventListener("visibilitychange", visibilityChange);
+        canvasListeners.forEach(([event, listener]) =>
+          canvas.removeEventListener(event, listener),
+        );
         contexts.delete(container);
         canvas.remove();
-        gl.getExtension('WEBGL_lose_context')?.loseContext();
+        gl.getExtension("WEBGL_lose_context")?.loseContext();
       };
     } catch {
-      container.dataset.staticFallback = 'true';
-      return () => { delete container.dataset.staticFallback; };
+      container.dataset.staticFallback = "true";
+      return () => {
+        delete container.dataset.staticFallback;
+      };
     }
-  }, [amplitude, brightness, detail, fogDepth, grain, grainIntensity, height, mouseInteraction, opacity, parallaxStrength, speed, swell, tilt, turbulence, waveRatio, waveScale, zoom]);
+  }, [
+    amplitude,
+    brightness,
+    detail,
+    fogDepth,
+    grain,
+    grainIntensity,
+    height,
+    mouseInteraction,
+    opacity,
+    parallaxStrength,
+    speed,
+    swell,
+    tilt,
+    turbulence,
+    waveRatio,
+    waveScale,
+    zoom,
+  ]);
 
   useEffect(() => {
     const container = containerRef.current;
     const context = container ? contexts.get(container) : undefined;
     if (!context) return;
     const uniforms = context.program.uniforms;
-    const waveDetail = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches ? 'low' : detail;
-    uniforms.uSpeed.value = speed; uniforms.uAmplitude.value = amplitude; uniforms.uWaveScale.value = waveScale;
-    uniforms.uWaveRatio.value = waveRatio; uniforms.uSwell.value = swell; uniforms.uTurbulence.value = turbulence;
-    uniforms.uTilt.value = tilt; uniforms.uZoom.value = zoom; uniforms.uHeight.value = height; uniforms.uFogDepth.value = fogDepth;
-    uniforms.uSteps.value = detailToSteps(waveDetail); uniforms.uBrightness.value = brightness; uniforms.uOpacity.value = opacity;
-    uniforms.uGrain.value = grain && waveDetail !== 'low' ? 1 : 0; uniforms.uGrainIntensity.value = grainIntensity;
-    uniforms.uParallax.value = parallaxStrength; uniforms.uEnableMouse.value = mouseEnabledRef.current && mouseInteraction;
-    const colors = [[uniforms.uHorizonColor.value as Float32Array, horizonColor], [uniforms.uWaveColor.value as Float32Array, waveColor], [uniforms.uCrestColor.value as Float32Array, crestColor]] as const;
-    colors.forEach(([target, hex]) => { const [red, green, blue] = hexToRgb(hex); target[0] = red; target[1] = green; target[2] = blue; });
-  }, [amplitude, brightness, crestColor, detail, fogDepth, grain, grainIntensity, height, horizonColor, mouseInteraction, opacity, parallaxStrength, speed, swell, tilt, turbulence, waveColor, waveRatio, waveScale, zoom]);
+    const waveDetail = window.matchMedia(
+      "(max-width: 767px), (pointer: coarse)",
+    ).matches
+      ? "low"
+      : detail;
+    uniforms.uSpeed.value = speed;
+    uniforms.uAmplitude.value = amplitude;
+    uniforms.uWaveScale.value = waveScale;
+    uniforms.uWaveRatio.value = waveRatio;
+    uniforms.uSwell.value = swell;
+    uniforms.uTurbulence.value = turbulence;
+    uniforms.uTilt.value = tilt;
+    uniforms.uZoom.value = zoom;
+    uniforms.uHeight.value = height;
+    uniforms.uFogDepth.value = fogDepth;
+    uniforms.uSteps.value = detailToSteps(waveDetail);
+    uniforms.uBrightness.value = brightness;
+    uniforms.uOpacity.value = opacity;
+    uniforms.uGrain.value = grain && waveDetail !== "low" ? 1 : 0;
+    uniforms.uGrainIntensity.value = grainIntensity;
+    uniforms.uParallax.value = parallaxStrength;
+    uniforms.uEnableMouse.value = mouseEnabledRef.current && mouseInteraction;
+    const colors = [
+      [uniforms.uHorizonColor.value as Float32Array, horizonColor],
+      [uniforms.uWaveColor.value as Float32Array, waveColor],
+      [uniforms.uCrestColor.value as Float32Array, crestColor],
+    ] as const;
+    colors.forEach(([target, hex]) => {
+      const [red, green, blue] = hexToRgb(hex);
+      target[0] = red;
+      target[1] = green;
+      target[2] = blue;
+    });
+  }, [
+    amplitude,
+    brightness,
+    crestColor,
+    detail,
+    fogDepth,
+    grain,
+    grainIntensity,
+    height,
+    horizonColor,
+    mouseInteraction,
+    opacity,
+    parallaxStrength,
+    speed,
+    swell,
+    tilt,
+    turbulence,
+    waveColor,
+    waveRatio,
+    waveScale,
+    zoom,
+  ]);
 
-  return <div ref={containerRef} className={`${styles.container} ${className}`.trim()} />;
+  return (
+    <div
+      ref={containerRef}
+      className={`${styles.container} ${className}`.trim()}
+    />
+  );
 }

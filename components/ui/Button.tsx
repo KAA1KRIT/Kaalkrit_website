@@ -1,29 +1,30 @@
-import Link from 'next/link';
-import type { ReactNode } from 'react';
+import Link from "next/link";
+import type { ReactNode } from "react";
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'destructive';
+type Variant = "primary" | "secondary" | "ghost" | "destructive";
 
 const base =
-  'inline-flex items-center justify-center gap-[var(--k-2)] min-h-[44px] rounded-[var(--k-radius)] ' +
-  'font-[family-name:var(--font-display)] font-semibold text-[var(--k-t-small)] leading-none no-underline ' +
-  'transition-[background-color,border-color,color,box-shadow,transform] duration-[var(--k-dur)] ease-[var(--k-ease)] ' +
-  'focus-visible:outline-3 focus-visible:outline-[var(--ring)] focus-visible:outline-offset-3 disabled:pointer-events-none disabled:opacity-50';
+  "inline-flex items-center justify-center gap-[var(--k-2)] min-h-[44px] rounded-[var(--k-radius)] " +
+  "font-[family-name:var(--font-display)] font-semibold text-[var(--k-t-small)] leading-none no-underline " +
+  "transition-[background-color,border-color,color,box-shadow,transform] duration-[var(--k-dur)] ease-[var(--k-ease)] " +
+  "focus-visible:outline-3 focus-visible:outline-[var(--ring)] focus-visible:outline-offset-3 disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  primary: 'px-[var(--k-5)] bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--foreground)] hover:text-[var(--card)]',
+  primary:
+    "px-[var(--k-5)] bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--foreground)] hover:text-[var(--card)]",
   secondary:
-    'px-[var(--k-5)] border border-[var(--accent-foreground)] text-[var(--k-text)] hover:border-[var(--primary)] hover:bg-[color-mix(in_srgb,var(--primary)_15%,var(--card))]',
+    "px-[var(--k-5)] border border-[var(--accent-foreground)] text-[var(--k-text)] hover:border-[var(--primary)] hover:bg-[color-mix(in_srgb,var(--primary)_15%,var(--card))]",
   ghost:
-    'px-[var(--k-3)] text-[var(--k-text)] hover:bg-[var(--secondary)] hover:text-[var(--accent-foreground)]',
+    "px-[var(--k-3)] text-[var(--k-text)] hover:bg-[var(--secondary)] hover:text-[var(--accent-foreground)]",
   destructive:
-    'px-[var(--k-5)] border border-[var(--destructive)] bg-[var(--destructive)] text-[var(--destructive-foreground)]',
+    "px-[var(--k-5)] border border-[var(--destructive)] bg-[var(--destructive)] text-[var(--destructive-foreground)]",
 };
 
 export function Button({
   href,
   children,
-  variant = 'secondary',
-  className = '',
+  variant = "secondary",
+  className = "",
   trailing,
   loading = false,
   ...rest
@@ -35,9 +36,12 @@ export function Button({
   loading?: boolean;
   /** Rendered after the label — the ghost variant's arrow. */
   trailing?: ReactNode;
-} & Omit<React.ComponentProps<typeof Link>, 'href' | 'children' | 'className'>) {
-  const isExternal = href.startsWith('mailto:') || href.startsWith('http');
-  const classes = `${base} ${variants[variant]} ${loading ? 'opacity-50 pointer-events-none' : ''} ${className}`;
+} & Omit<
+  React.ComponentProps<typeof Link>,
+  "href" | "children" | "className"
+>) {
+  const isExternal = href.startsWith("mailto:") || href.startsWith("http");
+  const classes = `${base} ${variants[variant]} ${loading ? "opacity-50 pointer-events-none" : ""} ${className}`;
 
   if (loading) {
     return (
@@ -49,14 +53,14 @@ export function Button({
   }
 
   if (isExternal) {
-    const isMailto = href.startsWith('mailto:');
+    const isMailto = href.startsWith("mailto:");
     return (
       <a
         href={href}
         className={classes}
-        {...(isMailto ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+        {...(isMailto ? {} : { target: "_blank", rel: "noopener noreferrer" })}
       >
-        {loading ? 'Loading…' : children}
+        {loading ? "Loading…" : children}
         {trailing}
       </a>
     );

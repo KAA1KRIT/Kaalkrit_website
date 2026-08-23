@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 /**
  * Shared editorial section opener. The same rule and two-column hierarchy
@@ -8,15 +8,15 @@ export function SectionHeader({
   eyebrow,
   heading,
   lede,
-  headingLevel: Heading = 'h2',
+  headingLevel: Heading = "h2",
   id,
-  className = '',
+  className = "",
   children,
 }: {
   eyebrow: string;
   heading: string;
   lede?: string;
-  headingLevel?: 'h1' | 'h2' | 'h3';
+  headingLevel?: "h1" | "h2" | "h3";
   id?: string;
   className?: string;
   children?: ReactNode;

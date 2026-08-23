@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { LEGAL } from '@/content/legal';
-import { mailto, SITE } from '@/content/site';
+import Link from "next/link";
+import { LEGAL } from "@/content/legal";
+import { mailto, SITE } from "@/content/site";
 
 export function LegalPageLayout({
   eyebrow,
@@ -21,8 +21,13 @@ export function LegalPageLayout({
         <p className="legal-page__intro">{intro}</p>
         <p className="legal-page__updated">Last updated: {LEGAL.lastUpdated}</p>
         <div className="legal-page__content">{children}</div>
-        <div className="legal-page__socials"><span>Official contact</span><a href={mailto('KAALKRIT website enquiry')}>{SITE.email}</a></div>
-        <div className="legal-page__back"><Link href="/">← Back to KAALKRIT</Link></div>
+        <div className="legal-page__socials">
+          <span>Official contact</span>
+          <a href={mailto("KAALKRIT website enquiry")}>{SITE.email}</a>
+        </div>
+        <div className="legal-page__back">
+          <Link href="/">← Back to KAALKRIT</Link>
+        </div>
       </div>
     </article>
   );

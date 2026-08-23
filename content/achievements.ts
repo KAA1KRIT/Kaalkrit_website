@@ -1,4 +1,4 @@
-import type { Achievement } from '@/lib/types';
+import type { Achievement } from "@/lib/types";
 
 /**
  * Verified public achievements. Exact event details remain a launch-content
@@ -6,13 +6,15 @@ import type { Achievement } from '@/lib/types';
  */
 export const achievements: Achievement[] = [
   {
-    id: 'business-evaluation',
-    title: '11th place — Business Evaluation',
-    detail: 'Placed 11th in Business Evaluation at a national-level competition.',
+    id: "business-evaluation",
+    title: "11th place — Business Evaluation",
+    detail:
+      "Placed 11th in Business Evaluation at a national-level competition.",
   },
   {
-    id: 'national-representation',
-    title: 'National-level drone innovation competitions',
-    detail: 'Represented Sir MVIT at national-level drone innovation competitions.',
+    id: "national-representation",
+    title: "National-level drone innovation competitions",
+    detail:
+      "Represented Sir MVIT at national-level drone innovation competitions.",
   },
 ];

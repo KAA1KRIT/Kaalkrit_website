@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
-import { milestones } from '@/content/journey';
-import { getPublicProject } from '@/content/projects';
+import Link from "next/link";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { milestones } from "@/content/journey";
+import { getPublicProject } from "@/content/projects";
 
 const kindLabels: Record<string, string> = {
-  founding: 'Founding',
-  competition: 'Competition',
-  project: 'Project',
-  achievement: 'Achievement',
-  forward: 'Direction',
+  founding: "Founding",
+  competition: "Competition",
+  project: "Project",
+  achievement: "Achievement",
+  forward: "Direction",
 };
 
 /**
@@ -29,7 +29,9 @@ export function Timeline() {
     const node = trackRef.current;
     if (!node) return;
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (reduced) {
       return;
     }
@@ -51,18 +53,18 @@ export function Timeline() {
     };
 
     update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
 
   useEffect(() => {
     const items = Array.from(
-      trackRef.current?.querySelectorAll<HTMLElement>('[data-milestone]') ?? [],
+      trackRef.current?.querySelectorAll<HTMLElement>("[data-milestone]") ?? [],
     );
     if (items.length === 0) return;
 
@@ -70,12 +72,12 @@ export function Timeline() {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            const index = Number(entry.target.getAttribute('data-milestone'));
+            const index = Number(entry.target.getAttribute("data-milestone"));
             if (!Number.isNaN(index)) setActiveIndex(index);
           }
         }
       },
-      { rootMargin: '-45% 0px -45% 0px' },
+      { rootMargin: "-45% 0px -45% 0px" },
     );
 
     for (const item of items) observer.observe(item);
@@ -88,12 +90,17 @@ export function Timeline() {
       <div
         aria-hidden="true"
         className="k-rule-v absolute left-0 top-0 bottom-0 md:left-[calc(25%-1px)]"
-        style={{ '--k-progress': `${progress}%` } as CSSProperties}
+        style={{ "--k-progress": `${progress}%` } as CSSProperties}
       />
 
-      <ol className="grid gap-[var(--k-10)] pl-[var(--k-6)] md:pl-0" aria-label="KAALKRIT milestones">
+      <ol
+        className="grid gap-[var(--k-10)] pl-[var(--k-6)] md:pl-0"
+        aria-label="KAALKRIT milestones"
+      >
         {milestones.map((milestone, index) => {
-          const project = milestone.projectSlug ? getPublicProject(milestone.projectSlug) : undefined;
+          const project = milestone.projectSlug
+            ? getPublicProject(milestone.projectSlug)
+            : undefined;
           const active = index === activeIndex;
 
           return (
@@ -101,18 +108,26 @@ export function Timeline() {
               <span
                 aria-hidden="true"
                 className="absolute -left-[calc(var(--k-6)+3px)] top-[10px] block size-[7px] rounded-[var(--k-radius-pill)] transition-colors duration-[var(--k-dur)] md:left-[calc(25%-4px)]"
-                style={{ background: active ? 'var(--k-signal)' : 'var(--k-line-strong)' }}
+                style={{
+                  background: active
+                    ? "var(--k-signal)"
+                    : "var(--k-line-strong)",
+                }}
               />
 
               <div className="grid gap-[var(--k-4)] md:grid-cols-4 md:gap-[var(--k-5)]">
                 <div className="md:col-span-1 md:pr-[var(--k-7)] md:text-right">
                   <p
                     className="font-[family-name:var(--font-mono)] text-[1.75rem] leading-none transition-colors duration-[var(--k-dur)]"
-                    style={{ color: active ? 'var(--k-text)' : 'var(--k-text-faint)' }}
+                    style={{
+                      color: active ? "var(--k-text)" : "var(--k-text-faint)",
+                    }}
                   >
-                    {milestone.year ?? '—'}
+                    {milestone.year ?? "—"}
                   </p>
-                  <p className="k-meta mt-[var(--k-2)]">{kindLabels[milestone.kind]}</p>
+                  <p className="k-meta mt-[var(--k-2)]">
+                    {kindLabels[milestone.kind]}
+                  </p>
                 </div>
 
                 <div className="md:col-span-3 md:pl-[var(--k-7)]">
@@ -120,7 +135,9 @@ export function Timeline() {
                   <h2 className="k-display mt-[var(--k-2)] text-[length:var(--k-t-h3)]">
                     {milestone.title}
                   </h2>
-                  <p className="k-body mt-[var(--k-4)]">{milestone.description}</p>
+                  <p className="k-body mt-[var(--k-4)]">
+                    {milestone.description}
+                  </p>
                   {project ? (
                     <Link
                       href={`/projects/${project.slug}`}

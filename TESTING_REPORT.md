@@ -4,14 +4,14 @@ Audit date: 13 August 2026. Local Node.js: 24.14.0. Framework: Next.js 16.3.0.
 
 ## Automated commands
 
-| Command | Result |
-| --- | --- |
-| `npm test` | Pass — 4 content/publication integrity tests |
-| `npm run lint` | Pass — no ESLint errors or warnings |
-| `npm run typecheck` | Pass — strict TypeScript check |
-| `npm run build` | Pass — 21 static/SSG outputs generated |
-| `npm audit --audit-level=high` | Pass — 0 vulnerabilities |
-| `git diff --check` | Pass |
+| Command                        | Result                                       |
+| ------------------------------ | -------------------------------------------- |
+| `npm test`                     | Pass — 4 content/publication integrity tests |
+| `npm run lint`                 | Pass — no ESLint errors or warnings          |
+| `npm run typecheck`            | Pass — strict TypeScript check               |
+| `npm run build`                | Pass — 21 static/SSG outputs generated       |
+| `npm audit --audit-level=high` | Pass — 0 vulnerabilities                     |
+| `git diff --check`             | Pass                                         |
 
 The tests protect verified contact channels, navigation destinations, unique/public-ready project records, valid capability references, and the gallery publication gate.
 

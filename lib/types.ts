@@ -1,8 +1,8 @@
-export type DomainGroupId = 'air' | 'machine' | 'silicon' | 'method';
+export type DomainGroupId = "air" | "machine" | "silicon" | "method";
 
-export type ContentStatus = 'ready' | 'draft' | 'awaiting-content' | 'hidden';
+export type ContentStatus = "ready" | "draft" | "awaiting-content" | "hidden";
 
-export type GalleryMediaKind = 'image' | 'video' | 'clip' | 'cad' | 'document';
+export type GalleryMediaKind = "image" | "video" | "clip" | "cad" | "document";
 
 export interface GalleryItem {
   id: string;
@@ -14,7 +14,7 @@ export interface GalleryItem {
   caption?: string;
   title?: string;
   href?: string;
-  projectSlug?: Project['slug'];
+  projectSlug?: Project["slug"];
   width?: number;
   height?: number;
   credit?: string;
@@ -22,17 +22,17 @@ export interface GalleryItem {
 }
 
 export type DomainId =
-  | 'uas'
-  | 'drone-tech'
-  | 'flight-control'
-  | 'robotics'
-  | 'mechanical'
-  | 'sensors'
-  | 'embedded'
-  | 'pcb'
-  | 'ai-cv'
-  | 'software'
-  | 'research';
+  | "uas"
+  | "drone-tech"
+  | "flight-control"
+  | "robotics"
+  | "mechanical"
+  | "sensors"
+  | "embedded"
+  | "pcb"
+  | "ai-cv"
+  | "software"
+  | "research";
 
 export interface Domain {
   id: DomainId;
@@ -47,9 +47,9 @@ export interface DomainGroup {
   note: string;
 }
 
-export type ProjectStatus = 'completed' | 'in-development';
+export type ProjectStatus = "completed" | "in-development";
 
-export type ProgrammeId = 'nidar-2026' | 'nidar-2027';
+export type ProgrammeId = "nidar-2026" | "nidar-2027";
 
 export interface Project {
   slug: string;
@@ -78,7 +78,8 @@ export interface MediaAsset {
   height: number;
 }
 
-export type MilestoneKind = 'founding' | 'competition' | 'project' | 'achievement' | 'forward';
+export type MilestoneKind =
+  "founding" | "competition" | "project" | "achievement" | "forward";
 
 export interface Milestone {
   id: string;
@@ -86,7 +87,7 @@ export interface Milestone {
   yearLabel: string;
   title: string;
   description: string;
-  projectSlug?: Project['slug'];
+  projectSlug?: Project["slug"];
   kind: MilestoneKind;
   contentStatus?: ContentStatus;
 }
@@ -115,7 +116,7 @@ export interface AchievementGalleryItem {
 
 export type DivisionId = DomainGroupId;
 
-export type MemberTier = 'leadership' | 'core' | 'faculty' | 'alumni';
+export type MemberTier = "leadership" | "core" | "faculty" | "alumni";
 
 export interface TeamMember {
   slug: string;
@@ -125,7 +126,7 @@ export interface TeamMember {
   tier: MemberTier;
   responsibilities: string[];
   skills: string[];
-  projects: Project['slug'][];
+  projects: Project["slug"][];
   links?: { label: string; href: string }[];
   photo?: MediaAsset;
   contentStatus?: ContentStatus;

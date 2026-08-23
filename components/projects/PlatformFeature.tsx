@@ -1,7 +1,7 @@
-import { platformProject } from '@/content/projects';
-import { domainLabel } from '@/content/domains';
-import { Reveal } from '@/components/ui/Reveal';
-import { StatusTag } from '@/components/ui/StatusTag';
+import { platformProject } from "@/content/projects";
+import { domainLabel } from "@/content/domains";
+import { Reveal } from "@/components/ui/Reveal";
+import { StatusTag } from "@/components/ui/StatusTag";
 
 /**
  * BWH gets a full-width treatment because it is KAALKRIT's flagship
@@ -27,8 +27,12 @@ export function PlatformFeature({ detail = false }: { detail?: boolean }) {
 
         <div className="mt-[var(--k-5)] grid gap-[var(--k-6)] md:grid-cols-12 md:gap-[var(--k-5)]">
           <div className="md:col-span-7">
-            <h3 className="k-display text-[length:var(--k-t-h2)]">{project.title}</h3>
-            <p className="k-lede mt-[var(--k-5)] text-[var(--k-text)]">{project.summary}</p>
+            <h3 className="k-display text-[length:var(--k-t-h2)]">
+              {project.title}
+            </h3>
+            <p className="k-lede mt-[var(--k-5)] text-[var(--k-text)]">
+              {project.summary}
+            </p>
             {detail ? (
               <>
                 <p className="k-body mt-[var(--k-5)]">{project.problem}</p>

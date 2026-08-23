@@ -1,24 +1,24 @@
-import type { Metadata, Viewport } from 'next';
-import { Bungee } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/next';
-import { SiteHeader } from '@/components/layout/SiteHeader';
-import { SiteFooter } from '@/components/layout/SiteFooter';
-import { ANALYTICS_ENABLED, SITE } from '@/content/site';
-import { organizationSchema, serializeJsonLd, websiteSchema } from '@/lib/seo';
-import '@/styles/globals.css';
+import type { Metadata, Viewport } from "next";
+import { Bungee } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ANALYTICS_ENABLED, SITE } from "@/content/site";
+import { organizationSchema, serializeJsonLd, websiteSchema } from "@/lib/seo";
+import "@/styles/globals.css";
 
 const brandFont = Bungee({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-  variable: '--font-kaalkrit-brand',
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-kaalkrit-brand",
 });
 
 export const metadata: Metadata = {
   ...(SITE.url ? { metadataBase: new URL(SITE.url) } : {}),
   title: {
-    default: 'KAALKRIT — Drone & Robotics Innovation Team, Sir MVIT',
-    template: '%s — KAALKRIT',
+    default: "KAALKRIT — Drone & Robotics Innovation Team, Sir MVIT",
+    template: "%s — KAALKRIT",
   },
   description: SITE.description,
   applicationName: SITE.name,
@@ -28,16 +28,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#f3bc16',
-  colorScheme: 'light',
+  themeColor: "#f3bc16",
+  colorScheme: "light",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-    >
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={brandFont.variable}>
         <a
           href="#main"
@@ -48,10 +49,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        {ANALYTICS_ENABLED && process.env.NODE_ENV === 'production' ? <Analytics /> : null}
+        {ANALYTICS_ENABLED && process.env.NODE_ENV === "production" ? (
+          <Analytics />
+        ) : null}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(organizationSchema()) }}
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(organizationSchema()),
+          }}
         />
         <script
           type="application/ld+json"

@@ -1,5 +1,5 @@
-import { MetaLine } from '@/components/ui/MetaLine';
-import { Rule } from '@/components/ui/Rule';
+import { MetaLine } from "@/components/ui/MetaLine";
+import { Rule } from "@/components/ui/Rule";
 
 /** The single h1 for an interior route. */
 export function PageHeader({

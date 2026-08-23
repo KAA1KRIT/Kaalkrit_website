@@ -1,12 +1,12 @@
-import { LandingPage } from '@/components/sections/LandingPage';
-import { SITE } from '@/content/site';
-import { pageMetadata } from '@/lib/seo';
+import { LandingPage } from "@/components/sections/LandingPage";
+import { SITE } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: 'Home',
-  fullTitle: 'KAALKRIT — Engineering what moves next',
+  title: "Home",
+  fullTitle: "KAALKRIT — Engineering what moves next",
   description: SITE.description,
-  path: '/',
+  path: "/",
 });
 
 export default function HomePage() {
