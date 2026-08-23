@@ -13,50 +13,14 @@ export type FlyoutNavigationGroup = {
   items: readonly FlyoutNavigationItem[];
 };
 export const primaryNav: NavItem[] = [
-  { label: 'Work', href: '/#projects' },
-  { label: 'Capabilities', href: '/#capabilities' },
-  { label: 'Projects', href: '/projects' },
+  { label: 'Work', href: '/projects' },
+  { label: 'Team', href: '/team' },
   { label: 'Journey', href: '/journey' },
-  { label: 'Contact', href: '/#partnership' },
+  { label: 'Contact', href: '/contact' },
 ];
 
-/** Desktop-only navigation groups. Each destination is already public. */
-export const flyoutNavigation: readonly FlyoutNavigationGroup[] = [
-  {
-    id: 'work',
-    label: 'Work',
-    ariaLabel: "Explore KAALKRIT's work",
-    items: [
-      {
-        label: 'Current work',
-        href: '/#projects',
-        description: "Explore KAALKRIT's public project overview.",
-      },
-      {
-        label: 'Project portfolio',
-        href: '/projects',
-        description: 'View the documented records for current projects.',
-      },
-    ],
-  },
-  {
-    id: 'capabilities',
-    label: 'Capabilities',
-    ariaLabel: 'Explore KAALKRIT capabilities',
-    items: [
-      {
-        label: 'Capability index',
-        href: '/#capabilities',
-        description: 'Browse the engineering disciplines that shape each system.',
-      },
-      {
-        label: 'Journey',
-        href: '/journey',
-        description: "Read KAALKRIT's documented journey so far.",
-      },
-    ],
-  },
-];
+/** Kept for footer/test compatibility; the top bar is intentionally direct. */
+export const flyoutNavigation: readonly FlyoutNavigationGroup[] = [];
 
 export const footerNav: NavItem[] = [
   { label: 'Work', href: '/#projects' },

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { mailto } from '@/content/site';
 import { TrackedLink } from '@/components/analytics/TrackedLink';
+import { Wordmark } from '@/components/ui/Wordmark';
 import { MobileNavigation } from './MobileNavigation';
 import { DesktopFlyoutNavigation } from './DesktopFlyoutNavigation';
 
@@ -42,9 +43,7 @@ export function SiteHeader() {
           className="site-header__brand-link"
           aria-label="KAALKRIT — home"
         >
-          <span className="site-header__brand" aria-hidden="true">
-            <span className="site-header__brand-soft">Kaal</span><span className="site-header__brand-accent">Krit</span>
-          </span>
+          <Wordmark priority variant="header" />
         </Link>
 
         <div className="site-header__desktop-navigation">

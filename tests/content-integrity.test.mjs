@@ -42,6 +42,29 @@ test('project records are unique, public-ready, and use documented domains', () 
   }
 });
 
+test('team roster uses only PDF-provided names and no placeholder profiles', () => {
+  const teamContent = readFileSync('content/team.ts', 'utf8');
+  const expected = [
+    ['Rajeev Tiwari', 'Technical Lead — Development & Engineering'],
+    ['Ankur Pathak', 'Business, Marketing & Outreach Lead'],
+    ['Shantanu Pawade', 'Design Support'],
+    ['Manas Yadu', 'Technical Team'],
+    ['Raunit Singh', 'Technical Team'],
+    ['Shubham Kumar', 'Sponsorship & Social Media'],
+    ['Aditi Kiran', 'Content Planning & Management'],
+    ['Hardhik Bhatia', 'Video Production & Editing'],
+    ['Suraj Verma', 'Design & Creatives'],
+    ['Kaavya Sharma', 'Design & Creatives'],
+  ];
+
+  for (const [name, role] of expected) {
+    assert.match(teamContent, new RegExp(`name: '${name}'`));
+    assert.match(teamContent, new RegExp(`role: '${role.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'`));
+  }
+
+  assert.doesNotMatch(teamContent, /https:\/\/www\.linkedin\.com|LinkedIn Profile|photo:\s*\{/);
+});
+
 test('gallery publication gate rejects incomplete and external media', () => {
   const base = {
     id: 'approved',
@@ -69,18 +92,26 @@ test('shared wordmark has a transparent presentation and a distinct footer scale
   const styles = readFileSync('styles/globals.css', 'utf8');
 
   assert.match(component, /alt="KAALKRIT"/);
-  assert.match(component, /src="\/logo_favicon\.jpg"/);
+  assert.match(component, /src="\/images\/approved\/kaalkrit-emblem\.png"/);
   assert.match(component, /unoptimized/);
+  assert.match(component, /wordmark--header/);
   assert.match(component, /wordmark--footer/);
   assert.match(styles, /\.wordmark\s*\{[^}]*background:\s*transparent/s);
   assert.match(styles, /\.wordmark\s*\{[^}]*overflow:\s*hidden/s);
+  assert.match(styles, /\.wordmark--header/);
   assert.match(styles, /\.wordmark--footer/);
   assert.match(styles, /\.wordmark__image\s*\{[^}]*object-fit:\s*contain/s);
 });
 
-test('navbar uses a text-only KaalKrit brand treatment while the official logo remains shared elsewhere', () => {
+test('navbar uses the approved logo image and a compact direct route set', () => {
   const header = readFileSync('components/layout/SiteHeader.tsx', 'utf8');
 
-  assert.match(header, /site-header__brand-soft">Kaal<\/span><span className="site-header__brand-accent">Krit/);
-  assert.doesNotMatch(header, /<Wordmark/);
+  assert.match(header, /<Wordmark priority variant="header" \/>/);
+  assert.doesNotMatch(header, /site-header__brand-soft|site-header__brand-accent/);
+  assert.deepEqual(primaryNav, [
+    { label: 'Work', href: '/projects' },
+    { label: 'Team', href: '/team' },
+    { label: 'Journey', href: '/journey' },
+    { label: 'Contact', href: '/contact' },
+  ]);
 });

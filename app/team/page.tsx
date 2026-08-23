@@ -18,7 +18,7 @@ export const metadata = pageMetadata({
 export default function TeamPage() {
   return (
     <>
-      <PageHeader eyebrow="Team" heading="A multidisciplinary engineering practice." lede="KAALKRIT brings together students working across autonomous systems, robotics, embedded systems, AI, computer vision, electronics, mechanical design, and software." meta={['Roster status: awaiting verified profiles']} />
+      <PageHeader eyebrow="Team" heading="A multidisciplinary engineering practice." lede="KAALKRIT brings together students working across autonomous systems, robotics, embedded systems, AI, computer vision, electronics, mechanical design, and software." meta={['Roster source: Team KAALKRIT Overview', 'Portraits and profile links awaiting approved assets']} />
       <section className="pb-[var(--k-section-y)]" aria-labelledby="team-roster-heading">
         <div className="k-container">
           <h2 id="team-roster-heading" className="sr-only">KAALKRIT team roster</h2>

@@ -2,16 +2,123 @@ import type { TeamMember, DivisionId } from '@/lib/types';
 import { domainGroups } from './domains';
 
 /**
- * Documented gap G1: the source documentation names no team member, role,
- * leadership position, faculty member or mentor. Nothing is inferred and
- * nothing is placeholdered.
- *
- * Add entries here and the roster renders, /team joins the navigation and
- * the sitemap, and Person structured data is emitted — no other change is
- * required. The TeamMember interface doubles as the collection form:
- * one field per line, filled in by each member.
+ * Public roster from "Team KAALKRIT — Project & Team Overview".
+ * The PDF labels some LinkedIn profiles, but does not provide actual URLs;
+ * no placeholder links are added. Portraits remain absent until approved
+ * images and consent records are supplied.
  */
-export const teamMembers: TeamMember[] = [];
+export const teamMembers: TeamMember[] = [
+  {
+    slug: 'rajeev-tiwari',
+    name: 'Rajeev Tiwari',
+    role: 'Technical Lead — Development & Engineering',
+    division: 'silicon',
+    tier: 'leadership',
+    responsibilities: ['Development', 'Engineering'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'ankur-pathak',
+    name: 'Ankur Pathak',
+    role: 'Business, Marketing & Outreach Lead',
+    division: 'method',
+    tier: 'leadership',
+    responsibilities: ['Business', 'Marketing', 'Outreach'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'shantanu-pawade',
+    name: 'Shantanu Pawade',
+    role: 'Design Support',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Design support'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'manas-yadu',
+    name: 'Manas Yadu',
+    role: 'Technical Team',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Technical team'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'raunit-singh',
+    name: 'Raunit Singh',
+    role: 'Technical Team',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Technical team'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'shubham-kumar',
+    name: 'Shubham Kumar',
+    role: 'Sponsorship & Social Media',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Sponsorship', 'Social media'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'aditi-kiran',
+    name: 'Aditi Kiran',
+    role: 'Content Planning & Management',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Content planning', 'Content management'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'hardhik-bhatia',
+    name: 'Hardhik Bhatia',
+    role: 'Video Production & Editing',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Video production', 'Editing'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'suraj-verma',
+    name: 'Suraj Verma',
+    role: 'Design & Creatives',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Design', 'Creatives'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+  {
+    slug: 'kaavya-sharma',
+    name: 'Kaavya Sharma',
+    role: 'Design & Creatives',
+    division: 'method',
+    tier: 'core',
+    responsibilities: ['Design', 'Creatives'],
+    skills: [],
+    projects: [],
+    contentStatus: 'ready',
+  },
+];
 
 export const hasRoster = teamMembers.length > 0;
 

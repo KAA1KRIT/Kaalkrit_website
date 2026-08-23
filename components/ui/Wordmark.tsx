@@ -18,14 +18,13 @@ export function Wordmark({
   return (
     <span className={`wordmark ${variantClass[variant]} ${className}`.trim()}>
       <Image
-        src="/logo_favicon.jpg"
+        src="/images/approved/kaalkrit-emblem.png"
         alt="KAALKRIT"
-        width={3020}
-        height={1392}
+        width={220}
+        height={220}
         priority={priority}
-        // The official mark is intentionally stable-named and may be replaced
-        // during brand updates. Serve it directly so Next's image optimizer
-        // cannot retain a stale derivative for the old artwork.
+        // The approved mark may be updated outside Next's generated image
+        // cache, so serve it directly.
         unoptimized
         className="wordmark__image"
       />
