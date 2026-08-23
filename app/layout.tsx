@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Crimson_Text, Mukta_Vaani, Palanquin_Dark } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -6,6 +7,30 @@ import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { ANALYTICS_ENABLED, SITE } from "@/content/site";
 import { organizationSchema, serializeJsonLd, websiteSchema } from "@/lib/seo";
 import "@/styles/globals.css";
+
+const editorialFont = Crimson_Text({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  preload: false,
+  variable: "--font-editorial",
+});
+
+const interfaceFont = Palanquin_Dark({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  variable: "--font-interface",
+});
+
+const bodyFont = Mukta_Vaani({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  variable: "--font-body-kaalkrit",
+});
 
 export const metadata: Metadata = {
   ...(SITE.url ? { metadataBase: new URL(SITE.url) } : {}),
@@ -32,7 +57,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>
+      <body
+        className={`${editorialFont.variable} ${interfaceFont.variable} ${bodyFont.variable}`}
+      >
         <SmoothScrollProvider>
           <a
             href="#main"

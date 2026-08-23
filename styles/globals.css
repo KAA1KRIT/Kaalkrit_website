@@ -63,7 +63,7 @@ body {
   overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body), Georgia, serif;
+  font-family: var(--font-body-kaalkrit), Georgia, serif;
   font-size: var(--k-t-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -150,7 +150,7 @@ svg {
   scroll-margin-top: 112px;
 }
 .k-display {
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 0.98;
@@ -231,7 +231,7 @@ svg {
   border-radius: var(--k-radius-pill);
   background: transparent;
   color: var(--foreground);
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.015em;
@@ -302,6 +302,32 @@ svg {
 .button--icon {
   width: 44px;
   padding: 0;
+}
+.pointer-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.pointer-button::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  opacity: 0;
+  background: radial-gradient(
+    120px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+    color-mix(in srgb, var(--primary-foreground) 28%, transparent),
+    transparent 70%
+  );
+  transition: opacity var(--k-dur) var(--k-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .pointer-button[data-pointer-active="true"]::before {
+    opacity: 1;
+  }
+  .pointer-button[data-pointer-active="true"] {
+    transform: translate3d(0, -2px, 0);
+  }
 }
 .text-link {
   display: inline-flex;
@@ -392,7 +418,7 @@ svg {
   border: 0;
   background: transparent;
   color: var(--navigation-foreground);
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -421,7 +447,7 @@ svg {
   border: 0;
   background: transparent;
   color: var(--navigation-foreground);
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -498,7 +524,7 @@ svg {
   align-items: center;
   border-bottom: 1px solid var(--border);
   color: var(--foreground);
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: 1.45rem;
   font-weight: 600;
   text-decoration: none;
@@ -657,7 +683,7 @@ svg {
 .scroll-expand-hero__compact-brand {
   margin: 0;
   color: var(--card);
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: clamp(1.4rem, 1.2rem + 1.25vw, 2.1rem);
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -685,7 +711,7 @@ svg {
   width: 100%;
   margin: 0;
   color: var(--card);
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-weight: 700;
   letter-spacing: -0.055em;
   line-height: 0.88;
@@ -794,7 +820,7 @@ svg {
 .partnership-card h2 {
   max-width: 14ch;
   margin: 0;
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: var(--k-t-h2);
   font-weight: 700;
   letter-spacing: -0.04em;
@@ -814,7 +840,7 @@ svg {
 }
 .masked-heading {
   margin: 28px 0 52px;
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: clamp(3.3rem, 10vw, 9.4rem);
   font-weight: 700;
   letter-spacing: -0.05em;
@@ -858,7 +884,7 @@ svg {
   gap: 9px;
   padding: 18px 20px;
   border-right: 1px solid var(--border);
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -907,7 +933,7 @@ svg {
   list-style: none;
 }
 .capability-index-warm li {
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -935,7 +961,7 @@ svg {
 }
 .project-editorial__copy h3 {
   margin: 14px 0 0;
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: clamp(2rem, 3.6vw, 3.9rem);
   font-weight: 700;
   letter-spacing: -0.04em;
@@ -964,7 +990,7 @@ svg {
   border-bottom: 1px solid var(--foreground);
 }
 .achievement-lines strong {
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.035em;
@@ -1021,7 +1047,7 @@ svg {
 .section-header h2 {
   max-width: 14ch;
   margin: 0;
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: var(--k-t-h2);
   letter-spacing: -0.04em;
   line-height: 0.96;
@@ -1148,7 +1174,7 @@ svg {
 .system-state h1 {
   max-width: 12ch;
   margin: 18px 0 0;
-  font-family: var(--font-display), Arial, sans-serif;
+  font-family: var(--font-interface), Arial, sans-serif;
   font-size: var(--k-t-hero);
   letter-spacing: -0.04em;
   line-height: 0.91;
@@ -1601,6 +1627,44 @@ body {
     ),
     linear-gradient(135deg, #05070c 0%, #0a1020 58%, #05070c 100%);
 }
+.hero-visual,
+.hero-visual__fallback,
+.gradient-waves {
+  position: absolute;
+  inset: 0;
+}
+.hero-visual {
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.62;
+  background:
+    radial-gradient(
+      circle at 68% 32%,
+      color-mix(in srgb, var(--primary) 18%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(155deg, var(--background), var(--accent), var(--background));
+}
+.hero-visual__fallback,
+.gradient-waves[data-fallback="true"] {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 15%,
+      color-mix(in srgb, var(--primary) 16%, transparent) 56%,
+      var(--background)
+    ),
+    radial-gradient(
+      ellipse 74% 42% at 72% 80%,
+      color-mix(in srgb, var(--primary) 32%, transparent),
+      transparent 72%
+    );
+}
+.gradient-waves__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .engineering-hero::before,
 .engineering-hero::after {
   position: absolute;
@@ -1673,18 +1737,24 @@ body {
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-bottom: clamp(36px, 8vw, 96px);
+  margin-bottom: clamp(28px, 5vw, 64px);
 }
 .engineering-hero h1 {
-  max-width: 13ch;
+  max-width: 14ch;
   margin: 20px 0 0;
   color: var(--foreground);
-  font-family: var(--font-sans);
-  font-size: clamp(3.3rem, 7.5vw, 8.2rem);
+  font-family: var(--font-editorial);
+  font-size: clamp(3.1rem, 6vw, 6.8rem);
   font-weight: 700;
   letter-spacing: -0.075em;
   line-height: 0.88;
   text-wrap: balance;
+}
+.engineering-hero__depth-text {
+  display: block;
+  width: fit-content;
+  margin-top: 18px;
+  max-width: 100%;
 }
 .engineering-hero__lede {
   max-width: 62ch;
@@ -1735,7 +1805,7 @@ body {
 .team-page-grid h2 {
   margin: 0;
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-editorial);
   font-size: var(--k-t-h2);
   font-weight: 650;
   letter-spacing: -0.055em;
@@ -1812,6 +1882,28 @@ body {
 .project-index {
   margin-top: 64px;
   border-top: 1px solid var(--border);
+}
+.project-index--hierarchical {
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(280px, 0.84fr);
+  gap: 0 48px;
+}
+.project-index--hierarchical > .project-index__item {
+  grid-row: span 1;
+}
+.project-index__item--featured {
+  min-height: 100%;
+  padding-right: 40px;
+  border-right: 1px solid var(--border);
+}
+.project-index__item--featured h3 {
+  font-family: var(--font-editorial);
+  font-size: clamp(2.6rem, 4vw, 4.7rem);
+  line-height: 0.9;
+}
+.project-index__supporting .project-index__item {
+  grid-template-columns: 82px minmax(0, 1fr);
+  padding: 24px 0;
 }
 .project-index__item {
   display: grid;
@@ -1939,7 +2031,7 @@ body {
   color: var(--foreground);
 }
 .closing-mark {
-  padding: 22px 0;
+  padding: clamp(52px, 8vw, 112px) 0;
   background: #030509;
   color: var(--accent-foreground);
   font: 0.7rem var(--font-mono);
@@ -1948,6 +2040,122 @@ body {
 }
 .closing-mark p {
   margin: 0;
+}
+.closing-mark .technical-label {
+  margin-bottom: 24px;
+}
+.closing-mark .depth-text {
+  color: var(--foreground);
+}
+.closing-mark > .k-container > p:last-child {
+  margin-top: 12px;
+  color: var(--accent-foreground);
+}
+.depth-text {
+  display: inline-block;
+  perspective: var(--depth-text-perspective);
+  perspective-origin: 50% 48%;
+  isolation: isolate;
+}
+.depth-text__stage {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.depth-text__layer,
+.depth-text__face {
+  grid-area: 1 / 1;
+  display: inline-block;
+  font-family: var(--font-interface);
+  font-size: var(--depth-text-font-size);
+  font-weight: var(--depth-text-font-weight);
+  line-height: 0.86;
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+  user-select: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+.depth-text__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  filter: saturate(0.95) brightness(0.92);
+}
+.depth-text__face {
+  position: relative;
+  color: var(--depth-text-face-color);
+  text-shadow: var(--depth-text-shadow);
+  transform: translateZ(0.6px);
+}
+.loader-four {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent-foreground);
+  font-family: var(--font-interface);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.route-loading {
+  display: grid;
+  min-height: 42vh;
+  align-items: center;
+  padding-block: var(--k-section-y);
+}
+.route-loading .loader-four {
+  margin-bottom: var(--k-5);
+}
+.loader-four__frame {
+  display: grid;
+  grid-template-columns: repeat(4, 5px);
+  gap: 4px;
+  align-items: end;
+  height: 26px;
+}
+.loader-four__frame i {
+  display: block;
+  width: 5px;
+  height: 8px;
+  background: var(--primary);
+  animation: loader-four-pulse 960ms var(--k-ease) infinite alternate;
+}
+.loader-four__frame i:nth-child(2) {
+  animation-delay: 120ms;
+}
+.loader-four__frame i:nth-child(3) {
+  animation-delay: 240ms;
+}
+.loader-four__frame i:nth-child(4) {
+  animation-delay: 360ms;
+}
+@keyframes loader-four-pulse {
+  to {
+    height: 24px;
+    background: var(--accent-foreground);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .depth-text__stage {
+    will-change: auto;
+  }
+  .hero-visual {
+    opacity: 0.42;
+  }
+  .gradient-waves__canvas {
+    display: none;
+  }
+  .loader-four__frame i {
+    animation: none;
+    height: 16px;
+  }
+  .pointer-button[data-pointer-active="true"] {
+    transform: none;
+  }
 }
 .project-brief-list {
   display: grid;
@@ -2130,6 +2338,16 @@ body {
   }
   .project-index {
     margin-top: 42px;
+  }
+  .project-index--hierarchical {
+    grid-template-columns: 1fr;
+  }
+  .project-index__item--featured {
+    padding-right: 0;
+    border-right: 0;
+  }
+  .project-index__supporting .project-index__item {
+    grid-template-columns: 1fr;
   }
   .project-index__item,
   .project-brief {

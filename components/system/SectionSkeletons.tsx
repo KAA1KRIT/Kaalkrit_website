@@ -1,3 +1,5 @@
+import { LoaderFour } from "@/components/ui/loader";
+
 export function RouteLoadingExperience({ label }: { label: string }) {
   return (
     <section
@@ -5,10 +7,8 @@ export function RouteLoadingExperience({ label }: { label: string }) {
       aria-busy="true"
       aria-label={`Loading ${label}`}
     >
-      <span className="sr-only" role="status">
-        Loading {label}
-      </span>
       <div className="public-container">
+        <LoaderFour label={`Loading ${label}`} />
         <div className="route-loading__eyebrow" />
         <div className="route-loading__title" />
         <div className="route-loading__body" />

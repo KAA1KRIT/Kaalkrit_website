@@ -135,14 +135,50 @@ test("smooth scrolling uses the current Lenis React provider", () => {
   assert.match(provider, /respectReducedMotion: true/);
   assert.match(provider, /scrollTo\(0, \{ immediate: true \}\)/);
   assert.match(layout, /<SmoothScrollProvider>/);
-  assert.match(hero, /Autonomous engineering/);
+  assert.match(hero, /Autonomous systems/);
   assert.doesNotMatch(provider, /@studio-freight/);
 });
 
-test("the hero uses the lightweight engineering identity rather than the retired WebGL experiment", () => {
+test("the hero uses the current engineering visual components", () => {
   assert.equal(existsSync("components/hero/EngineeringHero.tsx"), true);
-  assert.equal(existsSync("components/hero/GradientWaves.tsx"), false);
+  assert.equal(existsSync("components/hero/GradientWaves.tsx"), true);
   assert.equal(existsSync("components/hero/ScrollExpandHero.tsx"), false);
+});
+
+test("the final visual system uses the approved typography and progressive motion", () => {
+  const layout = readFileSync("app/layout.tsx", "utf8");
+  const hero = readFileSync("components/hero/EngineeringHero.tsx", "utf8");
+  const waves = readFileSync("components/hero/GradientWaves.tsx", "utf8");
+  const depth = readFileSync("components/ui/DepthText.tsx", "utf8");
+
+  assert.match(layout, /Crimson_Text/);
+  assert.match(layout, /Palanquin_Dark/);
+  assert.match(layout, /Mukta_Vaani/);
+  assert.match(hero, /DepthText/);
+  assert.match(hero, /HeroVisual/);
+  assert.match(waves, /IntersectionObserver/);
+  assert.match(waves, /visibilitychange/);
+  assert.match(depth, /prefers-reduced-motion/);
+});
+
+test("loader and pointer-responsive button primitives remain reusable", () => {
+  const loader = readFileSync("components/ui/loader.tsx", "utf8");
+  const loading = readFileSync(
+    "components/system/LoadingExperience.tsx",
+    "utf8",
+  );
+  const routeLoading = readFileSync(
+    "components/system/SectionSkeletons.tsx",
+    "utf8",
+  );
+  const button = readFileSync("components/ui/Button.tsx", "utf8");
+
+  assert.ok(existsSync("components/loader-four-demo.tsx"));
+  assert.match(loader, /role="status"/);
+  assert.match(loading, /<LoaderFour/);
+  assert.match(routeLoading, /<LoaderFour/);
+  assert.match(button, /dataset\.pointerActive/);
+  assert.match(button, /hover: hover/);
 });
 
 test("team and legal routes have verified production content", () => {

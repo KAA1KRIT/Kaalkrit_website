@@ -1,17 +1,15 @@
+import { LoaderFour } from "@/components/ui/loader";
+
 export function LoadingExperience() {
   return (
     <section
       className="loading-experience"
       aria-label="Loading Team KAALKRIT"
       aria-busy="true"
-      role="status"
     >
       <div className="public-container">
-        <p className="eyebrow">Team KAALKRIT / loading</p>
-        <span className="sr-only">Loading page content</span>
-        <div className="loading-line loading-line--wide" />
-        <div className="loading-line" />
-        <div className="loading-line loading-line--short" />
+        <p className="eyebrow">Team KAALKRIT / system status</p>
+        <LoaderFour label="Loading page content" />
       </div>
     </section>
   );
