@@ -1,5 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="[APPLE ICON PLACEHOLDER]">
-  <rect width="512" height="512" fill="#ffffff"/>
-  <rect x="24" y="24" width="464" height="464" fill="none" stroke="#2b2b2b" stroke-width="12" stroke-dasharray="24 18"/>
-  <text x="256" y="256" fill="#2b2b2b" font-family="sans-serif" font-size="40" text-anchor="middle">[ICON PLACEHOLDER]</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="KAALKRIT">
+  <rect width="512" height="512" fill="#151515"/>
+  <path d="M96 96h72v132l108-132h92L236 252l140 164h-96L168 280v136H96V96Z" fill="#f3bc16"/>
 </svg>

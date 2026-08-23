@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { absoluteUrl, SITE, SOCIAL_LINKS } from "@/content/site";
+import { absoluteUrl, SITE } from "@/content/site";
 import { publicProjects } from "@/content/projects";
-import { teamMembers } from "@/content/team";
 
 const TITLE_SUFFIX = "Team KAALKRIT";
 
@@ -17,7 +16,7 @@ export function pageMetadata({
   path: string;
   /** Use for the homepage, where the suffix would be redundant. */
   fullTitle?: string;
-  /** Exclude content-incomplete routes from search results. */
+  /** Exclude a route from search results when needed. */
   index?: boolean;
 }): Metadata {
   const resolved = fullTitle ?? `${title} — ${TITLE_SUFFIX}`;
@@ -29,7 +28,7 @@ export function pageMetadata({
     // template must not append it a second time.
     title: { absolute: resolved },
     description,
-    robots: { index, follow: true },
+    robots: { index: index && Boolean(SITE.url), follow: true },
     ...(url ? { alternates: { canonical: url } } : {}),
     openGraph: {
       title: resolved,
@@ -64,7 +63,7 @@ export function serializeJsonLd(value: unknown): string {
   return JSON.stringify(value).replaceAll("<", "\\u003c");
 }
 
-/** Organization schema with the two verified social profiles. */
+/** Organization schema using only verified public facts. */
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -72,7 +71,6 @@ export function organizationSchema() {
     name: SITE.name,
     alternateName: SITE.legalName,
     description: SITE.description,
-    email: SITE.email,
     ...(SITE.url ? { url: SITE.url } : {}),
     foundingDate: String(SITE.founded),
     parentOrganization: {
@@ -88,9 +86,6 @@ export function organizationSchema() {
         addressCountry: "IN",
       },
     },
-    ...(SOCIAL_LINKS.length > 0
-      ? { sameAs: SOCIAL_LINKS.map((link) => link.href) }
-      : {}),
   };
 }
 
@@ -120,28 +115,6 @@ export function projectsSchema() {
         creator: { "@type": "Organization", name: SITE.name },
         ...(absoluteUrl(`/projects/${project.slug}`)
           ? { url: absoluteUrl(`/projects/${project.slug}`) }
-          : {}),
-      },
-    })),
-  };
-}
-
-/** Emits nothing while the roster is empty (G1). */
-export function teamSchema() {
-  if (teamMembers.length === 0) return null;
-  return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: teamMembers.map((member, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Person",
-        name: member.name,
-        jobTitle: member.role,
-        worksFor: { "@type": "Organization", name: SITE.name },
-        ...(member.links && member.links.length > 0
-          ? { sameAs: member.links.map((link) => link.href) }
           : {}),
       },
     })),

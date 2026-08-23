@@ -1,75 +1,112 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
-import { galleryItems, readyGalleryItems } from "../content/gallery.ts";
-import { footerNav, primaryNav, sectionNav } from "../content/navigation.ts";
-import { SITE, SOCIAL_LINKS } from "../content/site.ts";
+import { footerNav, primaryNav } from "../content/navigation.ts";
+import { publicProjects } from "../content/projects.ts";
+import { SITE } from "../content/site.ts";
 
-test("site identity is populated while contact values remain placeholders", () => {
+const publicSourceRoots = ["app", "components", "content", "lib"];
+const forbiddenPublicText = new RegExp(
+  [
+    "place" + "holder",
+    "lorem" + " ipsum",
+    "\\bTO" + "DO\\b",
+    "\\bTB" + "D\\b",
+    "coming" + " soon",
+    "under" + " construction",
+    "replace" + " this",
+    "add" + " content",
+    "\\.in" + "valid",
+    "example" + "\\.com",
+  ].join("|"),
+  "i",
+);
+
+function sourceFiles(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? sourceFiles(path) : [path];
+  });
+}
+
+test("public source contains no unfinished or demo copy", () => {
+  for (const root of publicSourceRoots) {
+    for (const file of sourceFiles(root).filter((path) =>
+      /\.(?:ts|tsx|svg)$/.test(path),
+    )) {
+      assert.doesNotMatch(
+        readFileSync(file, "utf8"),
+        forbiddenPublicText,
+        file,
+      );
+    }
+  }
+});
+
+test("identity is factual and does not publish an unverified contact channel", () => {
   assert.equal(SITE.name, "Team KAALKRIT");
+  assert.equal(SITE.parentShortName, "Sir MVIT");
+  assert.equal(SITE.location, "Bengaluru");
   assert.equal(SITE.founded, 2024);
-  assert.match(SITE.email, /^\[EMAIL PLACEHOLDER\]$/);
-  assert.ok(SOCIAL_LINKS.every((link) => link.label.includes("PLACEHOLDER")));
+  assert.equal("email" in SITE, false);
+  assert.equal("instagram" in SITE, false);
+  assert.equal("x" in SITE, false);
 });
 
-test("navigation retains only local routes and standard labels", () => {
+test("metadata waits to permit indexing until a canonical origin is configured", () => {
+  const seo = readFileSync("lib/seo.ts", "utf8");
+  assert.match(seo, /index: index && Boolean\(SITE\.url\)/);
+});
+
+test("navigation exposes only substantive public routes", () => {
   assert.deepEqual(
-    primaryNav.map(({ label }) => label),
-    ["Projects", "Team", "Journey", "Contact"],
+    primaryNav.map(({ label, href }) => [label, href]),
+    [
+      ["Projects", "/projects"],
+      ["Journey", "/journey"],
+      ["Partners", "/partners"],
+    ],
   );
-  for (const { href } of [...primaryNav, ...footerNav, ...sectionNav]) {
-    assert.ok(href.startsWith("/"));
-    if (href.includes("#")) continue;
-    assert.ok(existsSync(`app${href}/page.tsx`), `Missing route for ${href}`);
+  assert.deepEqual(
+    footerNav.map(({ label, href }) => [label, href]),
+    [
+      ["Home", "/"],
+      ["Projects", "/projects"],
+      ["Journey", "/journey"],
+      ["Partners", "/partners"],
+    ],
+  );
+});
+
+test("published projects carry complete supported content and only approved local media", () => {
+  assert.equal(publicProjects.length, 5);
+  for (const project of publicProjects) {
+    assert.ok(project.title.trim());
+    assert.ok(project.summary.trim());
+    assert.ok(project.problem.trim());
+    assert.ok(project.significance.trim());
+    assert.ok(project.capabilities.length > 0);
+    if (project.media) {
+      assert.match(project.media.src, /^\/images\/approved\//);
+      assert.ok(existsSync(`public${project.media.src}`));
+      assert.ok(project.media.alt.trim());
+    }
   }
 });
 
-test("unprovided individual roster details remain placeholders", () => {
-  const content = ["team"]
-    .map((name) => readFileSync(`content/${name}.ts`, "utf8"))
-    .join("\n");
-  assert.doesNotMatch(content, /Rajeev Tiwari|Ankur Pathak/i);
-  assert.match(content, /\[TEAM MEMBER NAME PLACEHOLDER \$\{index \+ 1\}\]/);
-});
-
-test("gallery publication gate still rejects incomplete and external media", () => {
-  const base = {
-    id: "approved",
-    status: "ready",
-    kind: "image",
-    src: "/images/placeholder.svg",
-    alt: "[IMAGE ALT PLACEHOLDER]",
-    width: 1600,
-    height: 1200,
-    permissionConfirmed: true,
-  };
-  assert.deepEqual(
-    readyGalleryItems([
-      base,
-      { ...base, id: "external", src: "https://example.com/image.jpg" },
-    ]).map(({ id }) => id),
-    ["approved"],
-  );
-});
-
-test("approved NIDAR media is locally hosted, dimensioned, and accessible", () => {
-  assert.equal(galleryItems.length, 4);
-  for (const item of galleryItems) {
-    assert.ok(item.src?.startsWith("/images/approved/"));
-    assert.ok(item.width && item.height);
-    assert.ok(item.alt.length > 0);
-    assert.equal(item.permissionConfirmed, true);
+test("brand and error experiences use production-safe text assets", () => {
+  for (const file of [
+    "app/icon.svg",
+    "app/apple-icon.svg",
+    "app/opengraph-image.svg",
+    "components/ui/Wordmark.tsx",
+    "components/system/NotFoundExperience.tsx",
+    "components/system/GlobalErrorExperience.tsx",
+  ]) {
+    assert.ok(existsSync(file));
+    assert.doesNotMatch(readFileSync(file, "utf8"), forbiddenPublicText, file);
   }
-});
-
-test("brand raster assets are replaced with SVG placeholders", () => {
-  assert.ok(existsSync("app/icon.svg"));
-  assert.ok(existsSync("app/apple-icon.svg"));
-  assert.ok(!existsSync("app/icon.jpg"));
-  assert.match(
-    readFileSync("components/ui/Wordmark.tsx", "utf8"),
-    /\[LOGO PLACEHOLDER\]/,
-  );
 });
 
 test("smooth scrolling uses the current Lenis React provider", () => {
@@ -87,4 +124,22 @@ test("smooth scrolling uses the current Lenis React provider", () => {
   assert.match(layout, /<SmoothScrollProvider>/);
   assert.match(hero, /useLenis/);
   assert.doesNotMatch(provider, /@studio-freight/);
+});
+
+test("hero cleanup does not deliberately lose the WebGL context", () => {
+  const waves = readFileSync("components/hero/GradientWaves.tsx", "utf8");
+
+  assert.doesNotMatch(waves, /WEBGL_lose_context/);
+});
+
+test("unpublished legacy routes are not retained as empty page modules", () => {
+  for (const path of [
+    "app/team/page.tsx",
+    "app/contact/page.tsx",
+    "app/privacy/page.tsx",
+    "app/terms/page.tsx",
+    "app/accessibility/page.tsx",
+  ]) {
+    assert.equal(existsSync(path), false, path);
+  }
 });

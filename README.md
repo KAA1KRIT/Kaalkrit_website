@@ -1,6 +1,6 @@
-# Website repository
+# Team KAALKRIT website
 
-Next.js App Router website template with content held in `content/` and clearly labelled placeholders ready for replacement.
+Public Next.js App Router website for Team KAALKRIT, the drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru.
 
 ## Requirements
 
@@ -15,7 +15,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS origin when deploying. Set `NEXT_PUBLIC_ENABLE_ANALYTICS=true` only when analytics is intentionally configured and the related legal content is approved.
+Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS origin when deploying. This enables canonical metadata, Open Graph URLs, `robots.txt`, and `sitemap.xml`. Set `NEXT_PUBLIC_ENABLE_ANALYTICS=true` only when analytics is intentionally configured for the deployment.
 
 ## Commands
 
@@ -34,7 +34,7 @@ npm run start
 ```text
 app/          App Router pages and metadata routes
 components/   Shared layout, UI, animation, and feature components
-content/      Typed content schemas and placeholder values
+content/      Typed editorial content and project data
 lib/          Shared types and SEO helpers
 public/       Publishable static assets
 styles/       Theme tokens and global CSS
