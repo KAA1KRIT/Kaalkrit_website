@@ -27,6 +27,7 @@ npm run format:check
 npm test
 npm run build
 npm run start
+npm run e2e
 ```
 
 ## Content and brand architecture
@@ -39,6 +40,7 @@ lib/          Shared types and SEO helpers
 public/       Publishable static assets
 styles/       Theme tokens and global CSS
 tests/        Content and route-integrity tests
+tests/e2e/    Production-server Playwright release checks
 ```
 
 ## Brand and assets
@@ -62,3 +64,7 @@ The public site preserves its dark engineering system: near-black surfaces, off-
 Before public launch, provide a real HTTPS `NEXT_PUBLIC_SITE_URL`. It enables canonical metadata, Open Graph URLs, indexing, robots, and the sitemap. Add a verified public contact method only when it is approved; the site intentionally does not invent one. If analytics is enabled, review the Privacy page against the deployed analytics configuration.
 
 Do not commit `.env.local`, credentials, raw media, or unapproved assets.
+
+`npm run e2e` builds the production application and runs Playwright against a
+temporary production server. Install the Chromium browser once with
+`npx playwright install chromium` when it is not already available.
