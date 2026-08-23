@@ -8,7 +8,6 @@ export function EngineeringHero() {
   return (
     <section className="engineering-hero" aria-labelledby="hero-heading">
       <HeroVisual />
-      <div className="engineering-hero__grid" aria-hidden="true" />
       <div className="k-container engineering-hero__content">
         <div className="engineering-hero__identity">
           <Wordmark variant="system" priority />
