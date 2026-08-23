@@ -49,7 +49,7 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
       ref={rootRef}
       className="registry-depth-carousel"
       tabIndex={0}
-      aria-label="[MEDIA GALLERY ARIA LABEL PLACEHOLDER]"
+      aria-label="Team KAALKRIT NIDAR 2026 media gallery"
       onKeyDown={(event) => {
         if (event.key === "ArrowLeft") {
           event.preventDefault();

@@ -63,7 +63,7 @@ export default function ProjectsPage() {
             Build With Hardware
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            Team KAALKRIT's flagship engineering platform designed to make
+            Team KAALKRIT’s flagship engineering platform designed to make
             hardware innovation more accessible.
           </p>
           <div className="mt-[var(--k-8)]">

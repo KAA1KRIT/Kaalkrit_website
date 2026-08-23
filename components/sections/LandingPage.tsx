@@ -124,7 +124,7 @@ export function LandingPage() {
                 Intelligent engineering solutions in action.
               </h2>
               <p className="editorial-lede">
-                Explore Team KAALKRIT's autonomous aerial systems, robotics, and
+                Explore Team KAALKRIT’s autonomous aerial systems, robotics, and
                 engineering platform projects.
               </p>
             </div>

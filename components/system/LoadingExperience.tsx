@@ -2,12 +2,12 @@ export function LoadingExperience() {
   return (
     <section
       className="loading-experience"
-      aria-label="[LOADING ARIA LABEL PLACEHOLDER]"
+      aria-label="Loading Team KAALKRIT"
       aria-busy="true"
       role="status"
     >
       <div className="public-container">
-        <p className="eyebrow">[LOADING LABEL PLACEHOLDER]</p>
+        <p className="eyebrow">Team KAALKRIT / loading</p>
         <span className="sr-only">Loading page content</span>
         <div className="loading-line loading-line--wide" />
         <div className="loading-line" />

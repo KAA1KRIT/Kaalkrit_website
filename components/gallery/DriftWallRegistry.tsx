@@ -8,7 +8,7 @@ export function DriftWallRegistry({ items }: { items: GalleryItem[] }) {
   return (
     <div
       className="registry-drift-wall"
-      aria-label="[VISUAL ARCHIVE ARIA LABEL PLACEHOLDER]"
+      aria-label="Team KAALKRIT NIDAR 2026 visual archive"
     >
       {items.map((item) => (
         <figure key={item.id}>

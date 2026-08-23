@@ -51,7 +51,7 @@ export default function JourneyPage() {
               <p className="k-body">
                 At Team KAALKRIT, engineering is driven by curiosity,
                 innovation, integrity, and an unwavering pursuit of excellence.
-                We don't just imagine the future — we engineer it.
+                We don’t just imagine the future — we engineer it.
               </p>
               <div className="mt-[var(--k-6)] flex flex-col xs:flex-row gap-[var(--k-3)]">
                 <Button

@@ -109,7 +109,7 @@ export function projectsSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "[PROJECT LIST SCHEMA NAME PLACEHOLDER]",
+    name: "Team KAALKRIT projects",
     itemListElement: publicProjects.map((project, index) => ({
       "@type": "ListItem",
       position: index + 1,

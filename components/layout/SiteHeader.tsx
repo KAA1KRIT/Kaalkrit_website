@@ -41,7 +41,7 @@ export function SiteHeader() {
         <Link
           href="/"
           className="site-header__brand-link"
-          aria-label="[SITE NAME PLACEHOLDER] — [HOME LINK ARIA LABEL PLACEHOLDER]"
+          aria-label="Team KAALKRIT — home"
         >
           <Wordmark priority variant="header" />
         </Link>

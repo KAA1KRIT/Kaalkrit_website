@@ -14,8 +14,13 @@ export function SiteFooter() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Wordmark variant="footer" />
-            <p>[FOOTER ORGANIZATION DESCRIPTION PLACEHOLDER]</p>
-            <span>[FOOTER FOUNDING LABEL PLACEHOLDER] {SITE.founded}</span>
+            <p>
+              Team KAALKRIT is the official drone and robotics innovation team
+              of Sir M. Visvesvaraya Institute of Technology (Sir MVIT),
+              Bengaluru — building autonomous aerial systems, robotics, and
+              intelligent engineering solutions.
+            </p>
+            <span>Established {SITE.founded}</span>
             <TrackedLink
               href={mailto("[WEBSITE EMAIL SUBJECT PLACEHOLDER]")}
               className="footer-email"
@@ -91,7 +96,7 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="footer-endline">
-          <span>© {year} [FOOTER COPYRIGHT PLACEHOLDER]</span>
+          <span>© {year} Team KAALKRIT</span>
           <a href="#main" className="back-to-top">
             Back to top ↑
           </a>
