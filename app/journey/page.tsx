@@ -9,8 +9,9 @@ import { DriftWallGallery } from "@/components/gallery/DriftWallGallery";
 import { journeyGallery } from "@/content/gallery";
 
 export const metadata = pageMetadata({
-  title: "[JOURNEY PAGE TITLE PLACEHOLDER]",
-  description: "[JOURNEY META DESCRIPTION PLACEHOLDER]",
+  title: "Journey",
+  description:
+    "Discover Team KAALKRIT's vision, future scope, and commitment to intelligent engineering.",
   path: "/journey",
 });
 
@@ -18,11 +19,11 @@ export default function JourneyPage() {
   return (
     <>
       <PageHeader
-        eyebrow="[JOURNEY EYEBROW PLACEHOLDER]"
-        heading="[JOURNEY HEADLINE PLACEHOLDER]"
-        lede="[JOURNEY LEDE PLACEHOLDER]"
+        eyebrow="Journey"
+        heading="Engineering the Future Through Innovation, Autonomy, and Intelligent Systems."
+        lede="Discover Team KAALKRIT's vision, future scope, and commitment to intelligent engineering."
         meta={[
-          `[FOUNDED LABEL PLACEHOLDER] ${SITE.founded}`,
+          `Established ${SITE.founded}`,
           `${SITE.parentShortName}, ${SITE.location}`,
         ]}
       />
@@ -44,24 +45,28 @@ export default function JourneyPage() {
               id="journey-next"
               className="k-display md:col-span-5 text-[length:var(--k-t-h2)]"
             >
-              [JOURNEY CTA HEADLINE PLACEHOLDER]
+              Our Commitment
             </h2>
             <div className="md:col-span-6 md:col-start-7">
-              <p className="k-body">[JOURNEY CTA BODY COPY PLACEHOLDER]</p>
+              <p className="k-body">
+                At Team KAALKRIT, engineering is driven by curiosity,
+                innovation, integrity, and an unwavering pursuit of excellence.
+                We don't just imagine the future — we engineer it.
+              </p>
               <div className="mt-[var(--k-6)] flex flex-col xs:flex-row gap-[var(--k-3)]">
                 <Button
                   href="/projects"
                   variant="primary"
                   className="max-xs:w-full"
                 >
-                  [JOURNEY CTA PLACEHOLDER 1]
+                  Explore projects
                 </Button>
                 <Button
                   href="/#partnership"
                   variant="ghost"
                   trailing={<Arrow />}
                 >
-                  [JOURNEY CTA PLACEHOLDER 2]
+                  Partner with us
                 </Button>
               </div>
             </div>
@@ -79,10 +84,11 @@ export default function JourneyPage() {
             id="journey-archive-heading"
             className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]"
           >
-            [JOURNEY ARCHIVE HEADING PLACEHOLDER]
+            NIDAR 2026 Gallery
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            [JOURNEY ARCHIVE BODY COPY PLACEHOLDER]
+            Team KAALKRIT at the NIDAR 2026 National Innovation Challenge for
+            Drone Application and Research at Gautam Buddha University.
           </p>
           <div className="mt-[var(--k-7)]">
             <DriftWallGallery items={journeyGallery} />

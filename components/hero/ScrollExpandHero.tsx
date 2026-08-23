@@ -158,7 +158,9 @@ export function ScrollExpandHero() {
             <span className="scroll-expand-hero__visual-core" />
           </div>
           <div className="scroll-expand-hero__scrim" />
-          <p className="scroll-expand-hero__fact">[HERO FACT PLACEHOLDER]</p>
+          <p className="scroll-expand-hero__fact">
+            Team KAALKRIT · Sir MVIT, Bengaluru · 2024
+          </p>
         </div>
 
         <div className="scroll-expand-hero__blur-shell" aria-hidden="true">
@@ -181,12 +183,16 @@ export function ScrollExpandHero() {
             ref={compactContentRef}
             className="scroll-expand-hero__compact-content"
           >
-            <p className="eyebrow">[HERO EYEBROW PLACEHOLDER]</p>
+            <p className="eyebrow">
+              Official Drone and Robotics Innovation Team · Sir MVIT, Bengaluru
+            </p>
             <p className="scroll-expand-hero__compact-brand" aria-hidden="true">
-              [SITE NAME PLACEHOLDER]
+              Team KAALKRIT
             </p>
             <p className="scroll-expand-hero__compact-summary">
-              [HERO SUMMARY PLACEHOLDER]
+              Team KAALKRIT works at the intersection of hardware, software, and
+              artificial intelligence to transform innovative ideas into
+              intelligent engineering solutions.
             </p>
             <div className="scroll-expand-hero__actions">
               <TrackedLink
@@ -195,26 +201,35 @@ export function ScrollExpandHero() {
                 properties={{ placement: "hero" }}
                 className="button button--primary"
               >
-                [HERO CTA PLACEHOLDER] <span aria-hidden="true">↓</span>
+                Explore our work <span aria-hidden="true">↓</span>
               </TrackedLink>
             </div>
           </div>
           <div className="scroll-expand-hero__expanded-copy">
             <h1 id="hero-heading">
-              <span className="sr-only">[HERO SEO HEADLINE PLACEHOLDER]</span>
+              <span className="sr-only">
+                Engineering the Future Through Innovation, Autonomy, and
+                Intelligent Systems.
+              </span>
               <span className="scroll-expand-hero__title" aria-hidden="true">
                 <span className="scroll-expand-hero__title-brand">
-                  [SITE NAME PLACEHOLDER]
+                  Team KAALKRIT
                 </span>
                 <span className="scroll-expand-hero__title-tagline">
-                  [HERO TAGLINE PLACEHOLDER]
+                  Engineering the Future Through Innovation,
                   <br />
-                  [HERO TAGLINE CONTINUATION PLACEHOLDER]
+                  Autonomy, and Intelligent Systems.
                 </span>
               </span>
             </h1>
             <p className="scroll-expand-hero__summary">
-              [HERO EXPANDED SUMMARY PLACEHOLDER]
+              Team KAALKRIT works at the intersection of hardware, software, and
+              artificial intelligence to transform innovative ideas into
+              intelligent engineering solutions. From identifying real-world
+              challenges and conducting research to designing, prototyping,
+              manufacturing, programming, testing, and deploying complete
+              systems, our team manages the entire product development
+              lifecycle.
             </p>
             <div
               ref={expandedActionsRef}
@@ -226,7 +241,7 @@ export function ScrollExpandHero() {
                 properties={{ placement: "hero-expanded" }}
                 className="button button--primary"
               >
-                [HERO CTA PLACEHOLDER] <span aria-hidden="true">↓</span>
+                Explore our work <span aria-hidden="true">↓</span>
               </TrackedLink>
             </div>
           </div>
@@ -234,7 +249,7 @@ export function ScrollExpandHero() {
 
         <p className="scroll-expand-hero__cue" aria-hidden="true">
           <span />
-          [SCROLL CUE PLACEHOLDER]
+          Scroll to explore
         </p>
       </div>
     </section>

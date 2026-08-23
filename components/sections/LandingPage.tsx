@@ -17,10 +17,21 @@ export function LandingPage() {
         aria-labelledby="mission-heading"
       >
         <div className="public-container editorial-two-column">
-          <p className="eyebrow">[SECTION LABEL PLACEHOLDER 1]</p>
+          <p className="eyebrow">About Team KAALKRIT</p>
           <div>
-            <h2 id="mission-heading">[MISSION HEADLINE PLACEHOLDER]</h2>
-            <p className="editorial-lede">[MISSION BODY COPY PLACEHOLDER]</p>
+            <h2 id="mission-heading">
+              Engineering the Future Through Innovation, Autonomy, and
+              Intelligent Systems.
+            </h2>
+            <p className="editorial-lede">
+              Team KAALKRIT works at the intersection of hardware, software, and
+              artificial intelligence to transform innovative ideas into
+              intelligent engineering solutions. From identifying real-world
+              challenges and conducting research to designing, prototyping,
+              manufacturing, programming, testing, and deploying complete
+              systems, our team manages the entire product development
+              lifecycle.
+            </p>
           </div>
         </div>
       </section>
@@ -50,8 +61,10 @@ export function LandingPage() {
       >
         <div className="public-container">
           <div className="editorial-section__heading">
-            <p className="eyebrow">[SECTION LABEL PLACEHOLDER 3]</p>
-            <h2 id="lifecycle-heading">[LIFECYCLE HEADLINE PLACEHOLDER]</h2>
+            <p className="eyebrow">What We Do</p>
+            <h2 id="lifecycle-heading">
+              From innovative ideas to intelligent engineering solutions.
+            </h2>
           </div>
           <ol className="editorial-lifecycle">
             {lifecycleStages.map((stage, index) => (
@@ -70,13 +83,15 @@ export function LandingPage() {
       >
         <div className="public-container">
           <div className="editorial-two-column">
-            <p className="eyebrow">[SECTION LABEL PLACEHOLDER 4]</p>
+            <p className="eyebrow">Expertise Areas</p>
             <div>
               <h2 id="capabilities-heading">
-                [CAPABILITY HEADLINE PLACEHOLDER]
+                Hardware, software, and artificial intelligence.
               </h2>
               <p className="editorial-lede">
-                [CAPABILITY BODY COPY PLACEHOLDER]
+                Team KAALKRIT works at the intersection of hardware, software,
+                and artificial intelligence to transform innovative ideas into
+                intelligent engineering solutions.
               </p>
             </div>
           </div>
@@ -103,10 +118,15 @@ export function LandingPage() {
       >
         <div className="public-container">
           <div className="editorial-two-column projects-heading">
-            <p className="eyebrow">[SECTION LABEL PLACEHOLDER 5]</p>
+            <p className="eyebrow">Projects</p>
             <div>
-              <h2 id="projects-heading">[PROJECTS HEADLINE PLACEHOLDER]</h2>
-              <p className="editorial-lede">[PROJECTS BODY COPY PLACEHOLDER]</p>
+              <h2 id="projects-heading">
+                Intelligent engineering solutions in action.
+              </h2>
+              <p className="editorial-lede">
+                Explore Team KAALKRIT's autonomous aerial systems, robotics, and
+                engineering platform projects.
+              </p>
             </div>
           </div>
           <div className="project-editorial-list">
@@ -136,16 +156,14 @@ export function LandingPage() {
                       placement: "homepage",
                     }}
                   >
-                    [PROJECT LINK LABEL PLACEHOLDER]{" "}
-                    <span aria-hidden="true">→</span>
+                    View project details <span aria-hidden="true">→</span>
                   </TrackedLink>
                 </div>
               </article>
             ))}
           </div>
           <Link href="/projects" className="text-link">
-            [PROJECT INDEX LINK LABEL PLACEHOLDER]{" "}
-            <span aria-hidden="true">→</span>
+            View all projects <span aria-hidden="true">→</span>
           </Link>
         </div>
       </section>
