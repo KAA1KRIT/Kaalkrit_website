@@ -3,14 +3,11 @@
 import { Mesh, Program, Renderer, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
 
-type Detail = "low" | "medium" | "high";
-
 type GradientWavesProps = {
   horizonColor: string;
   waveColor: string;
   crestColor: string;
   speed?: number;
-  detail?: Detail;
   className?: string;
 };
 
@@ -19,50 +16,41 @@ in vec2 position;
 void main() { gl_Position = vec4(position, 0.0, 1.0); }
 `;
 
-// React Bits GradientWaves shader, adapted only to pause safely on reduced-motion,
-// low-power, hidden, and off-screen states.
+// React Bits GradientWaves, adapted to KAALKRIT's established dark engineering
+// palette and to pause safely on reduced-motion, low-power, hidden, and
+// off-screen states.
 const fragment = `#version 300 es
 precision highp float;
 uniform vec2 iResolution;
 uniform float iTime;
 uniform float uSpeed;
-uniform float uSteps;
 uniform vec3 uHorizonColor;
 uniform vec3 uWaveColor;
 uniform vec3 uCrestColor;
 out vec4 fragColor;
 
-float field(vec3 p, float time) {
-  float waveA = sin(p.x * .12 + time) * 2.1;
-  float waveB = sin(p.y * .18 - time * .73) * 1.55;
-  return p.z - (waveA + waveB + 4.9);
-}
-
-float march(vec3 ro, vec3 rd, float time) {
-  float distance = 0.;
-  for (int i = 0; i < 110; i++) {
-    if (float(i) >= uSteps) break;
-    float current = field(ro + rd * distance, time);
-    if (abs(current) < .08) break;
-    distance += current * .72;
-    if (distance > 120.) return 120.;
-  }
-  return distance;
+float waveLine(float x, float time) {
+  return .48
+    + sin(x * 4.3 + time) * .07
+    + sin(x * 9.4 - time * .68) * .022
+    + sin(x * 17.0 + time * .42) * .008;
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / iResolution.xy - .5;
-  uv.x *= iResolution.x / iResolution.y;
-  vec3 ro = vec3(0., 0., 28.);
-  vec3 rd = normalize(vec3(uv.x, -uv.y * .9, -1.1));
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  float aspect = iResolution.x / iResolution.y;
+  float x = (uv.x - .5) * aspect;
   float time = iTime * uSpeed;
-  float distance = march(ro, rd, time);
-  float fog = clamp(15. / max(distance, .001), 0., 1.);
-  vec3 point = ro + rd * distance;
-  float crest = clamp(point.z * .07 + .45, 0., 1.);
-  vec3 body = mix(uWaveColor, uCrestColor, crest);
-  vec3 color = mix(uHorizonColor, body, fog);
-  fragColor = vec4(color * fog, fog * .92);
+  float horizon = waveLine(x, time);
+  float depth = smoothstep(horizon - .03, horizon + .52, uv.y);
+  float crest = 1. - smoothstep(0., .035, abs(uv.y - horizon));
+  float ripple = sin((uv.y - horizon) * 54. - time * 1.8) * .5 + .5;
+  float rippleMask = smoothstep(horizon + .01, horizon + .27, uv.y);
+  vec3 body = mix(uWaveColor, uHorizonColor, depth * .52);
+  vec3 color = mix(uHorizonColor, body, smoothstep(horizon - .16, horizon + .22, uv.y));
+  color = mix(color, uCrestColor, crest * .42 + ripple * rippleMask * .06);
+  float vignette = smoothstep(1.18, .22, length(uv - vec2(.58, .48)));
+  fragColor = vec4(color * mix(.72, 1., vignette), .98);
 }
 `;
 
@@ -76,16 +64,11 @@ function toRgb(hex: string): [number, number, number] {
   ];
 }
 
-function steps(detail: Detail) {
-  return detail === "low" ? 36 : detail === "high" ? 92 : 64;
-}
-
 export default function GradientWaves({
   horizonColor,
   waveColor,
   crestColor,
   speed = 0.32,
-  detail = "medium",
   className = "",
 }: GradientWavesProps) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -93,6 +76,8 @@ export default function GradientWaves({
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    delete root.dataset.rendered;
+    delete root.dataset.fallback;
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -106,6 +91,7 @@ export default function GradientWaves({
     }
 
     let frame = 0;
+    let hasRendered = false;
     let visible = true;
     let pageVisible = !document.hidden;
     try {
@@ -127,7 +113,6 @@ export default function GradientWaves({
           iResolution: { value: new Float32Array([1, 1]) },
           iTime: { value: 0 },
           uSpeed: { value: speed },
-          uSteps: { value: steps(detail) },
           uHorizonColor: { value: new Float32Array(toRgb(horizonColor)) },
           uWaveColor: { value: new Float32Array(toRgb(waveColor)) },
           uCrestColor: { value: new Float32Array(toRgb(crestColor)) },
@@ -144,6 +129,10 @@ export default function GradientWaves({
       const render = (time: number) => {
         program.uniforms.iTime.value = time * 0.001;
         renderer.render({ scene: mesh });
+        if (!hasRendered) {
+          root.dataset.rendered = "true";
+          hasRendered = true;
+        }
         frame = requestAnimationFrame(render);
       };
       const start = () => {
@@ -176,13 +165,17 @@ export default function GradientWaves({
         resizeObserver.disconnect();
         document.removeEventListener("visibilitychange", visibilityChange);
         canvas.remove();
+        delete root.dataset.rendered;
         gl.getExtension("WEBGL_lose_context")?.loseContext();
       };
     } catch {
       root.dataset.fallback = "true";
-      return () => delete root.dataset.fallback;
+      return () => {
+        delete root.dataset.fallback;
+        delete root.dataset.rendered;
+      };
     }
-  }, [crestColor, detail, horizonColor, speed, waveColor]);
+  }, [crestColor, horizonColor, speed, waveColor]);
 
   return (
     <div

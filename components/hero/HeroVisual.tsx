@@ -15,7 +15,6 @@ export function HeroVisual() {
         waveColor="#13264b"
         crestColor="#377dff"
         speed={0.26}
-        detail="medium"
       />
     </div>
   );

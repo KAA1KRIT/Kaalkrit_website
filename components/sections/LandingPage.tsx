@@ -113,14 +113,16 @@ export function LandingPage() {
                   <span>01 / Featured engineering brief</span>
                   <span>{statusLabel[featuredProject.status]}</span>
                 </div>
-                <h3>{featuredProject.title}</h3>
-                <p>{featuredProject.summary}</p>
-                <Link
-                  href={`/projects/${featuredProject.slug}`}
-                  className="text-link"
-                >
-                  Project brief <span aria-hidden="true">→</span>
-                </Link>
+                <div className="project-index__content">
+                  <h3>{featuredProject.title}</h3>
+                  <p>{featuredProject.summary}</p>
+                  <Link
+                    href={`/projects/${featuredProject.slug}`}
+                    className="text-link"
+                  >
+                    Project brief <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
               </article>
             ) : null}
             <div className="project-index__supporting">
@@ -130,14 +132,16 @@ export function LandingPage() {
                     <span>{String(index + 2).padStart(2, "0")}</span>
                     <span>{statusLabel[project.status]}</span>
                   </div>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="text-link"
-                  >
-                    Project brief <span aria-hidden="true">→</span>
-                  </Link>
+                  <div className="project-index__content">
+                    <h3>{project.title}</h3>
+                    <p>{project.summary}</p>
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="text-link"
+                    >
+                      Project brief <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
                 </article>
               ))}
             </div>
