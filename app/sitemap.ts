@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       entry(`/projects/${project.slug}`, 0.75),
     ),
     entry("/partners", 0.65),
+    entry("/contact", 0.65),
     entry("/privacy", 0.3),
     entry("/terms", 0.3),
     entry("/accessibility", 0.3),

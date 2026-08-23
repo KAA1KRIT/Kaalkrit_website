@@ -8,7 +8,7 @@ import {
   primaryNav,
 } from "../content/navigation.ts";
 import { publicProjects } from "../content/projects.ts";
-import { SITE } from "../content/site.ts";
+import { PUBLIC_CONTACT, SITE, productionSiteUrl } from "../content/site.ts";
 
 const publicSourceRoots = ["app", "components", "content", "lib"];
 const forbiddenPublicText = new RegExp(
@@ -48,14 +48,46 @@ test("public source contains no unfinished or demo copy", () => {
   }
 });
 
-test("identity is factual and does not publish an unverified contact channel", () => {
+test("identity is factual and publishes only the verified public contact channel", () => {
   assert.equal(SITE.name, "Team KAALKRIT");
   assert.equal(SITE.parentShortName, "Sir MVIT");
   assert.equal(SITE.location, "Bengaluru");
   assert.equal(SITE.founded, 2024);
   assert.equal("email" in SITE, false);
-  assert.equal("instagram" in SITE, false);
-  assert.equal("x" in SITE, false);
+  assert.deepEqual(PUBLIC_CONTACT, {
+    label: "Instagram",
+    href: "https://www.instagram.com/team_kaalkrit/",
+    ariaLabel: "Open Team KAALKRIT on Instagram",
+  });
+  assert.equal(SITE.contact, PUBLIC_CONTACT);
+});
+
+test("the configured production origin accepts only safe HTTPS production URLs", () => {
+  assert.equal(
+    productionSiteUrl("https://kaalkrit.vercel.app/"),
+    "https://kaalkrit.vercel.app",
+  );
+  for (const unsafeUrl of [
+    "http://kaalkrit.vercel.app",
+    "https://localhost:3000",
+    "https://127.0.0.1",
+    "https://10.0.0.1",
+    "https://172.16.0.1",
+    "https://192.168.0.1",
+    "https://kaalkrit-git-main-example.vercel.app",
+    "https://example.com",
+    "https://kaalkrit.invalid",
+  ]) {
+    assert.equal(productionSiteUrl(unsafeUrl), null, unsafeUrl);
+  }
+});
+
+test("Vercel production configuration supplies the canonical public origin", () => {
+  const deployment = JSON.parse(readFileSync("vercel.json", "utf8"));
+  assert.equal(
+    deployment.env.NEXT_PUBLIC_SITE_URL,
+    "https://kaalkrit.vercel.app",
+  );
 });
 
 test("metadata waits to permit indexing until a canonical origin is configured", () => {
@@ -73,8 +105,8 @@ test("navigation exposes only substantive public routes", () => {
     ],
   );
   assert.deepEqual(collaborationCta, {
-    label: "Partner with us",
-    href: "/partners",
+    label: "Contact KAALKRIT",
+    href: "/contact",
   });
   assert.deepEqual(
     footerNav.map(({ label, href }) => [label, href]),
@@ -84,6 +116,7 @@ test("navigation exposes only substantive public routes", () => {
       ["Journey", "/journey"],
       ["Team", "/team"],
       ["Partners", "/partners"],
+      ["Contact", "/contact"],
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],
       ["Accessibility", "/accessibility"],
@@ -188,14 +221,20 @@ test("loader and pointer-responsive button primitives remain reusable", () => {
   assert.match(button, /hover: hover/);
 });
 
-test("team and legal routes have verified production content", () => {
+test("team, legal, and contact routes have verified production content", () => {
   for (const path of [
     "app/team/page.tsx",
     "app/privacy/page.tsx",
     "app/terms/page.tsx",
     "app/accessibility/page.tsx",
+    "app/contact/page.tsx",
   ]) {
     assert.equal(existsSync(path), true, path);
   }
-  assert.equal(existsSync("app/contact/page.tsx"), false);
+  const contactPage = readFileSync("app/contact/page.tsx", "utf8");
+  const partnersPage = readFileSync("app/partners/page.tsx", "utf8");
+  const footer = readFileSync("components/layout/SiteFooter.tsx", "utf8");
+  assert.match(contactPage, /SITE\.contact\.href/);
+  assert.match(partnersPage, /href="\/contact"/);
+  assert.match(footer, /footerNav/);
 });

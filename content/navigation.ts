@@ -7,8 +7,8 @@ export const primaryNav: NavItem[] = [
 ];
 
 export const collaborationCta: NavItem = {
-  label: "Partner with us",
-  href: "/partners",
+  label: "Contact KAALKRIT",
+  href: "/contact",
 };
 
 export const footerNav: NavItem[] = [
@@ -17,6 +17,7 @@ export const footerNav: NavItem[] = [
   { label: "Journey", href: "/journey" },
   { label: "Team", href: "/team" },
   { label: "Partners", href: "/partners" },
+  { label: "Contact", href: "/contact" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
   { label: "Accessibility", href: "/accessibility" },

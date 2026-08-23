@@ -14,7 +14,7 @@ export const privacyContent: LegalPageContent = {
     },
     {
       heading: "External links",
-      body: "If the website links to another service in the future, that service’s own privacy information will apply once you leave this site.",
+      body: "The website links to Team KAALKRIT’s verified Instagram account for public enquiries. Instagram’s own privacy information applies once you leave this site.",
     },
   ],
 };

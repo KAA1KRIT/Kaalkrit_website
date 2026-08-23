@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { Button } from "@/components/ui/Button";
 import { Rule } from "@/components/ui/Rule";
 import { collaborationFocus } from "@/content/partners";
 import { pageMetadata } from "@/lib/seo";
@@ -77,6 +78,11 @@ export default function PartnersPage() {
               <Link href="/projects" className="text-link mt-[var(--k-5)]">
                 Explore projects <span aria-hidden="true">→</span>
               </Link>
+              <div className="mt-[var(--k-5)]">
+                <Button href="/contact" variant="primary">
+                  Contact KAALKRIT
+                </Button>
+              </div>
             </div>
           </div>
         </div>

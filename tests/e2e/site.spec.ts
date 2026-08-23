@@ -1,5 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 
+const productionOrigin = "https://kaalkrit.vercel.app";
+const instagramUrl = "https://www.instagram.com/team_kaalkrit/";
+
 const routes = [
   [
     "/projects",
@@ -20,6 +23,11 @@ const routes = [
     "/partners",
     "Collaboration — Team KAALKRIT",
     "Collaboration starts with a shared engineering question.",
+  ],
+  [
+    "/contact",
+    "Contact — Team KAALKRIT",
+    "Start the engineering conversation.",
   ],
   ["/privacy", "Privacy — Team KAALKRIT", "Privacy"],
   ["/terms", "Terms of use — Team KAALKRIT", "Terms of use"],
@@ -72,14 +80,19 @@ async function expectNoOverflow(page: Page) {
 }
 
 async function expectImageToLoad(page: Page, selector: string) {
-  // App Router can retain the previous lazy image during a same-page route
-  // replacement. The last match is the currently rendered route instance.
-  const image = page.locator(selector).last();
-  await image.scrollIntoViewIfNeeded();
-  await expect(image).toHaveJSProperty("complete", true);
+  // Resolve the final matching image on every poll: Next can replace a lazy
+  // image during route hydration, so holding a stale element is flaky.
   await expect
     .poll(() =>
-      image.evaluate((element) => (element as HTMLImageElement).naturalWidth),
+      page.evaluate((imageSelector) => {
+        const images = Array.from(
+          document.querySelectorAll<HTMLImageElement>(imageSelector),
+        );
+        const image = images.at(-1);
+        if (!image) return 0;
+        image.scrollIntoView({ block: "center" });
+        return image.complete ? image.naturalWidth : 0;
+      }, selector),
     )
     .toBeGreaterThan(0);
 }
@@ -105,6 +118,33 @@ test("homepage delivers the engineering identity without layout or runtime error
   await expect(
     page.getByRole("link", { name: /Explore the work/i }),
   ).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    productionOrigin,
+  );
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    productionOrigin,
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    `${productionOrigin}/brand/kaalkrit-logo.png`,
+  );
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+    "content",
+    `${productionOrigin}/brand/kaalkrit-logo.png`,
+  );
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        Array.from(
+          document.querySelectorAll('script[type="application/ld+json"]'),
+        )
+          .map((script) => script.textContent)
+          .join("\n"),
+      ),
+    )
+    .toContain(productionOrigin);
   await expect(page.locator(".gradient-waves")).toHaveCount(1);
   await expect(page.locator(".gradient-waves")).toHaveAttribute(
     "data-rendered",
@@ -168,8 +208,8 @@ test("desktop and mobile navigation transition between public routes accessibly"
   await expect(
     page
       .getByRole("dialog", { name: "Primary navigation" })
-      .getByRole("link", { name: "Partner with us" }),
-  ).toHaveAttribute("href", "/partners");
+      .getByRole("link", { name: "Contact KAALKRIT" }),
+  ).toHaveAttribute("href", "/contact");
   await expect(menu).toHaveAccessibleName("Close menu");
   await expect(menu).toHaveAttribute("aria-expanded", "true");
   await page.keyboard.press("Escape");
@@ -198,7 +238,7 @@ test("desktop and mobile navigation transition between public routes accessibly"
   expect(faults).toEqual([]);
 });
 
-test("the floating navbar keeps real navigation, centred branding, and partnership action available", async ({
+test("the floating navbar keeps real navigation, centred branding, and contact action available", async ({
   page,
 }) => {
   const faults = captureApplicationFaults(page);
@@ -218,8 +258,8 @@ test("the floating navbar keeps real navigation, centred branding, and partnersh
     "page",
   );
   await expect(
-    navbar.getByRole("link", { name: "Partner with us" }),
-  ).toHaveAttribute("href", "/partners");
+    navbar.getByRole("link", { name: "Contact KAALKRIT" }),
+  ).toHaveAttribute("href", "/contact");
 
   const zones = await page.evaluate(() => {
     const nav = document.querySelector<HTMLElement>(".navbar-1__nav");
@@ -243,11 +283,36 @@ test("the floating navbar keeps real navigation, centred branding, and partnersh
   await page.keyboard.press("Tab");
   await expect(navbar.getByRole("link", { name: "Projects" })).toBeFocused();
   await expect(
-    navbar.getByRole("link", { name: "Partner with us" }),
+    navbar.getByRole("link", { name: "Contact KAALKRIT" }),
   ).toBeVisible();
-  await navbar.getByRole("link", { name: "Partner with us" }).click();
-  await expect(page).toHaveURL(/\/partners$/);
+  await navbar.getByRole("link", { name: "Contact KAALKRIT" }).click();
+  await expect(page).toHaveURL(/\/contact$/);
   expect(faults).toEqual([]);
+});
+
+test("contact, collaboration, and footer routes lead to the verified public channel", async ({
+  page,
+}) => {
+  await page.goto("/contact");
+  const instagram = page.getByRole("link", {
+    name: "Open KAALKRIT on Instagram",
+  });
+  await expect(instagram).toHaveAttribute("href", instagramUrl);
+  await expect(instagram).toHaveAttribute("target", "_blank");
+  await expect(instagram).toHaveAttribute("rel", "noopener noreferrer");
+
+  await page.goto("/partners");
+  await page
+    .getByRole("main")
+    .getByRole("link", { name: "Contact KAALKRIT" })
+    .click();
+  await expect(page).toHaveURL(/\/contact$/);
+
+  const footer = page.getByRole("contentinfo");
+  await expect(footer.getByRole("link", { name: "Contact" })).toHaveAttribute(
+    "href",
+    "/contact",
+  );
 });
 
 test("public routes, legal pages, and every published project resolve with their public heading", async ({
@@ -371,7 +436,7 @@ test("the project index follows its page header without an accidental double gap
 
   const spacing = await page.evaluate(() => {
     const headerRule = document.querySelector<HTMLElement>(
-      "main > header .k-rule",
+      "header > .k-container .k-rule",
     );
     const firstBrief = document.querySelector<HTMLElement>(".project-brief");
     if (!headerRule || !firstBrief) return null;
@@ -400,21 +465,25 @@ test("the 404 route remains useful and does not disclose internal errors", async
   await page.goto("/not-a-real-route");
   await page.getByRole("link", { name: /Explore projects/i }).click();
   await expect(page).toHaveURL(/\/projects$/);
-  const contactResponse = await page.goto("/contact");
-  expect(contactResponse?.status()).toBe(404);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "This route is not available.",
-  );
   expect(faults).toEqual([]);
 });
 
-test("public machine-readable endpoints remain available without a configured canonical origin", async ({
+test("production SEO endpoints use the configured canonical origin", async ({
   request,
 }) => {
   for (const path of ["/robots.txt", "/sitemap.xml", "/manifest.webmanifest"]) {
     const response = await request.get(path);
     expect(response.status(), path).toBe(200);
   }
+
+  const [robots, sitemap] = await Promise.all([
+    request.get("/robots.txt").then((response) => response.text()),
+    request.get("/sitemap.xml").then((response) => response.text()),
+  ]);
+  expect(robots).toContain(`${productionOrigin}/sitemap.xml`);
+  expect(sitemap).toContain(`${productionOrigin}/projects`);
+  expect(sitemap).toContain(`${productionOrigin}/contact`);
+  expect(sitemap).not.toMatch(/localhost|127\.0\.0\.1|\.invalid|example\.com/);
 });
 
 test("production responses carry the configured browser security headers", async ({

@@ -15,7 +15,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS origin when deploying. This enables canonical metadata, Open Graph URLs, `robots.txt`, and `sitemap.xml`. Set `NEXT_PUBLIC_ENABLE_ANALYTICS=true` only when analytics is intentionally configured for the deployment.
+For Vercel production deployments, `vercel.json` supplies `NEXT_PUBLIC_SITE_URL=https://kaalkrit.vercel.app`. This enables canonical metadata, Open Graph URLs, `robots.txt`, and `sitemap.xml`; preview deployments intentionally omit those production URLs. Set `NEXT_PUBLIC_ENABLE_ANALYTICS=true` only when analytics is intentionally configured for the deployment.
 
 ## Commands
 
@@ -61,7 +61,7 @@ The public site preserves its dark engineering system: near-black surfaces, off-
 
 ## Deployment checklist
 
-Before public launch, provide a real HTTPS `NEXT_PUBLIC_SITE_URL`. It enables canonical metadata, Open Graph URLs, indexing, robots, and the sitemap. Add a verified public contact method only when it is approved; the site intentionally does not invent one. If analytics is enabled, review the Privacy page against the deployed analytics configuration.
+`https://kaalkrit.vercel.app` is the configured production origin. The verified public enquiry channel is [Team KAALKRIT on Instagram](https://www.instagram.com/team_kaalkrit/). If analytics is enabled, review the Privacy page against the deployed analytics configuration.
 
 Do not commit `.env.local`, credentials, raw media, or unapproved assets.
 
