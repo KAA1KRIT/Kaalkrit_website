@@ -71,3 +71,20 @@ test("brand raster assets are replaced with SVG placeholders", () => {
     /\[LOGO PLACEHOLDER\]/,
   );
 });
+
+test("smooth scrolling uses the current Lenis React provider", () => {
+  const providerPath = "components/layout/SmoothScrollProvider.tsx";
+  assert.ok(existsSync(providerPath));
+  const provider = readFileSync(providerPath, "utf8");
+  const layout = readFileSync("app/layout.tsx", "utf8");
+  const hero = readFileSync("components/hero/ScrollExpandHero.tsx", "utf8");
+
+  assert.match(provider, /from "lenis\/react"/);
+  assert.match(provider, /<ReactLenis\s+root/);
+  assert.match(provider, /anchors: true/);
+  assert.match(provider, /respectReducedMotion: true/);
+  assert.match(provider, /scrollTo\(0, \{ immediate: true \}\)/);
+  assert.match(layout, /<SmoothScrollProvider>/);
+  assert.match(hero, /useLenis/);
+  assert.doesNotMatch(provider, /@studio-freight/);
+});

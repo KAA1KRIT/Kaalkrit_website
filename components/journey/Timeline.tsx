@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
+import { useLenis } from "lenis/react";
 import { milestones } from "@/content/journey";
 import { getPublicProject } from "@/content/projects";
 
@@ -24,6 +31,12 @@ export function Timeline() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const requestUpdateRef = useRef<() => void>(() => {});
+  const syncLenisScroll = useCallback(() => {
+    requestUpdateRef.current();
+  }, []);
+
+  useLenis(syncLenisScroll, []);
 
   useEffect(() => {
     const node = trackRef.current;
@@ -52,12 +65,12 @@ export function Timeline() {
       frame = window.requestAnimationFrame(update);
     };
 
+    requestUpdateRef.current = onScroll;
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      requestUpdateRef.current = () => {};
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);

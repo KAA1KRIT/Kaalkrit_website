@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
+import { useLenis } from "lenis/react";
 import { mailto } from "@/content/site";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Wordmark } from "@/components/ui/Wordmark";
@@ -19,13 +20,11 @@ export function SiteHeader() {
   const [openRoute, setOpenRoute] = useState<string | null>(null);
   const panelId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+  const updateScrolled = useCallback(() => {
+    setScrolled(window.scrollY > 8);
   }, []);
+
+  useLenis(updateScrolled, []);
 
   // The route is part of the menu state, so navigation closes it without an
   // extra render-producing effect.

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { GradualBlur } from "@/components/hero/GradualBlur";
 import { GradientWavesLayer } from "@/components/hero/GradientWavesLayer";
@@ -18,6 +19,12 @@ export function ScrollExpandHero() {
   const frameRef = useRef<HTMLDivElement>(null);
   const compactContentRef = useRef<HTMLDivElement>(null);
   const expandedActionsRef = useRef<HTMLDivElement>(null);
+  const requestUpdateRef = useRef<() => void>(() => {});
+  const syncLenisScroll = useCallback(() => {
+    requestUpdateRef.current();
+  }, []);
+
+  useLenis(syncLenisScroll, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -122,10 +129,11 @@ export function ScrollExpandHero() {
       if (!frameId) frameId = window.requestAnimationFrame(update);
     };
 
+    requestUpdateRef.current = requestUpdate;
+
     const observer = new ResizeObserver(requestUpdate);
     observer.observe(section);
     observer.observe(frame);
-    window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate, { passive: true });
     reduced.addEventListener("change", requestUpdate);
     compact.addEventListener("change", requestUpdate);
@@ -133,10 +141,10 @@ export function ScrollExpandHero() {
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
       reduced.removeEventListener("change", requestUpdate);
       compact.removeEventListener("change", requestUpdate);
+      requestUpdateRef.current = () => {};
       if (frameId) window.cancelAnimationFrame(frameId);
     };
   }, []);
