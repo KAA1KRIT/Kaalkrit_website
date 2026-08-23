@@ -52,7 +52,7 @@ export function TrackedLink({
     onClick?.(clickEvent);
   };
 
-  const isExternal = href.startsWith("mailto:") || href.startsWith("http");
+  const isExternal = href.startsWith("http");
 
   if (isExternal) {
     return (

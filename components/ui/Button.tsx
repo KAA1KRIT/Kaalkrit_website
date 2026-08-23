@@ -40,7 +40,7 @@ export function Button({
   React.ComponentProps<typeof Link>,
   "href" | "children" | "className"
 >) {
-  const isExternal = href.startsWith("mailto:") || href.startsWith("http");
+  const isExternal = href.startsWith("http");
   const classes = `${base} ${variants[variant]} ${loading ? "opacity-50 pointer-events-none" : ""} ${className}`;
 
   if (loading) {
@@ -53,12 +53,12 @@ export function Button({
   }
 
   if (isExternal) {
-    const isMailto = href.startsWith("mailto:");
     return (
       <a
         href={href}
         className={classes}
-        {...(isMailto ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         {loading ? "Loading…" : children}
         {trailing}

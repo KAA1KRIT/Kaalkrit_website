@@ -358,7 +358,6 @@ export default function GradientWaves({
         );
         contexts.delete(container);
         canvas.remove();
-        gl.getExtension("WEBGL_lose_context")?.loseContext();
       };
     } catch {
       container.dataset.staticFallback = "true";
