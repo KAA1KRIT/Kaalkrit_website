@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Button, Arrow } from "@/components/ui/Button";
 import { StatusTag } from "@/components/ui/StatusTag";
-import { GalleryEmptyState } from "@/components/gallery/GalleryStates";
-import { MorphSliderGallery } from "@/components/gallery/MorphSliderGallery";
-import { projectGallery } from "@/content/gallery";
 import { domainLabel } from "@/content/domains";
 import { getProject, publicProjects } from "@/content/projects";
 import { pageMetadata } from "@/lib/seo";
@@ -21,7 +19,7 @@ export async function generateMetadata({
 }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project || project.contentStatus !== "ready") return {};
+  if (!project) return {};
   return pageMetadata({
     title: project.title,
     description: project.summary,
@@ -32,10 +30,7 @@ export async function generateMetadata({
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project || project.contentStatus !== "ready") notFound();
-  const media = projectGallery.filter(
-    (item) => item.projectSlug === project.slug,
-  );
+  if (!project) notFound();
 
   return (
     <>
@@ -84,36 +79,38 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
         </div>
       </section>
-      <section
-        className="pb-[var(--k-section-y)]"
-        aria-labelledby="project-media-heading"
-      >
-        <div className="k-container">
-          <h2
-            id="project-media-heading"
-            className="k-display text-[length:var(--k-t-h2)]"
-          >
-            Project media
-          </h2>
-          <div className="mt-[var(--k-6)]">
-            {media.length > 0 ? (
-              <MorphSliderGallery items={media} />
-            ) : (
-              <GalleryEmptyState
-                title="Project media"
-                description="Project documentation will be shared as it becomes available."
+      {project.media ? (
+        <section
+          className="pb-[var(--k-section-y)]"
+          aria-labelledby="project-media-heading"
+        >
+          <div className="k-container">
+            <h2
+              id="project-media-heading"
+              className="k-display text-[length:var(--k-t-h2)]"
+            >
+              NIDAR 2026 field testing
+            </h2>
+            <figure className="mt-[var(--k-6)] max-w-[48rem]">
+              <Image
+                src={project.media.src}
+                alt={project.media.alt}
+                width={project.media.width}
+                height={project.media.height}
+                sizes="(min-width: 768px) 48rem, 100vw"
+                className="h-auto w-full rounded-[var(--k-radius)] border border-[var(--k-line)]"
               />
-            )}
+              <figcaption className="k-meta mt-[var(--k-3)]">
+                Team KAALKRIT testing its autonomous UAS in an open field.
+              </figcaption>
+            </figure>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
       <section className="pb-[var(--k-section-y)]" aria-label="Project actions">
         <div className="k-container flex flex-wrap gap-[var(--k-3)]">
           <Button href="/projects" variant="secondary">
             Back to projects <Arrow />
-          </Button>
-          <Button href="/#partnership" variant="primary">
-            Discuss collaboration <Arrow />
           </Button>
         </div>
       </section>

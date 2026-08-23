@@ -83,5 +83,4 @@ export const lifecycleStages = [
   "Programming",
   "Testing",
   "Deploying complete systems",
-  "Transforming ideas into intelligent engineering solutions",
 ];

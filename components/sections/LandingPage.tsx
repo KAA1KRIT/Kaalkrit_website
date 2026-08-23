@@ -1,17 +1,16 @@
 import Link from "next/link";
 import { ScrollExpandHero } from "@/components/hero/ScrollExpandHero";
-import { BorderGlow } from "@/components/motion/BorderGlow";
 import { MaskedHeading } from "@/components/motion/MaskedHeading";
-import { mailto } from "@/content/site";
-import { publicProjects, statusLabel } from "@/content/projects";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { achievements } from "@/content/achievements";
 import { domainsByGroup, lifecycleStages } from "@/content/domains";
-import { TrackedLink } from "@/components/analytics/TrackedLink";
+import { publicProjects, statusLabel } from "@/content/projects";
 
 export function LandingPage() {
   return (
     <>
       <ScrollExpandHero />
+
       <section
         className="editorial-section mission-section"
         aria-labelledby="mission-heading"
@@ -20,50 +19,27 @@ export function LandingPage() {
           <p className="eyebrow">About Team KAALKRIT</p>
           <div>
             <h2 id="mission-heading">
-              Engineering the Future Through Innovation, Autonomy, and
-              Intelligent Systems.
+              Engineering across hardware, software, and intelligence.
             </h2>
             <p className="editorial-lede">
-              Team KAALKRIT works at the intersection of hardware, software, and
-              artificial intelligence to transform innovative ideas into
-              intelligent engineering solutions. From identifying real-world
-              challenges and conducting research to designing, prototyping,
-              manufacturing, programming, testing, and deploying complete
-              systems, our team manages the entire product development
-              lifecycle.
+              Team KAALKRIT is the official drone and robotics innovation team
+              of Sir M. Visvesvaraya Institute of Technology (Sir MVIT),
+              Bengaluru. The team takes engineering work from research and
+              design through prototyping, testing, and complete systems.
             </p>
           </div>
         </div>
       </section>
-      <section
-        className="editorial-section why-section"
-        aria-labelledby="why-heading"
-      >
-        <div className="public-container">
-          <p className="eyebrow">[SECTION LABEL PLACEHOLDER 2]</p>
-          <MaskedHeading id="why-heading">
-            [VALUE PROPOSITION HEADLINE PLACEHOLDER]
-          </MaskedHeading>
-          <div className="reasons-grid">
-            {[1, 2, 3].map((index) => (
-              <article key={index}>
-                <span>{String(index).padStart(2, "0")}</span>
-                <h3>{`[REASON TITLE PLACEHOLDER ${index}]`}</h3>
-                <p>{`[REASON BODY COPY PLACEHOLDER ${index}]`}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+
       <section
         className="editorial-section lifecycle-section"
         aria-labelledby="lifecycle-heading"
       >
         <div className="public-container">
           <div className="editorial-section__heading">
-            <p className="eyebrow">What We Do</p>
+            <p className="eyebrow">How we work</p>
             <h2 id="lifecycle-heading">
-              From innovative ideas to intelligent engineering solutions.
+              From a real-world challenge to a complete system.
             </h2>
           </div>
           <ol className="editorial-lifecycle">
@@ -76,6 +52,7 @@ export function LandingPage() {
           </ol>
         </div>
       </section>
+
       <section
         id="capabilities"
         className="editorial-section capability-section"
@@ -83,15 +60,14 @@ export function LandingPage() {
       >
         <div className="public-container">
           <div className="editorial-two-column">
-            <p className="eyebrow">Expertise Areas</p>
+            <p className="eyebrow">Engineering areas</p>
             <div>
               <h2 id="capabilities-heading">
-                Hardware, software, and artificial intelligence.
+                Autonomous systems, robotics, embedded systems, and software.
               </h2>
               <p className="editorial-lede">
-                Team KAALKRIT works at the intersection of hardware, software,
-                and artificial intelligence to transform innovative ideas into
-                intelligent engineering solutions.
+                KAALKRIT combines disciplines that are needed to design,
+                prototype, and develop intelligent engineering systems.
               </p>
             </div>
           </div>
@@ -111,6 +87,7 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
       <section
         id="projects"
         className="editorial-section projects-section"
@@ -118,29 +95,20 @@ export function LandingPage() {
       >
         <div className="public-container">
           <div className="editorial-two-column projects-heading">
-            <p className="eyebrow">Projects</p>
+            <p className="eyebrow">Current work</p>
             <div>
               <h2 id="projects-heading">
-                Intelligent engineering solutions in action.
+                Programmes and projects in development.
               </h2>
               <p className="editorial-lede">
-                Explore Team KAALKRIT’s autonomous aerial systems, robotics, and
-                engineering platform projects.
+                Explore KAALKRIT’s work in aerial systems, robotics, and the
+                Build With Hardware engineering platform.
               </p>
             </div>
           </div>
           <div className="project-editorial-list">
-            {publicProjects.map((project, index) => (
-              <article
-                key={project.slug}
-                className={`project-editorial ${index % 2 === 1 ? "project-editorial--reverse" : ""}`}
-              >
-                <div
-                  className="project-editorial__image project-editorial__image--empty"
-                  aria-label={`[PROJECT IMAGE PLACEHOLDER ${index + 1}]`}
-                >
-                  <span>{`[IMAGE ${index + 1}]`}</span>
-                </div>
+            {publicProjects.map((project) => (
+              <article key={project.slug} className="project-editorial">
                 <div className="project-editorial__copy">
                   <p className="project-status">
                     {statusLabel[project.status]}
@@ -167,44 +135,17 @@ export function LandingPage() {
           </Link>
         </div>
       </section>
-      <section
-        className="editorial-section culture-section"
-        aria-labelledby="culture-heading"
-      >
-        <div className="public-container culture-grid">
-          <div
-            className="culture-grid__media"
-            aria-label="[CULTURE IMAGE PLACEHOLDER]"
-          >
-            <div className="culture-grid__image culture-grid__image--empty">
-              <span>[CULTURE IMAGE PLACEHOLDER]</span>
-            </div>
-          </div>
-          <div>
-            <p className="eyebrow">[SECTION LABEL PLACEHOLDER 6]</p>
-            <h2 id="culture-heading">[CULTURE HEADLINE PLACEHOLDER]</h2>
-            <p>[CULTURE BODY COPY PLACEHOLDER]</p>
-            <TrackedLink
-              href={mailto("[RECRUITMENT EMAIL SUBJECT PLACEHOLDER]")}
-              className="button button--secondary"
-              event="recruitment_cta_click"
-              properties={{ placement: "culture" }}
-            >
-              [RECRUITMENT CTA PLACEHOLDER] <span aria-hidden="true">↗</span>
-            </TrackedLink>
-          </div>
-        </div>
-      </section>
+
       <section
         className="editorial-section achievement-section"
         aria-labelledby="achievement-heading"
       >
         <div className="public-container editorial-two-column">
-          <p className="eyebrow">[SECTION LABEL PLACEHOLDER 7]</p>
+          <p className="eyebrow">Progress to date</p>
           <div>
-            <h2 id="achievement-heading">
-              [ACHIEVEMENTS HEADLINE PLACEHOLDER]
-            </h2>
+            <MaskedHeading id="achievement-heading">
+              Work grounded in multidisciplinary engineering.
+            </MaskedHeading>
             <div className="achievement-lines">
               {achievements.map((achievement) => (
                 <p key={achievement.id}>
@@ -216,65 +157,48 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
       <section
         className="editorial-section future-section"
         aria-labelledby="future-heading"
       >
-        <div className="public-container">
-          <p className="eyebrow">[SECTION LABEL PLACEHOLDER 8]</p>
-          <h2 id="future-heading">[FUTURE HEADLINE PLACEHOLDER]</h2>
-          <p className="editorial-lede">[FUTURE BODY COPY PLACEHOLDER]</p>
-          <ul className="future-list">
-            {Array.from({ length: 8 }, (_, index) => (
-              <li
-                key={index}
-              >{`[FUTURE LIST ITEM PLACEHOLDER ${index + 1}]`}</li>
-            ))}
-          </ul>
+        <div className="public-container editorial-two-column">
+          <p className="eyebrow">Direction</p>
+          <div>
+            <h2 id="future-heading">
+              Building toward more capable autonomous systems.
+            </h2>
+            <p className="editorial-lede">
+              KAALKRIT is focused on advancing autonomous aerial systems,
+              robotics, embedded platforms, and intelligent engineering while
+              developing a stronger foundation for research and collaboration.
+            </p>
+            <Link href="/journey" className="text-link">
+              Explore the team’s direction <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
+
       <section
-        id="partnership"
         className="editorial-section partnership-section"
         aria-labelledby="partnership-heading"
       >
         <div className="public-container">
-          <BorderGlow>
-            <div className="partnership-card">
-              <p className="eyebrow">[SECTION LABEL PLACEHOLDER 9]</p>
-              <h2 id="partnership-heading">
-                [PARTNERSHIP HEADLINE PLACEHOLDER]
-              </h2>
-              <p>[PARTNERSHIP BODY COPY PLACEHOLDER]</p>
-              <TrackedLink
-                href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
-                className="button button--primary"
-                event="partner_cta_click"
-                properties={{ placement: "partnership" }}
-              >
-                [PARTNERSHIP CTA PLACEHOLDER] <span aria-hidden="true">↗</span>
-              </TrackedLink>
-            </div>
-          </BorderGlow>
-        </div>
-      </section>
-      <section
-        id="join"
-        className="join-section"
-        aria-labelledby="join-heading"
-      >
-        <div className="public-container join-section__content">
-          <p className="eyebrow">[SECTION LABEL PLACEHOLDER 10]</p>
-          <h2 id="join-heading">[RECRUITMENT HEADLINE PLACEHOLDER]</h2>
-          <p>[RECRUITMENT BODY COPY PLACEHOLDER]</p>
-          <TrackedLink
-            href={mailto("[RECRUITMENT EMAIL SUBJECT PLACEHOLDER]")}
-            className="button button--secondary"
-            event="recruitment_cta_click"
-            properties={{ placement: "join" }}
-          >
-            [RECRUITMENT CTA PLACEHOLDER] <span aria-hidden="true">↗</span>
-          </TrackedLink>
+          <div className="partnership-card">
+            <p className="eyebrow">Collaboration</p>
+            <h2 id="partnership-heading">
+              A focused engineering team for technical collaboration.
+            </h2>
+            <p>
+              KAALKRIT’s work brings together research, hands-on engineering,
+              and student-led innovation. Its direction includes collaboration
+              with academia, industry, startups, and research organizations.
+            </p>
+            <Link href="/partners" className="button button--primary">
+              Explore collaboration <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
     </>

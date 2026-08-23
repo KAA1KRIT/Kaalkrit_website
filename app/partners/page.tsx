@@ -1,13 +1,13 @@
+import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { Button } from "@/components/ui/Button";
-import { GapNote } from "@/components/ui/GapNote";
-import { collaborationModes } from "@/content/partners";
-import { mailto } from "@/content/site";
+import { Rule } from "@/components/ui/Rule";
+import { collaborationFocus } from "@/content/partners";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "[PARTNERS PAGE TITLE PLACEHOLDER]",
-  description: "[PARTNERS META DESCRIPTION PLACEHOLDER]",
+  title: "Collaboration",
+  description:
+    "Learn how Team KAALKRIT’s work in autonomous systems, robotics, and engineering can support technical collaboration.",
   path: "/partners",
 });
 
@@ -15,59 +15,67 @@ export default function PartnersPage() {
   return (
     <>
       <PageHeader
-        eyebrow="[PARTNERS EYEBROW PLACEHOLDER]"
-        heading="[PARTNERS HEADLINE PLACEHOLDER]"
-        lede="[PARTNERS LEDE PLACEHOLDER]"
-        meta={[
-          "[PARTNERS META PLACEHOLDER 1]",
-          "[PARTNERS META PLACEHOLDER 2]",
-        ]}
+        eyebrow="Collaboration"
+        heading="A focused engineering team for technical collaboration."
+        lede="Team KAALKRIT brings student-led research, hands-on engineering, and practical system development together at Sir MVIT, Bengaluru."
+        meta={["Sir MVIT, Bengaluru", "Established 2024"]}
       />
+
       <section
         className="pb-[var(--k-section-y)]"
-        aria-labelledby="partner-modes-heading"
+        aria-labelledby="collaboration-focus-heading"
       >
         <div className="k-container">
-          <h2
-            id="partner-modes-heading"
-            className="k-display text-[length:var(--k-t-h2)]"
-          >
-            [PARTNERS SECTION HEADING PLACEHOLDER]
-          </h2>
-          <div className="mt-[var(--k-7)] grid gap-px border-y border-[var(--k-line)] bg-[var(--k-line)] md:grid-cols-2">
-            {collaborationModes.map((mode) => (
-              <article
-                key={mode.id}
-                className="bg-[var(--k-void)] p-[var(--k-6)]"
+          <Rule />
+          <div className="mt-[var(--k-7)] grid gap-[var(--k-6)] md:grid-cols-12">
+            <div className="md:col-span-5">
+              <h2
+                id="collaboration-focus-heading"
+                className="k-display text-[length:var(--k-t-h2)]"
               >
-                <p className="k-meta">{mode.id}</p>
-                <h3 className="k-display mt-[var(--k-4)] text-[length:var(--k-t-h3)]">
-                  {mode.title}
-                </h3>
-                <p className="k-body mt-[var(--k-4)]">{mode.description}</p>
-                <a
-                  className="text-link mt-[var(--k-5)]"
-                  href={mailto(mode.subject)}
-                >
-                  [PARTNERS CTA PLACEHOLDER] <span aria-hidden="true">→</span>
-                </a>
-              </article>
-            ))}
+                Areas of shared interest
+              </h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7">
+              <p className="k-body">
+                KAALKRIT’s direction includes work with academia, industry,
+                startups, and research organizations. The team’s current work
+                offers a practical basis for technical discussion around:
+              </p>
+              <ul className="mt-[var(--k-5)] grid gap-[var(--k-3)] border-t border-[var(--k-line)] pt-[var(--k-5)]">
+                {collaborationFocus.map((item) => (
+                  <li key={item} className="k-body">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="mt-[var(--k-7)]">
-            <GapNote
-              id="P1"
-              title="[PARTNERS NOTE TITLE PLACEHOLDER]"
-              detail="[PARTNERS NOTE BODY PLACEHOLDER]"
-            />
-          </div>
-          <div className="mt-[var(--k-7)]">
-            <Button
-              href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
-              variant="primary"
+        </div>
+      </section>
+
+      <section
+        className="pb-[var(--k-section-y)]"
+        aria-labelledby="work-heading"
+      >
+        <div className="k-container">
+          <Rule />
+          <div className="mt-[var(--k-7)] grid gap-[var(--k-5)] md:grid-cols-12">
+            <h2
+              id="work-heading"
+              className="k-display md:col-span-5 text-[length:var(--k-t-h2)]"
             >
-              [PARTNERS CTA PLACEHOLDER]
-            </Button>
+              Start with the work
+            </h2>
+            <div className="md:col-span-6 md:col-start-7">
+              <p className="k-body">
+                The projects page provides the clearest view of the team’s
+                current aerial, robotics, embedded, and platform work.
+              </p>
+              <Link href="/projects" className="text-link mt-[var(--k-5)]">
+                Explore projects <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

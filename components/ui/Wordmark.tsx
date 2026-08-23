@@ -16,9 +16,7 @@ export function Wordmark({
   void _priority;
   return (
     <span className={`wordmark ${variantClass[variant]} ${className}`.trim()}>
-      <span className="wordmark__placeholder" aria-hidden="true">
-        [LOGO PLACEHOLDER]
-      </span>
+      <span className="wordmark__text">KAALKRIT</span>
     </span>
   );
 }

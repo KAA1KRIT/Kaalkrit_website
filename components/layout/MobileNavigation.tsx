@@ -4,8 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, type RefObject } from "react";
 import { primaryNav } from "@/content/navigation";
-import { mailto } from "@/content/site";
-import { TrackedLink } from "@/components/analytics/TrackedLink";
 
 const focusableSelector = [
   "a[href]",
@@ -138,15 +136,6 @@ export function MobileNavigation({
               </Link>
             );
           })}
-          <TrackedLink
-            href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
-            className="button button--primary"
-            onClick={onClose}
-            event="partner_cta_click"
-            properties={{ placement: "mobile_navigation" }}
-          >
-            [MOBILE NAV CTA PLACEHOLDER]
-          </TrackedLink>
         </nav>
       </aside>
     </div>

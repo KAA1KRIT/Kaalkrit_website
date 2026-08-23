@@ -9,7 +9,7 @@ type DesktopFlyoutNavigationProps = {
 
 /**
  * Direct desktop navigation. The top bar only carries the routes a first-time
- * visitor needs: work, team, journey, and contact.
+ * visitor needs: projects, direction, and collaboration.
  */
 export function DesktopFlyoutNavigation({
   pathname,

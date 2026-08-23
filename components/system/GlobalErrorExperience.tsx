@@ -10,7 +10,10 @@ export function GlobalErrorExperience({ reset }: { reset: () => void }) {
         <h1 id="global-error-heading">
           The system could not complete that render.
         </h1>
-        <p>[GLOBAL ERROR BODY COPY PLACEHOLDER]</p>
+        <p>
+          Please try again. If the problem continues, return to the homepage and
+          continue exploring the available sections.
+        </p>
         <div className="not-found-experience__actions">
           <button
             type="button"

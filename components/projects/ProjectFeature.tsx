@@ -3,14 +3,6 @@ import { domainLabel } from "@/content/domains";
 import { Reveal } from "@/components/ui/Reveal";
 import { StatusTag } from "@/components/ui/StatusTag";
 
-/**
- * Editorial, alternating, asymmetric. No card wrapper — a hairline and
- * spacing do the work a card would otherwise do badly.
- *
- * Documented gap G6: no project photography exists. The media column is a
- * capability rail rather than a placeholder image, so the layout is honest
- * at full density and gains photography without restructuring.
- */
 export function ProjectFeature({
   project,
   reversed = false,

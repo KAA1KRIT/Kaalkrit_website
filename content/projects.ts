@@ -10,11 +10,10 @@ export const projects: Project[] = [
     status: "completed",
     year: 2026,
     summary:
-      "For NIDAR 2026, Team KAALKRIT successfully designed and developed a fully integrated Unmanned Aerial System (UAS), demonstrating expertise in airframe design, embedded electronics, flight controller integration, mission planning, payload management, and autonomous flight. This project laid a strong technical foundation for our future advancements in autonomous aerial technologies.",
+      "For NIDAR 2026, Team KAALKRIT designed and developed a fully integrated Unmanned Aerial System, combining airframe design, embedded electronics, flight-control integration, mission planning, payload management, and autonomous flight.",
     problem:
       "A fully integrated Unmanned Aerial System requiring airframe design, embedded electronics, flight controller integration, mission planning, payload management, and autonomous flight.",
-    significance:
-      "This project laid a strong technical foundation for future advancements in autonomous aerial technologies.",
+    significance: "A technical foundation for the team’s future aerial work.",
     capabilities: ["uas", "flight-control", "embedded", "mechanical", "pcb"],
     media: {
       src: "/images/approved/nidar-field-testing.jpg",
@@ -22,7 +21,6 @@ export const projects: Project[] = [
       width: 479,
       height: 378,
     },
-    contentStatus: "ready",
   },
   {
     slug: "airmos",
@@ -33,13 +31,12 @@ export const projects: Project[] = [
     status: "in-development",
     year: 2027,
     summary:
-      "Building upon our experience from UAS development, Team KAALKRIT is currently developing AirMOS for NIDAR 2027. AirMOS represents the next evolution of our research in intelligent aerial systems by integrating advanced sensing technologies, autonomous capabilities, and mission-oriented design to develop scalable drone solutions capable of addressing real-world challenges.",
+      "AirMOS is Team KAALKRIT’s NIDAR 2027 aerial-systems project, building on the UAS programme through advanced sensing, autonomous capabilities, and mission-oriented design.",
     problem:
       "Develop scalable drone solutions through advanced sensing technologies, autonomous capabilities, and mission-oriented design.",
     significance:
-      "AirMOS represents the next evolution of our research in intelligent aerial systems.",
+      "It extends the team’s research in intelligent aerial systems beyond the NIDAR 2026 UAS.",
     capabilities: ["uas", "drone-tech", "flight-control", "sensors", "ai-cv"],
-    contentStatus: "ready",
   },
   {
     slug: "build-with-hardware",
@@ -47,13 +44,12 @@ export const projects: Project[] = [
     shortTitle: "BWH",
     status: "in-development",
     summary:
-      "Team KAALKRIT's flagship engineering platform designed to make hardware innovation more accessible. The platform combines structured learning, practical hardware projects, technical documentation, collaborative workspaces, and AI-powered engineering assistance into a unified ecosystem, enabling students, developers, researchers, startups, and makers to learn, build, collaborate, and transform ideas into real-world hardware solutions.",
+      "Build With Hardware (BWH) is an engineering platform in development that brings structured learning, practical projects, technical documentation, collaborative workspaces, and AI-powered engineering assistance together.",
     problem:
       "Make hardware innovation more accessible through structured learning, practical hardware projects, technical documentation, collaborative workspaces, and AI-powered engineering assistance.",
     significance:
-      "The unified ecosystem enables students, developers, researchers, startups, and makers to transform ideas into real-world hardware solutions.",
+      "It is intended to make hardware innovation more accessible to students, developers, researchers, startups, and makers.",
     capabilities: ["software", "ai-cv", "research", "embedded"],
-    contentStatus: "ready",
   },
   {
     slug: "robotic-arm",
@@ -61,13 +57,12 @@ export const projects: Project[] = [
     shortTitle: "Robotic Arm",
     status: "in-development",
     summary:
-      "Demonstrates Team KAALKRIT's expertise in robotics, embedded systems, precision motion control, and intelligent automation. By integrating mechanical engineering, electronics, servo-based control, and advanced control algorithms, the system is being developed for future applications in industrial automation, smart manufacturing, precision handling, research, and autonomous robotic operations.",
+      "An intelligent robotic arm in development that combines mechanical engineering, electronics, servo-based control, and control algorithms for precision motion and automation.",
     problem:
       "Integrate mechanical engineering, electronics, servo-based control, and advanced control algorithms for precision motion control and intelligent automation.",
     significance:
-      "The system is being developed for industrial automation, smart manufacturing, precision handling, research, and autonomous robotic operations.",
+      "The work supports the team’s exploration of industrial automation, precision handling, research, and autonomous robotic operations.",
     capabilities: ["robotics", "mechanical", "embedded", "sensors"],
-    contentStatus: "ready",
   },
   {
     slug: "robot-vacuum",
@@ -75,20 +70,17 @@ export const projects: Project[] = [
     shortTitle: "Robot Vacuum",
     status: "completed",
     summary:
-      "Showcases capabilities in intelligent robotics, embedded systems, sensor integration, and autonomous navigation. Designed to perform efficient floor-cleaning operations with minimal human intervention, the system combines intelligent navigation, obstacle detection, motion control, and automation to demonstrate practical applications of robotics in everyday life. This project reflects our commitment to building smart, user-centric robotic solutions while strengthening our expertise in autonomous mobility, embedded electronics, and real-world product development.",
+      "An autonomous robot vacuum cleaner that combines navigation, obstacle detection, motion control, sensors, and embedded electronics for floor-cleaning with minimal human intervention.",
     problem:
       "Perform efficient floor-cleaning operations with minimal human intervention through intelligent navigation, obstacle detection, motion control, and automation.",
     significance:
-      "This project demonstrates practical applications of robotics in everyday life while strengthening expertise in autonomous mobility, embedded electronics, and real-world product development.",
+      "It demonstrates a practical everyday application of autonomous mobility and embedded robotics.",
     capabilities: ["robotics", "sensors", "embedded", "ai-cv"],
-    contentStatus: "ready",
   },
 ];
 
 const bySlug = new Map(projects.map((project) => [project.slug, project]));
-export const publicProjects = projects.filter(
-  (project) => project.contentStatus === "ready",
-);
+export const publicProjects = projects;
 const publicBySlug = new Map(
   publicProjects.map((project) => [project.slug, project]),
 );

@@ -2,7 +2,6 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ProgrammeSpine } from "@/components/projects/ProgrammeSpine";
 import { PlatformFeature } from "@/components/projects/PlatformFeature";
 import { ProjectFeature } from "@/components/projects/ProjectFeature";
-import { PartnershipSection } from "@/components/sections/PartnershipSection";
 import { Rule } from "@/components/ui/Rule";
 import { roboticsProjects } from "@/content/projects";
 import { pageMetadata, projectsSchema, serializeJsonLd } from "@/lib/seo";
@@ -101,8 +100,6 @@ export default function ProjectsPage() {
           </div>
         </div>
       </section>
-
-      <PartnershipSection />
 
       <script
         type="application/ld+json"

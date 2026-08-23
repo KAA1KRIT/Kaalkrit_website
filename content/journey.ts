@@ -9,8 +9,7 @@ export const milestones: Milestone[] = [
     title:
       "Engineering the Future Through Innovation, Autonomy, and Intelligent Systems.",
     description:
-      "At Team KAALKRIT, we envision a future where student-led innovation becomes a driving force behind technological advancement. Our goal is to establish ourselves as one of India's leading university engineering teams, recognized for developing intelligent autonomous systems, advanced robotics, and transformative technologies that create meaningful real-world impact.\n\nWe aspire to build an ecosystem where research, innovation, and practical engineering come together seamlessly. By continuously exploring emerging technologies in drones, robotics, embedded systems, artificial intelligence, automation, and intelligent software, we aim to develop solutions that are scalable, sustainable, and capable of addressing tomorrow's challenges.\n\nOur vision extends beyond competitions. We strive to inspire future engineers, collaborate with academia, industry, startups, and research organizations, contribute to India's vision of technological self-reliance, and build engineering solutions that improve lives.",
-    contentStatus: "ready",
+      "Team KAALKRIT aims to make student-led innovation a practical force in technological development. The team brings research, engineering, and hands-on learning together while exploring drones, robotics, embedded systems, artificial intelligence, automation, and intelligent software.\n\nIts direction extends beyond competitions: to inspire future engineers, work with academia, industry, startups, and research organizations, and contribute to engineering solutions with real-world relevance.",
   },
   {
     id: "future-scope",
@@ -19,8 +18,7 @@ export const milestones: Milestone[] = [
     kind: "forward",
     title: "Building the next generation of intelligent engineering.",
     description:
-      "The journey of Team KAALKRIT has only just begun. Our long-term vision is to evolve into one of India's most respected student-led research and innovation organizations, pioneering advancements in autonomous systems, robotics, artificial intelligence, and intelligent engineering.\n\nIn the coming years, we aim to develop next-generation autonomous drones, AI-powered robotic systems, swarm intelligence, computer vision-driven autonomy, advanced embedded platforms, intelligent robotic manipulators, and integrated autonomous ecosystems capable of transforming industries such as agriculture, healthcare, infrastructure inspection, environmental monitoring, disaster response, logistics, manufacturing, and smart cities.\n\nAlongside our hardware innovations, we envision expanding Build With Hardware (BWH) into a globally recognized collaborative platform that empowers students, researchers, startups, and engineering communities to learn, build, share knowledge, and accelerate hardware innovation at scale.\n\nOur ambition is not simply to participate in innovation — we aspire to define its future.",
-    contentStatus: "ready",
+      "The team intends to keep developing autonomous drones, AI-powered robotic systems, computer-vision-led autonomy, embedded platforms, robotic manipulators, and integrated autonomous systems. These areas can support future work in agriculture, healthcare, inspection, environmental monitoring, disaster response, logistics, manufacturing, and smart cities.\n\nAlongside this work, KAALKRIT plans to develop Build With Hardware (BWH) as a collaborative platform for learning, building, and sharing hardware knowledge.",
   },
   {
     id: "commitment",
@@ -29,9 +27,8 @@ export const milestones: Milestone[] = [
     kind: "forward",
     title: "We don't just imagine the future — we engineer it.",
     description:
-      "At Team KAALKRIT, engineering is driven by curiosity, innovation, integrity, and an unwavering pursuit of excellence. We believe that every challenge presents an opportunity to innovate, every setback becomes a lesson for improvement, and every project brings us closer to technologies that create meaningful impact.\n\nAs technology continues to reshape the world, Team KAALKRIT remains dedicated to pushing the boundaries of autonomous systems, robotics, embedded technologies, and intelligent engineering. We don't just imagine the future — we engineer it.",
-    contentStatus: "ready",
+      "KAALKRIT approaches engineering through curiosity, innovation, integrity, and continuous improvement. Each project is an opportunity to develop stronger work in autonomous systems, robotics, embedded technologies, and intelligent engineering.",
   },
 ];
 
-export const journeyContent = { status: "ready" as const, milestones };
+export const journeyContent = { milestones };

@@ -1,12 +1,10 @@
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Timeline } from "@/components/journey/Timeline";
-import { Button, Arrow } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { Rule } from "@/components/ui/Rule";
 import { Reveal } from "@/components/ui/Reveal";
 import { SITE } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
-import { DriftWallGallery } from "@/components/gallery/DriftWallGallery";
-import { journeyGallery } from "@/content/gallery";
 
 export const metadata = pageMetadata({
   title: "Journey",
@@ -20,8 +18,8 @@ export default function JourneyPage() {
     <>
       <PageHeader
         eyebrow="Journey"
-        heading="Engineering the Future Through Innovation, Autonomy, and Intelligent Systems."
-        lede="Discover Team KAALKRIT's vision, future scope, and commitment to intelligent engineering."
+        heading="A direction grounded in practical engineering."
+        lede="Discover Team KAALKRIT’s vision, future scope, and commitment to intelligent engineering."
         meta={[
           `Established ${SITE.founded}`,
           `${SITE.parentShortName}, ${SITE.location}`,
@@ -50,10 +48,11 @@ export default function JourneyPage() {
             <div className="md:col-span-6 md:col-start-7">
               <p className="k-body">
                 At Team KAALKRIT, engineering is driven by curiosity,
-                innovation, integrity, and an unwavering pursuit of excellence.
-                We don’t just imagine the future — we engineer it.
+                innovation, integrity, and continuous improvement. The team is
+                committed to advancing autonomous systems, robotics, embedded
+                technologies, and intelligent engineering through real work.
               </p>
-              <div className="mt-[var(--k-6)] flex flex-col xs:flex-row gap-[var(--k-3)]">
+              <div className="mt-[var(--k-6)]">
                 <Button
                   href="/projects"
                   variant="primary"
@@ -61,38 +60,9 @@ export default function JourneyPage() {
                 >
                   Explore projects
                 </Button>
-                <Button
-                  href="/#partnership"
-                  variant="ghost"
-                  trailing={<Arrow />}
-                >
-                  Partner with us
-                </Button>
               </div>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      <section
-        className="pb-[var(--k-section-y)]"
-        aria-labelledby="journey-archive-heading"
-      >
-        <div className="k-container">
-          <Rule />
-          <h2
-            id="journey-archive-heading"
-            className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]"
-          >
-            NIDAR 2026 Gallery
-          </h2>
-          <p className="k-lede mt-[var(--k-5)]">
-            Team KAALKRIT at the NIDAR 2026 National Innovation Challenge for
-            Drone Application and Research at Gautam Buddha University.
-          </p>
-          <div className="mt-[var(--k-7)]">
-            <DriftWallGallery items={journeyGallery} />
-          </div>
         </div>
       </section>
     </>

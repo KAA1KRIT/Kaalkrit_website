@@ -3,12 +3,6 @@ import { domainLabel } from "@/content/domains";
 import { Reveal } from "@/components/ui/Reveal";
 import { StatusTag } from "@/components/ui/StatusTag";
 
-/**
- * The platform route gets a full-width treatment.
- *
- * Documented gap G9 — availability is not stated in the source. There is
- * therefore no external link and no "available" language.
- */
 export function PlatformFeature({ detail = false }: { detail?: boolean }) {
   const project = platformProject;
   if (!project) return null;

@@ -198,9 +198,8 @@ export function ScrollExpandHero() {
               Team KAALKRIT
             </p>
             <p className="scroll-expand-hero__compact-summary">
-              Team KAALKRIT works at the intersection of hardware, software, and
-              artificial intelligence to transform innovative ideas into
-              intelligent engineering solutions.
+              Team KAALKRIT brings hardware, software, and artificial
+              intelligence together to develop intelligent engineering systems.
             </p>
             <div className="scroll-expand-hero__actions">
               <TrackedLink
@@ -231,13 +230,10 @@ export function ScrollExpandHero() {
               </span>
             </h1>
             <p className="scroll-expand-hero__summary">
-              Team KAALKRIT works at the intersection of hardware, software, and
-              artificial intelligence to transform innovative ideas into
-              intelligent engineering solutions. From identifying real-world
-              challenges and conducting research to designing, prototyping,
-              manufacturing, programming, testing, and deploying complete
-              systems, our team manages the entire product development
-              lifecycle.
+              Team KAALKRIT brings hardware, software, and artificial
+              intelligence together to develop intelligent engineering systems.
+              From research and design to prototyping, testing, and complete
+              systems, the team works across the product-development lifecycle.
             </p>
             <div
               ref={expandedActionsRef}

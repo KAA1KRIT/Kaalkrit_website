@@ -4,8 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useId, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
-import { mailto } from "@/content/site";
-import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Wordmark } from "@/components/ui/Wordmark";
 import { MobileNavigation } from "./MobileNavigation";
 import { DesktopFlyoutNavigation } from "./DesktopFlyoutNavigation";
@@ -47,14 +45,6 @@ export function SiteHeader() {
 
         <div className="site-header__desktop-navigation">
           <DesktopFlyoutNavigation pathname={pathname} />
-          <TrackedLink
-            className="site-header__cta"
-            href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
-            event="partner_cta_click"
-            properties={{ placement: "header" }}
-          >
-            [HEADER CTA PLACEHOLDER]
-          </TrackedLink>
         </div>
 
         <button

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { mailto } from "@/content/site";
 import { Wordmark } from "@/components/ui/Wordmark";
 
 export function NotFoundExperience() {
@@ -15,14 +14,8 @@ export function NotFoundExperience() {
           <i />
         </div>
         <p className="eyebrow">Error 404 / Route unavailable</p>
-        <h1 id="not-found-heading">[NOT FOUND HEADLINE PLACEHOLDER]</h1>
-        <p>
-          [NOT FOUND BODY COPY PLACEHOLDER]{" "}
-          <a href={mailto("[WEBSITE ISSUE EMAIL SUBJECT PLACEHOLDER]")}>
-            [NOT FOUND CONTACT LINK PLACEHOLDER]
-          </a>
-          .
-        </p>
+        <h1 id="not-found-heading">This route is not available.</h1>
+        <p>Return to the KAALKRIT homepage or explore the team’s projects.</p>
         <div className="not-found-experience__actions">
           <Link href="/" className="button button--primary">
             Return home <span aria-hidden="true">↗</span>
@@ -30,12 +23,6 @@ export function NotFoundExperience() {
           <Link href="/projects" className="button button--secondary">
             Explore projects <span aria-hidden="true">↗</span>
           </Link>
-          <a
-            href={mailto("[WEBSITE EMAIL SUBJECT PLACEHOLDER]")}
-            className="button button--secondary"
-          >
-            [NOT FOUND CTA PLACEHOLDER] <span aria-hidden="true">↗</span>
-          </a>
         </div>
       </div>
     </section>

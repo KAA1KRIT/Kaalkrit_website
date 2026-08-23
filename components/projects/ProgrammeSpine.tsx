@@ -4,11 +4,6 @@ import { domainLabel } from "@/content/domains";
 import { Reveal } from "@/components/ui/Reveal";
 import { StatusTag } from "@/components/ui/StatusTag";
 
-/**
- * The two NIDAR cycles presented as one continuous programme on a shared
- * spine. Numbering appears here because the order is real — 2026 is the
- * foundation for 2027. It appears nowhere that the order is decorative.
- */
 export function ProgrammeSpine({ detail = false }: { detail?: boolean }) {
   return (
     <div className="grid gap-[var(--k-5)] md:grid-cols-12">
@@ -20,7 +15,6 @@ export function ProgrammeSpine({ detail = false }: { detail?: boolean }) {
       </div>
 
       <div className="md:col-span-9 relative">
-        {/* The scale rule, turned vertical, carrying the programme. */}
         <div
           aria-hidden="true"
           className="k-rule-v absolute left-0 top-[var(--k-2)] bottom-[var(--k-2)]"
