@@ -3,7 +3,7 @@ import { absoluteUrl, SITE, SOCIAL_LINKS } from "@/content/site";
 import { publicProjects } from "@/content/projects";
 import { teamMembers } from "@/content/team";
 
-const TITLE_SUFFIX = "[SITE NAME PLACEHOLDER]";
+const TITLE_SUFFIX = "Team KAALKRIT";
 
 export function pageMetadata({
   title,
@@ -45,7 +45,7 @@ export function pageMetadata({
                 url: socialImage,
                 width: 1200,
                 height: 630,
-                alt: "[OPEN GRAPH IMAGE ALT PLACEHOLDER]",
+                alt: "Team KAALKRIT — Engineering the Future Through Innovation, Autonomy, and Intelligent Systems.",
               },
             ],
           }
@@ -84,8 +84,8 @@ export function organizationSchema() {
       "@type": "Place",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "[LOCALITY PLACEHOLDER]",
-        addressCountry: "[COUNTRY PLACEHOLDER]",
+        addressLocality: "Bengaluru",
+        addressCountry: "IN",
       },
     },
     ...(SOCIAL_LINKS.length > 0

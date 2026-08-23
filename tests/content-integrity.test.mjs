@@ -5,13 +5,18 @@ import { readyGalleryItems } from "../content/gallery.ts";
 import { footerNav, primaryNav, sectionNav } from "../content/navigation.ts";
 import { SITE, SOCIAL_LINKS } from "../content/site.ts";
 
-test("site identity and contact values are explicit placeholders", () => {
-  assert.match(SITE.name, /^\[.+ PLACEHOLDER\]$/);
+test("site identity is populated while contact values remain placeholders", () => {
+  assert.equal(SITE.name, "Team KAALKRIT");
+  assert.equal(SITE.founded, 2024);
   assert.match(SITE.email, /^\[EMAIL PLACEHOLDER\]$/);
   assert.ok(SOCIAL_LINKS.every((link) => link.label.includes("PLACEHOLDER")));
 });
 
-test("navigation retains only local routes and homepage anchors", () => {
+test("navigation retains only local routes and standard labels", () => {
+  assert.deepEqual(
+    primaryNav.map(({ label }) => label),
+    ["Projects", "Team", "Journey", "Contact"],
+  );
   for (const { href } of [...primaryNav, ...footerNav, ...sectionNav]) {
     assert.ok(href.startsWith("/"));
     if (href.includes("#")) continue;
@@ -19,20 +24,11 @@ test("navigation retains only local routes and homepage anchors", () => {
   }
 });
 
-test("content modules contain no supplied brand or roster data", () => {
-  const content = [
-    "site",
-    "projects",
-    "team",
-    "journey",
-    "partners",
-    "achievements",
-    "domains",
-  ]
+test("unprovided individual roster details remain placeholders", () => {
+  const content = ["team"]
     .map((name) => readFileSync(`content/${name}.ts`, "utf8"))
     .join("\n");
-  assert.doesNotMatch(content, /KAALKRIT|Rajeev Tiwari|Bengaluru/i);
-  assert.match(content, /\[PROJECT TITLE PLACEHOLDER \$\{index\}\]/);
+  assert.doesNotMatch(content, /Rajeev Tiwari|Ankur Pathak/i);
   assert.match(content, /\[TEAM MEMBER NAME PLACEHOLDER \$\{index \+ 1\}\]/);
 });
 

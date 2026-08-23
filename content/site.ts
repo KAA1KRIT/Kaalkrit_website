@@ -28,17 +28,18 @@ export const ANALYTICS_ENABLED =
   process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "true";
 
 export const SITE = {
-  name: "[SITE NAME PLACEHOLDER]",
-  legalName: "[LEGAL ENTITY NAME PLACEHOLDER]",
-  parentOrganization: "[PARENT ORGANIZATION PLACEHOLDER]",
-  parentShortName: "[PARENT ORGANIZATION SHORT NAME PLACEHOLDER]",
-  location: "[LOCATION PLACEHOLDER]",
-  founded: "[FOUNDED YEAR PLACEHOLDER]",
+  name: "Team KAALKRIT",
+  legalName: "Team KAALKRIT",
+  parentOrganization: "Sir M. Visvesvaraya Institute of Technology",
+  parentShortName: "Sir MVIT",
+  location: "Bengaluru",
+  founded: 2024,
   email: "[EMAIL PLACEHOLDER]",
   instagram: "https://social-link-placeholder.invalid/instagram",
   x: "https://social-link-placeholder.invalid/x",
   url: productionSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
-  description: "[SITE DESCRIPTION PLACEHOLDER]",
+  description:
+    "Team KAALKRIT is the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru — building autonomous aerial systems, robotics, and intelligent engineering solutions.",
 } as const;
 
 export const SOCIAL_LINKS: SocialLink[] = [

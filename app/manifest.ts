@@ -2,9 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "[MANIFEST NAME PLACEHOLDER]",
-    short_name: "[MANIFEST SHORT NAME PLACEHOLDER]",
-    description: "[MANIFEST DESCRIPTION PLACEHOLDER]",
+    name: "Team KAALKRIT",
+    short_name: "KAALKRIT",
+    description:
+      "Team KAALKRIT is the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology (Sir MVIT), Bengaluru — building autonomous aerial systems, robotics, and intelligent engineering solutions.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

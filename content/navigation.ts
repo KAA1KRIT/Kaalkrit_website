@@ -1,20 +1,20 @@
 import type { NavItem } from "@/lib/types";
 
 export const primaryNav: NavItem[] = [
-  { label: "[PRIMARY NAV ITEM PLACEHOLDER 1]", href: "/projects" },
-  { label: "[PRIMARY NAV ITEM PLACEHOLDER 2]", href: "/team" },
-  { label: "[PRIMARY NAV ITEM PLACEHOLDER 3]", href: "/journey" },
-  { label: "[PRIMARY NAV ITEM PLACEHOLDER 4]", href: "/contact" },
+  { label: "Projects", href: "/projects" },
+  { label: "Team", href: "/team" },
+  { label: "Journey", href: "/journey" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "[FOOTER NAV ITEM PLACEHOLDER 1]", href: "/#projects" },
-  { label: "[FOOTER NAV ITEM PLACEHOLDER 2]", href: "/#capabilities" },
-  { label: "[FOOTER NAV ITEM PLACEHOLDER 3]", href: "/projects" },
-  { label: "[FOOTER NAV ITEM PLACEHOLDER 4]", href: "/journey" },
-  { label: "[FOOTER NAV ITEM PLACEHOLDER 5]", href: "/team" },
-  { label: "[FOOTER NAV ITEM PLACEHOLDER 6]", href: "/partners" },
-  { label: "[FOOTER NAV ITEM PLACEHOLDER 7]", href: "/contact" },
+  { label: "Home", href: "/#projects" },
+  { label: "What We Do", href: "/#capabilities" },
+  { label: "Projects", href: "/projects" },
+  { label: "Journey", href: "/journey" },
+  { label: "Team", href: "/team" },
+  { label: "Partners", href: "/partners" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const sectionNav: NavItem[] = [

@@ -17,8 +17,9 @@ const brandFont = Bungee({
 export const metadata: Metadata = {
   ...(SITE.url ? { metadataBase: new URL(SITE.url) } : {}),
   title: {
-    default: "[SITE TITLE PLACEHOLDER]",
-    template: "%s — [SITE NAME PLACEHOLDER]",
+    default:
+      "Team KAALKRIT — Engineering the Future Through Innovation, Autonomy, and Intelligent Systems.",
+    template: "%s — Team KAALKRIT",
   },
   description: SITE.description,
   applicationName: SITE.name,

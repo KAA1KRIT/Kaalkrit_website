@@ -3,8 +3,9 @@ import { SITE } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "[HOME PAGE TITLE PLACEHOLDER]",
-  fullTitle: "[HOME PAGE SEO TITLE PLACEHOLDER]",
+  title: "Team KAALKRIT",
+  fullTitle:
+    "Team KAALKRIT — Engineering the Future Through Innovation, Autonomy, and Intelligent Systems.",
   description: SITE.description,
   path: "/",
 });
