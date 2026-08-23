@@ -43,7 +43,14 @@ tests/        Content and route-integrity tests
 
 ## Brand and assets
 
-The public site uses a dark engineering system: near-black surfaces, off-white type, electric blue technical accents, fine schematic lines, and angular framing inspired by the approved KAALKRIT ID-card reference.
+The public site preserves its dark engineering system: near-black surfaces, off-white type, electric-blue technical accents, fine schematic lines, and angular framing inspired by the approved KAALKRIT ID-card reference.
+
+- Crimson Text is reserved for editorial display headings and narrative statements.
+- Palanquin Dark carries navigation, controls, project titles, and technical structure.
+- Mukta Vaani is the readable body and supporting-information face.
+- `components/ui/DepthText.tsx` is the decorative KAALKRIT typographic signature. Pair it with a semantic heading or label; do not use it for body copy.
+- `components/hero/GradientWaves.tsx` is used only in the hero. It dynamically loads, pauses off-screen and in hidden tabs, and falls back to static CSS for reduced-motion and low-power contexts.
+- `components/ui/loader.tsx` provides the shared `LoaderFour` loading primitive used by `LoadingExperience`.
 
 - `public/brand/` contains the canonical KAALKRIT logo. Do not recreate, crop, or substitute it.
 - `public/images/projects/` contains approved project media.

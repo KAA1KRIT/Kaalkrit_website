@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { EngineeringHero } from "@/components/hero/EngineeringHero";
+import { Button } from "@/components/ui/Button";
+import { DepthText } from "@/components/ui/DepthText";
 import { achievements } from "@/content/achievements";
 import { domainsByGroup, lifecycleStages } from "@/content/domains";
 import { publicProjects, statusLabel } from "@/content/projects";
@@ -8,6 +10,8 @@ import { SITE } from "@/content/site";
 import { teamMembers } from "@/content/team";
 
 export function LandingPage() {
+  const [featuredProject, ...supportingProjects] = publicProjects;
+
   return (
     <>
       <EngineeringHero />
@@ -17,9 +21,12 @@ export function LandingPage() {
           <p className="technical-label">02 / Mission</p>
           <div>
             <h2 id="mission-heading">
-              Engineering that begins with the system, not the spectacle.
+              A student-led engineering team built around complete systems.
             </h2>
-            <p className="section-lede">{SITE.mission}</p>
+            <p className="section-lede">
+              {SITE.mission} From early research through testing and validation,
+              the team connects disciplines that are often treated separately.
+            </p>
           </div>
         </div>
       </section>
@@ -32,7 +39,9 @@ export function LandingPage() {
           <div className="split-heading">
             <p className="technical-label">03 / Engineering lifecycle</p>
             <div>
-              <h2 id="lifecycle-heading">From research to validation.</h2>
+              <h2 id="lifecycle-heading">
+                A connected lifecycle, from first question to validation.
+              </h2>
               <p className="section-lede">
                 KAALKRIT approaches engineering as a connected lifecycle, with
                 each discipline informing the next.
@@ -55,9 +64,7 @@ export function LandingPage() {
           <div className="split-heading">
             <p className="technical-label">04 / Engineering domains</p>
             <div>
-              <h2 id="domains-heading">
-                A multidisciplinary capability index.
-              </h2>
+              <h2 id="domains-heading">Disciplines arranged as one system.</h2>
               <p className="section-lede">
                 The team combines the disciplines required to build and validate
                 intelligent systems.
@@ -91,7 +98,7 @@ export function LandingPage() {
             <p className="technical-label">05 / Projects</p>
             <div>
               <h2 id="projects-heading">
-                Work in autonomous systems, robotics, and engineering platforms.
+                Current work, with room to go deeper.
               </h2>
               <p className="section-lede">
                 Each project is a practical setting for systems thinking across
@@ -99,20 +106,41 @@ export function LandingPage() {
               </p>
             </div>
           </div>
-          <div className="project-index">
-            {publicProjects.map((project, index) => (
-              <article key={project.slug} className="project-index__item">
+          <div className="project-index project-index--hierarchical">
+            {featuredProject ? (
+              <article className="project-index__item project-index__item--featured">
                 <div className="project-index__meta">
-                  <span>0{index + 1}</span>
-                  <span>{statusLabel[project.status]}</span>
+                  <span>01 / Featured engineering brief</span>
+                  <span>{statusLabel[featuredProject.status]}</span>
                 </div>
-                <h3>{project.title}</h3>
-                <p>{project.summary}</p>
-                <Link href={`/projects/${project.slug}`} className="text-link">
+                <h3>{featuredProject.title}</h3>
+                <p>{featuredProject.summary}</p>
+                <Link
+                  href={`/projects/${featuredProject.slug}`}
+                  className="text-link"
+                >
                   Project brief <span aria-hidden="true">→</span>
                 </Link>
               </article>
-            ))}
+            ) : null}
+            <div className="project-index__supporting">
+              {supportingProjects.map((project, index) => (
+                <article key={project.slug} className="project-index__item">
+                  <div className="project-index__meta">
+                    <span>{String(index + 2).padStart(2, "0")}</span>
+                    <span>{statusLabel[project.status]}</span>
+                  </div>
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="text-link"
+                  >
+                    Project brief <span aria-hidden="true">→</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -134,7 +162,7 @@ export function LandingPage() {
           <div>
             <p className="technical-label">06 / Progress</p>
             <h2 id="progress-heading">
-              Evidence through engineering practice.
+              Progress is built through practical engineering.
             </h2>
             <ul className="achievement-list">
               {achievements.map((achievement) => (
@@ -156,7 +184,7 @@ export function LandingPage() {
           <div className="people-preview__copy">
             <p className="technical-label">07 / People</p>
             <h2 id="people-heading">
-              A multidisciplinary team with one engineering direction.
+              A multidisciplinary team, aligned by the work.
             </h2>
             <p className="section-lede">
               KAALKRIT’s work is supported by technical, outreach, creative, and
@@ -187,7 +215,7 @@ export function LandingPage() {
         <div className="k-container split-heading">
           <p className="technical-label">08 / Direction</p>
           <div>
-            <h2 id="direction-heading">Future-facing, clearly labelled.</h2>
+            <h2 id="direction-heading">Future direction, clearly labelled.</h2>
             <p className="section-lede">
               KAALKRIT is looking toward autonomous drones, AI-powered robotics,
               swarm intelligence, computer-vision-driven autonomy, embedded
@@ -215,15 +243,24 @@ export function LandingPage() {
             industry, startups, research organisations, and communities working
             on connected technical challenges.
           </p>
-          <Link href="/partners" className="button button--primary">
+          <Button href="/partners" variant="primary">
             Collaboration context <span aria-hidden="true">↗</span>
-          </Link>
+          </Button>
         </div>
       </section>
 
       <section className="closing-mark" aria-label="KAALKRIT closing statement">
         <div className="k-container">
-          <p>KAALKRIT / Precision, autonomy, systems.</p>
+          <p className="technical-label">10 / KAALKRIT</p>
+          <DepthText
+            text="KAALKRIT"
+            layers={14}
+            depth={1.1}
+            faceColor="var(--foreground)"
+            depthColor="var(--primary)"
+            fontSize="clamp(2.6rem, 8vw, 6.8rem)"
+          />
+          <p>Precision, autonomy, systems.</p>
         </div>
       </section>
     </>
