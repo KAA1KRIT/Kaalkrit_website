@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, type RefObject } from "react";
-import { primaryNav } from "@/content/navigation";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Button } from "@/components/ui/Button";
+import { collaborationCta, primaryNav } from "@/content/navigation";
 
 const focusableSelector = [
   "a[href]",
@@ -30,6 +32,7 @@ export function MobileNavigation({
 }: MobileNavigationProps) {
   const pathname = usePathname();
   const panelRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (!open) return;
@@ -105,39 +108,82 @@ export function MobileNavigation({
     };
   }, [onClose, open, triggerRef]);
 
+  const transition = reducedMotion
+    ? { duration: 0 }
+    : { duration: 0.2, ease: [0.2, 0, 0, 1] as const };
+
   return (
-    <div
-      hidden={!open}
-      className="mobile-navigation"
-      onPointerDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
-    >
-      <aside
-        ref={panelRef}
-        id={panelId}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Primary navigation"
-        className="mobile-navigation__inner"
-      >
-        <nav aria-label="Primary mobile navigation">
-          {primaryNav.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
+    <AnimatePresence initial={!reducedMotion}>
+      {open ? (
+        <motion.div
+          className="mobile-navigation"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={transition}
+          onPointerDown={(event) => {
+            if (event.target === event.currentTarget) onClose();
+          }}
+        >
+          <motion.aside
+            ref={panelRef}
+            id={panelId}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Primary navigation"
+            className="mobile-navigation__inner"
+            initial={reducedMotion ? false : { opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={transition}
+          >
+            <nav aria-label="Primary mobile navigation">
+              {primaryNav.map((item, index) => {
+                const active =
+                  pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`);
+                return (
+                  <motion.div
+                    key={item.href}
+                    initial={reducedMotion ? false : { opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={
+                      reducedMotion
+                        ? transition
+                        : { ...transition, delay: 0.04 + index * 0.035 }
+                    }
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      aria-current={active ? "page" : undefined}
+                      className="mobile-navigation__link"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </nav>
+            <motion.div
+              initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={
+                reducedMotion ? transition : { ...transition, delay: 0.2 }
+              }
+            >
+              <Button
+                href={collaborationCta.href}
+                variant="primary"
+                className="mobile-navigation__cta"
                 onClick={onClose}
-                aria-current={active ? "page" : undefined}
               >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-      </aside>
-    </div>
+                {collaborationCta.label}
+              </Button>
+            </motion.div>
+          </motion.aside>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }

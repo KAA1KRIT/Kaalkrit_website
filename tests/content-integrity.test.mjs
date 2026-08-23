@@ -2,7 +2,11 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
-import { footerNav, primaryNav } from "../content/navigation.ts";
+import {
+  collaborationCta,
+  footerNav,
+  primaryNav,
+} from "../content/navigation.ts";
 import { publicProjects } from "../content/projects.ts";
 import { SITE } from "../content/site.ts";
 
@@ -66,9 +70,12 @@ test("navigation exposes only substantive public routes", () => {
       ["Projects", "/projects"],
       ["Journey", "/journey"],
       ["Team", "/team"],
-      ["Collaborate", "/partners"],
     ],
   );
+  assert.deepEqual(collaborationCta, {
+    label: "Partner with us",
+    href: "/partners",
+  });
   assert.deepEqual(
     footerNav.map(({ label, href }) => [label, href]),
     [

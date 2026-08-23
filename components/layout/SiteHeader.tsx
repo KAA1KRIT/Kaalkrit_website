@@ -1,16 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useId, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
-import { Wordmark } from "@/components/ui/Wordmark";
+import { Navbar1 } from "@/components/ui/navbar-1";
 import { MobileNavigation } from "./MobileNavigation";
-import { DesktopFlyoutNavigation } from "./DesktopFlyoutNavigation";
 
 /**
- * Sparse public navigation. The mobile menu owns its own layout so desktop
- * navigation never becomes a cramped drawer.
+ * Owns public navigation state and composes the shared floating Navbar1 with
+ * the accessible mobile sheet. The document remains the only scroll owner.
  */
 export function SiteHeader() {
   const pathname = usePathname();
@@ -29,40 +27,20 @@ export function SiteHeader() {
   const open = openRoute === pathname;
 
   const closeMenu = useCallback(() => setOpenRoute(null), []);
+  const toggleMenu = useCallback(() => {
+    setOpenRoute((current) => (current === pathname ? null : pathname));
+  }, [pathname]);
 
   return (
-    <header
-      className={`site-header fixed z-50 ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}
-    >
-      <div className="site-header__inner">
-        <Link
-          href="/"
-          className="site-header__brand-link"
-          aria-label="Team KAALKRIT — home"
-        >
-          <Wordmark priority variant="header" />
-        </Link>
-
-        <div className="site-header__desktop-navigation">
-          <DesktopFlyoutNavigation pathname={pathname} />
-        </div>
-
-        <button
-          ref={toggleRef}
-          type="button"
-          onClick={() => setOpenRoute(open ? null : pathname)}
-          aria-expanded={open}
-          aria-controls={panelId}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="site-header__menu-button"
-        >
-          {open ? "Close" : "Menu"}
-          <span aria-hidden="true" className="grid gap-[3px]">
-            <span className="block h-px w-[18px] bg-current" />
-            <span className="block h-px w-[18px] bg-current" />
-          </span>
-        </button>
-      </div>
+    <header className={`site-header ${open ? "is-open" : ""}`}>
+      <Navbar1
+        pathname={pathname}
+        scrolled={scrolled}
+        menuOpen={open}
+        menuPanelId={panelId}
+        menuButtonRef={toggleRef}
+        onMenuToggle={toggleMenu}
+      />
 
       <MobileNavigation
         open={open}

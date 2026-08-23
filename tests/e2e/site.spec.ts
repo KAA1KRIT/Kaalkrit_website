@@ -130,11 +130,16 @@ test("desktop and mobile navigation transition between public routes accessibly"
 
   await page.setViewportSize({ width: 375, height: 850 });
   await page.goto("/");
-  const menu = page.locator(".site-header__menu-button");
+  const menu = page.locator(".navbar-1__menu-button");
   await menu.click();
   await expect(
     page.getByRole("dialog", { name: "Primary navigation" }),
   ).toBeVisible();
+  await expect(
+    page
+      .getByRole("dialog", { name: "Primary navigation" })
+      .getByRole("link", { name: "Partner with us" }),
+  ).toHaveAttribute("href", "/partners");
   await expect(menu).toHaveAccessibleName("Close menu");
   await expect(menu).toHaveAttribute("aria-expanded", "true");
   await page.keyboard.press("Escape");
@@ -142,6 +147,14 @@ test("desktop and mobile navigation transition between public routes accessibly"
     page.getByRole("dialog", { name: "Primary navigation" }),
   ).toBeHidden();
   await expect(menu).toBeFocused();
+  await expect
+    .poll(() =>
+      page.evaluate(() => ({
+        overflow: document.body.style.overflow,
+        paddingRight: document.body.style.paddingRight,
+      })),
+    )
+    .toEqual({ overflow: "", paddingRight: "" });
 
   await menu.click();
   await page
@@ -152,6 +165,58 @@ test("desktop and mobile navigation transition between public routes accessibly"
   await expect(
     page.getByRole("dialog", { name: "Primary navigation" }),
   ).toBeHidden();
+  expect(faults).toEqual([]);
+});
+
+test("the floating navbar keeps real navigation, centred branding, and partnership action available", async ({
+  page,
+}) => {
+  const faults = captureApplicationFaults(page);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/projects");
+
+  const navbar = page.locator(".navbar-1");
+  await expect(navbar).toBeVisible();
+  await expect(
+    navbar.getByRole("link", { name: "Team KAALKRIT — home" }),
+  ).toBeVisible();
+  await expect(
+    navbar.getByRole("navigation", { name: "Primary" }),
+  ).toBeVisible();
+  await expect(navbar.getByRole("link", { name: "Projects" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await expect(
+    navbar.getByRole("link", { name: "Partner with us" }),
+  ).toHaveAttribute("href", "/partners");
+
+  const zones = await page.evaluate(() => {
+    const nav = document.querySelector<HTMLElement>(".navbar-1__nav");
+    const brand = document.querySelector<HTMLElement>(".navbar-1__brand");
+    const action = document.querySelector<HTMLElement>(".navbar-1__action");
+    if (!nav || !brand || !action) return null;
+    return {
+      nav: nav.getBoundingClientRect(),
+      brand: brand.getBoundingClientRect(),
+      action: action.getBoundingClientRect(),
+    };
+  });
+  expect(zones).not.toBeNull();
+  expect(zones!.nav.right).toBeLessThan(zones!.brand.left);
+  expect(zones!.brand.right).toBeLessThan(zones!.action.left);
+
+  await page.keyboard.press("Tab");
+  await expect(
+    page.getByRole("link", { name: "Skip to content" }),
+  ).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(navbar.getByRole("link", { name: "Projects" })).toBeFocused();
+  await expect(
+    navbar.getByRole("link", { name: "Partner with us" }),
+  ).toBeVisible();
+  await navbar.getByRole("link", { name: "Partner with us" }).click();
+  await expect(page).toHaveURL(/\/partners$/);
   expect(faults).toEqual([]);
 });
 
@@ -182,9 +247,11 @@ test("the public layout has no horizontal overflow from mobile through wide desk
   for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1600]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("/");
+    await page.waitForLoadState("networkidle");
     await expectNoOverflow(page);
 
     if (width >= 1280) {
+      await expect(page.locator(".project-index--hierarchical")).toBeVisible();
       const dimensions = await page.evaluate(() => {
         const index = document.querySelector<HTMLElement>(
           ".project-index--hierarchical",
@@ -308,6 +375,15 @@ test("reduced motion uses a static, readable GradientWaves fallback", async ({
     );
     await expect(page.locator(".gradient-waves canvas")).toHaveCount(0);
     await expectNoOverflow(page);
+
+    await page.setViewportSize({ width: 375, height: 850 });
+    const menu = page.locator(".navbar-1__menu-button");
+    await menu.click();
+    const dialog = page.getByRole("dialog", { name: "Primary navigation" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog).toHaveCSS("transform", "none");
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
     expect(faults).toEqual([]);
   } finally {
     await context.close();
