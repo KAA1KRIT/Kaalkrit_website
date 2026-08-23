@@ -21,7 +21,7 @@ export function pageMetadata({
 }): Metadata {
   const resolved = fullTitle ?? `${title} — ${TITLE_SUFFIX}`;
   const url = absoluteUrl(path);
-  const socialImage = absoluteUrl("/opengraph-image.svg");
+  const socialImage = absoluteUrl("/brand/kaalkrit-logo.png");
 
   return {
     // Absolute: `resolved` already carries the suffix, so the root
@@ -42,9 +42,9 @@ export function pageMetadata({
             images: [
               {
                 url: socialImage,
-                width: 1200,
-                height: 630,
-                alt: "Team KAALKRIT — Engineering the Future Through Innovation, Autonomy, and Intelligent Systems.",
+                width: 1536,
+                height: 1024,
+                alt: "Team KAALKRIT — Drone & Robotics Innovation Team",
               },
             ],
           }

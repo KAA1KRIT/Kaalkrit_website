@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Bungee } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -8,18 +7,10 @@ import { ANALYTICS_ENABLED, SITE } from "@/content/site";
 import { organizationSchema, serializeJsonLd, websiteSchema } from "@/lib/seo";
 import "@/styles/globals.css";
 
-const brandFont = Bungee({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  variable: "--font-brand",
-});
-
 export const metadata: Metadata = {
   ...(SITE.url ? { metadataBase: new URL(SITE.url) } : {}),
   title: {
-    default:
-      "Team KAALKRIT — Engineering the Future Through Innovation, Autonomy, and Intelligent Systems.",
+    default: "Team KAALKRIT — Drone & Robotics Innovation Team",
     template: "%s — Team KAALKRIT",
   },
   description: SITE.description,
@@ -30,8 +21,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f3bc16",
-  colorScheme: "light",
+  themeColor: "#05070c",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -41,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className={brandFont.variable}>
+      <body>
         <SmoothScrollProvider>
           <a
             href="#main"

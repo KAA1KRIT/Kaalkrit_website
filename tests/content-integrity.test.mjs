@@ -65,7 +65,8 @@ test("navigation exposes only substantive public routes", () => {
     [
       ["Projects", "/projects"],
       ["Journey", "/journey"],
-      ["Partners", "/partners"],
+      ["Team", "/team"],
+      ["Collaborate", "/partners"],
     ],
   );
   assert.deepEqual(
@@ -74,7 +75,11 @@ test("navigation exposes only substantive public routes", () => {
       ["Home", "/"],
       ["Projects", "/projects"],
       ["Journey", "/journey"],
+      ["Team", "/team"],
       ["Partners", "/partners"],
+      ["Privacy", "/privacy"],
+      ["Terms", "/terms"],
+      ["Accessibility", "/accessibility"],
     ],
   );
 });
@@ -88,18 +93,26 @@ test("published projects carry complete supported content and only approved loca
     assert.ok(project.significance.trim());
     assert.ok(project.capabilities.length > 0);
     if (project.media) {
-      assert.match(project.media.src, /^\/images\/approved\//);
+      assert.match(project.media.src, /^\/images\/projects\//);
       assert.ok(existsSync(`public${project.media.src}`));
       assert.ok(project.media.alt.trim());
     }
   }
 });
 
+test("manifest carries the production brand icon and dark theme", () => {
+  const manifest = readFileSync("app/manifest.ts", "utf8");
+  assert.match(manifest, /background_color: "#05070c"/);
+  assert.match(manifest, /theme_color: "#377dff"/);
+  assert.match(manifest, /src: "\/icon\.png"/);
+  assert.doesNotMatch(manifest, /icon\.svg|f3bc16/);
+});
+
 test("brand and error experiences use production-safe text assets", () => {
   for (const file of [
-    "app/icon.svg",
-    "app/apple-icon.svg",
-    "app/opengraph-image.svg",
+    "app/icon.png",
+    "app/apple-icon.png",
+    "public/brand/kaalkrit-logo.png",
     "components/ui/Wordmark.tsx",
     "components/system/NotFoundExperience.tsx",
     "components/system/GlobalErrorExperience.tsx",
@@ -114,7 +127,7 @@ test("smooth scrolling uses the current Lenis React provider", () => {
   assert.ok(existsSync(providerPath));
   const provider = readFileSync(providerPath, "utf8");
   const layout = readFileSync("app/layout.tsx", "utf8");
-  const hero = readFileSync("components/hero/ScrollExpandHero.tsx", "utf8");
+  const hero = readFileSync("components/hero/EngineeringHero.tsx", "utf8");
 
   assert.match(provider, /from "lenis\/react"/);
   assert.match(provider, /<ReactLenis\s+root/);
@@ -122,24 +135,24 @@ test("smooth scrolling uses the current Lenis React provider", () => {
   assert.match(provider, /respectReducedMotion: true/);
   assert.match(provider, /scrollTo\(0, \{ immediate: true \}\)/);
   assert.match(layout, /<SmoothScrollProvider>/);
-  assert.match(hero, /useLenis/);
+  assert.match(hero, /Autonomous engineering/);
   assert.doesNotMatch(provider, /@studio-freight/);
 });
 
-test("hero cleanup does not deliberately lose the WebGL context", () => {
-  const waves = readFileSync("components/hero/GradientWaves.tsx", "utf8");
-
-  assert.doesNotMatch(waves, /WEBGL_lose_context/);
+test("the hero uses the lightweight engineering identity rather than the retired WebGL experiment", () => {
+  assert.equal(existsSync("components/hero/EngineeringHero.tsx"), true);
+  assert.equal(existsSync("components/hero/GradientWaves.tsx"), false);
+  assert.equal(existsSync("components/hero/ScrollExpandHero.tsx"), false);
 });
 
-test("unpublished legacy routes are not retained as empty page modules", () => {
+test("team and legal routes have verified production content", () => {
   for (const path of [
     "app/team/page.tsx",
-    "app/contact/page.tsx",
     "app/privacy/page.tsx",
     "app/terms/page.tsx",
     "app/accessibility/page.tsx",
   ]) {
-    assert.equal(existsSync(path), false, path);
+    assert.equal(existsSync(path), true, path);
   }
+  assert.equal(existsSync("app/contact/page.tsx"), false);
 });

@@ -16,9 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/", 1),
     entry("/projects", 0.9),
     entry("/journey", 0.8),
+    entry("/team", 0.75),
     ...publicProjects.map((project) =>
       entry(`/projects/${project.slug}`, 0.75),
     ),
     entry("/partners", 0.65),
+    entry("/privacy", 0.3),
+    entry("/terms", 0.3),
+    entry("/accessibility", 0.3),
   ];
 }
