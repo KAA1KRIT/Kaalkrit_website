@@ -5,9 +5,8 @@ import { SITE, mailto } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contact",
-  description:
-    "Contact Team KAALKRIT for partnership, engineering collaboration, research, or joining enquiries.",
+  title: "[CONTACT PAGE TITLE PLACEHOLDER]",
+  description: "[CONTACT META DESCRIPTION PLACEHOLDER]",
   path: "/contact",
 });
 
@@ -15,10 +14,10 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Contact"
-        heading="Begin the right conversation."
-        lede="For partnership, engineering collaboration, research, or joining enquiries, use the verified Team KAALKRIT email channel."
-        meta={[SITE.email, "Sir MVIT, Bengaluru"]}
+        eyebrow="[CONTACT EYEBROW PLACEHOLDER]"
+        heading="[CONTACT HEADLINE PLACEHOLDER]"
+        lede="[CONTACT LEDE PLACEHOLDER]"
+        meta={[SITE.email, "[CONTACT LOCATION PLACEHOLDER]"]}
       />
       <section
         className="pb-[var(--k-section-y)]"
@@ -30,18 +29,17 @@ export default function ContactPage() {
               id="contact-options-heading"
               className="k-display text-[length:var(--k-t-h2)]"
             >
-              Keep it specific.
+              [CONTACT SECTION HEADING PLACEHOLDER]
             </h2>
             <p className="k-lede mt-[var(--k-5)]">
-              A short note about the area of work, organisation, or reason for
-              reaching out helps the team route the conversation.
+              [CONTACT SECTION BODY PLACEHOLDER]
             </p>
           </div>
           <div className="md:col-span-4 md:col-start-9">
-            <p className="k-meta">Verified contact</p>
+            <p className="k-meta">[CONTACT LABEL PLACEHOLDER]</p>
             <TrackedLink
               className="mt-[var(--k-3)] block break-words text-[length:var(--k-t-lede)] underline decoration-[var(--k-line-strong)] underline-offset-4"
-              href={mailto("KAALKRIT website enquiry")}
+              href={mailto("[WEBSITE EMAIL SUBJECT PLACEHOLDER]")}
               event="email_click"
               properties={{ placement: "contact" }}
             >
@@ -49,16 +47,16 @@ export default function ContactPage() {
             </TrackedLink>
             <div className="mt-[var(--k-6)] flex flex-wrap gap-[var(--k-3)]">
               <Button
-                href={mailto("Partnership with Team KAALKRIT")}
+                href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
                 variant="primary"
               >
-                Partnership
+                [CONTACT CTA PLACEHOLDER 1]
               </Button>
               <Button
-                href={mailto("Joining Team KAALKRIT")}
+                href={mailto("[RECRUITMENT EMAIL SUBJECT PLACEHOLDER]")}
                 variant="secondary"
               >
-                Joining
+                [CONTACT CTA PLACEHOLDER 2]
               </Button>
             </div>
           </div>

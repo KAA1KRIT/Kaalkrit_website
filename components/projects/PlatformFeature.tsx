@@ -4,8 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { StatusTag } from "@/components/ui/StatusTag";
 
 /**
- * BWH gets a full-width treatment because it is KAALKRIT's flagship
- * engineering-learning platform.
+ * The platform route gets a full-width treatment.
  *
  * Documented gap G9 — availability is not stated in the source. There is
  * therefore no external link and no "available" language.

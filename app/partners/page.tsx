@@ -6,9 +6,8 @@ import { mailto } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Partners",
-  description:
-    "Ways to begin an engineering, hardware, mentorship, or research conversation with KAALKRIT.",
+  title: "[PARTNERS PAGE TITLE PLACEHOLDER]",
+  description: "[PARTNERS META DESCRIPTION PLACEHOLDER]",
   path: "/partners",
 });
 
@@ -16,10 +15,13 @@ export default function PartnersPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Partners"
-        heading="Make room for meaningful engineering collaboration."
-        lede="KAALKRIT welcomes conversations with industry, startups, academia, research organisations, and engineering communities. No partnership claims are published without confirmation."
-        meta={["Collaboration conversations", "No public partner roster"]}
+        eyebrow="[PARTNERS EYEBROW PLACEHOLDER]"
+        heading="[PARTNERS HEADLINE PLACEHOLDER]"
+        lede="[PARTNERS LEDE PLACEHOLDER]"
+        meta={[
+          "[PARTNERS META PLACEHOLDER 1]",
+          "[PARTNERS META PLACEHOLDER 2]",
+        ]}
       />
       <section
         className="pb-[var(--k-section-y)]"
@@ -30,7 +32,7 @@ export default function PartnersPage() {
             id="partner-modes-heading"
             className="k-display text-[length:var(--k-t-h2)]"
           >
-            Start with the work.
+            [PARTNERS SECTION HEADING PLACEHOLDER]
           </h2>
           <div className="mt-[var(--k-7)] grid gap-px border-y border-[var(--k-line)] bg-[var(--k-line)] md:grid-cols-2">
             {collaborationModes.map((mode) => (
@@ -47,7 +49,7 @@ export default function PartnersPage() {
                   className="text-link mt-[var(--k-5)]"
                   href={mailto(mode.subject)}
                 >
-                  Start a conversation <span aria-hidden="true">→</span>
+                  [PARTNERS CTA PLACEHOLDER] <span aria-hidden="true">→</span>
                 </a>
               </article>
             ))}
@@ -55,16 +57,16 @@ export default function PartnersPage() {
           <div className="mt-[var(--k-7)]">
             <GapNote
               id="P1"
-              title="Partnership information is kept factual."
-              detail="KAALKRIT shares partner materials only when they are confirmed for public use."
+              title="[PARTNERS NOTE TITLE PLACEHOLDER]"
+              detail="[PARTNERS NOTE BODY PLACEHOLDER]"
             />
           </div>
           <div className="mt-[var(--k-7)]">
             <Button
-              href={mailto("Partnership with Team KAALKRIT")}
+              href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
               variant="primary"
             >
-              Partner with KAALKRIT
+              [PARTNERS CTA PLACEHOLDER]
             </Button>
           </div>
         </div>

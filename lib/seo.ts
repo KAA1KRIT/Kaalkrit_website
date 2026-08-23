@@ -3,7 +3,7 @@ import { absoluteUrl, SITE, SOCIAL_LINKS } from "@/content/site";
 import { publicProjects } from "@/content/projects";
 import { teamMembers } from "@/content/team";
 
-const TITLE_SUFFIX = "KAALKRIT";
+const TITLE_SUFFIX = "[SITE NAME PLACEHOLDER]";
 
 export function pageMetadata({
   title,
@@ -45,7 +45,7 @@ export function pageMetadata({
                 url: socialImage,
                 width: 1200,
                 height: 630,
-                alt: "KAALKRIT — Engineering what moves next",
+                alt: "[OPEN GRAPH IMAGE ALT PLACEHOLDER]",
               },
             ],
           }
@@ -84,8 +84,8 @@ export function organizationSchema() {
       "@type": "Place",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Bengaluru",
-        addressCountry: "IN",
+        addressLocality: "[LOCALITY PLACEHOLDER]",
+        addressCountry: "[COUNTRY PLACEHOLDER]",
       },
     },
     ...(SOCIAL_LINKS.length > 0
@@ -109,7 +109,7 @@ export function projectsSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "KAALKRIT projects",
+    name: "[PROJECT LIST SCHEMA NAME PLACEHOLDER]",
     itemListElement: publicProjects.map((project, index) => ({
       "@type": "ListItem",
       position: index + 1,

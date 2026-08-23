@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 export function GallerySkeleton({
-  label = "Loading media",
+  label = "[GALLERY LOADING LABEL PLACEHOLDER]",
 }: {
   label?: string;
 }) {
@@ -19,8 +19,8 @@ export function GallerySkeleton({
 }
 
 export function GalleryEmptyState({
-  title = "Media documentation",
-  description = "Visual documentation will be shared when it is ready for publication.",
+  title = "[GALLERY TITLE PLACEHOLDER]",
+  description = "[GALLERY DESCRIPTION PLACEHOLDER]",
   children,
 }: {
   title?: string;
@@ -29,7 +29,7 @@ export function GalleryEmptyState({
 }) {
   return (
     <div className="gallery-state gallery-state--empty">
-      <p className="k-meta">Media archive</p>
+      <p className="k-meta">[GALLERY LABEL PLACEHOLDER]</p>
       <h3>{title}</h3>
       <p>{description}</p>
       {children}
@@ -38,13 +38,13 @@ export function GalleryEmptyState({
 }
 
 export function GalleryErrorState({
-  description = "This media section could not be loaded. Please try again later.",
+  description = "[GALLERY ERROR DESCRIPTION PLACEHOLDER]",
 }: {
   description?: string;
 }) {
   return (
     <div className="gallery-state gallery-state--error" role="alert">
-      <p className="k-meta">Media unavailable</p>
+      <p className="k-meta">[GALLERY ERROR LABEL PLACEHOLDER]</p>
       <p>{description}</p>
     </div>
   );

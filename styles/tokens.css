@@ -52,7 +52,7 @@
   --font-display: var(--font-sans);
   --font-body: var(--font-sans);
 
-  /* KAALKRIT layout aliases resolve only to the semantic theme above. */
+  /* Layout aliases resolve only to the semantic theme above. */
   --k-void: var(--background);
   --k-surface: var(--background);
   --k-surface-2: var(--secondary);

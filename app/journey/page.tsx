@@ -9,9 +9,8 @@ import { DriftWallGallery } from "@/components/gallery/DriftWallGallery";
 import { journeyGallery } from "@/content/gallery";
 
 export const metadata = pageMetadata({
-  title: "Our Journey",
-  description:
-    "KAALKRIT from its founding at Sir MVIT in 2024 through the NIDAR 2026 unmanned aerial system, national-level competition, the ground-robotics track, Build With Hardware and AirMOS for NIDAR 2027.",
+  title: "[JOURNEY PAGE TITLE PLACEHOLDER]",
+  description: "[JOURNEY META DESCRIPTION PLACEHOLDER]",
   path: "/journey",
 });
 
@@ -19,11 +18,11 @@ export default function JourneyPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Our journey"
-        heading="From an engineering team to a continuing programme."
-        lede="Dates are year-granular because that is what the record supports. Nothing here is estimated, and nothing is placed on the timeline that has not happened or is not explicitly labelled as direction."
+        eyebrow="[JOURNEY EYEBROW PLACEHOLDER]"
+        heading="[JOURNEY HEADLINE PLACEHOLDER]"
+        lede="[JOURNEY LEDE PLACEHOLDER]"
         meta={[
-          `Founded ${SITE.founded}`,
+          `[FOUNDED LABEL PLACEHOLDER] ${SITE.founded}`,
           `${SITE.parentShortName}, ${SITE.location}`,
         ]}
       />
@@ -45,28 +44,24 @@ export default function JourneyPage() {
               id="journey-next"
               className="k-display md:col-span-5 text-[length:var(--k-t-h2)]"
             >
-              The next cycle is open.
+              [JOURNEY CTA HEADLINE PLACEHOLDER]
             </h2>
             <div className="md:col-span-6 md:col-start-7">
-              <p className="k-body">
-                AirMOS is in development now. KAALKRIT is open to meaningful
-                collaboration with organisations that want to contribute to the
-                work.
-              </p>
+              <p className="k-body">[JOURNEY CTA BODY COPY PLACEHOLDER]</p>
               <div className="mt-[var(--k-6)] flex flex-col xs:flex-row gap-[var(--k-3)]">
                 <Button
                   href="/projects"
                   variant="primary"
                   className="max-xs:w-full"
                 >
-                  See the work
+                  [JOURNEY CTA PLACEHOLDER 1]
                 </Button>
                 <Button
                   href="/#partnership"
                   variant="ghost"
                   trailing={<Arrow />}
                 >
-                  Partner with us
+                  [JOURNEY CTA PLACEHOLDER 2]
                 </Button>
               </div>
             </div>
@@ -84,11 +79,10 @@ export default function JourneyPage() {
             id="journey-archive-heading"
             className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]"
           >
-            Visual archive.
+            [JOURNEY ARCHIVE HEADING PLACEHOLDER]
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            Visual documentation is shared only when approval and publication
-            permission are confirmed.
+            [JOURNEY ARCHIVE BODY COPY PLACEHOLDER]
           </p>
           <div className="mt-[var(--k-7)]">
             <DriftWallGallery items={journeyGallery} />

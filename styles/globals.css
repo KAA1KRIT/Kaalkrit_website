@@ -123,18 +123,22 @@ svg {
   border-radius: 6px;
   background: transparent;
 }
-.wordmark__image {
-  width: 52px;
-  max-width: none;
-  height: auto;
-  object-fit: contain;
+.wordmark__placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  padding: 0.25rem;
+  border: 1px dashed var(--k-line-strong);
+  color: var(--k-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  line-height: 1.1;
+  text-align: center;
 }
 .wordmark--header {
   width: 58px;
   height: 54px;
-}
-.wordmark--header .wordmark__image {
-  width: 54px;
 }
 .wordmark--footer {
   width: 72px;
@@ -142,16 +146,9 @@ svg {
   border-color: transparent;
   background: transparent;
 }
-.wordmark--footer .wordmark__image {
-  width: 34px;
-  height: auto;
-}
 .wordmark--system {
   width: 104px;
   height: 44px;
-}
-.wordmark--system .wordmark__image {
-  width: 44px;
 }
 .public-section,
 .k-section {
@@ -1938,7 +1935,7 @@ svg {
   inset: 0;
   transform-style: preserve-3d;
 }
-.kaalkrit-depth-card {
+.depth-carousel-card {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1956,11 +1953,11 @@ svg {
     opacity 260ms var(--k-ease),
     transform 520ms var(--k-ease);
 }
-.kaalkrit-depth-card img,
+.depth-carousel-card img,
 .registry-morph-slide img {
   object-fit: cover;
 }
-.kaalkrit-depth-card figcaption,
+.depth-carousel-card figcaption,
 .registry-morph-slide figcaption {
   position: absolute;
   right: 16px;
@@ -2086,7 +2083,7 @@ svg {
   .registry-depth-carousel {
     min-height: 350px;
   }
-  .kaalkrit-depth-card {
+  .depth-carousel-card {
     width: 62vw;
     height: 72%;
   }

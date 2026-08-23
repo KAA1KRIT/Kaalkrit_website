@@ -1,5 +1,5 @@
 export type SocialLink = {
-  label: "Instagram" | "X";
+  label: string;
   href: string;
   ariaLabel: string;
 };
@@ -28,31 +28,29 @@ export const ANALYTICS_ENABLED =
   process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "true";
 
 export const SITE = {
-  name: "KAALKRIT",
-  legalName: "Team KAALKRIT",
-  parentOrganization: "Sir M. Visvesvaraya Institute of Technology",
-  parentShortName: "Sir MVIT",
-  location: "Bengaluru, India",
-  founded: 2024,
-  email: "teamkaalkrit@gmail.com",
-  instagram: "https://www.instagram.com/team_kaalkrit/",
-  x: "https://x.com/KAALKRit",
-  /** Set NEXT_PUBLIC_SITE_URL at deployment time; never use a placeholder. */
+  name: "[SITE NAME PLACEHOLDER]",
+  legalName: "[LEGAL ENTITY NAME PLACEHOLDER]",
+  parentOrganization: "[PARENT ORGANIZATION PLACEHOLDER]",
+  parentShortName: "[PARENT ORGANIZATION SHORT NAME PLACEHOLDER]",
+  location: "[LOCATION PLACEHOLDER]",
+  founded: "[FOUNDED YEAR PLACEHOLDER]",
+  email: "[EMAIL PLACEHOLDER]",
+  instagram: "https://social-link-placeholder.invalid/instagram",
+  x: "https://social-link-placeholder.invalid/x",
   url: productionSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
-  description:
-    "KAALKRIT is the official drone and robotics innovation team of Sir M. Visvesvaraya Institute of Technology, Bengaluru. We engineer autonomous aerial systems, robotics, embedded systems, AI and software.",
+  description: "[SITE DESCRIPTION PLACEHOLDER]",
 } as const;
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: "Instagram",
+    label: "[SOCIAL PLATFORM PLACEHOLDER 1]",
     href: SITE.instagram,
-    ariaLabel: "Follow Team KAALKRIT on Instagram",
+    ariaLabel: "[SOCIAL LINK ARIA LABEL PLACEHOLDER 1]",
   },
   {
-    label: "X",
+    label: "[SOCIAL PLATFORM PLACEHOLDER 2]",
     href: SITE.x,
-    ariaLabel: "Follow Team KAALKRIT on X",
+    ariaLabel: "[SOCIAL LINK ARIA LABEL PLACEHOLDER 2]",
   },
 ];
 

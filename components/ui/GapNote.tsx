@@ -17,7 +17,9 @@ export function GapNote({
 }) {
   return (
     <div className="border border-[var(--k-line)] border-l-2 border-l-[var(--k-signal)] bg-[var(--k-surface)] p-[var(--k-5)] rounded-[var(--k-radius)] max-w-[60ch]">
-      <p className="k-meta text-[var(--k-signal)]">KAALKRIT update · {id}</p>
+      <p className="k-meta text-[var(--k-signal)]">
+        [UPDATE LABEL PLACEHOLDER] · {id}
+      </p>
       <p className="mt-[var(--k-3)] text-[var(--k-text)] font-medium">
         {title}
       </p>

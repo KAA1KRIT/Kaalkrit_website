@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import type { GalleryItem } from "@/lib/types";
 
-/** Typed, low-power-safe KAALKRIT adaptation of the React Bits MorphSlider registry component. */
+/** Typed, low-power-safe adapter for the MorphSlider registry component. */
 export function MorphSliderRegistry({ items }: { items: GalleryItem[] }) {
   const [active, setActive] = useState(0);
   const move = (delta: number) =>

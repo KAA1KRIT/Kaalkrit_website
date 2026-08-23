@@ -14,13 +14,10 @@ export function SiteFooter() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Wordmark variant="footer" />
-            <p>
-              Official Drone and Robotics Innovation Team of Sir MVIT,
-              Bengaluru.
-            </p>
-            <span>Established {SITE.founded}</span>
+            <p>[FOOTER ORGANIZATION DESCRIPTION PLACEHOLDER]</p>
+            <span>[FOOTER FOUNDING LABEL PLACEHOLDER] {SITE.founded}</span>
             <TrackedLink
-              href={mailto("KAALKRIT website enquiry")}
+              href={mailto("[WEBSITE EMAIL SUBJECT PLACEHOLDER]")}
               className="footer-email"
               event="email_click"
               properties={{ placement: "footer" }}
@@ -29,7 +26,7 @@ export function SiteFooter() {
             </TrackedLink>
           </div>
           <nav aria-label="Footer navigation" className="footer-nav">
-            <h2>Navigate</h2>
+            <h2>[FOOTER NAV HEADING PLACEHOLDER]</h2>
             <ul>
               {footerNav.map((item) => (
                 <li key={item.href}>
@@ -41,7 +38,7 @@ export function SiteFooter() {
             </ul>
           </nav>
           <nav aria-label="Footer actions" className="footer-nav">
-            <h2>Connect</h2>
+            <h2>[FOOTER CONNECT HEADING PLACEHOLDER]</h2>
             <ul>
               {sectionNav.map((item) => (
                 <li key={item.href}>
@@ -51,7 +48,9 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-            <h2 className="footer-nav__subhead">Follow</h2>
+            <h2 className="footer-nav__subhead">
+              [FOOTER SOCIAL HEADING PLACEHOLDER]
+            </h2>
             <ul>
               {SOCIAL_LINKS.map((link) => (
                 <li key={link.href}>
@@ -71,31 +70,28 @@ export function SiteFooter() {
             </ul>
           </nav>
           <nav aria-label="Legal navigation" className="footer-nav">
-            <h2>Legal</h2>
+            <h2>[FOOTER LEGAL HEADING PLACEHOLDER]</h2>
             <ul>
               <li>
                 <Link href="/privacy" className={footerLink}>
-                  Privacy Policy
+                  [PRIVACY NAV LABEL PLACEHOLDER]
                 </Link>
               </li>
               <li>
                 <Link href="/terms" className={footerLink}>
-                  Terms of Use
+                  [TERMS NAV LABEL PLACEHOLDER]
                 </Link>
               </li>
               <li>
                 <Link href="/accessibility" className={footerLink}>
-                  Accessibility Statement
+                  [ACCESSIBILITY NAV LABEL PLACEHOLDER]
                 </Link>
               </li>
             </ul>
           </nav>
         </div>
         <div className="footer-endline">
-          <span>
-            © {year} Team KAALKRIT · Official Drone and Robotics Innovation Team
-            of Sir MVIT, Bengaluru
-          </span>
+          <span>© {year} [FOOTER COPYRIGHT PLACEHOLDER]</span>
           <a href="#main" className="back-to-top">
             Back to top ↑
           </a>

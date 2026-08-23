@@ -95,7 +95,7 @@ export function Timeline() {
 
       <ol
         className="grid gap-[var(--k-10)] pl-[var(--k-6)] md:pl-0"
-        aria-label="KAALKRIT milestones"
+        aria-label="[MILESTONES ARIA LABEL PLACEHOLDER]"
       >
         {milestones.map((milestone, index) => {
           const project = milestone.projectSlug

@@ -23,10 +23,12 @@ export function LegalPageLayout({
         <div className="legal-page__content">{children}</div>
         <div className="legal-page__socials">
           <span>Official contact</span>
-          <a href={mailto("KAALKRIT website enquiry")}>{SITE.email}</a>
+          <a href={mailto("[WEBSITE EMAIL SUBJECT PLACEHOLDER]")}>
+            {SITE.email}
+          </a>
         </div>
         <div className="legal-page__back">
-          <Link href="/">← Back to KAALKRIT</Link>
+          <Link href="/">← [HOME LINK LABEL PLACEHOLDER]</Link>
         </div>
       </div>
     </article>

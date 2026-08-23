@@ -41,7 +41,7 @@ export function SiteHeader() {
         <Link
           href="/"
           className="site-header__brand-link"
-          aria-label="KAALKRIT — home"
+          aria-label="[SITE NAME PLACEHOLDER] — [HOME LINK ARIA LABEL PLACEHOLDER]"
         >
           <Wordmark priority variant="header" />
         </Link>
@@ -50,11 +50,11 @@ export function SiteHeader() {
           <DesktopFlyoutNavigation pathname={pathname} />
           <TrackedLink
             className="site-header__cta"
-            href={mailto("Partnership with Team KAALKRIT")}
+            href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
             event="partner_cta_click"
             properties={{ placement: "header" }}
           >
-            Partner with KAALKRIT
+            [HEADER CTA PLACEHOLDER]
           </TrackedLink>
         </div>
 

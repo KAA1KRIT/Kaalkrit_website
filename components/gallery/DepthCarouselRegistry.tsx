@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { GalleryItem } from "@/lib/types";
 
-/** Typed KAALKRIT adaptation of the React Bits DepthCarousel JS + CSS registry component. */
+/** Typed adapter for the DepthCarousel registry component. */
 export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
   const [active, setActive] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
   useEffect(() => {
     if (reducedRef.current || !rootRef.current) return;
     const animations = Array.from(
-      rootRef.current.querySelectorAll<HTMLElement>(".kaalkrit-depth-card"),
+      rootRef.current.querySelectorAll<HTMLElement>(".depth-carousel-card"),
     ).map((card, index) =>
       card.animate(
         [
@@ -49,7 +49,7 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
       ref={rootRef}
       className="registry-depth-carousel"
       tabIndex={0}
-      aria-label="KAALKRIT media gallery"
+      aria-label="[MEDIA GALLERY ARIA LABEL PLACEHOLDER]"
       onKeyDown={(event) => {
         if (event.key === "ArrowLeft") {
           event.preventDefault();
@@ -75,7 +75,7 @@ export function DepthCarouselRegistry({ items }: { items: GalleryItem[] }) {
           return (
             <figure
               key={item.id}
-              className="kaalkrit-depth-card"
+              className="depth-carousel-card"
               style={
                 {
                   "--depth": `${distance * -170}px`,

@@ -52,28 +52,12 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Keep the canonical brand filename revalidating so replacements are
-        // picked up without an immutable asset-cache delay.
-        source: "/logo_favicon.jpg",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
-        ],
-      },
-      {
         source: "/images/approved/:path*",
         headers: [
           {
             key: "Cache-Control",
             value: "public, max-age=86400, stale-while-revalidate=604800",
           },
-        ],
-      },
-      {
-        // The filename is intentionally stable so a revised official mark can
-        // propagate without a stale immutable cache entry.
-        source: "/images/approved/logo_favicon.jpg",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
         ],
       },
     ];

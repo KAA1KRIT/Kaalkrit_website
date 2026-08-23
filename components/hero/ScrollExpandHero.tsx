@@ -158,9 +158,7 @@ export function ScrollExpandHero() {
             <span className="scroll-expand-hero__visual-core" />
           </div>
           <div className="scroll-expand-hero__scrim" />
-          <p className="scroll-expand-hero__fact">
-            Established 2024 · Sir MVIT, Bengaluru
-          </p>
+          <p className="scroll-expand-hero__fact">[HERO FACT PLACEHOLDER]</p>
         </div>
 
         <div className="scroll-expand-hero__blur-shell" aria-hidden="true">
@@ -183,16 +181,12 @@ export function ScrollExpandHero() {
             ref={compactContentRef}
             className="scroll-expand-hero__compact-content"
           >
-            <p className="eyebrow">
-              Official Drone &amp; Robotics Innovation Team · Sir MVIT,
-              Bengaluru
-            </p>
+            <p className="eyebrow">[HERO EYEBROW PLACEHOLDER]</p>
             <p className="scroll-expand-hero__compact-brand" aria-hidden="true">
-              KAALKRIT
+              [SITE NAME PLACEHOLDER]
             </p>
             <p className="scroll-expand-hero__compact-summary">
-              A student-led engineering team building autonomous aerial,
-              robotic, and embedded systems through hands-on practice.
+              [HERO SUMMARY PLACEHOLDER]
             </p>
             <div className="scroll-expand-hero__actions">
               <TrackedLink
@@ -201,30 +195,26 @@ export function ScrollExpandHero() {
                 properties={{ placement: "hero" }}
                 className="button button--primary"
               >
-                Explore our work <span aria-hidden="true">↓</span>
+                [HERO CTA PLACEHOLDER] <span aria-hidden="true">↓</span>
               </TrackedLink>
             </div>
           </div>
           <div className="scroll-expand-hero__expanded-copy">
             <h1 id="hero-heading">
-              <span className="sr-only">
-                KAALKRIT — Engineering what moves next.
-              </span>
+              <span className="sr-only">[HERO SEO HEADLINE PLACEHOLDER]</span>
               <span className="scroll-expand-hero__title" aria-hidden="true">
                 <span className="scroll-expand-hero__title-brand">
-                  KAALKRIT
+                  [SITE NAME PLACEHOLDER]
                 </span>
                 <span className="scroll-expand-hero__title-tagline">
-                  Engineering what
+                  [HERO TAGLINE PLACEHOLDER]
                   <br />
-                  moves next.
+                  [HERO TAGLINE CONTINUATION PLACEHOLDER]
                 </span>
               </span>
             </h1>
             <p className="scroll-expand-hero__summary">
-              KAALKRIT brings together research, hardware, software, and
-              intelligent systems to build ambitious engineering work with
-              real-world purpose.
+              [HERO EXPANDED SUMMARY PLACEHOLDER]
             </p>
             <div
               ref={expandedActionsRef}
@@ -236,7 +226,7 @@ export function ScrollExpandHero() {
                 properties={{ placement: "hero-expanded" }}
                 className="button button--primary"
               >
-                Explore our work <span aria-hidden="true">↓</span>
+                [HERO CTA PLACEHOLDER] <span aria-hidden="true">↓</span>
               </TrackedLink>
             </div>
           </div>
@@ -244,7 +234,7 @@ export function ScrollExpandHero() {
 
         <p className="scroll-expand-hero__cue" aria-hidden="true">
           <span />
-          Scroll to explore
+          [SCROLL CUE PLACEHOLDER]
         </p>
       </div>
     </section>

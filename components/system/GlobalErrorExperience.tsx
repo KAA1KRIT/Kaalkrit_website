@@ -10,7 +10,7 @@ export function GlobalErrorExperience({ reset }: { reset: () => void }) {
         <h1 id="global-error-heading">
           The system could not complete that render.
         </h1>
-        <p>Try the request again, or return to the KAALKRIT home experience.</p>
+        <p>[GLOBAL ERROR BODY COPY PLACEHOLDER]</p>
         <div className="not-found-experience__actions">
           <button
             type="button"

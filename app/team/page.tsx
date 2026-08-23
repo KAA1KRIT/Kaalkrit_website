@@ -9,9 +9,8 @@ import { DepthCarouselGallery } from "@/components/gallery/DepthCarouselGallery"
 import { teamGallery } from "@/content/gallery";
 
 export const metadata = pageMetadata({
-  title: "Team",
-  description:
-    "The multidisciplinary student engineering team behind KAALKRIT.",
+  title: "[TEAM PAGE TITLE PLACEHOLDER]",
+  description: "[TEAM META DESCRIPTION PLACEHOLDER]",
   path: "/team",
   index: teamMembers.length > 0,
 });
@@ -20,13 +19,10 @@ export default function TeamPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Team"
-        heading="A multidisciplinary engineering practice."
-        lede="KAALKRIT brings together students working across autonomous systems, robotics, embedded systems, AI, computer vision, electronics, mechanical design, and software."
-        meta={[
-          "Roster source: Team KAALKRIT Overview",
-          "Portraits and profile links awaiting approved assets",
-        ]}
+        eyebrow="[TEAM EYEBROW PLACEHOLDER]"
+        heading="[TEAM HEADLINE PLACEHOLDER]"
+        lede="[TEAM LEDE PLACEHOLDER]"
+        meta={["[TEAM META PLACEHOLDER 1]", "[TEAM META PLACEHOLDER 2]"]}
       />
       <section
         className="pb-[var(--k-section-y)]"
@@ -34,7 +30,7 @@ export default function TeamPage() {
       >
         <div className="k-container">
           <h2 id="team-roster-heading" className="sr-only">
-            KAALKRIT team roster
+            [TEAM ROSTER HEADING PLACEHOLDER]
           </h2>
           {teamMembers.length > 0 ? (
             <TeamRoster members={teamMembers} />
@@ -49,8 +45,11 @@ export default function TeamPage() {
             <DepthCarouselGallery items={teamGallery} />
           </div>
           <div className="mt-[var(--k-7)]">
-            <Button href={mailto("Joining Team KAALKRIT")} variant="primary">
-              Join the conversation
+            <Button
+              href={mailto("[RECRUITMENT EMAIL SUBJECT PLACEHOLDER]")}
+              variant="primary"
+            >
+              [TEAM CTA PLACEHOLDER]
             </Button>
           </div>
         </div>

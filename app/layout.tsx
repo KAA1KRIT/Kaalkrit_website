@@ -11,14 +11,14 @@ const brandFont = Bungee({
   subsets: ["latin"],
   weight: "400",
   display: "swap",
-  variable: "--font-kaalkrit-brand",
+  variable: "--font-brand",
 });
 
 export const metadata: Metadata = {
   ...(SITE.url ? { metadataBase: new URL(SITE.url) } : {}),
   title: {
-    default: "KAALKRIT — Drone & Robotics Innovation Team, Sir MVIT",
-    template: "%s — KAALKRIT",
+    default: "[SITE TITLE PLACEHOLDER]",
+    template: "%s — [SITE NAME PLACEHOLDER]",
   },
   description: SITE.description,
   applicationName: SITE.name,

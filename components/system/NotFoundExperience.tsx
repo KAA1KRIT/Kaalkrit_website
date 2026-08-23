@@ -15,12 +15,11 @@ export function NotFoundExperience() {
           <i />
         </div>
         <p className="eyebrow">Error 404 / Route unavailable</p>
-        <h1 id="not-found-heading">This page took a different flight path.</h1>
+        <h1 id="not-found-heading">[NOT FOUND HEADLINE PLACEHOLDER]</h1>
         <p>
-          There is no public page at this address. Return to KAALKRIT, explore
-          the documented projects, or{" "}
-          <a href={mailto("KAALKRIT website issue")}>
-            tell us about a broken link
+          [NOT FOUND BODY COPY PLACEHOLDER]{" "}
+          <a href={mailto("[WEBSITE ISSUE EMAIL SUBJECT PLACEHOLDER]")}>
+            [NOT FOUND CONTACT LINK PLACEHOLDER]
           </a>
           .
         </p>
@@ -32,10 +31,10 @@ export function NotFoundExperience() {
             Explore projects <span aria-hidden="true">↗</span>
           </Link>
           <a
-            href={mailto("KAALKRIT website enquiry")}
+            href={mailto("[WEBSITE EMAIL SUBJECT PLACEHOLDER]")}
             className="button button--secondary"
           >
-            Contact KAALKRIT <span aria-hidden="true">↗</span>
+            [NOT FOUND CTA PLACEHOLDER] <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>

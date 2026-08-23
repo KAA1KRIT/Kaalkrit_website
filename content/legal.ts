@@ -1,7 +1,7 @@
 import { ANALYTICS_ENABLED, SITE } from "@/content/site";
 
 export const LEGAL = {
-  lastUpdated: "13 August 2026",
+  lastUpdated: "[LEGAL LAST UPDATED PLACEHOLDER]",
   privacyContact: SITE.email,
   instagramUrl: SITE.instagram,
   cookiePolicy: {

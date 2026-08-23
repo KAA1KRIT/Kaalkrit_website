@@ -1,12 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="[OPEN GRAPH IMAGE PLACEHOLDER]">
   <rect width="1200" height="630" fill="#ffffff"/>
-  <rect x="54" y="52" width="1092" height="526" rx="22" fill="#383838"/>
-  <path d="M54 438H1146" stroke="#f2e5c0" stroke-width="2"/>
-  <circle cx="938" cy="217" r="116" fill="#f3bc16"/>
-  <path d="M850 230 938 160 1026 230 938 300Z" fill="none" stroke="#383838" stroke-width="6"/>
-  <path d="M938 160V300M850 230H1026" stroke="#383838" stroke-width="4"/>
-  <text x="112" y="156" fill="#f2e5c0" font-family="monospace" font-size="18" letter-spacing="3">OFFICIAL DRONE &amp; ROBOTICS INNOVATION TEAM</text>
-  <text x="112" y="282" fill="#ffffff" font-family="Arial, sans-serif" font-size="75" font-weight="700" letter-spacing="-3">KAALKRIT</text>
-  <text x="112" y="360" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="-2">ENGINEERING WHAT MOVES NEXT.</text>
-  <text x="112" y="492" fill="#f2e5c0" font-family="Georgia, serif" font-size="25">Official Drone and Robotics Innovation Team of Sir MVIT, Bengaluru</text>
+  <rect x="48" y="48" width="1104" height="534" fill="none" stroke="#2b2b2b" stroke-width="8" stroke-dasharray="20 16"/>
+  <text x="600" y="315" fill="#2b2b2b" font-family="sans-serif" font-size="52" text-anchor="middle">[OPEN GRAPH IMAGE PLACEHOLDER]</text>
 </svg>

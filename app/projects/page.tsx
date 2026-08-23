@@ -4,13 +4,12 @@ import { PlatformFeature } from "@/components/projects/PlatformFeature";
 import { ProjectFeature } from "@/components/projects/ProjectFeature";
 import { PartnershipSection } from "@/components/sections/PartnershipSection";
 import { Rule } from "@/components/ui/Rule";
-import { publicProjects, roboticsProjects } from "@/content/projects";
+import { roboticsProjects } from "@/content/projects";
 import { pageMetadata, projectsSchema, serializeJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Projects",
-  description:
-    "Five documented KAALKRIT projects: a NIDAR 2026 unmanned aerial system, AirMOS for NIDAR 2027, Build With Hardware, an intelligent robotic arm and an autonomous robot vacuum cleaner.",
+  title: "[PROJECTS PAGE TITLE PLACEHOLDER]",
+  description: "[PROJECTS META DESCRIPTION PLACEHOLDER]",
   path: "/projects",
 });
 
@@ -18,13 +17,13 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Projects"
-        heading="Five documented systems, from airframe to firmware."
-        lede="Each entry states what the system is, its current status and the engineering capability it demonstrates."
+        eyebrow="[PROJECTS EYEBROW PLACEHOLDER]"
+        heading="[PROJECTS HEADLINE PLACEHOLDER]"
+        lede="[PROJECTS LEDE PLACEHOLDER]"
         meta={[
-          `${publicProjects.length} documented systems`,
-          "2 NIDAR cycles",
-          "1 platform",
+          "[PROJECTS META PLACEHOLDER 1]",
+          "[PROJECTS META PLACEHOLDER 2]",
+          "[PROJECTS META PLACEHOLDER 3]",
         ]}
       />
 
@@ -37,12 +36,10 @@ export default function ProjectsPage() {
             id="programme-heading"
             className="k-display text-[length:var(--k-t-h2)]"
           >
-            The aerial programme
+            [PROGRAMME HEADING PLACEHOLDER]
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            One programme across two competition cycles. The 2026 system is the
-            foundation the 2027 system is built on — stated in that order
-            because that is how the work runs.
+            [PROGRAMME BODY COPY PLACEHOLDER]
           </p>
           <div className="mt-[var(--k-8)]">
             <ProgrammeSpine detail />
@@ -60,11 +57,10 @@ export default function ProjectsPage() {
             id="platform-heading"
             className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]"
           >
-            The platform
+            [PLATFORM HEADING PLACEHOLDER]
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            KAALKRIT’s flagship engineering-learning platform, currently in
-            development.
+            [PLATFORM BODY COPY PLACEHOLDER]
           </p>
           <div className="mt-[var(--k-8)]">
             <PlatformFeature detail />
@@ -82,11 +78,10 @@ export default function ProjectsPage() {
             id="robotics-heading"
             className="k-display mt-[var(--k-7)] text-[length:var(--k-t-h2)]"
           >
-            Ground robotics
+            [PROJECT CATEGORY HEADING PLACEHOLDER]
           </h2>
           <p className="k-lede mt-[var(--k-5)]">
-            Navigation, sensing, motion control and precision automation off the
-            airframe: one developed system and one in development.
+            [PROJECT CATEGORY BODY COPY PLACEHOLDER]
           </p>
           <div className="mt-[var(--k-8)] grid gap-[var(--k-9)]">
             {roboticsProjects.map((project, index) => (

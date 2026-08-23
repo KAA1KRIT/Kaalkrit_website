@@ -13,10 +13,10 @@ export function PartnershipSection() {
     >
       <div className="public-container">
         <SectionHeader
-          eyebrow="Partnership / 11"
+          eyebrow="[PARTNERSHIP EYEBROW PLACEHOLDER]"
           id="partnership-heading"
-          heading="Help move a system from intent to validation."
-          lede="KAALKRIT is open to conversations around engineering collaboration, hardware, research and mentorship. No sponsor claims or contact details are implied here."
+          heading="[PARTNERSHIP HEADING PLACEHOLDER]"
+          lede="[PARTNERSHIP LEDE PLACEHOLDER]"
         />
         <div className="partnership__body">
           <ul className="collaboration-list">
@@ -31,17 +31,14 @@ export function PartnershipSection() {
             ))}
           </ul>
           <div className="partnership__route">
-            <p className="eyebrow">Approved route</p>
-            <p>
-              Send a partnership question to the team through the official
-              contact route.
-            </p>
+            <p className="eyebrow">[PARTNERSHIP ROUTE LABEL PLACEHOLDER]</p>
+            <p>[PARTNERSHIP ROUTE BODY COPY PLACEHOLDER]</p>
             <Button
-              href={mailto("Partnership with Team KAALKRIT")}
+              href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
               variant="primary"
               trailing={<span aria-hidden="true">↗</span>}
             >
-              Email the team
+              [PARTNERSHIP CTA PLACEHOLDER]
             </Button>
           </div>
         </div>

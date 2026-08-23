@@ -139,13 +139,13 @@ export function MobileNavigation({
             );
           })}
           <TrackedLink
-            href={mailto("Partnership with Team KAALKRIT")}
+            href={mailto("[PARTNERSHIP EMAIL SUBJECT PLACEHOLDER]")}
             className="button button--primary"
             onClick={onClose}
             event="partner_cta_click"
             properties={{ placement: "mobile_navigation" }}
           >
-            Partner with KAALKRIT
+            [MOBILE NAV CTA PLACEHOLDER]
           </TrackedLink>
         </nav>
       </aside>

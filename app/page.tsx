@@ -3,8 +3,8 @@ import { SITE } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Home",
-  fullTitle: "KAALKRIT — Engineering what moves next",
+  title: "[HOME PAGE TITLE PLACEHOLDER]",
+  fullTitle: "[HOME PAGE SEO TITLE PLACEHOLDER]",
   description: SITE.description,
   path: "/",
 });
