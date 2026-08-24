@@ -10,6 +10,7 @@ import {
   useState,
   type KeyboardEvent,
   type PointerEvent,
+  type FocusEvent,
   type CSSProperties,
   type WheelEvent,
 } from "react";
@@ -17,10 +18,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import type { TeamMemberWithIdCard } from "@/lib/types";
 import styles from "./DepthCarousel.module.css";
+import { useCarouselAutoplay } from "./useCarouselAutoplay";
 
 type DepthCarouselProps = {
   items: readonly TeamMemberWithIdCard[];
   label: string;
+  autoplay?: boolean;
+  autoplayDelay?: number;
+  interactionGraceDelay?: number;
 };
 
 function circularOffset(index: number, activeIndex: number, total: number) {
@@ -34,11 +39,18 @@ function memberLabel(member: TeamMemberWithIdCard) {
   return member.area ? `${member.role} / ${member.area}` : member.role;
 }
 
-export function DepthCarousel({ items, label }: DepthCarouselProps) {
+export function DepthCarousel({
+  items,
+  label,
+  autoplay = true,
+  autoplayDelay = 2600,
+  interactionGraceDelay = 1200,
+}: DepthCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
   const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
+  const pointerType = useRef<string | null>(null);
   const ignoreCardClickUntil = useRef(0);
   const lastWheelAt = useRef(0);
   const statusId = useId();
@@ -91,11 +103,43 @@ export function DepthCarousel({ items, label }: DepthCarouselProps) {
     [total],
   );
 
-  const previous = useCallback(
-    () => goTo(activeIndex - 1),
-    [activeIndex, goTo],
+  const advanceAutomatically = useCallback(() => {
+    if (!total) return;
+    setActiveIndex((currentIndex) => (currentIndex + 1) % total);
+  }, [total]);
+
+  const {
+    beginInteraction,
+    endInteraction,
+    restartAutoplay,
+    setIsFocused,
+    setIsHovered,
+    shouldAutoplay,
+  } = useCarouselAutoplay({
+    enabled: autoplay && total > 1,
+    delay: autoplayDelay,
+    reducedMotion,
+    onAdvance: advanceAutomatically,
+  });
+
+  const navigateManually = useCallback(
+    (index: number, graceDelay?: number) => {
+      beginInteraction();
+      goTo(index);
+      restartAutoplay();
+      if (graceDelay !== undefined) endInteraction(graceDelay);
+    },
+    [beginInteraction, endInteraction, goTo, restartAutoplay],
   );
-  const next = useCallback(() => goTo(activeIndex + 1), [activeIndex, goTo]);
+
+  const previous = useCallback(
+    () => navigateManually(activeIndex - 1, 0),
+    [activeIndex, navigateManually],
+  );
+  const next = useCallback(
+    () => navigateManually(activeIndex + 1, 0),
+    [activeIndex, navigateManually],
+  );
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "ArrowLeft") {
@@ -109,6 +153,8 @@ export function DepthCarousel({ items, label }: DepthCarouselProps) {
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
+    pointerType.current = event.pointerType;
+    beginInteraction();
     pointerStart.current = { x: event.clientX, y: event.clientY };
   };
 
@@ -127,8 +173,12 @@ export function DepthCarousel({ items, label }: DepthCarouselProps) {
 
     pointerStart.current = null;
     ignoreCardClickUntil.current = Date.now() + 350;
-    if (horizontalDistance > 0) previous();
-    else next();
+    navigateManually(activeIndex + (horizontalDistance > 0 ? -1 : 1));
+  };
+
+  const finishPointerInteraction = () => {
+    pointerStart.current = null;
+    endInteraction(pointerType.current === "touch" ? interactionGraceDelay : 0);
   };
 
   const handleWheel = (event: WheelEvent<HTMLElement>) => {
@@ -137,8 +187,14 @@ export function DepthCarousel({ items, label }: DepthCarouselProps) {
     if (now - lastWheelAt.current < 480) return;
     event.preventDefault();
     lastWheelAt.current = now;
-    if (event.deltaX > 0) next();
-    else previous();
+    navigateManually(activeIndex + (event.deltaX > 0 ? 1 : -1), 0);
+  };
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = (event: FocusEvent<HTMLElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsFocused(false);
+    }
   };
 
   const cardPositions = useMemo(
@@ -156,20 +212,25 @@ export function DepthCarousel({ items, label }: DepthCarouselProps) {
       aria-roledescription="carousel"
       aria-label={label}
       aria-describedby={statusId}
+      data-autoplay={shouldAutoplay ? "running" : "paused"}
       tabIndex={0}
       onKeyDown={handleKeyDown}
+      onFocusCapture={handleFocus}
+      onBlurCapture={handleBlur}
+      onPointerEnter={(event) => {
+        if (event.pointerType !== "touch") setIsHovered(true);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== "touch") setIsHovered(false);
+      }}
     >
       <div
         className={styles.stage}
         data-testid="team-depth-carousel-stage"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
-        onPointerUp={() => {
-          pointerStart.current = null;
-        }}
-        onPointerCancel={() => {
-          pointerStart.current = null;
-        }}
+        onPointerUp={finishPointerInteraction}
+        onPointerCancel={finishPointerInteraction}
         onWheel={handleWheel}
       >
         {items.map((member, index) => {
@@ -198,7 +259,14 @@ export function DepthCarousel({ items, label }: DepthCarouselProps) {
                 if (Date.now() < ignoreCardClickUntil.current) {
                   return;
                 }
-                goTo(index);
+                const interactionPointerType = pointerType.current;
+                navigateManually(
+                  index,
+                  interactionPointerType === "touch"
+                    ? interactionGraceDelay
+                    : 0,
+                );
+                pointerType.current = null;
               }}
             >
               <Image
@@ -256,7 +324,7 @@ export function DepthCarousel({ items, label }: DepthCarouselProps) {
               className={`${styles.indicator} ${isActive ? styles.indicatorActive : ""}`}
               aria-label={`Show ${member.name} — ${memberLabel(member)}`}
               aria-current={isActive ? "true" : undefined}
-              onClick={() => goTo(index)}
+              onClick={() => navigateManually(index, 0)}
             />
           );
         })}

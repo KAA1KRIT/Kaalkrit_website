@@ -585,6 +585,193 @@ test("team ID cards preserve the full artwork and support accessible manual expl
   await expectNoOverflow(page);
 });
 
+test("team ID cards advance automatically when motion is allowed", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/team");
+
+  const carousel = page.getByTestId("team-depth-carousel");
+  const activeImage = carousel.locator('[data-active="true"] img');
+  const initialCard = await activeImage.getAttribute("alt");
+
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+  await expect
+    .poll(() => activeImage.getAttribute("alt"), {
+      timeout: 4_000,
+      intervals: [250, 400, 600],
+    })
+    .not.toBe(initialCard);
+});
+
+test("team card autoplay pauses for hover and keyboard focus, then resumes", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/team");
+
+  const carousel = page.getByTestId("team-depth-carousel");
+  const activeCard = carousel.locator('[data-active="true"] img');
+
+  await carousel.hover();
+  const hoveredCard = await activeCard.getAttribute("alt");
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  await page.waitForTimeout(3_000);
+  await expect(activeCard).toHaveAttribute("alt", hoveredCard ?? "");
+
+  await page.mouse.move(5, 5);
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+  await expect
+    .poll(() => activeCard.getAttribute("alt"), {
+      timeout: 4_000,
+      intervals: [250, 400, 600],
+    })
+    .not.toBe(hoveredCard);
+
+  await carousel.focus();
+  const focusedCard = await activeCard.getAttribute("alt");
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  await page.waitForTimeout(3_000);
+  await expect(activeCard).toHaveAttribute("alt", focusedCard ?? "");
+
+  await page.getByRole("link", { name: /Team KAALKRIT — home/i }).focus();
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+  await expect
+    .poll(() => activeCard.getAttribute("alt"), {
+      timeout: 4_000,
+      intervals: [250, 400, 600],
+    })
+    .not.toBe(focusedCard);
+});
+
+test("team card controls restart autoplay without advancing underneath a manual action", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/team");
+
+  const carousel = page.getByTestId("team-depth-carousel");
+  const activeCard = carousel.locator('[data-active="true"] img');
+  await carousel
+    .getByRole("button", { name: /Show the next team member/ })
+    .click();
+  const homeLink = page.getByRole("link", { name: /Team KAALKRIT — home/i });
+  await homeLink.focus();
+  await homeLink.hover();
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+
+  const manuallySelectedCard = await activeCard.getAttribute("alt");
+  await page.waitForTimeout(900);
+  await expect(activeCard).toHaveAttribute("alt", manuallySelectedCard ?? "");
+  await expect
+    .poll(() => activeCard.getAttribute("alt"), {
+      timeout: 4_000,
+      intervals: [250, 400, 600],
+    })
+    .not.toBe(manuallySelectedCard);
+});
+
+test("team card touch drag pauses autoplay until the interaction grace period ends", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 844 });
+  await page.goto("/team");
+
+  const carousel = page.getByTestId("team-depth-carousel");
+  const stage = page.getByTestId("team-depth-carousel-stage");
+  const activeCard = carousel.locator('[data-active="true"] img');
+  await stage.dispatchEvent("pointerdown", {
+    pointerId: 1,
+    pointerType: "touch",
+    clientX: 220,
+    clientY: 300,
+  });
+  await stage.dispatchEvent("pointermove", {
+    pointerId: 1,
+    pointerType: "touch",
+    clientX: 140,
+    clientY: 300,
+  });
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  await stage.dispatchEvent("pointerup", {
+    pointerId: 1,
+    pointerType: "touch",
+    clientX: 140,
+    clientY: 300,
+  });
+
+  const selectedCard = await activeCard.getAttribute("alt");
+  await page.waitForTimeout(700);
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  await expect(carousel).toHaveAttribute("data-autoplay", "running", {
+    timeout: 2_000,
+  });
+  await expect
+    .poll(() => activeCard.getAttribute("alt"), {
+      timeout: 4_000,
+      intervals: [250, 400, 600],
+    })
+    .not.toBe(selectedCard);
+  await expectNoOverflow(page);
+});
+
+test("team card autoplay remains disabled when reduced motion is requested", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ reducedMotion: "reduce" });
+  const page = await context.newPage();
+  try {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto("/team");
+
+    const carousel = page.getByTestId("team-depth-carousel");
+    const activeCard = carousel.locator('[data-active="true"] img');
+    const initialCard = await activeCard.getAttribute("alt");
+    await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+    await page.waitForTimeout(3_000);
+    await expect(activeCard).toHaveAttribute("alt", initialCard ?? "");
+  } finally {
+    await context.close();
+  }
+});
+
+test("team card autoplay pauses while the page is hidden and resumes once visible", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/team");
+
+  const carousel = page.getByTestId("team-depth-carousel");
+  const activeCard = carousel.locator('[data-active="true"] img');
+  const beforeFreeze = await activeCard.getAttribute("alt");
+
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: true,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  await page.waitForTimeout(3_000);
+  await expect(activeCard).toHaveAttribute("alt", beforeFreeze ?? "");
+
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: false,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+  await expect
+    .poll(() => activeCard.getAttribute("alt"), {
+      timeout: 4_000,
+      intervals: [250, 400, 600],
+    })
+    .not.toBe(beforeFreeze);
+});
+
 test("team ID cards remain contained and keyboard-operable on mobile and reduced motion", async ({
   page,
 }) => {
