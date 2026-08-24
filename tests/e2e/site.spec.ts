@@ -630,3 +630,42 @@ test("team ID cards remain contained and keyboard-operable on mobile and reduced
   );
   await expectNoOverflow(page);
 });
+
+test("team ID cards retain their full aspect ratio across the responsive release matrix", async ({
+  page,
+}) => {
+  for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1920]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/team");
+
+    // Read the current route instance atomically; App Router can retain an
+    // outgoing instance briefly while a same-page viewport transition settles.
+    const bounds = await page.evaluate(() => {
+      const carousel = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '[data-testid="team-depth-carousel"]',
+        ),
+      ).at(-1);
+      const image = carousel?.querySelector<HTMLImageElement>(
+        '[data-active="true"] img',
+      );
+      if (!image) return null;
+      const rect = image.getBoundingClientRect();
+      return {
+        left: rect.left,
+        right: rect.right,
+        viewport: window.innerWidth,
+        objectFit: getComputedStyle(image).objectFit,
+      };
+    });
+
+    expect(bounds, `${width}px active card`).not.toBeNull();
+    if (!bounds) throw new Error(`Missing active team card at ${width}px`);
+    expect(bounds.left, `${width}px left bound`).toBeGreaterThanOrEqual(0);
+    expect(bounds.right, `${width}px right bound`).toBeLessThanOrEqual(
+      bounds.viewport,
+    );
+    expect(bounds.objectFit).toBe("contain");
+    await expectNoOverflow(page);
+  }
+});
