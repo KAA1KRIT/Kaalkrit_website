@@ -32,6 +32,9 @@ const commonSecurityHeaders = [
 
 const nextConfig: NextConfig = {
   agentRules: false,
+  // Permit loopback checks through 127.0.0.1 as well as localhost during
+  // development. This only affects Next's dev-resource origin guard.
+  allowedDevOrigins: ["127.0.0.1"],
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
