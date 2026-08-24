@@ -22,7 +22,7 @@ export function EngineeringHero() {
           depth={1.55}
           faceColor="var(--foreground)"
           depthColor="var(--primary)"
-          fontSize="clamp(3.4rem, 10vw, 8.4rem)"
+          fontSize="clamp(2.8rem, 14vw, 8.4rem)"
           className="engineering-hero__depth-text"
         />
         <h1 id="hero-heading">Engineering systems that move with purpose.</h1>

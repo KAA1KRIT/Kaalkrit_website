@@ -290,6 +290,44 @@ test("the floating navbar keeps real navigation, centred branding, and contact a
   expect(faults).toEqual([]);
 });
 
+test("primary actions retain a blue surface and readable foreground on hover", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+
+  const primaryAction = page.getByRole("link", { name: /Explore the work/i });
+  const readColors = () =>
+    primaryAction.evaluate((element) => {
+      const styles = getComputedStyle(element);
+      return {
+        background: styles.backgroundColor,
+        foreground: styles.color,
+        outlineStyle: styles.outlineStyle,
+      };
+    });
+
+  const defaultColors = await readColors();
+  await primaryAction.hover();
+  await page.waitForTimeout(250);
+  const hoverColors = await readColors();
+
+  for (const background of [defaultColors.background, hoverColors.background]) {
+    const channels = background.match(/\d+/g)?.map(Number) ?? [];
+    expect(channels).toHaveLength(3);
+    const [red = 0, green = 0, blue = 0] = channels;
+    expect(blue).toBeGreaterThan(red + 30);
+    expect(blue).toBeGreaterThan(green + 30);
+  }
+
+  const foreground = hoverColors.foreground.match(/\d+/g)?.map(Number) ?? [];
+  expect(foreground).toHaveLength(3);
+  expect(Math.min(...foreground)).toBeGreaterThan(180);
+
+  await primaryAction.focus();
+  await expect.poll(readColors).toMatchObject({ outlineStyle: "solid" });
+});
+
 test("contact, collaboration, and footer routes lead to the verified public channel", async ({
   page,
 }) => {
@@ -339,7 +377,9 @@ test("public routes, legal pages, and every published project resolve with their
 test("the public layout has no horizontal overflow from mobile through ultra-wide desktop", async ({
   page,
 }) => {
-  for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1600, 1920]) {
+  for (const width of [
+    320, 360, 375, 390, 430, 480, 600, 768, 834, 1024, 1280, 1440, 1600, 1920,
+  ]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("/");
     await page.waitForLoadState("networkidle");
@@ -369,6 +409,106 @@ test("the public layout has no horizontal overflow from mobile through ultra-wid
         Math.min(width * 0.7, 1150),
       );
       expect(dimensions!.summaryWidth).toBeGreaterThan(280);
+    }
+  }
+});
+
+test("mobile navigation and the team carousel use the available viewport without dead rails", async ({
+  page,
+}) => {
+  for (const width of [320, 360, 390, 430, 600]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/team");
+
+    const navbar = page.locator(".navbar-1");
+    const brand = navbar.getByRole("link", { name: /Team KAALKRIT — home/i });
+    const carousel = page.getByTestId("team-depth-carousel").last();
+    const activeCard = carousel.locator('[data-active="true"]');
+    const controls = carousel.locator("[class*='controls']");
+
+    await expect(navbar).toBeVisible();
+    await expect(brand).toBeVisible();
+    await expect(activeCard).toBeVisible();
+    await expect(controls).toBeVisible();
+
+    const dimensions = await page.evaluate(() => {
+      const navbar = document.querySelector<HTMLElement>(".navbar-1");
+      const brand = document.querySelector<HTMLElement>(
+        ".navbar-1__brand-link",
+      );
+      const carousel = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          "[data-testid='team-depth-carousel']",
+        ),
+      ).at(-1);
+      const activeCard = carousel?.querySelector<HTMLElement>(
+        '[data-active="true"]',
+      );
+      const stage = carousel?.querySelector<HTMLElement>(
+        '[data-testid="team-depth-carousel-stage"]',
+      );
+      const controls = carousel?.querySelector<HTMLElement>(
+        "[class*='controls']",
+      );
+      if (!navbar || !brand || !activeCard || !stage || !controls) return null;
+      const cardBounds = activeCard.getBoundingClientRect();
+      const stageBounds = stage.getBoundingClientRect();
+      const controlsBounds = controls.getBoundingClientRect();
+      return {
+        navbarHeight: navbar.getBoundingClientRect().height,
+        brandWidth: brand.getBoundingClientRect().width,
+        cardWidth: cardBounds.width,
+        cardLeft: cardBounds.left,
+        cardRight: cardBounds.right,
+        stageBottom: stageBounds.bottom,
+        controlsTop: controlsBounds.top,
+        viewport: window.innerWidth,
+      };
+    });
+
+    expect(dimensions, `${width}px responsive team layout`).not.toBeNull();
+    if (!dimensions)
+      throw new Error(`Missing responsive team layout at ${width}px`);
+    expect(dimensions.navbarHeight).toBeLessThanOrEqual(68);
+    expect(dimensions.navbarHeight).toBeGreaterThanOrEqual(56);
+    expect(dimensions.brandWidth).toBeGreaterThanOrEqual(100);
+    expect(dimensions.cardWidth).toBeGreaterThanOrEqual(
+      Math.min(width * 0.8, 336),
+    );
+    expect(dimensions.cardLeft).toBeGreaterThanOrEqual(0);
+    expect(dimensions.cardRight).toBeLessThanOrEqual(dimensions.viewport);
+    expect(dimensions.controlsTop - dimensions.stageBottom).toBeLessThanOrEqual(
+      24,
+    );
+    await expectNoOverflow(page);
+    await page.mouse.wheel(0, 640);
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBeGreaterThan(0);
+  }
+});
+
+test("interior routes retain readable, overflow-free layouts at mobile, tablet, and desktop", async ({
+  page,
+}) => {
+  const representativeRoutes = [
+    "/projects",
+    "/projects/uas-nidar-2026",
+    "/journey",
+    "/team",
+    "/partners",
+    "/contact",
+    "/privacy",
+    "/terms",
+    "/accessibility",
+  ];
+
+  for (const width of [320, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const path of representativeRoutes) {
+      await page.goto(path);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expectNoOverflow(page);
     }
   }
 });

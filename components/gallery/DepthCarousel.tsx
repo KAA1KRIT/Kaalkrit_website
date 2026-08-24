@@ -48,6 +48,7 @@ export function DepthCarousel({
 }: DepthCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [compactLayout, setCompactLayout] = useState(false);
   const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const pointerType = useRef<string | null>(null);
@@ -68,22 +69,36 @@ export function DepthCarousel({
   }, []);
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const updateLayout = () => setCompactLayout(media.matches);
+    updateLayout();
+    media.addEventListener("change", updateLayout);
+    return () => media.removeEventListener("change", updateLayout);
+  }, []);
+
+  useEffect(() => {
     const context = gsap.context(() => {
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
         const offset = circularOffset(index, activeIndex, total);
         const distance = Math.abs(offset);
         const isActive = distance === 0;
+        const spread = compactLayout ? 52 : 64;
+        const depth = compactLayout ? 128 : 180;
+        const tilt = compactLayout ? -8 : -13;
+        const scaleFalloff = compactLayout ? 0.065 : 0.09;
+        const opacityFalloff = compactLayout ? 0.19 : 0.23;
+        const blurStep = compactLayout ? 1 : 1.5;
 
         gsap.to(card, {
-          xPercent: -50 + offset * 64,
+          xPercent: -50 + offset * spread,
           yPercent: -50,
-          z: isActive ? 0 : -distance * 180,
-          rotationY: offset * -13,
-          scale: Math.max(0.76, 1 - distance * 0.09),
-          opacity: Math.max(0.24, 1 - distance * 0.23),
+          z: isActive ? 0 : -distance * depth,
+          rotationY: offset * tilt,
+          scale: Math.max(0.76, 1 - distance * scaleFalloff),
+          opacity: Math.max(0.24, 1 - distance * opacityFalloff),
           filter: distance
-            ? `blur(${Math.min(distance * 1.5, 4)}px)`
+            ? `blur(${Math.min(distance * blurStep, 4)}px)`
             : "blur(0px)",
           duration: reducedMotion ? 0 : 0.65,
           ease: "power3.out",
@@ -93,7 +108,7 @@ export function DepthCarousel({
     });
 
     return () => context.revert();
-  }, [activeIndex, reducedMotion, total]);
+  }, [activeIndex, compactLayout, reducedMotion, total]);
 
   const goTo = useCallback(
     (index: number) => {

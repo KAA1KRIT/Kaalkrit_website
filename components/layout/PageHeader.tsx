@@ -14,7 +14,7 @@ export function PageHeader({
   meta?: string[];
 }) {
   return (
-    <header className="pt-[calc(68px+var(--k-9))] pb-[var(--k-8)]">
+    <header className="page-header">
       <div className="k-container">
         <p className="k-meta">{eyebrow}</p>
         <h1 className="page-header__heading k-display mt-[var(--k-5)] text-[length:var(--k-t-hero)] leading-[1.02] max-w-[16ch] text-[var(--k-text)]">

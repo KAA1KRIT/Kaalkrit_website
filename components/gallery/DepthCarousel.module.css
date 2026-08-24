@@ -1,5 +1,5 @@
 .carousel {
-  --team-card-width: clamp(13.75rem, 25vw, 22.5rem);
+  --team-card-width: clamp(19rem, 30vw, 22.5rem);
   outline: none;
 }
 
@@ -159,16 +159,23 @@
 
 @media (max-width: 767px) {
   .carousel {
-    --team-card-width: min(76vw, 17rem);
+    --team-card-width: clamp(16.5rem, 80vw, 21rem);
   }
 
   .stage {
+    margin-top: var(--k-5);
     min-height: 0;
     max-height: none;
   }
 
   .controls {
+    margin-top: var(--k-4);
     gap: var(--k-3);
+  }
+
+  .indicators,
+  .hint {
+    margin-top: var(--k-3);
   }
 
   .status {

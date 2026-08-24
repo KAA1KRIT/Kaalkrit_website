@@ -13,7 +13,7 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "px-[var(--k-5)] bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--foreground)] hover:text-[var(--card)]",
+    "px-[var(--k-5)] bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--accent-foreground)] hover:text-[var(--primary-foreground)] active:bg-[color-mix(in_srgb,var(--primary)_82%,var(--background))] focus-visible:bg-[var(--primary)]",
   secondary:
     "px-[var(--k-5)] border border-[var(--accent-foreground)] text-[var(--k-text)] hover:border-[var(--primary)] hover:bg-[color-mix(in_srgb,var(--primary)_15%,var(--card))]",
   ghost:

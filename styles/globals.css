@@ -50,7 +50,6 @@
   box-sizing: border-box;
 }
 html {
-  overflow-x: clip;
   overflow-y: auto;
   scrollbar-color: var(--accent-foreground) var(--secondary);
   scrollbar-gutter: stable;
@@ -60,7 +59,6 @@ html {
 }
 body {
   margin: 0;
-  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body-kaalkrit), Georgia, serif;
@@ -68,9 +66,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-}
-main {
-  overflow-x: clip;
 }
 ::-webkit-scrollbar {
   width: 12px;
@@ -325,8 +320,6 @@ svg {
 
 /* Floating technical navigation: three stable desktop zones with no page rail. */
 .site-header {
-  --site-header-offset: clamp(12px, 2vw, 28px);
-  --site-header-height: 80px;
   position: fixed;
   z-index: 50;
   top: var(--site-header-offset);
@@ -392,6 +385,7 @@ svg {
 .navbar-1__brand-link .wordmark--header {
   width: 120px;
   height: 64px;
+  transform: scale(1.16);
 }
 .navbar-1__action {
   justify-self: end;
@@ -523,13 +517,14 @@ svg {
 }
 
 @media (max-width: 959px) {
-  .site-header {
-    --site-header-height: 68px;
+  :root {
+    --site-header-offset: clamp(10px, 3vw, 16px);
+    --site-header-height: 64px;
   }
   .navbar-1__inner {
     display: flex;
     justify-content: space-between;
-    padding-inline: var(--k-4);
+    padding-inline: var(--k-3);
   }
   .navbar-1__nav,
   .navbar-1__cta {
@@ -539,12 +534,13 @@ svg {
     justify-self: start;
   }
   .navbar-1__brand-link {
-    min-width: 108px;
-    min-height: 58px;
+    min-width: 112px;
+    min-height: 60px;
   }
   .navbar-1__brand-link .wordmark--header {
-    width: 108px;
-    height: 58px;
+    width: 112px;
+    height: 60px;
+    transform: scale(1.2);
   }
   .navbar-1__menu-button {
     display: inline-flex;
@@ -552,6 +548,12 @@ svg {
 }
 
 /* Shared pages and routes */
+.page-header {
+  padding-top: calc(
+    var(--site-header-offset) + var(--site-header-height) + var(--k-7)
+  );
+  padding-bottom: var(--k-8);
+}
 .section-header__grid {
   display: grid;
   grid-template-columns: minmax(150px, 0.38fr) minmax(0, 1fr);
@@ -734,6 +736,19 @@ svg {
   }
   .section-header__grid > .eyebrow {
     margin-bottom: 20px;
+  }
+  .page-header {
+    padding-top: calc(
+      var(--site-header-offset) + var(--site-header-height) + var(--k-6)
+    );
+    padding-bottom: var(--k-7);
+  }
+  .system-section--after-page-header {
+    padding-top: var(--k-5);
+  }
+  .section-lede,
+  .split-heading .section-lede {
+    margin-top: var(--k-4);
   }
   .not-found-experience__actions {
     flex-direction: column;
@@ -1401,13 +1416,15 @@ svg {
 }
 @media (max-width: 767px) {
   .engineering-hero {
-    min-height: 720px;
+    min-height: min(45rem, 100svh);
   }
   .engineering-hero::before {
     inset: 12px;
   }
   .engineering-hero__content {
-    padding-top: 116px;
+    padding-top: calc(
+      var(--site-header-offset) + var(--site-header-height) + var(--k-6)
+    );
   }
   .engineering-hero__identity {
     gap: 12px;
@@ -1417,7 +1434,7 @@ svg {
     width: 156px;
   }
   .engineering-hero h1 {
-    font-size: clamp(2.85rem, 14vw, 4.5rem);
+    font-size: clamp(2.6rem, 13.5vw, 4.5rem);
   }
   .engineering-hero__specs {
     margin-top: 42px;

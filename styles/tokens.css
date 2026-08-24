@@ -111,8 +111,10 @@
   --k-11: 144px;
   --k-container: 1200px;
   --k-container-wide: 1360px;
-  --k-gutter: clamp(20px, 5.56vw, 80px);
-  --k-section-y: clamp(72px, 8vw, 112px);
+  --k-gutter: clamp(16px, 4vw, 80px);
+  --k-section-y: clamp(56px, calc(4.5vw + 40px), 112px);
+  --site-header-offset: clamp(12px, 2vw, 28px);
+  --site-header-height: 80px;
   --k-radius: var(--radius);
   --k-radius-small: 4px;
   --k-radius-pill: 999px;
