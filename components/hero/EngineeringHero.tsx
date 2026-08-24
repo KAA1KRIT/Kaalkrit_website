@@ -1,4 +1,3 @@
-import { HeroVisual } from "@/components/hero/HeroVisual";
 import { Button } from "@/components/ui/Button";
 import { DepthText } from "@/components/ui/DepthText";
 import { Wordmark } from "@/components/ui/Wordmark";
@@ -7,7 +6,6 @@ import { SITE } from "@/content/site";
 export function EngineeringHero() {
   return (
     <section className="engineering-hero" aria-labelledby="hero-heading">
-      <HeroVisual />
       <div className="k-container engineering-hero__content">
         <div className="engineering-hero__identity">
           <Wordmark variant="system" priority />

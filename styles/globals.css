@@ -67,6 +67,70 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+.site-shell {
+  position: relative;
+  isolation: isolate;
+}
+.site-gradient-background {
+  --site-gradient-fallback-strength: 16%;
+  --site-gradient-wave-opacity: 0.68;
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse 76% 44% at 68% 78%,
+      color-mix(
+        in srgb,
+        var(--primary) var(--site-gradient-fallback-strength),
+        transparent
+      ),
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--background) 18%, transparent),
+      var(--background)
+    );
+  pointer-events: none;
+}
+.site-gradient-background--hero {
+  --site-gradient-fallback-strength: 26%;
+  --site-gradient-wave-opacity: 1;
+}
+.site-gradient-background--technical {
+  --site-gradient-fallback-strength: 20%;
+  --site-gradient-wave-opacity: 0.82;
+}
+.site-gradient-background--quiet {
+  --site-gradient-fallback-strength: 8%;
+  --site-gradient-wave-opacity: 0.38;
+}
+.site-gradient-background .gradient-waves {
+  position: absolute;
+  inset: 0;
+  opacity: var(--site-gradient-wave-opacity);
+}
+.site-gradient-background .gradient-waves[data-fallback="true"] {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 15%,
+      color-mix(in srgb, var(--primary) 16%, transparent) 56%,
+      var(--background)
+    ),
+    radial-gradient(
+      ellipse 74% 42% at 72% 80%,
+      color-mix(in srgb, var(--primary) 32%, transparent),
+      transparent 72%
+    );
+}
+.site-content-layer,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -804,33 +868,7 @@ svg {
   align-items: end;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
-  background: var(--background);
-}
-.hero-visual,
-.hero-visual__fallback,
-.gradient-waves {
-  position: absolute;
-  inset: 0;
-}
-.hero-visual {
-  z-index: 0;
-  overflow: hidden;
-  opacity: 1;
-}
-.hero-visual__fallback,
-.gradient-waves[data-fallback="true"] {
-  background:
-    linear-gradient(
-      180deg,
-      transparent 15%,
-      color-mix(in srgb, var(--primary) 16%, transparent) 56%,
-      var(--background)
-    ),
-    radial-gradient(
-      ellipse 74% 42% at 72% 80%,
-      color-mix(in srgb, var(--primary) 32%, transparent),
-      transparent 72%
-    );
+  background: transparent;
 }
 .gradient-waves__canvas {
   display: block;
@@ -936,7 +974,7 @@ svg {
   padding-top: var(--k-7);
 }
 .system-section--panel {
-  background: linear-gradient(135deg, #0a101b, #080d16);
+  background: color-mix(in srgb, var(--secondary) 74%, transparent);
 }
 .split-heading {
   display: grid;
@@ -1148,13 +1186,6 @@ svg {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.direction-section {
-  background: radial-gradient(
-    circle at 80% 20%,
-    color-mix(in srgb, var(--primary) 18%, transparent),
-    transparent 28rem
-  );
-}
 .collaboration-band {
   background: var(--primary);
   color: var(--primary-foreground);
@@ -1291,9 +1322,6 @@ svg {
 @media (prefers-reduced-motion: reduce) {
   .depth-text__stage {
     will-change: auto;
-  }
-  .hero-visual {
-    opacity: 0.42;
   }
   .gradient-waves__canvas {
     display: none;

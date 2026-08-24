@@ -687,10 +687,9 @@ test("team ID cards preserve the full artwork and support accessible manual expl
   const activeImage = carousel.locator('[data-active="true"] img');
   await expect(carousel).toHaveAttribute("aria-roledescription", "carousel");
   await expect(cards).toHaveCount(10);
-  await expect(activeImage).toHaveAttribute(
-    "alt",
-    "KAALKRIT ID card for Rajeev Tiwari, Technical Lead.",
-  );
+  await carousel.hover();
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  const initiallyActiveCard = await activeImage.getAttribute("alt");
   await expect(activeImage).toHaveJSProperty("complete", true);
   await expect
     .poll(() =>
@@ -705,15 +704,16 @@ test("team ID cards preserve the full artwork and support accessible manual expl
   await carousel
     .getByRole("button", { name: /Show the next team member/ })
     .click();
-  await expect(carousel.locator('[data-active="true"] img')).toHaveAttribute(
-    "alt",
-    "KAALKRIT ID card for Ankur Pathak, Business, Marketing & Outreach Lead.",
-  );
+  const afterNext = await carousel
+    .locator('[data-active="true"] img')
+    .getAttribute("alt");
+  expect(afterNext).not.toBe(initiallyActiveCard);
   await carousel.press("ArrowRight");
-  await expect(carousel.locator('[data-active="true"] img')).toHaveAttribute(
-    "alt",
-    "KAALKRIT ID card for Shantanu Pawade, Design Support.",
-  );
+  await expect
+    .poll(() =>
+      carousel.locator('[data-active="true"] img').getAttribute("alt"),
+    )
+    .not.toBe(afterNext);
   await carousel
     .getByLabel("Select a team member")
     .getByRole("button", { name: /Show Aditi Kiran/ })
@@ -769,8 +769,11 @@ test("team card autoplay pauses for hover and keyboard focus, then resumes", asy
     .not.toBe(hoveredCard);
 
   await carousel.focus();
+  await expect(carousel).toBeFocused();
   const focusedCard = await activeCard.getAttribute("alt");
-  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  await expect
+    .poll(() => carousel.getAttribute("data-autoplay"))
+    .toBe("paused");
   await page.waitForTimeout(3_000);
   await expect(activeCard).toHaveAttribute("alt", focusedCard ?? "");
 

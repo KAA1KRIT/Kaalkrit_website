@@ -10,6 +10,10 @@ import {
 import { publicProjects } from "../content/projects.ts";
 import { PUBLIC_CONTACT, SITE, productionSiteUrl } from "../content/site.ts";
 import { teamIdCards, teamMembers } from "../content/team.ts";
+import {
+  backgroundVariantForPath,
+  SITE_WAVE_COLORS,
+} from "../components/background/backgroundConfig.ts";
 
 const publicSourceRoots = ["app", "components", "content", "lib"];
 const forbiddenPublicText = new RegExp(
@@ -183,6 +187,10 @@ test("smooth scrolling uses the current Lenis React provider", () => {
 test("the hero uses the current engineering visual components", () => {
   assert.equal(existsSync("components/hero/EngineeringHero.tsx"), true);
   assert.equal(existsSync("components/hero/GradientWaves.tsx"), true);
+  assert.equal(
+    existsSync("components/background/SiteGradientBackground.tsx"),
+    true,
+  );
   assert.equal(existsSync("components/hero/ScrollExpandHero.tsx"), false);
 });
 
@@ -196,10 +204,31 @@ test("the final visual system uses the approved typography and progressive motio
   assert.match(layout, /Palanquin_Dark/);
   assert.match(layout, /Mukta_Vaani/);
   assert.match(hero, /DepthText/);
-  assert.match(hero, /HeroVisual/);
+  assert.doesNotMatch(hero, /HeroVisual/);
+  assert.match(layout, /<SiteGradientBackground\s*\/>/);
   assert.match(waves, /IntersectionObserver/);
   assert.match(waves, /visibilitychange/);
   assert.match(depth, /prefers-reduced-motion/);
+});
+
+test("the global wave system has one safe route preset model", () => {
+  assert.deepEqual(SITE_WAVE_COLORS, {
+    horizon: "#05070c",
+    wave: "#13264b",
+    crest: "#377dff",
+  });
+  assert.equal(backgroundVariantForPath("/"), "hero");
+  assert.equal(backgroundVariantForPath("/projects"), "technical");
+  assert.equal(
+    backgroundVariantForPath("/projects/uas-nidar-2026"),
+    "technical",
+  );
+  assert.equal(backgroundVariantForPath("/journey"), "technical");
+  assert.equal(backgroundVariantForPath("/team"), "standard");
+  assert.equal(backgroundVariantForPath("/contact"), "standard");
+  assert.equal(backgroundVariantForPath("/privacy"), "quiet");
+  assert.equal(backgroundVariantForPath("/terms"), "quiet");
+  assert.equal(backgroundVariantForPath("/accessibility"), "quiet");
 });
 
 test("loader and pointer-responsive button primitives remain reusable", () => {

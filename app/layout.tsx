@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
+import { SiteGradientBackground } from "@/components/background/SiteGradientBackground";
 import { ANALYTICS_ENABLED, SITE } from "@/content/site";
 import { organizationSchema, serializeJsonLd, websiteSchema } from "@/lib/seo";
 import "@/styles/globals.css";
@@ -61,15 +62,20 @@ export default function RootLayout({
         className={`${editorialFont.variable} ${interfaceFont.variable} ${bodyFont.variable}`}
       >
         <SmoothScrollProvider>
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-[var(--k-4)] focus:top-[var(--k-4)] focus:z-[60] focus:inline-flex focus:items-center focus:min-h-[44px] focus:px-[var(--k-5)] focus:bg-[var(--k-signal)] focus:text-white focus:rounded-[var(--k-radius)] focus:no-underline"
-          >
-            Skip to content
-          </a>
-          <SiteHeader />
-          <main id="main">{children}</main>
-          <SiteFooter />
+          <div className="site-shell">
+            <SiteGradientBackground />
+            <a
+              href="#main"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-[var(--k-4)] focus:top-[var(--k-4)] focus:z-[60] focus:inline-flex focus:items-center focus:min-h-[44px] focus:px-[var(--k-5)] focus:bg-[var(--k-signal)] focus:text-white focus:rounded-[var(--k-radius)] focus:no-underline"
+            >
+              Skip to content
+            </a>
+            <SiteHeader />
+            <main id="main" className="site-content-layer">
+              {children}
+            </main>
+            <SiteFooter />
+          </div>
         </SmoothScrollProvider>
         {ANALYTICS_ENABLED && process.env.NODE_ENV === "production" ? (
           <Analytics />
