@@ -1,6 +1,6 @@
-import Image from "next/image";
+import { DepthCarousel } from "@/components/gallery/DepthCarousel";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { teamMembers } from "@/content/team";
+import { teamIdCards } from "@/content/team";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -20,43 +20,20 @@ export default function TeamPage() {
       />
       <section
         className="system-section system-section--after-page-header"
-        aria-labelledby="team-directory-heading"
+        aria-labelledby="team-cards-heading"
       >
-        <div className="k-container team-page-grid">
+        <div className="k-container">
           <div>
-            <h2 id="team-directory-heading">Current directory</h2>
+            <p className="technical-label">07 / The team</p>
+            <h2 id="team-cards-heading" className="mt-[var(--k-4)]">
+              Built across disciplines.
+            </h2>
             <p className="section-lede">
-              Roles are listed as provided in the current KAALKRIT overview.
+              The people behind KAALKRIT’s engineering work, represented through
+              their approved team ID cards.
             </p>
           </div>
-          <ol className="team-directory">
-            {teamMembers.map((member, index) => (
-              <li key={member.name}>
-                <span>0{index + 1}</span>
-                <div>
-                  <h3>{member.name}</h3>
-                  <p>
-                    {member.role}
-                    {member.area ? ` / ${member.area}` : ""}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-      <section
-        className="system-section system-section--panel"
-        aria-label="Team image"
-      >
-        <div className="k-container team-image">
-          <Image
-            src="/images/team/nidar-2026-team.webp"
-            alt="KAALKRIT members together at NIDAR 2026."
-            width={1438}
-            height={753}
-            sizes="(min-width: 900px) 72rem, 100vw"
-          />
+          <DepthCarousel items={teamIdCards} label="Team KAALKRIT ID cards" />
         </div>
       </section>
     </>

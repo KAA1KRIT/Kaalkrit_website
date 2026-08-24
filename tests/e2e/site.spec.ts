@@ -172,7 +172,7 @@ test("approved public media loads on every route that presents it", async ({
   const mediaRoutes = [
     ["/", ".proof-section img"],
     ["/", ".people-preview img"],
-    ["/team", ".team-image img"],
+    ["/team", '[data-testid="team-id-card"][data-active="true"] img'],
     ["/projects/uas-nidar-2026", "figure img"],
   ] as const;
 
@@ -531,4 +531,102 @@ test("reduced motion uses a static, readable GradientWaves fallback", async ({
   } finally {
     await context.close();
   }
+});
+
+test("team ID cards preserve the full artwork and support accessible manual exploration", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/team");
+
+  const carousel = page.getByTestId("team-depth-carousel");
+  const cards = page.getByTestId("team-id-card");
+  const activeCard = carousel.locator(
+    '[data-testid="team-id-card"][aria-current="true"]',
+  );
+  const activeImage = carousel.locator('[data-active="true"] img');
+  await expect(carousel).toHaveAttribute("aria-roledescription", "carousel");
+  await expect(cards).toHaveCount(10);
+  await expect(activeImage).toHaveAttribute(
+    "alt",
+    "KAALKRIT ID card for Rajeev Tiwari, Technical Lead.",
+  );
+  await expect(activeImage).toHaveJSProperty("complete", true);
+  await expect
+    .poll(() =>
+      activeImage.evaluate(
+        (element) => (element as HTMLImageElement).naturalWidth,
+      ),
+    )
+    .toBeGreaterThan(0);
+  await expect(activeImage).toHaveCSS("object-fit", "contain");
+  await expect(activeCard).toHaveCount(1);
+
+  await carousel
+    .getByRole("button", { name: /Show the next team member/ })
+    .click();
+  await expect(carousel.locator('[data-active="true"] img')).toHaveAttribute(
+    "alt",
+    "KAALKRIT ID card for Ankur Pathak, Business, Marketing & Outreach Lead.",
+  );
+  await carousel.press("ArrowRight");
+  await expect(carousel.locator('[data-active="true"] img')).toHaveAttribute(
+    "alt",
+    "KAALKRIT ID card for Shantanu Pawade, Design Support.",
+  );
+  await carousel
+    .getByLabel("Select a team member")
+    .getByRole("button", { name: /Show Aditi Kiran/ })
+    .click();
+  await expect(carousel.locator('[data-active="true"] img')).toHaveAttribute(
+    "alt",
+    "KAALKRIT ID card for Aditi Kiran, Content Planning & Management.",
+  );
+  await expectNoOverflow(page);
+});
+
+test("team ID cards remain contained and keyboard-operable on mobile and reduced motion", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 320, height: 844 });
+  await page.goto("/team");
+
+  const carousel = page.getByTestId("team-depth-carousel");
+  const activeImage = carousel.locator('[data-active="true"] img');
+  await activeImage.scrollIntoViewIfNeeded();
+  const bounds = await activeImage.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return {
+      left: rect.left,
+      right: rect.right,
+      top: rect.top,
+      bottom: rect.bottom,
+      width: window.innerWidth,
+    };
+  });
+  expect(bounds.left).toBeGreaterThanOrEqual(0);
+  expect(bounds.right).toBeLessThanOrEqual(bounds.width);
+  const stage = page.getByTestId("team-depth-carousel-stage");
+  await stage.dispatchEvent("pointerdown", {
+    pointerId: 1,
+    clientX: 200,
+    clientY: 300,
+  });
+  await stage.dispatchEvent("pointermove", {
+    pointerId: 1,
+    clientX: 140,
+    clientY: 300,
+  });
+  await expect(carousel.locator('[data-active="true"] img')).toHaveAttribute(
+    "alt",
+    "KAALKRIT ID card for Ankur Pathak, Business, Marketing & Outreach Lead.",
+  );
+  await carousel.focus();
+  await carousel.press("ArrowLeft");
+  await expect(carousel.locator('[data-active="true"] img')).toHaveAttribute(
+    "alt",
+    "KAALKRIT ID card for Rajeev Tiwari, Technical Lead.",
+  );
+  await expectNoOverflow(page);
 });

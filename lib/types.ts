@@ -62,6 +62,10 @@ export interface TeamMember {
   area?: string;
 }
 
+export interface TeamMemberWithIdCard extends TeamMember {
+  idCard: MediaAsset;
+}
+
 export interface LegalPageContent {
   title: string;
   description: string;

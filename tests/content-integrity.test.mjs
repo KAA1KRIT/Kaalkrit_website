@@ -9,6 +9,7 @@ import {
 } from "../content/navigation.ts";
 import { publicProjects } from "../content/projects.ts";
 import { PUBLIC_CONTACT, SITE, productionSiteUrl } from "../content/site.ts";
+import { teamIdCards, teamMembers } from "../content/team.ts";
 
 const publicSourceRoots = ["app", "components", "content", "lib"];
 const forbiddenPublicText = new RegExp(
@@ -237,4 +238,30 @@ test("team, legal, and contact routes have verified production content", () => {
   assert.match(contactPage, /SITE\.contact\.href/);
   assert.match(partnersPage, /href="\/contact"/);
   assert.match(footer, /footerNav/);
+});
+
+test("published team ID cards map each canonical member to approved local media", () => {
+  assert.equal(teamIdCards.length, teamMembers.length);
+  assert.deepEqual(
+    teamIdCards.map((member) => member.name),
+    teamMembers.map((member) => member.name),
+  );
+
+  for (const member of teamIdCards) {
+    assert.match(member.idCard.src, /^\/images\/team\/id-cards\/.+\.webp$/);
+    assert.match(
+      member.idCard.alt,
+      new RegExp(`KAALKRIT ID card for ${member.name}`),
+    );
+    assert.equal(member.idCard.src.startsWith("http"), false);
+    assert.equal(
+      member.idCard.alt.toLowerCase().includes("placeholder"),
+      false,
+    );
+    assert.equal(
+      existsSync(`public${member.idCard.src}`),
+      true,
+      member.idCard.src,
+    );
+  }
 });
