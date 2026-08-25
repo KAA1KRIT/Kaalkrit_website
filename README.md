@@ -25,6 +25,8 @@ npm run lint
 npm run typecheck
 npm run format:check
 npm test
+npm run test:coverage
+npm run test:e2e
 npm run build
 npm run start
 npm run e2e
@@ -87,3 +89,23 @@ This authenticated integration check verifies the Git connection, `main` as
 the production branch, enabled Git deployments, a ready production target, and
 the canonical alias. After a push, use `npm run test:deployment:current` to
 also confirm production has reached the current commit.
+
+## CI and security
+
+Vercel's native Git integration is the only deployment path: pushes to `main`
+produce production deployments and pull requests receive Vercel previews. To
+avoid duplicate deployments, GitHub Actions only runs quality and security
+gates; it does not invoke the Vercel CLI.
+
+The CI workflows require no deployment secrets. If native Git integration is
+ever replaced by CLI-based Vercel deployment, configure these GitHub repository
+secrets in Settings → Secrets and variables → Actions (never in the repository):
+
+```text
+VERCEL_TOKEN=
+VERCEL_ORG_ID=
+VERCEL_PROJECT_ID=
+```
+
+See [TESTING.md](TESTING.md) for local test commands and [SECURITY.md](SECURITY.md)
+for the security controls and current input-surface scope.

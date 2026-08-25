@@ -608,6 +608,18 @@ test("the 404 route remains useful and does not disclose internal errors", async
   expect(faults).toEqual([]);
 });
 
+test("an unknown project resolves to the production 404 state", async ({
+  page,
+}) => {
+  // App Router may stream the segment loading state with an initial 200 before
+  // `notFound()` resolves the final route. The rendered recovery state is the
+  // stable user-facing invariant for this segment.
+  await page.goto("/projects/not-a-published-project");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "This route is not available.",
+  );
+});
+
 test("production SEO endpoints use the configured canonical origin", async ({
   request,
 }) => {
@@ -640,6 +652,7 @@ test("production responses carry the configured browser security headers", async
   expect(headers["x-content-type-options"]).toBe("nosniff");
   expect(headers["x-frame-options"]).toBe("DENY");
   expect(headers["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+  expect(headers["strict-transport-security"]).toContain("max-age=63072000");
 });
 
 test("reduced motion uses a static, readable GradientWaves fallback", async ({
