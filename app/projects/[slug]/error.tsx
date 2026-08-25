@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { GlobalErrorExperience } from "@/components/system/GlobalErrorExperience";
 
-export default function Error({
+export default function ProjectError({
   error,
   reset,
 }: {
@@ -11,8 +11,7 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // TODO: wire to error monitoring service.
-    console.error("KAALKRIT application error", error);
+    console.error("KAALKRIT project route error", error);
   }, [error]);
 
   return <GlobalErrorExperience reset={reset} />;

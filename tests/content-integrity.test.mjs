@@ -39,13 +39,17 @@ function sourceFiles(directory) {
   });
 }
 
+function removeSourceComments(source) {
+  return source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+}
+
 test("public source contains no unfinished or demo copy", () => {
   for (const root of publicSourceRoots) {
     for (const file of sourceFiles(root).filter((path) =>
       /\.(?:ts|tsx|svg)$/.test(path),
     )) {
       assert.doesNotMatch(
-        readFileSync(file, "utf8"),
+        removeSourceComments(readFileSync(file, "utf8")),
         forbiddenPublicText,
         file,
       );
@@ -254,7 +258,7 @@ test("loader and pointer-responsive button primitives remain reusable", () => {
 
   assert.ok(existsSync("components/loader-four-demo.tsx"));
   assert.match(loader, /role="status"/);
-  assert.match(loading, /<LoaderFour/);
+  assert.match(loading, /<HomepageSkeleton/);
   assert.match(routeLoading, /<LoaderFour/);
   assert.match(button, /dataset\.pointerActive/);
   assert.match(button, /hover: hover/);

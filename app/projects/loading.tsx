@@ -1,5 +1,5 @@
-import { RouteLoadingExperience } from "@/components/system/SectionSkeletons";
+import { ProjectsSkeleton } from "@/components/ui/skeletons";
 
 export default function Loading() {
-  return <RouteLoadingExperience label="projects" />;
+  return <ProjectsSkeleton />;
 }
