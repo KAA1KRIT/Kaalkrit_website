@@ -28,6 +28,7 @@ npm test
 npm run build
 npm run start
 npm run e2e
+npm run test:deployment
 ```
 
 ## Content and brand architecture
@@ -68,3 +69,21 @@ Do not commit `.env.local`, credentials, raw media, or unapproved assets.
 `npm run e2e` builds the production application and runs Playwright against a
 temporary production server. Install the Chromium browser once with
 `npx playwright install chromium` when it is not already available.
+
+## Vercel Git deployment
+
+The Vercel project is connected to `KAA1KRIT/Kaalkrit_website`; pushes to
+`main` automatically create production deployments at
+`https://kaalkrit.vercel.app`. Other branches receive Vercel preview
+deployments.
+
+After `npx vercel login` and `npx vercel link --yes --project kaalkrit --scope rossonerians-projects`, run:
+
+```bash
+npm run test:deployment
+```
+
+This authenticated integration check verifies the Git connection, `main` as
+the production branch, enabled Git deployments, a ready production target, and
+the canonical alias. After a push, use `npm run test:deployment:current` to
+also confirm production has reached the current commit.

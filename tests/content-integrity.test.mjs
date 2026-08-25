@@ -95,6 +95,15 @@ test("Vercel production configuration supplies the canonical public origin", () 
   );
 });
 
+test("the Vercel Git deployment verification gate remains available", () => {
+  const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+  assert.equal(
+    packageJson.scripts["test:deployment"],
+    "node scripts/verify-vercel-deployment.mjs",
+  );
+  assert.equal(existsSync("scripts/verify-vercel-deployment.mjs"), true);
+});
+
 test("metadata waits to permit indexing until a canonical origin is configured", () => {
   const seo = readFileSync("lib/seo.ts", "utf8");
   assert.match(seo, /index: index && Boolean\(SITE\.url\)/);
