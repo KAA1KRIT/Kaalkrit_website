@@ -2,6 +2,7 @@ import { createRef } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { Arrow, Button } from "@/components/ui/Button";
+import { DepthCarousel } from "@/components/gallery/DepthCarousel";
 import { DepthText } from "@/components/ui/DepthText";
 import { LoaderFour } from "@/components/ui/loader";
 import { MetaLine } from "@/components/ui/MetaLine";
@@ -112,5 +113,59 @@ describe("shared UI primitives", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     expect(onMenuToggle).toHaveBeenCalledOnce();
+  });
+
+  it("supports keyboard navigation including Home and End keys in DepthCarousel", () => {
+    const mockMembers = [
+      {
+        name: "Alice",
+        role: "Lead",
+        idCard: {
+          src: "/test1.webp",
+          alt: "Alice card",
+          width: 100,
+          height: 100,
+        },
+      },
+      {
+        name: "Bob",
+        role: "Developer",
+        idCard: {
+          src: "/test2.webp",
+          alt: "Bob card",
+          width: 100,
+          height: 100,
+        },
+      },
+      {
+        name: "Charlie",
+        role: "Designer",
+        idCard: {
+          src: "/test3.webp",
+          alt: "Charlie card",
+          width: 100,
+          height: 100,
+        },
+      },
+    ];
+
+    render(
+      <DepthCarousel
+        items={mockMembers}
+        label="Team members"
+        autoplay={false}
+      />,
+    );
+    const region = screen.getByRole("region", { name: "Team members" });
+    expect(screen.getByText("Alice")).toBeVisible();
+
+    fireEvent.keyDown(region, { key: "ArrowRight" });
+    expect(screen.getByText("Bob")).toBeVisible();
+
+    fireEvent.keyDown(region, { key: "End" });
+    expect(screen.getByText("Charlie")).toBeVisible();
+
+    fireEvent.keyDown(region, { key: "Home" });
+    expect(screen.getByText("Alice")).toBeVisible();
   });
 });

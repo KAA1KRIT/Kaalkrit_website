@@ -165,6 +165,14 @@ export function DepthCarousel({
       event.preventDefault();
       next();
     }
+    if (event.key === "Home") {
+      event.preventDefault();
+      navigateManually(0, 0);
+    }
+    if (event.key === "End") {
+      event.preventDefault();
+      navigateManually(total - 1, 0);
+    }
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLElement>) => {

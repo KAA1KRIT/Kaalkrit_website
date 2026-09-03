@@ -36,8 +36,8 @@ export function SiteFooter() {
         </div>
         <div className="footer-endline">
           <span>© {year} Team KAALKRIT</span>
-          <a href="#main" className="back-to-top">
-            Back to top ↑
+          <a href="#main" className="back-to-top" aria-label="Back to top">
+            Back to top <span aria-hidden="true">↑</span>
           </a>
         </div>
       </div>
