@@ -159,13 +159,13 @@
 
 @media (max-width: 767px) {
   .carousel {
-    --team-card-width: clamp(16.5rem, 80vw, 21rem);
+    --team-card-width: clamp(13.5rem, 68vw, 18rem);
   }
 
   .stage {
-    margin-top: var(--k-5);
-    min-height: 0;
-    max-height: none;
+    margin-top: var(--k-4);
+    min-height: 20rem;
+    max-height: 32rem;
   }
 
   .controls {

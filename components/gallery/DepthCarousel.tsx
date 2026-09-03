@@ -83,8 +83,8 @@ export function DepthCarousel({
         const offset = circularOffset(index, activeIndex, total);
         const distance = Math.abs(offset);
         const isActive = distance === 0;
-        const spread = compactLayout ? 52 : 64;
-        const depth = compactLayout ? 128 : 180;
+        const spread = compactLayout ? 42 : 64;
+        const depth = compactLayout ? 110 : 180;
         const tilt = compactLayout ? -8 : -13;
         const scaleFalloff = compactLayout ? 0.065 : 0.09;
         const opacityFalloff = compactLayout ? 0.19 : 0.23;

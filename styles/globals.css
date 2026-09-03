@@ -460,6 +460,8 @@ svg {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
+  padding-inline: 8px;
+  border-radius: var(--k-radius);
   color: var(--navigation-muted);
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -469,6 +471,9 @@ svg {
   text-decoration: none;
   text-transform: uppercase;
   transition: color var(--k-dur) var(--k-ease);
+}
+.navbar-1__brand-link {
+  border-radius: var(--k-radius);
 }
 .navbar-1__link::after {
   position: absolute;

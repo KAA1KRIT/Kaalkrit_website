@@ -82,9 +82,9 @@ export default function GradientWaves({
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const lowPower =
-      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches ||
+      window.matchMedia("(max-width: 767px) and (pointer: coarse)").matches ||
       (navigator.hardwareConcurrency !== undefined &&
-        navigator.hardwareConcurrency <= 4);
+        navigator.hardwareConcurrency <= 2);
     if (reduced || lowPower) {
       root.dataset.fallback = "true";
       return () => delete root.dataset.fallback;
